@@ -1,0 +1,294 @@
+
+\def\anon{1} %% set to 1 for anonymous submissions, hides acknowledgements and author names
+\def\full{1} %% set to 0 for springer proceedings
+
+
+\ifnum\full=1
+\documentclass[11pt]{llncs}
+
+
+\addtolength{\parskip}{1pt}
+\else
+\documentclass[10pt, runningheads]{llncs}
+\usepackage{times}
+
+\fi
+
+
+\input{header.tex}
+
+
+\begin{document}
+	\title{Draft: Notes on the revised Hidden weight function}
+
+	
+	\titlerunning{Notes on the revised Hidden weight function}
+	\author{
+		\mbox{Pierrick M\'eaux}\inst{1}
+	}
+	
+	\authorrunning{ P. M\'eaux}
+	
+	\institute{
+	Luxembourg university, Luxembourg\\
+		\email{pierrick.meaux@uni.lu}		
+	}
+	
+
+	
+	
+	
+	%----------------------------------------------------------------
+	\maketitle
+
+
+\institute{
+	University of Luxembourg, Luxembourg\\
+	\email{pierrick.meaux@uni.lu}		
+}	
+	
+	\begin{abstract}
+	
+		
+	\end{abstract}
+
+
+\section{Introduction}
+
+\section{Preliminaries}
+
+
+\subsection{Boolean functions and weightwise considerations}
+
+In this part we recall general concepts on Boolean functions and their weightwise properties we use in this article. 
+For a deeper introduction on Boolean functions and their cryptographic parameters we refer to the survey of \eg~\cite{Carlet20} and to~\cite{TOSC:CarMeaRot17} for the weightwise properties, also called properties on the slices.
+For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k  \}$ and call it slice of the Boolean hypercube (of dimension $n$). 
+Accordingly, the Boolean hypercube is partitioned into $n+1$ slices where the elements have the same Hamming weight.
+
+\begin{definition}[Boolean Function]\label{def:bool_f}
+	A Boolean function $f$ in $n$ variables is a function from $\F_2^n$ to $\F_2$. 
+	The set of all Boolean functions in $n$ variables is denoted by $\BN$, and we denote $\BN^*$ the set without the null function.
+\end{definition}
+
+
+To denote when a property or a definition is restricted to a slice we use the subscript $k$. 
+For example, for a $n$-variable Boolean function $f$ we denote its support $\supp(f)=\{x\in \F_2^n \, | \, f(x)=1  \}$ and we denote $\suppk{k}(f)$ its support restricted to a slice, that is $\supp(f)\cap \Ekn{k}{n}$.
+
+
+\begin{definition}[Balancedness]\label{def:balancedness}
+	A Boolean function $f\in \BN$ is called balanced if $|\supp(f)|=2^{n-1}=|\supp(f+1)|$. 
+	
+	For $k\in [0,n]$ the function is said balanced on the slice $k$ if $||\suppk{k}(f)|-|\suppk{k}(f+1)| |\le 1$. In particular when $|\Ekn{k}{n}|$ is even $|\suppk{k}(f)|=|\suppk{k}(f+1)|=|\Ekn{k}{n}|/2$.
+\end{definition}
+
+\begin{definition}[Algebraic Normal Form (ANF) and degree]\label{def:anf}
+	We call Algebraic Normal Form of a Boolean function $f$ its $n$-variable polynomial representation over $\F_2$ (\textit{i.e.} belonging to $\F_2[x_1,\dots,x_n]/(x_1^2+x_1,\dots,x_n^2+x_n)$):
+	\[f(x_1,\dots,x_n)= \sum_{I \subseteq [1,n]} a_I \left( \prod_{i \in I} x_i \right) \]%x_1,\dots,x_n=\sum_{I \subseteq [1,n]} a_I x^I,\]
+	where $a_I\in \F_2$. 	
+	The (algebraic) degree of $f$, denoted $\degg(f)$ is: \[\degg(f)=\
+	\max_{I\subseteq [1,n]}\{ |I|\, | \, a_I=1\}  \text{ if $f$ is not null},0  \text{ otherwise}.\]
+\end{definition}
+
+
+
+
+\begin{definition}[Walsh transform and restricted Walsh transform]\label{def:walsh_transform}
+	Let $f\in \Bn{n}$ be a Boolean function, its Walsh transform $\wt{f}$ at $a \in \F_2^n$ is defined as:
+	\[  \wt{f} (a) := \sum_{x \in \F_2^n} (-1)^{f(x) +  a \cdot x }.\]
+	%	The Walsh support is the set $\Wsupp{f}:=\{ a\in \F_2^n\, | \, \wt{f} (a) \neq 0 \}$.
+	Let $f\in \Bn{n}$, $S \subset \F_2^n$, its Walsh transform restricted to $S$ at $a \in \F_2^n$ is defined as:
+	\[  \wt{f,S} (a) := \sum_{x\in S} (-1)^{f(x)+ax}.\]
+	For $S=\Ekn{k}{n}$ we denote $\wt{f,\Ekn{k}{n}} (a)$ by $\wtk{f}{k}(a)$.%, and for $a= 0_{n}$ we denote $\wtk{f}{k}(a)$ as $\wtk{f}{k}(0)$.
+\end{definition}
+
+
+	
+
+
+%\begin{definition}[Algebraic Immunity] \label{def:ai}
+%	The algebraic immunity of a Boolean function $f\in \Bfn{n}$, denoted as $\AI(f)$, is defined as:
+%	\[ \AI(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0 \; \text{or} \; (f + 1)g = 0 \}{,} \]
+%	where $\degg(g)$ is the algebraic degree of $g$.
+%	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
+%	Additionally we denote $\AN(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0\}$.
+%\end{definition}
+
+\begin{Prop}[Nonlinearity on the slice, adapted from~\cite{TOSC:CarMeaRot17}, Proposition 6]\label{prop:nlk}
+	Let $n\in \N^*, k\in [0,n]$, for every $n$-variable Boolean function $f$ over $\Ekn{k}{n}$:
+	\[ \NLk{k}(f)=\frac{|\Ekn{k}{n}|}{2} -\frac{\max_{a\in \F_2^n} |\wtk{f}{k}(a)|}{2}  .\]
+\end{Prop}
+
+
+\subsection{Symmetric Functions}
+
+
+The $n$-variable \emph{Boolean symmetric functions} are those that are constant on each slice $\Ekn{k}{n}$ for $k\in [0,n]$. 
+This class has been assiduously studied in the context of cryptography, see \eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,CCDS:Meaux21,IEEE:CarMea21}.
+In this paper we mainly consider two families of symmetric functions, which are both bases of the symmetric functions:
+
+\begin{definition}[Elementary symmetric functions]
+Let $i\in [0,n]$, the elementary symmetric function of degree $i$ in $n$ variables, denoted $\sigma_{i,n}$, is the function which ANF contains all monomials of degree $i$ and no monomials of other degrees. 
+\end{definition}
+\begin{definition}[Slice indicator functions]
+ Let $k\in [0,n]$, the indicator function of the slice of weight $k$ is defined as:
+ \[\forall  x\in \mathbb{F}_2^{n}, \quad \phikn{k}{n}(x) = 1 \text{ if and only if } \w(x) = k.\]
+\end{definition}
+We recall that bent functions are those Boolean functions achieving maximal nonlinearity.
+
+
+
+\begin{Prop}[Weightwise restricted Walsh transform and addition of symmetric function (~\cite{INDO:GinMea22}, Proposition $4$)]\label{prop:AddSym}
+	Let $n\in \N^*$, $k\in [0,n]$ and $f \in \Bn{n}$, the following holds on $f+\phikn{k}{n}$
+	\[\forall a\in \F_2^n, \forall i\in [0,n]\setminus \{k\}, \wtk{f+\phikn{k}{n}}{i}(a)=\wtk{f}{i}(a),\text{ and } \wtk{f+\phikn{k}{n}}{k}(a)=-\wtk{f}{i}(a).\]	
+\end{Prop}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Main section}
+%\subsection{Restricted Walsh transform of $f$ in a recursive fashion}
+
+We study the function $f$ in an even number of variables $n$ defined as the following:
+\[f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=0}^n \phikn{k}{n} x_k.\]
+
+We study the restricted Walsh transform  of $f$ to bound its nonlinearity.
+
+\begin{align*}
+\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}\\
+&=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}+ ax}\\
+&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ (c)x},
+\end{align*}
+where $c$ is the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_i$ where the $e_i$ denotes the canonical vector with "1" in position $i$.
+
+Accordingly, we can study the restricted Walsh transform of this function by analyzing the one of $\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}$, for all $a$. We introduce the following notations.
+
+\begin{definition}
+Let $n\in \N^*$ be an even number, and $a\in \F_2^n$. We denote $d_n$ the function given by: $d_n(x)=\sum_{i \text{ odd}}^n x_i x_{i+1}$, 
+and we denote by $\Dnka{n}{k}{a}$:
+\[\Dnka{n}{k}{a}= \sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\]
+\end{definition}
+
+With these notations we obtain a recursive relation for $\Dnka{n}{k}{a}$, and therefore for $\wtk{f}{k}(a)$, denoting $b=(a_1,\cdots,a_{n-2})$ and $y=(x_1,\cdots,x_{n-2})$:
+
+\begin{align*}
+\Dnka{n}{k}{a}&=\sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\\
+&=\sum_{x\in \Ekn{k}{n-2}} (-1)^{d_{n-2}(y) +b y}+
+\sum_{x\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b y + a_{n-1}}\\
+&+\sum_{x\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b y + a_{n}}
++\sum_{x\in \Ekn{k-2}{n-2}} (-1)^{d_{n-2}(y) +b y +1 + a_{n-1}+ a_{n}}\\
+&=\Dnka{n}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n}{k-2}{b}.
+\end{align*}
+
+Then it gives three cases:
+\begin{itemize}
+	\item if $a_{n-1}=a_n=0$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}+2\Dnka{n}{k-1}{b}-\Dnka{n}{k-2}{b}$,
+	\item if $a_{n-1} \ne a_n$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}+\Dnka{n}{k-2}{b}$,
+	\item if $a_{n-1}=a_n=1$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}-2\Dnka{n}{k-1}{b}-\Dnka{n}{k-2}{b}$.
+\end{itemize}
+
+In this analysis we considered the different cases depending on the values of $a_{n-1}$ and $a_n$, but the same reasoning applies with any $a_i, a_{i+1}$ where $i$ is odd. 
+Thereafter, the value of $\Dnka{n}{k}{a}$ depends only on the number of pairs of $a$ being $(0,0)$, $(1,1)$ or $(0,1)$ or $(1,0)$, and the values $\Dnka{2}{k}{a}$ for $k \in [0,2]$ and $a\in \{ (0,0),(1,1),(0,1)\}$.
+
+The first values of $\Dnka{2}{k}{a}$ are listed in Table~\ref{tab:Dnka}
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		$a$ & $(0,0)$ & $(0,1)$ & $(1,1)$ \\ \hline
+		$\Dnka{2}{0}{a}$ &$1$&$1$ & $1$\\ \hline
+		$\Dnka{2}{1}{a}$ &$2$& $0$ & $-2$\\ \hline
+		$\Dnka{2}{2}{a}$ &$-1$&$1$ & $-1$\\ \hline
+	\end{tabular}
+	\caption{Values of $\Dnka{2}{k}{a}$}\label{tab:Dnka}
+\end{table}
+
+
+
+
+The restricted Walsh transform of $f$ can the be written as \begin{align*}
+\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ (c)x}\\
+&=\Dnka{n}{k}{d},
+\end{align*}
+where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. Calling $\pi$ this permutation we can write $d=\pi(a)+ \pi(e_k)+ (0,1,0,1,\ldots,0,1)$. 
+Accordingly, if $k\le n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2+1$, with one couple of consecutive elements (the first one with an odd index) being $(1,1)$ and all the others $(0,1)$. 
+Otherwise,  when $k> n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2-1$, with one couple of consecutive elements (the first one with an odd index) being $(0,0)$ and all the others $(0,1)$. 
+
+Denoting by $b$ the vector $\pi(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh transform of $f$ in $a$ as:
+\[\wt{f}(a)=\sum_{k=0}^n\Dnka{n}{k}{b+\pi(e_k)}.\]
+
+In particular, for $a=0_n$ we can study the balancedness of $f$:
+\begin{align*}
+\wt{f}(0_n)&=\sum_{k=0}^n\Dnka{n}{k}{(0,1,0,1,\ldots,0,1)+\pi(e_k)}\\
+&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}
+\end{align*}
+Using the recursive relation we obtain:
+\begin{align*}
+\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}&= \Dnka{n-2}{k}{(1,1,0,1,\ldots,0,1)} + \Dnka{n-2}{k-2}{(1,1,0,1,\ldots,0,1)} \\
+&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{(1,1)}\\
+&=\binom{n/2-1}{k/2} \Dnka{2}{0}{(1,1)}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{(1,1)}+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{(1,1)}\\
+&=\binom{n/2-1}{k/2} -2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1}\\
+\end{align*}
+Similarly, for $\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}$ we get:
+\begin{align*}
+\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}
+%&= \Dnka{n-2}{k}{(0,0,0,1,\ldots,0,1)} + \Dnka{n-2}{k-2}{(0,0,0,1,\ldots,0,1)} \\
+&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{(0,0)}\\
+&=\binom{n/2-1}{k/2} \Dnka{2}{0}{(0,0)}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{(0,0)}+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{(0,0)}\\
+&=\binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1}\\
+\end{align*}
+
+
+%We can study the balancedness of $f$ using the $\Dnka{n}{k}{a}$ values.
+Combining both we obtain:
+\begin{align*}
+\wt{f}(0_n)&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\\
+&=\sum_{k=0}^{n/2} \left(\binom{n/2-1}{k/2} -2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
+&=\sum_{k=0}^{n}\left( \binom{n/2-1}{k/2} - \binom{n/2-1}{k/2-1}\right) 
++ 2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
+&=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
+&=2 \left( \sum_{i=\lceil n/4 \rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4 \rfloor} \binom{n/2-1}{i}\right).\\
+\end{align*}
+
+Then, depending on the parity of $n/2$ we obtain the the value of $\wt{f}(0_n)$ (using that $\binom{n}{k}=\binom{n}{n-k}$):
+	\[\wt{f}(0_n)= \left \{
+\begin{array}{l l}
+0 & \text{ if } n/2 \text{ is even, } \\
+-2 \binom{n/2-1}{(n-2)/4} & \text{ if }  n/2 \text{ is odd.}
+\end{array}\right.\]
+
+Accordingly, $f$ is balanced when $n=0\mod 4$ and unbalanced when $n=2 \mod 4$.
+
+
+
+
+
+
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\ifnum\full=0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{splncs04}
+\bibliography{add}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\else
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{alpha}
+\bibliography{add}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+
+\end{document}
