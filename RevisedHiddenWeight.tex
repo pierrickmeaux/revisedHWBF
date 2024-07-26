@@ -171,12 +171,13 @@ where $c$ is the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_
 Accordingly, we can study the restricted Walsh transform of this function by analyzing the one of $\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}$, for all $a$. We introduce the following notations.
 
 \begin{definition}
-Let $n\in \N^*$ be an even number, and $a\in \F_2^n$. We denote $d_n$ the function given by: $d_n(x)=\sum_{i \text{ odd}}^n x_i x_{i+1}$, 
+Let $n\in \N$ be an even number, and $a\in \F_2^n$. We denote $d_n$ the function given by: $d_n(x)=\sum_{i \text{ odd}}^n x_i x_{i+1}$, 
 and we denote by $\Dnka{n}{k}{a}$:
 \[\Dnka{n}{k}{a}= \sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\]
 \end{definition}
+The limit case of $n=0$ yields that $\Dnka 0ka=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise.
 
-With these notations we obtain a recursive relation for $\Dnka{n}{k}{a}$, and therefore for $\wtk{f}{k}(a)$, denoting $b=(a_1,\cdots,a_{n-2})$ and $y=(x_1,\cdots,x_{n-2})$:
+With these notations we obtain a recursive relation for $\Dnka{n}{k}{a}$, and therefore for $\wtk{f}{k}(a)$, denoting $b=(a_1,\cdots,a_{n-2})$ and $y=(x_1,\cdots,x_{n-2})$, we get for any even $n\geq 2$:
 
 \begin{align*}
 \Dnka{n}{k}{a}&=\sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\\
@@ -184,7 +185,7 @@ With these notations we obtain a recursive relation for $\Dnka{n}{k}{a}$, and th
 \sum_{x\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b y + a_{n-1}}\\
 &+\sum_{x\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b y + a_{n}}
 +\sum_{x\in \Ekn{k-2}{n-2}} (-1)^{d_{n-2}(y) +b y +1 + a_{n-1}+ a_{n}}\\
-&=\Dnka{n}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n}{k-2}{b}.
+&=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.
 \end{align*}
 
 Then it gives three cases:
@@ -268,11 +269,106 @@ Then, depending on the parity of $n/2$ we obtain the the value of $\wt{f}(0_n)$ 
 
 Accordingly, $f$ is balanced when $n=0\mod 4$ and unbalanced when $n=2 \mod 4$.
 
+\subsection{Study of $\Dnka nka$ through Generating Functions}
+For $a\in\F_2^n$, denote by $p=p(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(0,0)$, by $q=q(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(1,1)$, and by $r=r(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})\in\{(0,1),(1,0)\}$. We then have $p+q+r=n/2$. Consider further the integer polynomial $P_a(z)$ given by the following expression:
+\[
+    P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
+\]
 
+\begin{Prop}\label{prop:generating_fct}
+    It holds that $\sum_{k\in\Z}\Dnka nka z^k= P_a(z)$.
+\end{Prop}
 
+\begin{proof}
+    Proceed by induction on even $n\geq 0$. The base case $n=0$ is obvious because for $a\in\F_2^0$, we have $P_a(z)=1$, while $\Dnka 0ka=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise. For the inductive step, let $n\geq 2$ be even, and assume that the corresponding formula holds for $n-2$. Using the recursive formula for $\Dnka nka$ with the notation $a=(b,a_{n-1},a_n)$, we have:
+    \begin{align*}
+        \begin{split}
+        \sum_{k\in\Z}\Dnka nka z^k&=\sum_{k\in\Z}\Dnka{n-2}kbz^k+\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)\sum_{k\in\Z}\Dnka{n-2}{k-1}{b}z^k\\
+        &\quad+(-1)^{1+a_{n-1}+a_n}\sum_{k\in\Z}\Dnka{n-2}{k-2}{b}z^k\\
+        &=P_b(z)+\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)zP_b(z)+(-1)^{1+a_{n-1}+a_n}z^2P_b(z)\\
+        &=P_b(z)\cdot\Big(z^2(-1)^{1+a_{n-1}+a_n}+z\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)+1\Big)\\
+        &=P_a(z).\qedhere
+        \end{split}
+    \end{align*}
+\end{proof}
 
+We can use this result to express $\Dnka n{n-k}a$  in terms of $\Dnka nka$:
 
+\begin{Prop}\label{prop:symmetry}
+    For every integer $k$, we have:
+    \[
+        \Dnka n{n-k}a=(-1)^{p+q+k}\Dnka nka.
+    \]
+\end{Prop}
 
+\begin{proof}
+    Define the degree $n$ polynomial $Q_a(z)$ in such a way that the coefficient of $z^k$ in $Q_a(z)$ is equal to the coefficient of $z^{n-k}$ in $P_a(z)$. Then we have:
+    \begin{align*}
+        Q_a(z)&=z^nP_a(1/z)\\
+        &=(z^2+2z-1)^p\cdot(z^2-2z-1)^q\cdot(z^2+1)^r\\
+        &=(-1)^{p+q}(-z^2-2z+1)^p\cdot(-z^2+2z+1)^q\cdot(z^2+1)^r\\
+        &=(-1)^{p+q}P_a(-z).
+    \end{align*}
+    Thus the coefficient of $z^k$ in $Q_a(z)$, which is $\Dnka n{n-k}a$, is equal to the coefficient of $z^k$ in $(-1)^{p+q}P_a(-z)$, which is $(-1)^{p+q+k}\Dnka nka$.
+\end{proof}
+
+\begin{Corollary}
+    If $r$ is odd, then for $k=n/2$, we have: $\Dnka n{n/2}a=0.$
+\end{Corollary}
+
+\begin{proof}
+    By Property \ref{prop:symmetry}, we have $\Dnka n{n/2}a=(-1)^{p+q+n/2}\Dnka n{n/2}a=-\Dnka n{n/2}a$ because $p+q+n/2\equiv n/2-p-q\equiv r\equiv 1\bmod 2$.
+\end{proof}
+
+Another immediate case for zero coefficients is the following:
+\begin{Prop}
+    If $p=q$ and $k$ is odd, then $\Dnka nka=0$.
+\end{Prop}
+
+\begin{proof}
+    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ of $z^k$ for odd $k$ must be zero in $P_a(z)$.
+\end{proof}
+
+We can also use Property \ref{prop:generating_fct} to obtain $\Dnka nka$ through differentiation:
+\[
+    k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}.
+\]
+Using this formula, we can for instance use a computer algebra system to deduce $\Dnka nka$ for small values of $k$, see Table \ref{tab:Dnka_small_k}. Note that even though the expression for $\Dnka n3a$ involves a division by $3$, its evaluation at specific values for $(p,q,r)$ will always yield integers. Indeed, either $p-q\equiv 0\bmod 3$, or $(p-q)^2\equiv 1\bmod 3$, in which case $2(p-q)^2+7\equiv 0\bmod 3$.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		$k$ & $\Dnka nka$\\ \hline
+		$0$&$1$\\ \hline
+        $1$&$2(p-q)$\\ \hline
+        $2$&$2(p-q)^2-3(p+q)+r$\\ \hline
+        $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
+	\end{tabular}
+	\caption{Values of $\Dnka{n}{k}{a}$ for small $k$}\label{tab:Dnka_small_k}
+\end{table}
+
+Using Property \ref{prop:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
+
+\begin{Prop}\mbox{}
+    \begin{enumerate}
+        \item The sum and alternating sum over $k$ of the $\Dnka nka$ are, respectively:
+        \[
+            \sum_{k=0}^n\Dnka nka=(-1)^{q}2^{n/2},\quad\sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
+        \]
+        \item The sum over the even and the odd $k$ of the the $\Dnka nka$ are, respectively:
+        \[
+            \sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big),
+        \]
+        \[
+            \sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
+        \]
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}
+    For the sum and the alternating sum, it is enough to compute $P_a(1)$ and $P_a(-1)$, respectively. The sum of the $\Dnka nka$ over the even (respectively, odd) $k$ is obtained by adding (respectively, subtracting) these two sums and dividing by $2$.
+\end{proof}
 
 \newpage
 
