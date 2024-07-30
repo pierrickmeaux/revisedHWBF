@@ -370,6 +370,15 @@ Using Property \ref{prop:generating_fct}, we can also deduce some sums involving
     For the sum and the alternating sum, it is enough to compute $P_a(1)$ and $P_a(-1)$, respectively. The sum of the $\Dnka nka$ over the even (respectively, odd) $k$ is obtained by adding (respectively, subtracting) these two sums and dividing by $2$.
 \end{proof}
 
+One can also prove the following:
+
+\begin{Prop}
+    For a fixed integer $k\geq 1$ and sufficiently large $n\geq b(k)$, it holds that:
+    \[
+        \max_{a\in\F_2^n}|\Dnka nka|=\left(-\frac12\right)^k\sum_{i=\lceil k/2\rceil}^{n/2}(-4)^i\binom{n/2}{i}\binom{i}{k-i}.
+    \]
+\end{Prop}
+
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
