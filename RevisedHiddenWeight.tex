@@ -329,24 +329,26 @@ Another immediate case for zero coefficients is the following:
     If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ of $z^k$ for odd $k$ must be zero in $P_a(z)$.
 \end{proof}
 
-We can also use Property \ref{prop:generating_fct} to obtain $\Dnka nka$ through differentiation:
-\[
-    k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}.
-\]
-Using this formula, we can for instance use a computer algebra system to deduce $\Dnka nka$ for small values of $k$, see Table \ref{tab:Dnka_small_k}. Note that even though the expression for $\Dnka n3a$ involves a division by $3$, its evaluation at specific values for $(p,q,r)$ will always yield integers. Indeed, either $p-q\equiv 0\bmod 3$, or $(p-q)^2\equiv 1\bmod 3$, in which case $2(p-q)^2+7\equiv 0\bmod 3$.
-
-\begin{table}
-	\centering
-	\begin{tabular}{|c|c|}
-		\hline
-		$k$ & $\Dnka nka$\\ \hline
-		$0$&$1$\\ \hline
-        $1$&$2(p-q)$\\ \hline
-        $2$&$2(p-q)^2-3(p+q)+r$\\ \hline
-        $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
-	\end{tabular}
-	\caption{Values of $\Dnka{n}{k}{a}$ for small $k$}\label{tab:Dnka_small_k}
-\end{table}
+\begin{remark}
+    We can also use Property \ref{prop:generating_fct} to obtain $\Dnka nka$ through differentiation:
+    \[
+        k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}.
+    \]
+    Using this formula, we can for instance use a computer algebra system to deduce $\Dnka nka$ for small values of $k$, see Table \ref{tab:Dnka_small_k}. Note that even though the expression for $\Dnka n3a$ involves a division by $3$, its evaluation at specific values for $(p,q,r)$ will always yield integers. Indeed, either $p-q\equiv 0\bmod 3$, or $(p-q)^2\equiv 1\bmod 3$, in which case $2(p-q)^2+7\equiv 0\bmod 3$.
+    
+    \begin{table}
+    	\centering
+    	\begin{tabular}{|c|c|}
+    		\hline
+    		$k$ & $\Dnka nka$\\ \hline
+    		$0$&$1$\\ \hline
+            $1$&$2(p-q)$\\ \hline
+            $2$&$2(p-q)^2-3(p+q)+r$\\ \hline
+            $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
+    	\end{tabular}
+    	\caption{Values of $\Dnka{n}{k}{a}$ for small $k$}\label{tab:Dnka_small_k}
+    \end{table}
+\end{remark}
 
 Using Property \ref{prop:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
 
@@ -379,7 +381,36 @@ One can also prove the following:
     \]
 \end{Prop}
 
-In general, it also appears that the vector $a\in\F_2^n$ for which $|\Dnka nka|$ is maximal always satisfies $r(a)=0$.
+\begin{remark}
+    In general, it also appears that the vector $a\in\F_2^n$ for which $|\Dnka nka|$ is maximal always satisfies $r(a)=0$.
+\end{remark}
+
+Also, using the Cauchy estimate on holomorphic functions, we can prove:
+
+\begin{Prop}
+    For any real number $R>0$, we have the following bound:
+    \[
+        |\Dnka nka|\leq\frac{(M_R)^{n/2}}{R^k},
+    \]
+    where $B_R$ is the maximum of $\left|z^2-2z-1\right|$ on the complex disk $|z|=R$. Explicitly, $M_R$ can be expressed as follows:
+    \[
+        M_R=
+        \begin{cases}
+            -R^2+2R+1&\text{if $R\leq\sqrt 2-1$}\\
+            \sqrt 2\left(R^2+1\right)&\text{if $\sqrt 2-1\leq R\leq\sqrt 2+1$}\\
+            R^2+2R-1&\text{if $R\geq\sqrt 2+1$}\\
+        \end{cases}.
+    \]
+\end{Prop}
+
+\begin{remark}
+Here are some interesting choices for $R$:
+\begin{itemize}
+    \item Choosing $R=1/\sqrt 2$ yields that $|\Dnka nka|\leq\left(3/\sqrt 2\right)^{n/2}\cdot \sqrt 2^k$.
+    \item Choosing $R=1/2$ gives $|\Dnka nka|\leq (5\sqrt 2/4)^{n/2}\cdot 2^k$.
+\end{itemize}
+\end{remark}
+
 
 \newpage
 
