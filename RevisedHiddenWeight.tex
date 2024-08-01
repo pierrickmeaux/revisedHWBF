@@ -392,7 +392,7 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
     \[
         |\Dnka nka|\leq\frac{(M_R)^{n/2}}{R^k},
     \]
-    where $B_R$ is the maximum of $\left|z^2-2z-1\right|$ on the complex disk $|z|=R$. Explicitly, $M_R$ can be expressed as follows:
+    where $M_R$ is the maximum of $\left|z^2-2z-1\right|$ on the complex disk $|z|=R$. Explicitly, $M_R$ can be expressed as follows:
     \[
         M_R=
         \begin{cases}
@@ -404,13 +404,34 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
 \end{Prop}
 
 \begin{remark}
-Here are some interesting choices for $R$:
-\begin{itemize}
-    \item Choosing $R=1/\sqrt 2$ yields that $|\Dnka nka|\leq\left(3/\sqrt 2\right)^{n/2}\cdot \sqrt 2^k$.
-    \item Choosing $R=1/2$ gives $|\Dnka nka|\leq (5\sqrt 2/4)^{n/2}\cdot 2^k$.
-\end{itemize}
+    Here are some interesting choices for $R$:
+    \begin{itemize}
+        \item Choosing $R=1/\sqrt 2$ yields that $|\Dnka nka|\leq\left(3/\sqrt 2\right)^{n/2}\cdot \sqrt 2^k$.
+        \item Choosing $R=1/2$ gives $|\Dnka nka|\leq (5\sqrt 2/4)^{n/2}\cdot 2^k$.
+        \item Choosing $R=1$ yields $|\Dnka nka|\leq (2\sqrt 2)^{n/2}$. This is particularly useful if $k$ is close to $n/2$.
+    \end{itemize}
 \end{remark}
 
+\begin{remark}
+    We can even go ahead and choose $R=R_{n,k}$ in terms of $n$ and $k$, in such a way that the upper bound of $B_{R,n,k}=(M_R)^{n/2}/R^k$ is minimized. To do this, consider any $1\leq k\leq n-1$. We can actually assume that $k\leq n/2$: if $k>n/2$, replace it by $n-k$ (recall that $|\Dnka nka|=|\Dnka n{n-k}a|$ by Property \ref{prop:symmetry}). One can show that $B_{R,n,k}$ is minimal for the following choice of $R=R_{n,k}$:
+    \[
+        R_{n,k}=\begin{cases}
+            \frac{n-2k-\sqrt{2(n-2k)^2-n^2}}{2(n-k)}&\text{if $k\leq\frac{2-\sqrt 2}{4}\cdot n$}\\
+            \sqrt{\frac{k}{n-k}}&\text{if $k\geq\frac{2-\sqrt 2}{4}\cdot n$}
+        \end{cases}.
+    \]
+    Figure \ref{fig:cauchy_estimate} compares for $n=1\,000$ the two upper bounds we have for $|\Dnka nka|$ on a logarithmic scale: the binomial coefficient $\binom nk$ in red, and the bound $B_{R,n,k}$ with the optimally chosen $R=R_{n,k}$ in blue. The $x$-axis represents the values for $k$, while the $y$-axis represents the binary logarithm of the two bounds. In case $|k-n/2|\leq\sqrt{2}/4\cdot n$, it can be observed that the Cauchy estimate yields particularly good bounds compared to the binomial coefficients. In fact, in this case, we get:
+    \[
+        \Dnka nka\leq\left(\frac{\sqrt 2 n}{n-k}\right)^{n/2}\cdot\left(\frac{n-k}{k}\right)^{k/2}.
+    \]
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=7cm]{cauchy_estimate.pdf}
+        \caption{Cauchy estimate in blue vs.\ binomial coefficients in red}
+        \label{fig:cauchy_estimate}
+    \end{figure}
+\end{remark}
 
 \newpage
 
