@@ -322,11 +322,11 @@ We can use this result to express $\Dnka n{n-k}a$  in terms of $\Dnka nka$:
 
 Another immediate case for zero coefficients is the following:
 \begin{Prop}
-    If $p=q$ and $k$ is odd, then $\Dnka nka=0$.
+    If $p=q$ and $k$ is odd, then $\Dnka nka=0=\Dnka n{n-k}a$.
 \end{Prop}
 
 \begin{proof}
-    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ of $z^k$ for odd $k$ must be zero in $P_a(z)$.
+    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p\cdot(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ of $z^k$ for odd $k$ must be zero in $P_a(z)$. It follows that also $\Dnka n{n-k}a=0$ by Property \ref{prop:symmetry}.
 \end{proof}
 
 \begin{remark}
@@ -348,6 +348,25 @@ Another immediate case for zero coefficients is the following:
     	\end{tabular}
     	\caption{Values of $\Dnka{n}{k}{a}$ for small $k$}\label{tab:Dnka_small_k}
     \end{table}
+\end{remark}
+
+With this, we can get more cases in which $\Dnka nka=0$:
+
+\begin{Prop}\mbox{}
+    \begin{enumerate}
+        \item If $n=16m$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=s(s-1)$, then $\Dnka n2a=0=\Dnka n{k-2}a$.
+        \item If $n=16m+2$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=\left(6s^2+6s+(-1)^s(2s+1)-1\right)/8$, then $\Dnka n3a=0=\Dnka n{k-3}a$.
+        \item If $n=16m+4$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=s^2$, then $\Dnka n2a=0=\Dnka n{k-2}a$.
+        \item If $n=16m+6$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=\left(6s^2+6s-(-1)^s(2s+1)+1\right)/8$, then $\Dnka n3a=0=\Dnka n{k-3}a$.
+    \end{enumerate}
+\end{Prop}
+
+\begin{proof}
+    It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$.
+\end{proof}
+
+\begin{remark}
+    There are still instances where $\Dnka nka=0$ which have not been described by the above. For instance, we have $\Dnka{34}4a=0$ if $\{p,q\}=\{1,2\}$.
 \end{remark}
 
 Using Property \ref{prop:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
@@ -422,7 +441,7 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
     \]
     Figure \ref{fig:cauchy_estimate} compares for $n=1\,000$ the two upper bounds we have for $|\Dnka nka|$ on a logarithmic scale: the binomial coefficient $\binom nk$ in red, and the bound $B_{R,n,k}$ with the optimally chosen $R=R_{n,k}$ in blue. The $x$-axis represents the values for $k$, while the $y$-axis represents the binary logarithm of the two bounds. In case $|k-n/2|\leq\sqrt{2}/4\cdot n$, it can be observed that the Cauchy estimate yields particularly good bounds compared to the binomial coefficients. In fact, in this case, we get:
     \[
-        \Dnka nka\leq\left(\frac{\sqrt 2 n}{n-k}\right)^{n/2}\cdot\left(\frac{n-k}{k}\right)^{k/2}.
+        |\Dnka nka|\leq\left(\frac{\sqrt 2 n}{n-k}\right)^{n/2}\cdot\left(\frac{n-k}{k}\right)^{k/2}.
     \]
 
     \begin{figure}
