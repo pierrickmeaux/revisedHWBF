@@ -441,15 +441,25 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
     \]
     Figure \ref{fig:cauchy_estimate} compares for $n=1\,000$ the two upper bounds we have for $|\Dnka nka|$ on a logarithmic scale: the binomial coefficient $\binom nk$ in red, and the bound $B_{R,n,k}$ with the optimally chosen $R=R_{n,k}$ in blue. The $x$-axis represents the values for $k$, while the $y$-axis represents the binary logarithm of the two bounds. In case $|k-n/2|\leq\sqrt{2}/4\cdot n$, it can be observed that the Cauchy estimate yields particularly good bounds compared to the binomial coefficients. In fact, in this case, we get:
     \[
-        |\Dnka nka|\leq\left(\frac{\sqrt 2 n}{n-k}\right)^{n/2}\cdot\left(\frac{n-k}{k}\right)^{k/2}.
+        |\Dnka nka|\leq 2^{n/4}\sqrt{\frac{n^n}{(n-k)^{n-k}\cdot k^k}}.
     \]
-
     \begin{figure}
         \centering
         \includegraphics[width=7cm]{cauchy_estimate.pdf}
         \caption{Cauchy estimate in blue vs.\ binomial coefficients in red}
         \label{fig:cauchy_estimate}
     \end{figure}
+    
+    \begin{Prop}
+        For every $1\leq k\leq n$, fix a Boolean vector $a\ui k\in\F_2^n$. Then we have the following bound:
+        \[
+            \sum_{k=1}^n\left|\Dnka nk{a\ui k}\right|\leq n\cdot 2^{3n/4}.
+        \]
+    \end{Prop}
+
+    \begin{proof}
+        Simply observe that $2^{n/4}\sqrt{\frac{n^n}{(n-k)^{n-k}\cdot k^k}}$ is maximal for $k=n/2$, in which case the expression reduces to $2^{3n/4}$.
+    \end{proof}
 \end{remark}
 
 \newpage
