@@ -225,7 +225,9 @@ Accordingly, if $k\le n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has we
 Otherwise,  when $k> n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2-1$, with one couple of consecutive elements (the first one with an odd index) being $(0,0)$ and all the others $(0,1)$. 
 
 Denoting by $b$ the vector $\pi(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh transform of $f$ in $a$ as:
-\[\wt{f}(a)=\sum_{k=0}^n\Dnka{n}{k}{b+\pi(e_k)}.\]
+\begin{equation}\label{eqn:walsh_from_D}
+    \wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}.
+\end{equation}
 
 In particular, for $a=0_n$ we can study the balancedness of $f$:
 \begin{align*}
@@ -253,14 +255,15 @@ Similarly, for $\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}$ we get:
 Combining both we obtain:
 \begin{align*}
 \wt{f}(0_n)&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\\
-&=\sum_{k=0}^{n/2} \left(\binom{n/2-1}{k/2} -2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
+&=\sum_{k=0}^{n/2} \left(\binom{n/2-1}{k/2} -2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
+&\qquad+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
 &=\sum_{k=0}^{n}\left( \binom{n/2-1}{k/2} - \binom{n/2-1}{k/2-1}\right) 
 + 2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
 &=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
 &=2 \left( \sum_{i=\lceil n/4 \rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4 \rfloor} \binom{n/2-1}{i}\right).\\
 \end{align*}
 
-Then, depending on the parity of $n/2$ we obtain the the value of $\wt{f}(0_n)$ (using that $\binom{n}{k}=\binom{n}{n-k}$):
+Then, depending on the parity of $n/2$ we obtain the value of $\wt{f}(0_n)$ (using that $\binom{n}{k}=\binom{n}{n-k}$):
 	\[\wt{f}(0_n)= \left \{
 \begin{array}{l l}
 0 & \text{ if } n/2 \text{ is even, } \\
@@ -292,7 +295,9 @@ For $a\in\F_2^n$, denote by $p=p(a)$ the number of odd $i\geq 1$ for which $(a_i
     \end{align*}
 \end{proof}
 
-We can use this result to express $\Dnka n{n-k}a$  in terms of $\Dnka nka$:
+\begin{remark}
+    In particular, since $P_a(z)$ only depends on the triplet $(p,q,r)$, we deduce that also $\Dnka nka$ only depends on the triplet $(p,q,r)$; therefore, it makes sense to introduce the notation $\mathsf D_{n,k}^{p,q,r}=\Dnka nka$, where $a\in\mathbb F_2^n$ is any vector with $(p(a),q(a),r(a))=(p,q,r)$. We will make use of this notation later on.
+\end{remark}
 
 \begin{Prop}\label{prop:symmetry}
     For every integer $k$, we have:
@@ -374,16 +379,15 @@ Using Property \ref{prop:generating_fct}, we can also deduce some sums involving
 \begin{Prop}\mbox{}
     \begin{enumerate}
         \item The sum and alternating sum over $k$ of the $\Dnka nka$ are, respectively:
-        \[
-            \sum_{k=0}^n\Dnka nka=(-1)^{q}2^{n/2},\quad\sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
-        \]
+        \begin{gather*}
+            \sum_{k=0}^n\Dnka nka=(-1)^{q}2^{n/2},\\
+            \sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
+        \end{gather*}
         \item The sum over the even and the odd $k$ of the the $\Dnka nka$ are, respectively:
-        \[
-            \sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big),
-        \]
-        \[
+        \begin{gather*}
+            \sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big),\\
             \sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
-        \]
+        \end{gather*}
     \end{enumerate}
 \end{Prop}
 
@@ -449,19 +453,157 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
         \caption{Cauchy estimate in blue vs.\ binomial coefficients in red}
         \label{fig:cauchy_estimate}
     \end{figure}
-    
-    \begin{Prop}
-        For every $1\leq k\leq n$, fix a Boolean vector $a\ui k\in\F_2^n$. Then we have the following bound:
-        \[
-            \sum_{k=1}^n\left|\Dnka nk{a\ui k}\right|\leq n\cdot 2^{3n/4}.
-        \]
-    \end{Prop}
-
-    \begin{proof}
-        Simply observe that $2^{n/4}\sqrt{\frac{n^n}{(n-k)^{n-k}\cdot k^k}}$ is maximal for $k=n/2$, in which case the expression reduces to $2^{3n/4}$.
-    \end{proof}
 \end{remark}
+    
+\begin{Prop}\label{prop:bound_sum_D_nka}
+    For every $1\leq k\leq n$, fix a Boolean vector $a\ui k\in\F_2^n$. Then we have the following bound:
+    \[
+        \sum_{k=1}^n\left|\Dnka nk{a\ui k}\right|\leq n\cdot 2^{3n/4}.
+    \]
+\end{Prop}
 
+\begin{proof}
+    Simply observe that $2^{n/4}\sqrt{\frac{n^n}{(n-k)^{n-k}\cdot k^k}}$ is maximal for $k=n/2$, in which case the expression reduces to $2^{3n/4}$.
+\end{proof}
+
+\subsection{Bounding the Walsh transform of $f$}
+
+From Property \ref{prop:bound_sum_D_nka}, we can in particular deduce that $|\wt f(a)|\leq n\cdot 2^{3n/4}+1$ for every Boolean vector $a\in\F_2^n$. This is a very pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
+
+This method is based on the identity (\ref{eqn:walsh_from_D}). For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $1\leq k\leq n$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$. Observe that for every $1\leq k\leq n$, we have $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\leq n/2$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
+
+In the following discussion, we outline a method to determine an upper bound on $\max_{a\in\F_2^n}\wt f(a)$. A similar approach can be applied to find a lower bound on $\min_{a\in\F_2^n}\wt f(a)$, and by utilizing both, we can also obtain an upper bound on $\max_{a\in\F_2^n}|\wt f(a)|$ by making use of the following identity:
+\[
+    \max_{a\in\F_2^n}|\wt f(a)|=\max\Big(\max_{a\in\F_2^n}\wt f(a),-\min_{a\in\F_2^n}\wt f(a)\Big).
+\]
+For each $1\leq k\leq n/2$, select $\{\alpha_k,\beta_k,\gamma_k\}=\{0,\pm 1\}$ with $\gamma_k\neq 0$ such that the following expression is defined and maximized:
+\[
+    B_k^{p,q,r}=\mathsf D_{n,k}^{p+\alpha_k,q+\beta_k,r+\gamma_k}+\mathsf D_{n,k+n/2}^{p+\alpha_k',q+\beta_k',r+\gamma_k'}.
+\]
+This implies that $\Dnka{n}{k}{b_k}+\Dnka{n}{k+n/2}{b_{k+n/2}}\leq B_k^{p,q,r}$ for every $1\leq k\leq n/2$, leading to the conclusion that $\sum_{k=1}^n\Dnka nk{b_k}\leq\sum_{k=1}^{n/2} B_k^{p,q,r}$. As a result, we derive the following upper bound:
+\begin{equation}\label{eqn:bound_walsh}
+\max_{a\in\F_2^n}\wt f(a)\leq\max_{p+q+r=n/2}\sum_{k=1}^{n/2} B_k^{p,q,r}.
+\end{equation}
+Under the assumption that the values of $\mathsf{D}_{n,k}^{p,q,r}$ have already been computed for all triplets $(p,q,r)$ satisfying $p+q+r=n/2$, the bound in equation (\ref{eqn:bound_walsh}) can be determined with a computational complexity of $\mathcal{O}(n^3)$. This is because there are $\mathcal{O}(n^2)$ possible triplets $(p,q,r)$ that meet the condition $p+q+r=n/2$, and the summation itself can be computed in $\mathcal{O}(n)$.
+
+Consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $0 \leq k \leq n$ and for all triplets $(p,q,r)$ where $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, according to Property \ref{prop:generating_fct}, it is sufficient to expand the polynomials $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$.
+
+To achieve this, we first precompute the expanded polynomials $(-z^2 + 2z + 1)^p$ for each $1 \leq p \leq n/2$. This can be done recursively using the formula $(-z^2 + 2z + 1)^{p+1} = (-z^2 + 2z + 1) \cdot (-z^2 + 2z + 1)^p$. For each $p$, we need to compute the product of two expanded polynomials of degree at most $n/2$, which requires $\mathcal{O}(n \log n)$ computations . Performing this for every $p$ results in a total complexity of $\mathcal{O}(n^2 \log n)$. The same approach is used to expand the polynomials $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$, resulting in an overall complexity of $\mathcal{O}(n^2 \log n)$ for this precomputational step.
+
+Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded polynomials $(-z^2 + 2z + 1)^p$, $(-z^2 - 2z + 1)^q$, and $(z^2 + 1)^r$. These two multiplications are once more performed in $\mathcal{O}(n \log n)$. Given that there are $\mathcal{O}(n^2)$ such triplets $(p,q,r)$, the complexity of this step totals $\mathcal{O}(n^3 \log n)$. Therefore, this final step is the primary computational bottleneck, making the overall complexity of the procedure also $\mathcal{O}(n^3 \log n)$.
+
+Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table \ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$. As we can see from Figure \ref{fig:walsh_bound}, our bound $B_n$ is exponential in $n$.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    $n$ & $\max_{a\in\F_2^n}|W_f(a)|$ & $B_n$ \\ \hline
+    $2$  & $2$     & $2$     \\
+    $4$  & $8$     & $8$     \\
+    $6$  & $20$    & $28$    \\
+    $8$  & $52$    & $76$    \\
+    $10$ & $108$   & $212$   \\
+    $12$ & $292$   & $596$   \\
+    $14$ & $700$   & $1\,828$  \\
+    $16$ & $2\,176$  & $5\,196$  \\
+    $18$ & $4\,964$  & $14\,668$  \\
+    $20$ & $14\,032$ & $41\,468$ \\
+    $22$ & $34\,232$ & $118\,544$ \\
+    $24$ & $109\,648$ & $325\,188$ \\ \hline
+    \end{tabular}
+    \caption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ vs.\ our bound $B_n$}
+    \label{table:max_walsh_vs_bound}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{minipage}{0.19\textwidth}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            $n$ & $B_n$ \\
+            \hline
+            $2$  & $2.00 \cdot 10^{0}$  \\
+            $4$  & $8.00 \cdot 10^{0}$  \\
+            $6$  & $2.80 \cdot 10^{1}$  \\
+            $8$  & $7.60 \cdot 10^{1}$  \\
+            $10$ & $2.12 \cdot 10^{2}$ \\
+            $12$ & $5.96 \cdot 10^{2}$ \\
+            $14$ & $1.83 \cdot 10^{3}$ \\
+            $16$ & $5.20 \cdot 10^{3}$ \\
+            $18$ & $1.47 \cdot 10^{4}$ \\
+            $20$ & $4.15 \cdot 10^{4}$ \\
+            \hline
+        \end{tabular}
+    \end{minipage}%
+    \begin{minipage}{0.19\textwidth}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            $n$ & $B_n$ \\
+            \hline
+            $22$ & $1.19 \cdot 10^{5}$ \\
+            $24$ & $3.25 \cdot 10^{5}$ \\
+            $26$ & $9.59 \cdot 10^{5}$ \\
+            $28$ & $2.68 \cdot 10^{6}$ \\
+            $30$ & $7.65 \cdot 10^{6}$ \\
+            $32$ & $2.14 \cdot 10^{7}$ \\
+            $34$ & $6.25 \cdot 10^{7}$ \\
+            $36$ & $1.76 \cdot 10^{8}$ \\
+            $38$ & $5.03 \cdot 10^{8}$ \\
+            $40$ & $1.40 \cdot 10^{9}$ \\
+            \hline
+        \end{tabular}
+    \end{minipage}%
+    \begin{minipage}{0.19\textwidth}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            $n$ & $B_n$ \\
+            \hline
+            $42$ & $4.01 \cdot 10^{9}$ \\
+            $44$ & $1.12 \cdot 10^{10}$ \\
+            $46$ & $3.21 \cdot 10^{10}$ \\
+            $48$ & $8.91 \cdot 10^{10}$ \\
+            $50$ & $2.56 \cdot 10^{11}$ \\
+            $52$ & $7.12 \cdot 10^{11}$ \\
+            $54$ & $2.05 \cdot 10^{12}$ \\
+            $56$ & $5.73 \cdot 10^{12}$ \\
+            $58$ & $1.65 \cdot 10^{13}$ \\
+            $60$ & $4.59 \cdot 10^{13}$ \\
+            \hline
+        \end{tabular}
+    \end{minipage}%
+    \begin{minipage}{0.19\textwidth}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            $n$ & $B_n$ \\
+            \hline
+            $62$ & $1.32 \cdot 10^{14}$ \\
+            $64$ & $3.66 \cdot 10^{14}$ \\
+            $66$ & $1.05 \cdot 10^{15}$ \\
+            $68$ & $2.93 \cdot 10^{15}$ \\
+            $70$ & $8.40 \cdot 10^{15}$ \\
+            $72$ & $2.33 \cdot 10^{16}$ \\
+            $74$ & $6.71 \cdot 10^{16}$ \\
+            $76$ & $1.87 \cdot 10^{17}$ \\
+            $78$ & $5.39 \cdot 10^{17}$ \\
+            $80$ & $1.51 \cdot 10^{18}$ \\
+            \hline
+        \end{tabular}
+    \end{minipage}
+    \caption{Values of $B_n$ for various $n$.}
+    \label{table:walsh_bounds}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm]{walsh_bound}
+    \caption{Our bounds $B_n$ in terms of $n$, on a logarithmic scale}
+    \label{fig:walsh_bound}
+\end{figure}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
