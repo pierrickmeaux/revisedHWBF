@@ -112,14 +112,26 @@ For example, for a $n$-variable Boolean function $f$ we denote its support $\sup
 %	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
 %	Additionally we denote $\AN(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0\}$.
 %\end{definition}
+\begin{definition}[Nonlinearity and weightwise nonlinearity] \label{def:nl}
+	The nonlinearity $\NL(f)$ of a Boolean function $f\in \BN$, where $n$ is a positive integer, is the minimum Hamming distance between $f$ and all the affine functions in $\BN$:
+	\[ \NL(f) = \min_{g,\, \degg(g)\leq 1} \{ \hd(f,g) \}{,} \]
+	where $g(x)=a\cdot x+\varepsilon$, $a\in \F_2^n, \varepsilon\in \F_2$. 	
+	The nonlinearity can also be defined from the Walsh transform:
+	\[ \NL(f) = 2^{n-1}- \frac{1}{2} \max_{a\in \F_2^n}{|\wt{f}(a)|}. \]
+\end{definition}
 
-
+\begin{definition}[Algebraic immunity] \label{def:ai}
+	The algebraic immunity of a Boolean function $f\in \Bfn{n}$, denoted as $\AI(f)$, is defined as:
+	\[ \AI(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0 \; \text{or} \; (f + 1)g = 0 \}{,} \]
+	where $\degg(g)$ is the algebraic degree of $g$.
+	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
+\end{definition}
 
 \subsection{Symmetric Functions}
 
 
 The $n$-variable \emph{Boolean symmetric functions} are those that are constant on each slice $\Ekn{k}{n}$ for $k\in [0,n]$. 
-This class has been assiduously studied in the context of cryptography, see \eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,CCDS:Meaux21,IEEE:CarMea21}.
+This class has been assiduously studied in the context of cryptography, see \eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
 In this paper we mainly consider two families of symmetric functions, which are both bases of the symmetric functions:
 
 \begin{definition}[Elementary symmetric functions]
@@ -147,6 +159,8 @@ We use Krawtchouk polynomials and some of their properties to prove one of our r
 
 
 
+
+\pmnote{Introduce formally HWBF, and weightwise degree d functions}
 
 
 
@@ -270,7 +284,7 @@ Then, depending on the parity of $n/2$ we obtain the value of $\wt{f}(0_n)$ (usi
 -2 \binom{n/2-1}{(n-2)/4} & \text{ if }  n/2 \text{ is odd.}
 \end{array}\right.\]
 
-Accordingly, $f$ is balanced when $n=0\mod 4$ and unbalanced when $n=2 \mod 4$.
+Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equiv 2 \mod 4$.
 
 
 \subsection{Study of $\Dnka nka$ through Generating Functions}
@@ -525,6 +539,25 @@ Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)
     \label{table:max_walsh_vs_bound}
 \end{table}
 
+
+
+
+\pmnote{@Tim, could you do a (summary) graph with the bound it gives for the nonlinearity? (Definition from the Walsh transform in the preliminaries)
+
+Could you add curves for the majority function, $n$ even $\NL=2^{n-1}- 1/2 \binom{n}{n/2}$ , and HWBF  $n$ even $\NL=2^{n-1}- 2 \binom{n-2}{(n-2)/2}$ \cite{DAM:WCST14} Theorem 3.
+
+
+
+}
+
+
+
+
+
+
+
+
+
 Here is the updated table with the new values for \( B_n \) corresponding to each \( n \):
 
 \begin{table}
@@ -668,8 +701,18 @@ We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}
 	\[\AI(f)\ge \AI(h)-2.\]
 \end{proposition}
 \begin{proof}
-	content...
+	Let denote by $q$ the quadratic function $\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}$, it allows to write $h=f+q$. 
+	Let $g\neq 0$ be an annihilator of $f+ \varepsilon$ of minimum degree (where $\varepsilon \in \{0,1\}$), then the following holds:
+	\[g (1+q) (h+\varepsilon) = g(1+q) (f+\varepsilon + q)=0, \]
+	hence $g (1+q)$ is an annihilator of $h+ \varepsilon$. 
+	If $g (1+q)\ne 0$ then $\degg(g(1+q)) \le \degg(g)+2$ and we obtain $\degg(g)\ge \AI(h) -2$. 
+	Otherwise, $g (1+q)= 0$ implies that $g$ annihilates $1+q$ and therefore $0=g (f+\varepsilon + 1 +q)=g(h+ \varepsilon +1)$ that is $\degg(g)\ge \AI(h)$. 
+	Summarizing, for any non null annihilator $g$ of $f$ or $f+1$ we get $\degg(g)\ge \AI(h)-2$, it allows to conclude $\AI(f)\ge \AI(h)-2$.
+	
 \end{proof}
+
+From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the HWBF is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for $f$.
+
 
 
 \newpage
