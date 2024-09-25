@@ -113,10 +113,6 @@ For example, for a $n$-variable Boolean function $f$ we denote its support $\sup
 %	Additionally we denote $\AN(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0\}$.
 %\end{definition}
 
-\begin{Prop}[Nonlinearity on the slice, adapted from~\cite{TOSC:CarMeaRot17}, Proposition 6]\label{prop:nlk}
-	Let $n\in \N^*, k\in [0,n]$, for every $n$-variable Boolean function $f$ over $\Ekn{k}{n}$:
-	\[ \NLk{k}(f)=\frac{|\Ekn{k}{n}|}{2} -\frac{\max_{a\in \F_2^n} |\wtk{f}{k}(a)|}{2}  .\]
-\end{Prop}
 
 
 \subsection{Symmetric Functions}
@@ -137,10 +133,6 @@ We recall that bent functions are those Boolean functions achieving maximal nonl
 
 
 
-\begin{Prop}[Weightwise restricted Walsh transform and addition of symmetric function (~\cite{INDO:GinMea22}, Proposition $4$)]\label{prop:AddSym}
-	Let $n\in \N^*$, $k\in [0,n]$ and $f \in \Bn{n}$, the following holds on $f+\phikn{k}{n}$
-	\[\forall a\in \F_2^n, \forall i\in [0,n]\setminus \{k\}, \wtk{f+\phikn{k}{n}}{i}(a)=\wtk{f}{i}(a),\text{ and } \wtk{f+\phikn{k}{n}}{k}(a)=-\wtk{f}{i}(a).\]	
-\end{Prop}
 
 
 \subsection{Krawtchouk polynomials}
@@ -626,9 +618,8 @@ Here is the updated table with the new values for \( B_n \) corresponding to eac
 
 
 
-\pmnote{Bounds on Dnk from complex analysis}
 
-\pmnote{practical experiments for the function.}
+
 
 \subsection{Generalization}
 
@@ -665,6 +656,21 @@ We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}
 	
 	
 \end{proof}
+
+
+
+
+\subsection{Algebraic immunity of $f$}
+
+\begin{proposition}[Algebraic immunity of $f$]
+	Let $n\in \N$ be even, $f$ defined as
+	$f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k$ and $h$ denote the $n$-variable HWBF, the following holds:
+	\[\AI(f)\ge \AI(h)-2.\]
+\end{proposition}
+\begin{proof}
+	content...
+\end{proof}
+
 
 \newpage
 
