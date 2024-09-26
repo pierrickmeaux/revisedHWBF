@@ -391,7 +391,6 @@ With this, we can get more cases in which $\Dnka nka=0$:
 \begin{remark}
     There are still instances where $\Dnka nka=0$ which have not been described by the above. For instance, we have $\Dnka{34}4a=0$ if $\{p,q\}=\{1,2\}$.
 \end{remark}
->>>>>>> 927bf10bd354d63e33833a2cff7df1af6d3d3523
 
 Using Property \ref{prop:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
 
@@ -515,7 +514,7 @@ To achieve this, we first precompute the expanded polynomials $(-z^2 + 2z + 1)^p
 
 Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded polynomials $(-z^2 + 2z + 1)^p$, $(-z^2 - 2z + 1)^q$, and $(z^2 + 1)^r$. These two multiplications are once more performed in $\mathcal{O}(n \log n)$. Given that there are $\mathcal{O}(n^2)$ such triplets $(p,q,r)$, the complexity of this step totals $\mathcal{O}(n^3 \log n)$. Therefore, this final step is the primary computational bottleneck, making the overall complexity of the procedure also $\mathcal{O}(n^3 \log n)$.
 
-Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table \ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$. As we can see from Figure \ref{fig:walsh_bound}, our bound $B_n$ is exponential in $n$.
+Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table \ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
 
 \begin{table}
     \centering
@@ -539,26 +538,14 @@ Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)
     \label{table:max_walsh_vs_bound}
 \end{table}
 
+Figure \ref{fig:walsh_bound_comparison} compares our experimental bound $B_n$ to the theoretical bound $n\cdot 2^{3n/4}+1$ and the binomial coefficient $\binom{n}{n/2}$, on a logarithmic scale. The first two and the last one have an asymptotic slope of $3/4$ and $1$, respectively.
 
-
-
-\pmnote{@Tim, could you do a (summary) graph with the bound it gives for the nonlinearity? (Definition from the Walsh transform in the preliminaries)
-
-Could you add curves for the majority function, $n$ even $\NL=2^{n-1}- 1/2 \binom{n}{n/2}$ , and HWBF  $n$ even $\NL=2^{n-1}- 2 \binom{n-2}{(n-2)/2}$ \cite{DAM:WCST14} Theorem 3.
-
-
-
-}
-
-
-
-
-
-
-
-
-
-Here is the updated table with the new values for \( B_n \) corresponding to each \( n \):
+\begin{figure}
+    \centering
+    \includegraphics[width=9cm]{comparison_walsh_bound.pdf}
+    \caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $n\cdot 2^{3n/4}+1$ from Property \ref{prop:bound_sum_D_nka} in green, and the bound $\binom{n}{n/2}$ in blue.}
+    \label{fig:walsh_bound_comparison}
+\end{figure}
 
 \begin{table}
     \centering
@@ -566,7 +553,7 @@ Here is the updated table with the new values for \( B_n \) corresponding to eac
         \centering
         \begin{tabular}{|c|c|}
             \hline
-            $n$ & $B_n$ \\
+            $n$ & $\approx B_n$ \\
             \hline
             $2$  & $4.00 \cdot 10^{0}$  \\
             $4$  & $1.40 \cdot 10^{1}$  \\
@@ -585,7 +572,7 @@ Here is the updated table with the new values for \( B_n \) corresponding to eac
         \centering
         \begin{tabular}{|c|c|}
             \hline
-            $n$ & $B_n$ \\
+            $n$ & $\approx B_n$ \\
             \hline
             $22$ & $1.40 \cdot 10^{5}$  \\
             $24$ & $3.92 \cdot 10^{5}$  \\
@@ -604,7 +591,7 @@ Here is the updated table with the new values for \( B_n \) corresponding to eac
         \centering
         \begin{tabular}{|c|c|}
             \hline
-            $n$ & $B_n$ \\
+            $n$ & $\approx B_n$ \\
             \hline
             $42$ & $4.59 \cdot 10^{9}$  \\
             $44$ & $1.29 \cdot 10^{10}$ \\
@@ -623,7 +610,7 @@ Here is the updated table with the new values for \( B_n \) corresponding to eac
         \centering
         \begin{tabular}{|c|c|}
             \hline
-            $n$ & $B_n$ \\
+            $n$ & $\approx B_n$ \\
             \hline
             $62$ & $1.47 \cdot 10^{14}$ \\
             $64$ & $4.09 \cdot 10^{14}$ \\
@@ -638,21 +625,9 @@ Here is the updated table with the new values for \( B_n \) corresponding to eac
             \hline
         \end{tabular}
     \end{minipage}
-    \caption{Values of $B_n$ for various $n$}
+    \caption{Approximate values of $B_n$ for various $n$}
     \label{table:walsh_bounds}
 \end{table}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=10cm]{walsh_bound}
-    \caption{Our bounds $B_n$ in terms of $n$, on a logarithmic scale}
-    \label{fig:walsh_bound}
-\end{figure}
-
-
-
-
-
 
 \subsection{Generalization}
 
@@ -682,9 +657,9 @@ We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}
 	
 	\begin{align*}
 	\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,t}(y)+by +cz}\\
-	&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t} \atop z \in \Ekn{k-\ell}{n-2t}} (-1)^{d_{t,t}(y)+by +cz}\\
+	&=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,t}(y)+by +cz}\\
 	&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,t}(y)+by} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{cz}\right)\\
-	&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.
+	&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.\qedhere
 	\end{align*}	
 	
 	
@@ -708,7 +683,6 @@ We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}
 	If $g (1+q)\ne 0$ then $\degg(g(1+q)) \le \degg(g)+2$ and we obtain $\degg(g)\ge \AI(h) -2$. 
 	Otherwise, $g (1+q)= 0$ implies that $g$ annihilates $1+q$ and therefore $0=g (f+\varepsilon + 1 +q)=g(h+ \varepsilon +1)$ that is $\degg(g)\ge \AI(h)$. 
 	Summarizing, for any non null annihilator $g$ of $f$ or $f+1$ we get $\degg(g)\ge \AI(h)-2$, it allows to conclude $\AI(f)\ge \AI(h)-2$.
-	
 \end{proof}
 
 From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the HWBF is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for $f$.
