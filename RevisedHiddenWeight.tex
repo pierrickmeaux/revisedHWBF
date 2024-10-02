@@ -57,13 +57,18 @@
 
 \section{Preliminaries}
 
+For $v$ a binary vector of length $n$ we denote by $\w(v)$ its Hamming weight: $\w(v)=|\{i\in [1,n] \, | \, x_i=1\}|$.
 
-\subsection{Boolean functions and weightwise considerations}
+\pmnote{Preliminaries to adapt}
 
-In this part we recall general concepts on Boolean functions and their weightwise properties we use in this article. 
-For a deeper introduction on Boolean functions and their cryptographic parameters we refer to the survey of \eg~\cite{Carlet20} and to~\cite{TOSC:CarMeaRot17} for the weightwise properties, also called properties on the slices.
+
+\subsection{Boolean functions and cryptographic parameters}
+
+In this part we recall general concepts on Boolean functions and their cryptographic properties we use in this article. 
+For a deeper introduction on Boolean functions and their cryptographic parameters we refer to the book~\cite{Carlet20} and to~\cite{TOSC:CarMeaRot17} for the weightwise properties, also called properties on the slices.
 For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k  \}$ and call it slice of the Boolean hypercube (of dimension $n$). 
-Accordingly, the Boolean hypercube is partitioned into $n+1$ slices where the elements have the same Hamming weight.
+
+%Accordingly, the Boolean hypercube is partitioned into $n+1$ slices where the elements have the same Hamming weight.
 
 \begin{definition}[Boolean Function]\label{def:bool_f}
 	A Boolean function $f$ in $n$ variables is a function from $\F_2^n$ to $\F_2$. 
@@ -71,14 +76,10 @@ Accordingly, the Boolean hypercube is partitioned into $n+1$ slices where the el
 \end{definition}
 
 
-To denote when a property or a definition is restricted to a slice we use the subscript $k$. 
-For example, for a $n$-variable Boolean function $f$ we denote its support $\supp(f)=\{x\in \F_2^n \, | \, f(x)=1  \}$ and we denote $\suppk{k}(f)$ its support restricted to a slice, that is $\supp(f)\cap \Ekn{k}{n}$.
-
-
 \begin{definition}[Balancedness]\label{def:balancedness}
 	A Boolean function $f\in \BN$ is called balanced if $|\supp(f)|=2^{n-1}=|\supp(f+1)|$. 
 	
-	For $k\in [0,n]$ the function is said balanced on the slice $k$ if $||\suppk{k}(f)|-|\suppk{k}(f+1)| |\le 1$. In particular when $|\Ekn{k}{n}|$ is even $|\suppk{k}(f)|=|\suppk{k}(f+1)|=|\Ekn{k}{n}|/2$.
+%	For $k\in [0,n]$ the function is said balanced on the slice $k$ if $||\suppk{k}(f)|-|\suppk{k}(f+1)| |\le 1$. In particular when $|\Ekn{k}{n}|$ is even $|\suppk{k}(f)|=|\suppk{k}(f+1)|=|\Ekn{k}{n}|/2$.
 \end{definition}
 
 \begin{definition}[Algebraic Normal Form (ANF) and degree]\label{def:anf}
@@ -127,23 +128,68 @@ For example, for a $n$-variable Boolean function $f$ we denote its support $\sup
 	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
 \end{definition}
 
-\subsection{Symmetric Functions}
+\subsection{Symmetric Functions, HWBF and weightwise degree-d functions}
 
 
 The $n$-variable \emph{Boolean symmetric functions} are those that are constant on each slice $\Ekn{k}{n}$ for $k\in [0,n]$. 
 This class has been assiduously studied in the context of cryptography, see \eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
-In this paper we mainly consider two families of symmetric functions, which are both bases of the symmetric functions:
+In this paper we mainly consider the slice indicator functions.
 
-\begin{definition}[Elementary symmetric functions]
-Let $i\in [0,n]$, the elementary symmetric function of degree $i$ in $n$ variables, denoted $\sigma_{i,n}$, is the function which ANF contains all monomials of degree $i$ and no monomials of other degrees. 
-\end{definition}
-\begin{definition}[Slice indicator functions]
+%\begin{definition}[Elementary symmetric functions]
+%Let $i\in [0,n]$, the elementary symmetric function of degree $i$ in $n$ variables, denoted $\sigma_{i,n}$, is the function which ANF contains all monomials of degree $i$ and no monomials of other degrees. 
+%\end{definition}
+\begin{definition}[Slice indicator functions]\label{def:slice}
  Let $k\in [0,n]$, the indicator function of the slice of weight $k$ is defined as:
  \[\forall  x\in \mathbb{F}_2^{n}, \quad \phikn{k}{n}(x) = 1 \text{ if and only if } \w(x) = k.\]
 \end{definition}
-We recall that bent functions are those Boolean functions achieving maximal nonlinearity.
 
 
+
+
+
+%We recall that bent functions are those Boolean functions achieving maximal nonlinearity.
+
+
+
+\pmnote{adapt usefull parts:
+
+
+
+In~\cite{DAM:GinMea22} the authors study the relationship between weightwise perfectly balanced functions (functions balanced on all the slices, see for example~\cite{TOSC:CarMeaRot17,DCC:LiuMes19,CC:TangLiu19,BFA:MesSuLi21,ACI:ManKuLar22,SSRN:ZLCQZ23,ASIACCS:YCL+23,LATIN:GinMea23}) and weightwise affine functions \ie weightwise degree-$1$ functions. 
+In fact weightwise degree-$1$ and degree-$0$ functions have been studied for their cryptographic properties in many works, without the same formalism. 
+The weightwise constant functions ($\WD{0}{n}$) are the symmetric functions that have been extensively studied (\eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:CheLu11,A2C:CarMea19,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}). 
+Thereafter, the hidden weight bit function introduced in~\cite{IEEE:Bryant91} is a weightwise degree-$1$ function, the one obtained by fixing $f_0=0$ and $f_k=x_k$ for $k \in [n]$. 
+The cryptographic properties of this function have been studied in~\cite{DAM:WCST14}, showing good algebraic properties for this function. 
+In~\cite{TOSC:CarMeaRot17}, the bent functions in Propositions $1$ and $2$ are weightwise affine.}
+
+\pmnote{Introduce formally HWBF, and weightwise degree d functions}
+\begin{definition}[Hidden Weight Bit Function (HWBF)]\label{def:hwbf}
+	Let $n\in \N^*$we call Hidden Weight Bit Function (HWBF) the $n$-variable Boolean function defined by:
+	\[h(x)= \left\{ 
+	\begin{array}{l l}
+	0 & \quad \text{ if } \w(x) =0, \\
+	x_k & \quad \text{ if } \w(x)=k.
+	\end{array} \right. \] 
+
+\end{definition}
+
+
+\begin{definition}[Weightwise degree-$d$ functions]\label{def:WdegD}
+	Let $n\in \N^*$ and for $k\in[0,n]$ $\phikn{k}{n}$ denotes the indicator function of $\Ekn{k}{n}$. 
+	An $n$-variable Boolean function $f$, written as $f=\sum_{k=0}^n f_k \phikn{k}{n}$, is called weightwise degree-$d$ if and only if for each $k\in [0,n]$ $f_k$ coincide with a function of degree at most $d$ over $\Ekn{k}{n}$. 
+	%	Equivalently, $f$ is weightwise affine if and only if for each $k\in [0,n]$ $\NLk{k}(f)=0$.
+	
+	The set of weightwise degree-$d$ functions is denoted by $\WD{d}{n}$.
+	
+	
+	
+	%	$f=\sum_{k=0}^n f_k \phikn{k}{n}$ is called weightwise affine if and only if for each $k\in [0,n]$ $f_k$ coincide with an affine function over $\Ekn{k}{n}$.
+	
+\end{definition}
+
+\pmnote{add: properties of maj function, HWPF, and some WWL and WWQ}
+
+\pmnote{add the nonlinearity of Dickson's function}
 
 
 
@@ -155,12 +201,6 @@ We use Krawtchouk polynomials and some of their properties to prove one of our r
 	
 	Krawtchouk polynomials are characterized by the generating series: $ \displaystyle (1+z)^{n-x} (1-z)^x=\sum_{k=0}^\infty \kraw{k}{x}{n} z^k$.
 \end{definition}
-
-
-
-
-
-\pmnote{Introduce formally HWBF, and weightwise degree d functions}
 
 
 
