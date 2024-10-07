@@ -333,9 +333,9 @@ For $a\in\F_2^n$, denote by $p=p(a)$ the number of odd $i\geq 1$ for which $(a_i
 P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
 \]
 
-\begin{Prop}\label{prop:generating_fct}
+\begin{proposition}\label{proposition:generating_fct}
 	It holds that $\sum_{k\in\Z}\Dnka nka z^k= P_a(z)$.
-\end{Prop}
+\end{proposition}
 
 \begin{proof}
 	Proceed by induction on even $n\geq 0$. 
@@ -356,12 +356,12 @@ P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
     In particular, since $P_a(z)$ only depends on the triplet $(p,q,r)$, we deduce that also $\Dnka nka$ only depends on the triplet $(p,q,r)$; therefore, it makes sense to introduce the notation $\mathsf D_{n,k}^{p,q,r}=\Dnka nka$, where $a\in\mathbb F_2^n$ is any vector with $(p(a),q(a),r(a))=(p,q,r)$. We will make use of this notation later on.
 \end{remark}
 
-\begin{Prop}\label{prop:symmetry}
+\begin{proposition}\label{proposition:symmetry}
 	For every integer $k$, we have:
 	\[
 	\Dnka n{n-k}a=(-1)^{p+q+k}\Dnka nka.
 	\]
-\end{Prop}
+\end{proposition}
 
 \begin{proof}
 	Define the degree $n$ polynomial $Q_a(z)$ in such a way that the coefficient of $z^k$ in $Q_a(z)$ is equal to the coefficient of $z^{n-k}$ in $P_a(z)$. Then we have:
@@ -379,21 +379,20 @@ P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
 \end{Corollary}
 
 \begin{proof}
-	By Property \ref{prop:symmetry}, we have $\Dnka n{n/2}a=(-1)^{p+q+n/2}\Dnka n{n/2}a=-\Dnka n{n/2}a$ because $p+q+n/2\equiv n/2-p-q\equiv r\equiv 1\bmod 2$.
+	By Proposition \ref{proposition:symmetry}, we have $\Dnka n{n/2}a=(-1)^{p+q+n/2}\Dnka n{n/2}a=-\Dnka n{n/2}a$ because $p+q+n/2\equiv n/2-p-q\equiv r\equiv 1\bmod 2$.
 \end{proof}
 
 Another immediate case for zero coefficients is the following:
-\begin{Prop}
-
+\begin{proposition}
     If $p=q$ and $k$ is odd, then $\Dnka nka=0=\Dnka n{n-k}a$.
-\end{Prop}
+\end{proposition}
 
 \begin{proof}
-    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p\cdot(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ of $z^k$ for odd $k$ must be zero in $P_a(z)$. It follows that also $\Dnka n{n-k}a=0$ by Property \ref{prop:symmetry}.
+    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p\cdot(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ of $z^k$ for odd $k$ must be zero in $P_a(z)$. It follows that also $\Dnka n{n-k}a=0$ by Proposition \ref{proposition:symmetry}.
 \end{proof}
 
-\begin{remark}
-    We can also use Property \ref{prop:generating_fct} to obtain $\Dnka nka$ through differentiation:
+\begin{remark}\label{remark:D_nka_differentiation}
+    We can also use Proposition \ref{proposition:generating_fct} to obtain $\Dnka nka$ through differentiation:
     \[
         k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}.
     \]
@@ -415,14 +414,14 @@ Another immediate case for zero coefficients is the following:
 
 With this, we can get more cases in which $\Dnka nka=0$:
 
-\begin{Prop}\mbox{}
+\begin{proposition}\mbox{}
     \begin{enumerate}
         \item If $n=16m$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=s(s-1)$, then $\Dnka n2a=0=\Dnka n{k-2}a$.
         \item If $n=16m+2$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=\left(6s^2+6s+(-1)^s(2s+1)-1\right)/8$, then $\Dnka n3a=0=\Dnka n{k-3}a$.
         \item If $n=16m+4$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=s^2$, then $\Dnka n2a=0=\Dnka n{k-2}a$.
         \item If $n=16m+6$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=\left(6s^2+6s-(-1)^s(2s+1)+1\right)/8$, then $\Dnka n3a=0=\Dnka n{k-3}a$.
     \end{enumerate}
-\end{Prop}
+\end{proposition}
 
 \begin{proof}
     It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$.
@@ -432,9 +431,9 @@ With this, we can get more cases in which $\Dnka nka=0$:
     There are still instances where $\Dnka nka=0$ which have not been described by the above. For instance, we have $\Dnka{34}4a=0$ if $\{p,q\}=\{1,2\}$.
 \end{remark}
 
-Using Property \ref{prop:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
+Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
 
-\begin{Prop}\mbox{}
+\begin{proposition}\mbox{}
     \begin{enumerate}
         \item The sum and alternating sum over $k$ of the $\Dnka nka$ are, respectively:
         \begin{gather*}
@@ -448,31 +447,75 @@ Using Property \ref{prop:generating_fct}, we can also deduce some sums involving
         \end{gather*}
     \end{enumerate}
 
-\end{Prop}
+\end{proposition}
 
 \begin{proof}
 	For the sum and the alternating sum, it is enough to compute $P_a(1)$ and $P_a(-1)$, respectively. The sum of the $\Dnka nka$ over the even (respectively, odd) $k$ is obtained by adding (respectively, subtracting) these two sums and dividing by $2$.
 \end{proof}
 
+\subsection{Bounding the Walsh transform of $f$ using the Cauchy estimate}
 
+Recall the Cauchy estimate on holomorphic functions:
 
+\begin{Prop}[\cite{rudin1987}, Theorem 10.26]\label{property:cauchy_estimate}
+    Let $w$ be a complex number, and let $R>0$ be some radius. If $f$ is a holomorphic function defined on an open set containing every complex number $z$ satisfying $|z-w|<R$, then for every integer $k\geq 0$, the $k$-th derivative of $f$ evaluated at $w$ can be bounded, in absolute value, as follows:
+    \[
+        \left|\frac{\dd^k}{\dd^k z}f(w)\right|\leq\frac{k!\cdot M_R}{R^k},
+    \]
+    where $M_R$ is the maximum of $|f(z)|$ on the circle $|z-w|=R$.
+\end{Prop}
 
-One can also prove the following:
+Applying this, we get:
 
-\begin{Prop}
+\begin{theorem}\label{theorem:bound_D_nka}
+    For every $a\in\F_2^n$ and every integer $k\geq 0$, it holds that:
+    \[
+        |\Dnka nka|\leq 2^{3n/4}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Recall from Remark \ref{remark:D_nka_differentiation} that $k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}$. Choosing $f=P_a$, $w=0$ and $R=1$ in Property \ref{property:cauchy_estimate} then gives:
+    \[
+        |\Dnka nka|=\frac{1}{k!}\left|\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}\right|\leq M,
+    \]
+    where $M$ is the maximum of $|P_a(z)|$ on the circle $|z|=1$. We claim, and prove below, that the maximum of $\left|-z^2+2z+1\right|$ on $|z|=1$ is $2\sqrt 2$. This implies that the maximum of $\left|-z^2-2z+1\right|$ on $|z|=1$ is $2\sqrt 2$ as well. Since the maximum of $\left|z^2+1\right|$ on $|z|=1$ is $2<2\sqrt 2$, it follows that $|\Dnka nka|\leq M\leq (2\sqrt 2)^{p+q}2^r\leq (2\sqrt 2)^{n/2}$.
+
+    It remains to prove that the maximum of $\left|-z^2+2z+1\right|^2$ on $|z|=1$ equals $8$. Using that $|w|^2=w\overline w$ for every complex number $w$, we obtain for $|z|=1$:
+    \[
+        \left|-z^2+2z+1\right|^2=\left(z^2-2z-1\right)\left(\overline z^2-2\overline z-1\right)=6-\left(z^2+\overline z^2\right)=6-2\mathrm{Re}\left(z^2\right),
+    \]
+    where $\mathrm{Re}\left(z^2\right)$ denotes the real part of $z^2$. Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $|z|=1$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $|z|=1$ is $6-2(-1)=8$.
+\end{proof}
+
+As a consequence, we have:
+
+\begin{Corollary}\label{cor:bound_walsh_cauchy}
+    For every $a\in\F_2^n$, it holds that:
+    \[
+        |\wt f(a)|\leq 1+n\cdot 2^{3n/4}.
+    \]
+\end{Corollary}
+
+\begin{proof}
+    We have previously established that $\wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}$. Then, applying Proposition \ref{theorem:bound_D_nka} yields:
+    \[
+        |\wt{f}(a)|\leq 1+\sum_{k=1}^n\left|\Dnka{n}{k}{b+\pi(e_k)}\right|\leq 1+ n\cdot 2^{3n/4}.\qedhere
+    \]
+\end{proof}
+
+\mycomment{One can also prove the following:
+
+\begin{proposition}
     For a fixed integer $k\geq 1$ and sufficiently large $n\geq b(k)$, it holds that:
     \[
         \max_{a\in\F_2^n}|\Dnka nka|=|\Dnka nk{0_n}|=\left(-\frac12\right)^k\sum_{i=\lceil k/2\rceil}^{n/2}(-4)^i\binom{n/2}{i}\binom{i}{k-i}.
     \]
-\end{Prop}
-
-\begin{remark}
-    In general, it also appears that the vector $a\in\F_2^n$ for which $|\Dnka nka|$ is maximal always satisfies $r(a)=0$.
-\end{remark}
+\end{proposition}
 
 Also, using the Cauchy estimate on holomorphic functions, we can prove:
 
-\begin{Prop}
+\begin{proposition}
     For any real number $R>0$, we have the following bound:
     \[
         |\Dnka nka|\leq\frac{(M_R)^{n/2}}{R^k},
@@ -486,7 +529,7 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
             R^2+2R-1&\text{if $R\geq\sqrt 2+1$}\\
         \end{cases}.
     \]
-\end{Prop}
+\end{proposition}
 
 \begin{remark}
     Here are some interesting choices for $R$:
@@ -498,7 +541,7 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
 \end{remark}
 
 \begin{remark}
-    We can even go ahead and choose $R=R_{n,k}$ in terms of $n$ and $k$, in such a way that the upper bound of $B_{R,n,k}=(M_R)^{n/2}/R^k$ is minimized. To do this, consider any $1\leq k\leq n-1$. We can actually assume that $k\leq n/2$: if $k>n/2$, replace it by $n-k$ (recall that $|\Dnka nka|=|\Dnka n{n-k}a|$ by Property \ref{prop:symmetry}). One can show that $B_{R,n,k}$ is minimal for the following choice of $R=R_{n,k}$:
+    We can even go ahead and choose $R=R_{n,k}$ in terms of $n$ and $k$, in such a way that the upper bound of $B_{R,n,k}=(M_R)^{n/2}/R^k$ is minimized. To do this, consider any $1\leq k\leq n-1$. We can actually assume that $k\leq n/2$: if $k>n/2$, replace it by $n-k$ (recall that $|\Dnka nka|=|\Dnka n{n-k}a|$ by Proposition \ref{proposition:symmetry}). One can show that $B_{R,n,k}$ is minimal for the following choice of $R=R_{n,k}$:
     \[
         R_{n,k}=\begin{cases}
             \frac{n-2k-\sqrt{2(n-2k)^2-n^2}}{2(n-k)}&\text{if $k\leq\frac{2-\sqrt 2}{4}\cdot n$}\\
@@ -515,22 +558,11 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
         \caption{Cauchy estimate in blue vs.\ binomial coefficients in red}
         \label{fig:cauchy_estimate}
     \end{figure}
-\end{remark}
-    
-\begin{Prop}\label{prop:bound_sum_D_nka}
-    For every $1\leq k\leq n$, fix a Boolean vector $a\ui k\in\F_2^n$. Then we have the following bound:
-    \[
-        \sum_{k=1}^n\left|\Dnka nk{a\ui k}\right|\leq n\cdot 2^{3n/4}.
-    \]
-\end{Prop}
+\end{remark}}
 
-\begin{proof}
-    Simply observe that $2^{n/4}\sqrt{\frac{n^n}{(n-k)^{n-k}\cdot k^k}}$ is maximal for $k=n/2$, in which case the expression reduces to $2^{3n/4}$.
-\end{proof}
+\subsection{Bounding the Walsh transform of $f$ experimentally}
 
-\subsection{Bounding the Walsh transform of $f$}
-
-From Property \ref{prop:bound_sum_D_nka}, we can in particular deduce that $|\wt f(a)|\leq n\cdot 2^{3n/4}+1$ for every Boolean vector $a\in\F_2^n$. This is a very pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
+We have just deduced that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
 
 This method is based on the identity (\ref{eqn:walsh_from_D}). For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $1\leq k\leq n$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$. Observe that for every $1\leq k\leq n$, we have $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\leq n/2$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
 
@@ -548,7 +580,7 @@ This implies that $\Dnka{n}{k}{b_k}+\Dnka{n}{k+n/2}{b_{k+n/2}}\leq B_k^{p,q,r}$ 
 \end{equation}
 Under the assumption that the values of $\mathsf{D}_{n,k}^{p,q,r}$ have already been computed for all triplets $(p,q,r)$ satisfying $p+q+r=n/2$, the bound in equation (\ref{eqn:bound_walsh}) can be determined with a computational complexity of $\mathcal{O}(n^3)$. This is because there are $\mathcal{O}(n^2)$ possible triplets $(p,q,r)$ that meet the condition $p+q+r=n/2$, and the summation itself can be computed in $\mathcal{O}(n)$.
 
-Consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $0 \leq k \leq n$ and for all triplets $(p,q,r)$ where $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, according to Property \ref{prop:generating_fct}, it is sufficient to expand the polynomials $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$.
+Consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $0 \leq k \leq n$ and for all triplets $(p,q,r)$ where $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, according to Proposition \ref{proposition:generating_fct}, it is sufficient to expand the polynomials $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$.
 
 To achieve this, we first precompute the expanded polynomials $(-z^2 + 2z + 1)^p$ for each $1 \leq p \leq n/2$. This can be done recursively using the formula $(-z^2 + 2z + 1)^{p+1} = (-z^2 + 2z + 1) \cdot (-z^2 + 2z + 1)^p$. For each $p$, we need to compute the product of two expanded polynomials of degree at most $n/2$, which requires $\mathcal{O}(n \log n)$ computations . Performing this for every $p$ results in a total complexity of $\mathcal{O}(n^2 \log n)$. The same approach is used to expand the polynomials $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$, resulting in an overall complexity of $\mathcal{O}(n^2 \log n)$ for this precomputational step.
 
@@ -578,12 +610,12 @@ Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)
     \label{table:max_walsh_vs_bound}
 \end{table}
 
-Figure \ref{fig:walsh_bound_comparison} compares our experimental bound $B_n$ to the theoretical bound $n\cdot 2^{3n/4}+1$ and the binomial coefficient $\binom{n}{n/2}$, on a logarithmic scale. The first two and the last one have an asymptotic slope of $3/4$ and $1$, respectively.
+Figure \ref{fig:walsh_bound_comparison} compares our experimental bound $B_n$ to the theoretical bound $1+n\cdot 2^{3n/4}$ and the binomial coefficient $\binom{n}{n/2}$, on a logarithmic scale. The first two and the last one have an asymptotic slope of $3/4$ and $1$, respectively.
 
 \begin{figure}
     \centering
     \includegraphics[width=9cm]{comparison_walsh_bound.pdf}
-    \caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $n\cdot 2^{3n/4}+1$ from Property \ref{prop:bound_sum_D_nka} in green, and the bound $\binom{n}{n/2}$ in blue.}
+    \caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue.}
     \label{fig:walsh_bound_comparison}
 \end{figure}
 
@@ -682,7 +714,7 @@ In particular, $d_{n,n}(x)=d_n(x)$.
 
 We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}$
 
-\begin{proposition}\label{prop:dtn}
+\begin{proposition}\label{proposition:dtn}
 	Let $t, n\in \N$ with $n$ even and $t\le n/2$, the following holds on $d_{t,n}$ for all $k\in [0,n]$:
 	\[\wtk{d_{t,n}}{k}(a)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t},\]
 	where $b$ denotes the first $2t$ elements of $a$ and $c$ the last $n-2t$ elements.
