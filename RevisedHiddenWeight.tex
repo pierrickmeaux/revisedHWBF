@@ -488,8 +488,6 @@ Applying this, we get:
     where $\mathrm{Re}\left(z^2\right)$ denotes the real part of $z^2$. Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $|z|=1$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $|z|=1$ is $6-2(-1)=8$.
 \end{proof}
 
-As a consequence, we have:
-
 \begin{Corollary}\label{cor:bound_walsh_cauchy}
     For every $a\in\F_2^n$, it holds that:
     \[
@@ -710,7 +708,7 @@ Figure \ref{fig:walsh_bound_comparison} compares our experimental bound $B_n$ to
 	%	\[\Dnka{n}{k}{a}= \sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\]
 \end{definition}
 
-In particular, $d_{n,n}(x)=d_n(x)$. 
+In particular, $d_{n/2,n}(x)=d_n(x)$. 
 
 We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}$
 
@@ -718,11 +716,6 @@ We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}
 	Let $t, n\in \N$ with $n$ even and $t\le n/2$, the following holds on $d_{t,n}$ for all $k\in [0,n]$:
 	\[\wtk{d_{t,n}}{k}(a)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t},\]
 	where $b$ denotes the first $2t$ elements of $a$ and $c$ the last $n-2t$ elements.
-	
-	
-	
-	
-	
 \end{proposition}
 \begin{proof}
 	We rewrite the restricted Walsh transform, denoting $x\in \F_2^n$ by $(y,z)$ where $y\in \F_2^{2t}$ and $z \in \F_2^{n-2t}$, and similarly denoting $a$ by $(b,c)$:
@@ -733,12 +726,49 @@ We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}
 	&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,t}(y)+by} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{cz}\right)\\
 	&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.\qedhere
 	\end{align*}	
-	
-	
 \end{proof}
 
+This leads to the following generating function:
 
+\begin{proposition}
+    Let $t, n\in \N$ with $n$ even and $t\le n/2$. Let $a=(b,c)\in\F_2^n$ with $b\in\F_2^{2t}$. Denote $n-2t-\w(c)$ and $\w(c)$ by $u$ and $v$, respectively. Then the following holds:
+    \[
+        \sum_{k\in\Z}\wtk{d_{t,n}}{k}(a)z^k=P_b(z)\cdot(1+z)^u\cdot(1-z)^v.
+    \]
+\end{proposition}
 
+\begin{proof}
+    Applying Proposition \ref{proposition:dtn}, we get:
+    \begin{align*}
+        \sum_{k\in\Z}\wtk{d_{t,n}}{k}(a)z^k&=\sum_{\ell=0}^{2t}\Dnka{2t}{\ell}{b}z^\ell\sum_{k\in\Z}\kraw{k-\ell}{\w(c)}{n-2t}z^{k-\ell}\\
+        &=\left(\sum_{\ell=0}^{2t}\Dnka{2t}{\ell}{b}z^\ell\right)\cdot(1+z)^u\cdot(1-z)^v\\
+        &=P_b(z)\cdot(1+z)^u\cdot(1-z)^v.\qedhere
+    \end{align*}
+\end{proof}
+
+Consequently, we get a generalization of Theorem \ref{theorem:bound_D_nka}:
+
+\begin{theorem}
+    Let $t, n\in \N$ with $n$ even and $t\le n/2$. For every $a\in\F_2^n$, it holds that:
+    \[
+        |\wtk{d_{t,n}}{k}(a)|\leq 2^{n-t/2}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    By applying Property \ref{property:cauchy_estimate}, we get that a bound on $|\wtk{d_{t,n}}{k}(a)|$ is given by the maximum $M'$ on the circle $|z|=1$ of $|P_b(z)|\cdot|(1+z)^u\cdot(1-z)^v|$. As previously established, $|P_b(z)|$ is bounded on $|z|=1$ by $(2\sqrt 2)^t=2^{3t/2}$, and $|(1+z)^u\cdot(1-z)^v|$ is bounded on $|z|=1$ by $2^{u+v}=2^{n-2t}$. Therefore, we conclude that $M'$ is bounded by $2^{3t/2}2^{n-2t}=2^{n-t/2}$, and hence this is also a bound for $|\wtk{d_{t,n}}{k}(a)|$. 
+\end{proof}
+
+\begin{Corollary}
+    For every $a\in\F_2^n$, the following holds:
+    \[
+        |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{n-t/2}.
+    \]
+\end{Corollary}
+
+\begin{proof}
+    Analogous to the proof of Corollary \ref{cor:bound_walsh_cauchy}.
+\end{proof}
 
 \subsection{Algebraic immunity of $f$}
 
