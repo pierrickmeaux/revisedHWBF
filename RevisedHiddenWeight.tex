@@ -55,6 +55,24 @@
 
 \section{Introduction}
 
+\pmnote{short intro:
+
+HWBF introduced in x, interesting for its cryptographic criteria and easy implementation. cryptographic properties studied in y such as balancedness, algebraic immunity and nonlinearity. 
+New potential uses in a stream cipher, or modifications. Use: transciphering and works aiming at finding Boolean functions easy to evaluate homomorphically, input oblivious algorithms. 
+Nonlinearity a bit low for direct use.
+
+
+
+Contributions: new function as addition of HWBF and quadratic bent function. We show when the function is balanced, formalize and study its nonlinearity. Bounds on the nonlinearity of $f$, generalization to a family of function, and an algorithm for estimating the nonlinearity for $n$ up to $80$. Comparisons with other functions and practical values of the parameters for $n$ up to $20$.
+
+
+
+}
+
+
+
+
+
 \section{Preliminaries}
 
 For $v$ a binary vector of length $n$ we denote by $\w(v)$ its Hamming weight: $\w(v)=|\{i\in [1,n] \, | \, x_i=1\}|$.
@@ -113,13 +131,21 @@ For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k 
 %	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
 %	Additionally we denote $\AN(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0\}$.
 %\end{definition}
-\begin{definition}[Nonlinearity and weightwise nonlinearity] \label{def:nl}
+\begin{definition}[Nonlinearity %and weightwise nonlinearity
+	] \label{def:nl}
 	The nonlinearity $\NL(f)$ of a Boolean function $f\in \BN$, where $n$ is a positive integer, is the minimum Hamming distance between $f$ and all the affine functions in $\BN$:
 	\[ \NL(f) = \min_{g,\, \degg(g)\leq 1} \{ \hd(f,g) \}{,} \]
 	where $g(x)=a\cdot x+\varepsilon$, $a\in \F_2^n, \varepsilon\in \F_2$. 	
 	The nonlinearity can also be defined from the Walsh transform:
 	\[ \NL(f) = 2^{n-1}- \frac{1}{2} \max_{a\in \F_2^n}{|\wt{f}(a)|}. \]
 \end{definition}
+
+When $n$ is even, the nonlinearity of a function can reach at most $2^{n-1}-2^{n/2 -1}$. Functions reaching this maximum are called bent functions. The quadratic function $d_n$ given by: $d_n(x)=\sum_{i \text{ odd}}^n x_i x_{i+1}$ is an example of bent function.
+
+
+
+
+
 
 \begin{definition}[Algebraic immunity] \label{def:ai}
 	The algebraic immunity of a Boolean function $f\in \Bfn{n}$, denoted as $\AI(f)$, is defined as:
@@ -131,10 +157,11 @@ For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k 
 \subsection{Symmetric Functions, HWBF and weightwise degree-d functions}
 
 
-The $n$-variable \emph{Boolean symmetric functions} are those that are constant on each slice $\Ekn{k}{n}$ for $k\in [0,n]$. 
-This class has been assiduously studied in the context of cryptography, see \eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
-In this paper we mainly consider the slice indicator functions.
 
+
+The $n$-variable \emph{Boolean symmetric functions} are those that are constant on each slice $\Ekn{k}{n}$ for $k\in [0,n]$. 
+This class has been assiduously studied in the context of cryptography, see \eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,IEEE:CheLu11,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
+In this article we mainly consider the slice indicator functions.
 %\begin{definition}[Elementary symmetric functions]
 %Let $i\in [0,n]$, the elementary symmetric function of degree $i$ in $n$ variables, denoted $\sigma_{i,n}$, is the function which ANF contains all monomials of degree $i$ and no monomials of other degrees. 
 %\end{definition}
@@ -143,26 +170,19 @@ In this paper we mainly consider the slice indicator functions.
  \[\forall  x\in \mathbb{F}_2^{n}, \quad \phikn{k}{n}(x) = 1 \text{ if and only if } \w(x) = k.\]
 \end{definition}
 
+Bigger families of function can be obtained by considering functions of bounded degree on each slice, it corresponds to the concept of weightwise degree-$d$ function introduced in~\cite{DAM:GinMea22} for $d=1$ and~\cite{DAM:MeaOza24} for the general case. 
+
+\begin{definition}[Weightwise degree-$d$ functions (~\cite{DAM:MeaOza24} Definition 12)]\label{def:WdegD}
+	Let $n\in \N^*$ and for $k\in[0,n]$ $\phikn{k}{n}$ denotes the indicator function of $\Ekn{k}{n}$. 
+	An $n$-variable Boolean function $f$, written as $f=\sum_{k=0}^n f_k \phikn{k}{n}$, is called weightwise degree-$d$ if and only if for each $k\in [0,n]$ $f_k$ coincide with a function of degree at most $d$ over $\Ekn{k}{n}$. 
+		The set of weightwise degree-$d$ functions is denoted by $\WD{d}{n}$.
+\end{definition}
 
 
 
+Various weightwise affine functions (\ie belonging to $\WD{1}{n}$) have been exhibited such as in~\cite{TOSC:CarMeaRot17} where the bent functions in Propositions $1$ and $2$ are weightwise affine or in~\cite{DAM:GinMea22} to show than no weightwise perfectly balanced function is weightwise affine for $n\ge 8$. 
+The most known example of weightwise affine function is the hidden weight bit function introduced in~\cite{IEEE:Bryant91}, the one obtained by fixing $f_0=0$ and $f_k=x_k$ for $k \in [n]$. The cryptographic properties of this function have been studied in~\cite{DAM:WCST14}, showing good algebraic properties for this function.
 
-%We recall that bent functions are those Boolean functions achieving maximal nonlinearity.
-
-
-
-\pmnote{adapt usefull parts:
-
-
-
-In~\cite{DAM:GinMea22} the authors study the relationship between weightwise perfectly balanced functions (functions balanced on all the slices, see for example~\cite{TOSC:CarMeaRot17,DCC:LiuMes19,CC:TangLiu19,BFA:MesSuLi21,ACI:ManKuLar22,SSRN:ZLCQZ23,ASIACCS:YCL+23,LATIN:GinMea23}) and weightwise affine functions \ie weightwise degree-$1$ functions. 
-In fact weightwise degree-$1$ and degree-$0$ functions have been studied for their cryptographic properties in many works, without the same formalism. 
-The weightwise constant functions ($\WD{0}{n}$) are the symmetric functions that have been extensively studied (\eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:CheLu11,A2C:CarMea19,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}). 
-Thereafter, the hidden weight bit function introduced in~\cite{IEEE:Bryant91} is a weightwise degree-$1$ function, the one obtained by fixing $f_0=0$ and $f_k=x_k$ for $k \in [n]$. 
-The cryptographic properties of this function have been studied in~\cite{DAM:WCST14}, showing good algebraic properties for this function. 
-In~\cite{TOSC:CarMeaRot17}, the bent functions in Propositions $1$ and $2$ are weightwise affine.}
-
-\pmnote{Introduce formally HWBF, and weightwise degree d functions}
 \begin{definition}[Hidden Weight Bit Function (HWBF)]\label{def:hwbf}
 	Let $n\in \N^*$we call Hidden Weight Bit Function (HWBF) the $n$-variable Boolean function defined by:
 	\[h(x)= \left\{ 
@@ -173,23 +193,29 @@ In~\cite{TOSC:CarMeaRot17}, the bent functions in Propositions $1$ and $2$ are w
 
 \end{definition}
 
+In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$ and lower bounds are given for the nonlinearity. 
+We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
 
-\begin{definition}[Weightwise degree-$d$ functions]\label{def:WdegD}
-	Let $n\in \N^*$ and for $k\in[0,n]$ $\phikn{k}{n}$ denotes the indicator function of $\Ekn{k}{n}$. 
-	An $n$-variable Boolean function $f$, written as $f=\sum_{k=0}^n f_k \phikn{k}{n}$, is called weightwise degree-$d$ if and only if for each $k\in [0,n]$ $f_k$ coincide with a function of degree at most $d$ over $\Ekn{k}{n}$. 
-	%	Equivalently, $f$ is weightwise affine if and only if for each $k\in [0,n]$ $\NLk{k}(f)=0$.
-	
-	The set of weightwise degree-$d$ functions is denoted by $\WD{d}{n}$.
-	
-	
-	
-	%	$f=\sum_{k=0}^n f_k \phikn{k}{n}$ is called weightwise affine if and only if for each $k\in [0,n]$ $f_k$ coincide with an affine function over $\Ekn{k}{n}$.
-	
-\end{definition}
 
-\pmnote{add: properties of maj function, HWPF, and some WWL and WWQ}
+\pmnote{complete the following prop, + references}
 
-\pmnote{add the nonlinearity of Dickson's function}
+\begin{property}[Cryptographic properties of functions from $\WD{1}{n}$ \label{prop:wwd1}]
+Let $n\in \N^*$, the following hold for functions in $\WD{1}{n}$.
+\begin{itemize}
+	\item Nonlinearity of majority functions.
+	\item Nonlinearity of HWBF.
+	\item Nonlinearity bound WWA.
+\end{itemize}
+	
+
+	
+	
+	
+	
+\end{property}
+
+
+
 
 
 
@@ -207,11 +233,19 @@ We use Krawtchouk polynomials and some of their properties to prove one of our r
 
 
 
-\section{Main section}
+\section{Revisited HWBF and balancedness}
 %\subsection{Restricted Walsh transform of $f$ in a recursive fashion}
 
-We study the function $f$ in an even number of variables $n$ defined as the following:
+In this part we formally define the revisited HWBF function $f$ and introduce a quantity that allows us to study its weightwise nonlinearity and balancedness.
+
+\begin{definition}[Revisited HWBF]\label{def:revHWBF}
+Let $n\in \N^*$, even, we call revisited HWBF and denote by $f$ the Boolean function defined as:
 \[f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k.\]
+\end{definition}
+
+
+%We study the function $f$ in an even number of variables $n$ defined as the following:
+%\[f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k.\]
 
 We study the restricted Walsh transform  of $f$ to bound its nonlinearity.
 
