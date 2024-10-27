@@ -1,5 +1,5 @@
 
-\def\anon{1} %% set to 1 for anonymous submissions, hides acknowledgements and author names
+\def\anon{0} %% set to 1 for anonymous submissions, hides acknowledgements and author names
 \def\full{1} %% set to 0 for springer proceedings
 
 
@@ -19,21 +19,29 @@
 
 
 \begin{document}
-	\title{Draft: Notes on the revised Hidden weight function}
+	\title{Revisited hidden weight bit function}
 
 	
-	\titlerunning{Notes on the revised Hidden weight function}
-	\author{
-%		\mbox{Pierrick M\'eaux}\inst{1}
-	}
+	\titlerunning{Revisited Hidden weight bit function}
+\author{
+	Pierrick M\'eaux\inst{1},
+	Tim Seuré\inst{1}, 
+	Deng Tang\inst{2}
+%	Pierrick M\'eaux\orcidID{0000-0001-5733-4341}\inst{1},
+%	Tim Seuré\inst{1}, 
+%	Deng Tang\orcidID{0000-0002-8373-9200}\inst{2}
+}
+\authorrunning{P. M\'eaux, T. Seuré, D. Tang}
+
 	
-	\authorrunning{ P. M\'eaux}
-	
-	\institute{
-	Luxembourg university, Luxembourg\\
-%		\email{pierrick.meaux@uni.lu}		
-	}
-	
+\institute{
+	University of Luxembourg, Luxembourg\\ \email{pierrick.meaux@uni.lu, tim.seure@uni.lu} 
+	%\and
+%		University of Luxembourg, Luxembourg\\ \email{pierrick.meaux@uni.lu}
+	\and
+	Shanghai Jiao Tong University, Shanghai, China.\\
+	\email{dengtang@sjtu.edu.cn}
+}
 
 	
 	
@@ -116,7 +124,7 @@ For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k 
 	\[  \wt{f} (a) := \sum_{x \in \F_2^n} (-1)^{f(x) +  a \cdot x }.\]
 	%	The Walsh support is the set $\Wsupp{f}:=\{ a\in \F_2^n\, | \, \wt{f} (a) \neq 0 \}$.
 	Let $f\in \Bn{n}$, $S \subset \F_2^n$, its Walsh transform restricted to $S$ at $a \in \F_2^n$ is defined as:
-	\[  \wt{f,S} (a) := \sum_{x\in S} (-1)^{f(x)+ax}.\]
+	\[  \wt{f,S} (a) := \sum_{x\in S} (-1)^{f(x)+a \cdot x}.\]
 	For $S=\Ekn{k}{n}$ we denote $\wt{f,\Ekn{k}{n}} (a)$ by $\wtk{f}{k}(a)$.%, and for $a= 0_{n}$ we denote $\wtk{f}{k}(a)$ as $\wtk{f}{k}(0)$.
 \end{definition}
 
@@ -172,7 +180,7 @@ In this article we mainly consider the slice indicator functions.
 
 Bigger families of function can be obtained by considering functions of bounded degree on each slice, it corresponds to the concept of weightwise degree-$d$ function introduced in~\cite{DAM:GinMea22} for $d=1$ and~\cite{DAM:MeaOza24} for the general case. 
 
-\begin{definition}[Weightwise degree-$d$ functions (~\cite{DAM:MeaOza24} Definition 12)]\label{def:WdegD}
+\begin{definition}[Weightwise degree-$d$ functions (~\cite{DAM:MeaOza24} Definition 12)]\label{def:wwdegd}
 	Let $n\in \N^*$ and for $k\in[0,n]$ $\phikn{k}{n}$ denotes the indicator function of $\Ekn{k}{n}$. 
 	An $n$-variable Boolean function $f$, written as $f=\sum_{k=0}^n f_k \phikn{k}{n}$, is called weightwise degree-$d$ if and only if for each $k\in [0,n]$ $f_k$ coincide with a function of degree at most $d$ over $\Ekn{k}{n}$. 
 		The set of weightwise degree-$d$ functions is denoted by $\WD{d}{n}$.
@@ -236,7 +244,7 @@ We use Krawtchouk polynomials and some of their properties to prove one of our r
 \section{Revisited HWBF and balancedness}
 %\subsection{Restricted Walsh transform of $f$ in a recursive fashion}
 
-In this part we formally define the revisited HWBF function $f$ and introduce a quantity that allows us to study its weightwise nonlinearity and balancedness.
+In this part we formally define the revisited HWBF function $f$ and introduce a quantity that allows us to study its balancedness and nonlinearity.
 
 \begin{definition}[Revisited HWBF]\label{def:revHWBF}
 Let $n\in \N^*$, even, we call revisited HWBF and denote by $f$ the Boolean function defined as:
@@ -247,25 +255,67 @@ Let $n\in \N^*$, even, we call revisited HWBF and denote by $f$ the Boolean func
 %We study the function $f$ in an even number of variables $n$ defined as the following:
 %\[f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k.\]
 
-We study the restricted Walsh transform  of $f$ to bound its nonlinearity.
+Since $f$ is the sum of a quadratic function and a weightweise affine function, it is a weightwise quadratic function. 
+Using the formalism of Definition~\ref{def:wwdegd} $f$ is the WWQ function defined by:% $f_0=0$ and for $k\in [1,n]$ $f_k=x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$.
+\[f_0=0, \quad \text{ and } \quad \forall k \in [1,n], \, f_k= \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}.\]
 
-\begin{align*}
-\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}\\
-&=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}+ ax}\\
-&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ (c)x},
-\end{align*}
-where $c$ is the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_i$ where the $e_i$ denotes the canonical vector with "1" in position $i$.
+This form allows to derive the restricted Walsh transform of $f$, which can be a useful tool to study the balancedness and bound the nonlinearity of a function.
+%Maybe add examples, such as OM24, M24
+
+
+
+%We study the restricted Walsh transform  of $f$ to bound its nonlinearity.
+\begin{proposition}\label{prop:restrWT}
+Let $n \in \N^*$ even, and $f$ be the function from Definition~\ref{def:revHWBF}, for all $k\in [0,n]$ its restricted Walsh transform in $a\in \F_2^n$ is given by:
+\[\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x},\]
+where $c$ is the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_i$ where the $e_i$ denotes the canonical vector with $1$ in position $i$.
+\end{proposition}
+\begin{proof}
+%\begin{align*}
+%	\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+a \cdot x}
+%	=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}+ a \cdot x}\\
+%	&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x},
+%\end{align*}
+%\begin{align*}
+\[	\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+a \cdot x}
+	=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}+ a \cdot x}\\
+	=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x},\]
+where $c$ denotes the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_i$ and $e_i$ denotes the $i$-th canonical vector.
+\end{proof}
+
+%\begin{align*}
+%\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}\\
+%&=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}+ ax}\\
+%&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ (c)x},
+%\end{align*}
+%where $c$ is the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_i$ where the $e_i$ denotes the canonical vector with "1" in position $i$.
 
 Accordingly, we can study the restricted Walsh transform of this function by analyzing the one of $\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}$, for all $a$. We introduce the following notations.
 
 \begin{definition}
 Let $n\in \N$ be an even number, and $a\in \F_2^n$. We denote $d_n$ the function given by: $d_n(x)=\sum_{i \text{ odd}}^n x_i x_{i+1}$, 
-and we denote by $\Dnka{n}{k}{a}$:
+and we denote by $\Dnka{n}{k}{a}$ the quantity:
 \[\Dnka{n}{k}{a}= \sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\]
 \end{definition}
-The limit case of $n=0$ yields that $\Dnka 0ka=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise.
 
-With these notations we obtain a recursive relation for $\Dnka{n}{k}{a}$, and therefore for $\wtk{f}{k}(a)$, denoting $b=(a_1,\cdots,a_{n-2})$ and $y=(x_1,\cdots,x_{n-2})$, we get for any even $n\geq 2$:
+We can give a recursive relation for $\Dnka{n}{k}{a}$.
+
+
+
+
+\begin{proposition}\label{prop:recursiveDnka}
+Let $n\in \N$ be an even number, $k$ an integer in the range $[0,n]$ and $a\in \F_2^n$. the Following holds on $\Dnka{n}{k}{a}$:
+\begin{itemize}
+	\item For $n=0$, $\Dnka{0}{k}{a}=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise.
+	\item if $n\ge 2$, denoting  $b=(a_1,\cdots,a_{n-2})$ and $y=(x_1,\cdots,x_{n-2})$, we get:
+	\[\Dnka{n}{k}{a}=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.\]
+\end{itemize}
+
+	
+\end{proposition}
+
+\begin{proof}
+For $n\ge 2$ we can rewrite $\Dnka{n}{k}{a}$:
 
 \begin{align*}
 \Dnka{n}{k}{a}&=\sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\\
@@ -276,17 +326,37 @@ With these notations we obtain a recursive relation for $\Dnka{n}{k}{a}$, and th
 &=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.
 \end{align*}
 
-Then it gives three cases:
+
+
+The limit cases $\Dnka 0ka=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise are obtained from the values of $\Dnka{2}{k}{a}$ given in Table~\ref{tab:Dnka}.
+\end{proof}
+
+
+
+
+
+%The limit case of $n=0$ yields that $\Dnka 0ka=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise.
+
+%With these notations we obtain a recursive relation for $\Dnka{n}{k}{a}$, and therefore for $\wtk{f}{k}(a)$, denoting $b=(a_1,\cdots,a_{n-2})$ and $y=(x_1,\cdots,x_{n-2})$, we get for any even $n\geq 2$:
+
+
+We remark that it gives three different cases depending on the values of the two last elements of $a$:%Then it gives three cases:
 \begin{itemize}
 	\item if $a_{n-1}=a_n=0$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}+2\Dnka{n}{k-1}{b}-\Dnka{n}{k-2}{b}$,
 	\item if $a_{n-1} \ne a_n$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}+\Dnka{n}{k-2}{b}$,
 	\item if $a_{n-1}=a_n=1$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}-2\Dnka{n}{k-1}{b}-\Dnka{n}{k-2}{b}$.
 \end{itemize}
 
-In this analysis we considered the different cases depending on the values of $a_{n-1}$ and $a_n$, but the same reasoning applies with any $a_i, a_{i+1}$ where $i$ is odd. 
-Thereafter, the value of $\Dnka{n}{k}{a}$ depends only on the number of pairs of $a$ being $(0,0)$, $(1,1)$ or $(0,1)$ or $(1,0)$, and the values $\Dnka{2}{k}{a}$ for $k \in [0,2]$ and $a\in \{ (0,0),(1,1),(0,1)\}$.
+%In this analysis we considered the different cases depending on the values of $a_{n-1}$ and $a_n$, but the same reasoning applies with any $a_i, a_{i+1}$ where $i$ is odd. 
 
-The first values of $\Dnka{2}{k}{a}$ are listed in Table~\ref{tab:Dnka}
+The recursive formula of Proposition~\ref{prop:recursiveDnka} gives different cases depending on the values of $a_{n-1}$ and $a_n$, however the same reasoning applies with any $a_i, a_{i+1}$ where $i$ is odd. 
+Thereafter, the value of $\Dnka{n}{k}{a}$ depends only on the number of pairs of $a$ being $(0,0)$, $(1,1)$ or $(0,1)$ or $(1,0)$, and the values $\Dnka{2}{k}{a}$ for $k \in [0,2]$ and $a \in \{ (0,0),(1,1),(0,1)\}$. 
+We give the first values of $\Dnka{2}{k}{a}$ in Table~\ref{tab:Dnka},  these values and Proposition~\ref{prop:recursiveDnka} are sufficient to determine any $\Dnka{n}{k}{a}$. 
+In the following, we show how the Walsh transform of $f$ can be written in terms of $\Dnka{n}{k}{a}$. Then, in Section~\ref{sec:balancedness} we use Proposition~\ref{prop:recursiveDnka} to determine the balancedness of $f$, and in Section~\ref{sec:genfunc} we study the value of $\Dnka{n}{k}{a}$ using trough generating functions.
+
+
+
+%The first values of $\Dnka{2}{k}{a}$ are listed in Table~\ref{tab:Dnka}
 
 
 \begin{table}[H]
@@ -303,26 +373,54 @@ The first values of $\Dnka{2}{k}{a}$ are listed in Table~\ref{tab:Dnka}
 
 
 
+Then, we can express the restricted Walsh transform of $f$ in terms of $\Dnka{n}{k}{a}$:
 
-The restricted Walsh transform of $f$ can the be written as \begin{align*}
-\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ (c)x}\\
-&=\Dnka{n}{k}{d},
-\end{align*}
-where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. Calling $\pi$ this permutation we can write $d=\pi(a)+ \pi(e_k)+ (0,1,0,1,\ldots,0,1)$. 
+
+\begin{proposition}[Walsh transform of $f$]\label{prop:WT}
+	Let $n \in \N^*$ even, and $f$ be the function from Definition~\ref{def:revHWBF}, for all $a\in \F_2^n$ its Walsh transform is given by:
+	\[ \wt{f}(a)=1+\sum_{k=1}^n \Dnka{n}{k}{b+\pi(e_k)},\]
+where $\pi$ is the permutation sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions, and $b=\pi(a)+(0,1,0,1,\ldots,0,1)$.
+\end{proposition}
+
+\begin{proof}
+Using Proposition~\ref{prop:restrWT}, the restricted Walsh transform of $f$ can the be written as \[
+\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x}=\Dnka{n}{k}{d},\]
+where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
+
+Calling $\pi$ this permutation, since $c=a+e_k+\sum_{i=n/2+1}^n e_i$, we can write $d=\pi(c)=\pi(a)+ \pi(e_k)+ (0,1,0,1,\ldots,0,1)$. 
 Accordingly, if $k\le n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2+1$, with one couple of consecutive elements (the first one with an odd index) being $(1,1)$ and all the others $(0,1)$. 
 Otherwise,  when $k> n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2-1$, with one couple of consecutive elements (the first one with an odd index) being $(0,0)$ and all the others $(0,1)$. 
 
 Denoting by $b$ the vector $\pi(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh transform of $f$ in $a$ as:
-\begin{equation}\label{eqn:walsh_from_D}
-    \wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}.
-\end{equation}
+\[ \wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}.\]
+\end{proof}
 
-In particular, for $a=0_n$ we can study the balancedness of $f$:
-\begin{align*}
-\wt{f}(0_n)&=\sum_{k=0}^n\Dnka{n}{k}{(0,1,0,1,\ldots,0,1)+\pi(e_k)}\\
-&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}
-\end{align*}
-Using the recursive relation we obtain:
+\subsection{Balancedness of $f$}\label{sec:balancedness}
+
+In this part we determine for which values of $n$ the function $f$ is balanced, using the expression of its Walsh transform in terms of $\Dnka{n}{k}{a}$ and the recursive relation of these quantities.
+
+
+\begin{theorem}[Balancedness of $f$]
+	Let $n \in \N^*$ even, and $f$ be the $n$-variable function from Definition~\ref{def:revHWBF}, the following holds on its Walsh transform in $0_n$:
+	\[\wt{f}(0_n)= \left \{
+	\begin{array}{l l}
+	0 & \text{ if } n/2 \text{ is even, } \\
+	-2 \binom{n/2-1}{(n-2)/4} & \text{ if }  n/2 \text{ is odd.}
+	\end{array}\right.\]
+	
+	Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equiv 2 \mod 4$.
+	
+\end{theorem}
+
+\begin{proof}
+We use the expression of the Walsh transform of $f$ from Proposition~\ref{prop:WT}:
+%In particular, for $a=0_n$ we can study the balancedness of $f$:
+%\begin{align*}
+%\wt{f}(0_n)&=\sum_{k=0}^n\Dnka{n}{k}{(0,1,0,1,\ldots,0,1)+\pi(e_k)}\\
+%&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}
+%\end{align*}
+\[\wt{f}(0_n)=\sum_{k=0}^n\Dnka{n}{k}{(0,1,0,1,\ldots,0,1)+\pi(e_k)}=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\]
+Using the recursive relation from Proposition~\ref{prop:recursiveDnka} we obtain:
 \begin{align*}
 \Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}&= \Dnka{n-2}{k}{(1,1,0,1,\ldots,0,1)} + \Dnka{n-2}{k-2}{(1,1,0,1,\ldots,0,1)} \\
 &=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{(1,1)}\\
@@ -341,27 +439,52 @@ Similarly, for $\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}$ we get:
 
 %We can study the balancedness of $f$ using the $\Dnka{n}{k}{a}$ values.
 Combining both we obtain:
+%\begin{align*}
+%\wt{f}(0_n)&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\\
+%&=\sum_{k=0}^{n/2} \left(\binom{n/2-1}{k/2} -2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
+%&\qquad+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
+%&=\sum_{k=0}^{n}\left( \binom{n/2-1}{k/2} - \binom{n/2-1}{k/2-1}\right) 
+%+ 2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
+%&=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
+%&=2 \left( \sum_{i=\lceil n/4 \rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4 \rfloor} \binom{n/2-1}{i}\right).\\
+%\end{align*}
 \begin{align*}
 \wt{f}(0_n)&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\\
-&=\sum_{k=0}^{n/2} \left(\binom{n/2-1}{k/2} -2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
-&\qquad+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
-&=\sum_{k=0}^{n}\left( \binom{n/2-1}{k/2} - \binom{n/2-1}{k/2-1}\right) 
-+ 2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
-&=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
-&=2 \left( \sum_{i=\lceil n/4 \rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4 \rfloor} \binom{n/2-1}{i}\right).\\
+&=\sum_{k=0}^{\frac{n}{2}} \left(\binom{\frac{n}{2}-1}{\frac{k}{2}} -2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{\frac{n}{2}-1}{\frac{k}{2}} +2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)\\
+&=\sum_{k=0}^{n}\left( \binom{\frac{n}{2}-1}{\frac{k}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1}\right) 
++ 2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \sum_{k=0}^{\frac{n}{2}} \binom{\frac{n}{2}-1}{\frac{k-1}{2}}\right)\\
+&=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \sum_{k=0}^{n/2} \binom{\frac{n}{2}-1}{\frac{k-1}{2}}\right)
+=2 \left( \sum_{i=\lceil \frac{n}{4} \rceil}^{\frac{n}{2}-1} \binom {\frac{n}{2}-1}{i} - \sum_{i=0}^{\lfloor\frac{n-2}{4}\rfloor} \binom{\frac{n}{2}-1}{i}\right).\\
 \end{align*}
-
-Then, depending on the parity of $n/2$ we obtain the value of $\wt{f}(0_n)$ (using that $\binom{n}{k}=\binom{n}{n-k}$):
+Then, depending on the parity of $\frac{n}{2}$ we obtain the value of $\wt{f}(0_n)$ (using that $\binom{n}{k}=\binom{n}{n-k}$):
 	\[\wt{f}(0_n)= \left \{
 \begin{array}{l l}
-0 & \text{ if } n/2 \text{ is even, } \\
--2 \binom{n/2-1}{(n-2)/4} & \text{ if }  n/2 \text{ is odd.}
+0 & \text{ if } \frac{n}{2} \text{ is even, } \\
+-2 \binom{\frac{n}{2}-1}{\frac{n-2}{4}} & \text{ if }  \frac{n}{2} \text{ is odd.}
 \end{array}\right.\]
 
 Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equiv 2 \mod 4$.
+\end{proof}
 
 
-\subsection{Study of $\Dnka nka$ through Generating Functions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Extensive study of $\Dnka nka$ and bounds on the Walsh spectrum of $f$}
+
+\subsection{Study of $\Dnka nka$ through Generating Functions}\label{sec:genfunc}
 For $a\in\F_2^n$, denote by $p=p(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(0,0)$, by $q=q(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(1,1)$, and by $r=r(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})\in\{(0,1),(1,0)\}$. We then have $p+q+r=n/2$. Consider further the integer polynomial $P_a(z)$ given by the following expression:
 \[
 P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
@@ -592,146 +715,7 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
     \end{figure}
 \end{remark}}
 
-\subsection{Bounding the Walsh transform of $f$ experimentally}
 
-We have just deduced that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
-
-This method is based on the identity (\ref{eqn:walsh_from_D}). For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $1\leq k\leq n$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$. Observe that for every $1\leq k\leq n$, we have $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\leq n/2$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
-
-In the following discussion, we outline a method to determine an upper bound on $\max_{a\in\F_2^n}\wt f(a)$. A similar approach can be applied to find a lower bound on $\min_{a\in\F_2^n}\wt f(a)$, and by utilizing both, we can also obtain an upper bound on $\max_{a\in\F_2^n}|\wt f(a)|$ by making use of the following identity:
-\[
-    \max_{a\in\F_2^n}|\wt f(a)|=\max\Big(\max_{a\in\F_2^n}\wt f(a),-\min_{a\in\F_2^n}\wt f(a)\Big).
-\]
-For each $1\leq k\leq n/2$, select $\{\alpha_k,\beta_k,\gamma_k\}=\{0,\pm 1\}$ with $\gamma_k\neq 0$ such that the following expression is defined and maximized:
-\[
-    B_k^{p,q,r}=\mathsf D_{n,k}^{p+\alpha_k,q+\beta_k,r+\gamma_k}+\mathsf D_{n,k+n/2}^{p+\alpha_k',q+\beta_k',r+\gamma_k'}.
-\]
-This implies that $\Dnka{n}{k}{b_k}+\Dnka{n}{k+n/2}{b_{k+n/2}}\leq B_k^{p,q,r}$ for every $1\leq k\leq n/2$, leading to the conclusion that $\sum_{k=1}^n\Dnka nk{b_k}\leq\sum_{k=1}^{n/2} B_k^{p,q,r}$. As a result, we derive the following upper bound:
-\begin{equation}\label{eqn:bound_walsh}
-\max_{a\in\F_2^n}\wt f(a)\leq\max_{p+q+r=n/2}\sum_{k=1}^{n/2} B_k^{p,q,r}.
-\end{equation}
-Under the assumption that the values of $\mathsf{D}_{n,k}^{p,q,r}$ have already been computed for all triplets $(p,q,r)$ satisfying $p+q+r=n/2$, the bound in equation (\ref{eqn:bound_walsh}) can be determined with a computational complexity of $\mathcal{O}(n^3)$. This is because there are $\mathcal{O}(n^2)$ possible triplets $(p,q,r)$ that meet the condition $p+q+r=n/2$, and the summation itself can be computed in $\mathcal{O}(n)$.
-
-Consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $0 \leq k \leq n$ and for all triplets $(p,q,r)$ where $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, according to Proposition \ref{proposition:generating_fct}, it is sufficient to expand the polynomials $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$.
-
-To achieve this, we first precompute the expanded polynomials $(-z^2 + 2z + 1)^p$ for each $1 \leq p \leq n/2$. This can be done recursively using the formula $(-z^2 + 2z + 1)^{p+1} = (-z^2 + 2z + 1) \cdot (-z^2 + 2z + 1)^p$. For each $p$, we need to compute the product of two expanded polynomials of degree at most $n/2$, which requires $\mathcal{O}(n \log n)$ computations . Performing this for every $p$ results in a total complexity of $\mathcal{O}(n^2 \log n)$. The same approach is used to expand the polynomials $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$, resulting in an overall complexity of $\mathcal{O}(n^2 \log n)$ for this precomputational step.
-
-Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded polynomials $(-z^2 + 2z + 1)^p$, $(-z^2 - 2z + 1)^q$, and $(z^2 + 1)^r$. These two multiplications are once more performed in $\mathcal{O}(n \log n)$. Given that there are $\mathcal{O}(n^2)$ such triplets $(p,q,r)$, the complexity of this step totals $\mathcal{O}(n^3 \log n)$. Therefore, this final step is the primary computational bottleneck, making the overall complexity of the procedure also $\mathcal{O}(n^3 \log n)$.
-
-Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table \ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
-
-\begin{table}
-    \centering
-    \begin{tabular}{|c|c|c|}
-    \hline
-    $n$ & $\max_{a\in\F_2^n}|W_f(a)|$ & $B_n$ \\ \hline
-    $2$  & $2$     & $4$     \\
-    $4$  & $8$     & $14$     \\
-    $6$  & $20$    & $36$    \\
-    $8$  & $52$    & $114$    \\
-    $10$ & $108$   & $288$   \\
-    $12$ & $292$   & $820$   \\
-    $14$ & $700$   & $2\,316$  \\
-    $16$ & $2\,176$  & $6\,006$  \\
-    $18$ & $4\,964$  & $18\,192$  \\
-    $20$ & $14\,968$ & $48\,480$ \\
-    $22$ & $34\,232$ & $140\,392$ \\
-    $24$ & $109\,648$ & $392\,168$ \\ \hline
-    \end{tabular}
-    \caption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ vs.\ our bound $B_n$}
-    \label{table:max_walsh_vs_bound}
-\end{table}
-
-Figure \ref{fig:walsh_bound_comparison} compares our experimental bound $B_n$ to the theoretical bound $1+n\cdot 2^{3n/4}$ and the binomial coefficient $\binom{n}{n/2}$, on a logarithmic scale. The first two and the last one have an asymptotic slope of $3/4$ and $1$, respectively.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=9cm]{comparison_walsh_bound.pdf}
-    \caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue.}
-    \label{fig:walsh_bound_comparison}
-\end{figure}
-
-\begin{table}
-    \centering
-    \begin{minipage}{0.24\textwidth}
-        \centering
-        \begin{tabular}{|c|c|}
-            \hline
-            $n$ & $\approx B_n$ \\
-            \hline
-            $2$  & $4.00 \cdot 10^{0}$  \\
-            $4$  & $1.40 \cdot 10^{1}$  \\
-            $6$  & $3.60 \cdot 10^{1}$  \\
-            $8$  & $1.14 \cdot 10^{2}$  \\
-            $10$ & $2.88 \cdot 10^{2}$  \\
-            $12$ & $8.20 \cdot 10^{2}$  \\
-            $14$ & $2.32 \cdot 10^{3}$  \\
-            $16$ & $6.01 \cdot 10^{3}$  \\
-            $18$ & $1.82 \cdot 10^{4}$  \\
-            $20$ & $4.85 \cdot 10^{4}$  \\
-            \hline
-        \end{tabular}
-    \end{minipage}%
-    \begin{minipage}{0.24\textwidth}
-        \centering
-        \begin{tabular}{|c|c|}
-            \hline
-            $n$ & $\approx B_n$ \\
-            \hline
-            $22$ & $1.40 \cdot 10^{5}$  \\
-            $24$ & $3.92 \cdot 10^{5}$  \\
-            $26$ & $1.14 \cdot 10^{6}$  \\
-            $28$ & $3.12 \cdot 10^{6}$  \\
-            $30$ & $8.90 \cdot 10^{6}$  \\
-            $32$ & $2.50 \cdot 10^{7}$  \\
-            $34$ & $7.14 \cdot 10^{7}$  \\
-            $36$ & $2.04 \cdot 10^{8}$  \\
-            $38$ & $5.75 \cdot 10^{8}$  \\
-            $40$ & $1.62 \cdot 10^{9}$  \\
-            \hline
-        \end{tabular}
-    \end{minipage}%
-    \begin{minipage}{0.24\textwidth}
-        \centering
-        \begin{tabular}{|c|c|}
-            \hline
-            $n$ & $\approx B_n$ \\
-            \hline
-            $42$ & $4.59 \cdot 10^{9}$  \\
-            $44$ & $1.29 \cdot 10^{10}$ \\
-            $46$ & $3.63 \cdot 10^{10}$ \\
-            $48$ & $1.02 \cdot 10^{11}$ \\
-            $50$ & $2.88 \cdot 10^{11}$ \\
-            $52$ & $8.06 \cdot 10^{11}$ \\
-            $54$ & $2.30 \cdot 10^{12}$ \\
-            $56$ & $6.45 \cdot 10^{12}$ \\
-            $58$ & $1.83 \cdot 10^{13}$ \\
-            $60$ & $5.14 \cdot 10^{13}$ \\
-            \hline
-        \end{tabular}
-    \end{minipage}%
-    \begin{minipage}{0.24\textwidth}
-        \centering
-        \begin{tabular}{|c|c|}
-            \hline
-            $n$ & $\approx B_n$ \\
-            \hline
-            $62$ & $1.47 \cdot 10^{14}$ \\
-            $64$ & $4.09 \cdot 10^{14}$ \\
-            $66$ & $1.17 \cdot 10^{15}$ \\
-            $68$ & $3.25 \cdot 10^{15}$ \\
-            $70$ & $9.34 \cdot 10^{15}$ \\
-            $72$ & $2.60 \cdot 10^{16}$ \\
-            $74$ & $7.44 \cdot 10^{16}$ \\
-            $76$ & $2.08 \cdot 10^{17}$ \\
-            $78$ & $5.97 \cdot 10^{17}$ \\
-            $80$ & $1.65 \cdot 10^{18}$ \\
-            \hline
-        \end{tabular}
-    \end{minipage}
-    \caption{Approximate values of $B_n$ for various $n$}
-    \label{table:walsh_bounds}
-\end{table}
 
 \subsection{Generalization}
 
@@ -804,6 +788,160 @@ Consequently, we get a generalization of Theorem \ref{theorem:bound_D_nka}:
     Analogous to the proof of Corollary \ref{cor:bound_walsh_cauchy}.
 \end{proof}
 
+\section{Experiments and comparisons}
+
+
+
+\subsection{Bounding the Walsh transform of $f$ experimentally}
+
+We have just deduced that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
+
+%This method is based on the identity (\ref{eqn:walsh_from_D}). 
+This method is based on the identity given in Proposition~\ref{prop:WT}.
+For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $1\leq k\leq n$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$. Observe that for every $1\leq k\leq n$, we have $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\leq n/2$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
+
+In the following discussion, we outline a method to determine an upper bound on $\max_{a\in\F_2^n}\wt f(a)$. A similar approach can be applied to find a lower bound on $\min_{a\in\F_2^n}\wt f(a)$, and by utilizing both, we can also obtain an upper bound on $\max_{a\in\F_2^n}|\wt f(a)|$ by making use of the following identity:
+\[
+\max_{a\in\F_2^n}|\wt f(a)|=\max\Big(\max_{a\in\F_2^n}\wt f(a),-\min_{a\in\F_2^n}\wt f(a)\Big).
+\]
+For each $1\leq k\leq n/2$, select $\{\alpha_k,\beta_k,\gamma_k\}=\{0,\pm 1\}$ with $\gamma_k\neq 0$ such that the following expression is defined and maximized:
+\[
+B_k^{p,q,r}=\mathsf D_{n,k}^{p+\alpha_k,q+\beta_k,r+\gamma_k}+\mathsf D_{n,k+n/2}^{p+\alpha_k',q+\beta_k',r+\gamma_k'}.
+\]
+This implies that $\Dnka{n}{k}{b_k}+\Dnka{n}{k+n/2}{b_{k+n/2}}\leq B_k^{p,q,r}$ for every $1\leq k\leq n/2$, leading to the conclusion that $\sum_{k=1}^n\Dnka nk{b_k}\leq\sum_{k=1}^{n/2} B_k^{p,q,r}$. As a result, we derive the following upper bound:
+\begin{equation}\label{eqn:bound_walsh}
+\max_{a\in\F_2^n}\wt f(a)\leq\max_{p+q+r=n/2}\sum_{k=1}^{n/2} B_k^{p,q,r}.
+\end{equation}
+Under the assumption that the values of $\mathsf{D}_{n,k}^{p,q,r}$ have already been computed for all triplets $(p,q,r)$ satisfying $p+q+r=n/2$, the bound in equation (\ref{eqn:bound_walsh}) can be determined with a computational complexity of $\mathcal{O}(n^3)$. This is because there are $\mathcal{O}(n^2)$ possible triplets $(p,q,r)$ that meet the condition $p+q+r=n/2$, and the summation itself can be computed in $\mathcal{O}(n)$.
+
+Consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $0 \leq k \leq n$ and for all triplets $(p,q,r)$ where $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, according to Proposition \ref{proposition:generating_fct}, it is sufficient to expand the polynomials $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$.
+
+To achieve this, we first precompute the expanded polynomials $(-z^2 + 2z + 1)^p$ for each $1 \leq p \leq n/2$. This can be done recursively using the formula $(-z^2 + 2z + 1)^{p+1} = (-z^2 + 2z + 1) \cdot (-z^2 + 2z + 1)^p$. For each $p$, we need to compute the product of two expanded polynomials of degree at most $n/2$, which requires $\mathcal{O}(n \log n)$ computations . Performing this for every $p$ results in a total complexity of $\mathcal{O}(n^2 \log n)$. The same approach is used to expand the polynomials $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$, resulting in an overall complexity of $\mathcal{O}(n^2 \log n)$ for this precomputational step.
+
+Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded polynomials $(-z^2 + 2z + 1)^p$, $(-z^2 - 2z + 1)^q$, and $(z^2 + 1)^r$. These two multiplications are once more performed in $\mathcal{O}(n \log n)$. Given that there are $\mathcal{O}(n^2)$ such triplets $(p,q,r)$, the complexity of this step totals $\mathcal{O}(n^3 \log n)$. Therefore, this final step is the primary computational bottleneck, making the overall complexity of the procedure also $\mathcal{O}(n^3 \log n)$.
+
+Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table \ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		$n$ & $\max_{a\in\F_2^n}|W_f(a)|$ & $B_n$ \\ \hline
+		$2$  & $2$     & $4$     \\
+		$4$  & $8$     & $14$     \\
+		$6$  & $20$    & $36$    \\
+		$8$  & $52$    & $114$    \\
+		$10$ & $108$   & $288$   \\
+		$12$ & $292$   & $820$   \\
+		$14$ & $700$   & $2\,316$  \\
+		$16$ & $2\,176$  & $6\,006$  \\
+		$18$ & $4\,964$  & $18\,192$  \\
+		$20$ & $14\,968$ & $48\,480$ \\
+		$22$ & $34\,232$ & $140\,392$ \\
+		$24$ & $109\,648$ & $392\,168$ \\ \hline
+	\end{tabular}
+	\caption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ vs.\ our bound $B_n$}
+	\label{table:max_walsh_vs_bound}
+\end{table}
+
+Figure \ref{fig:walsh_bound_comparison} compares our experimental bound $B_n$ to the theoretical bound $1+n\cdot 2^{3n/4}$ and the binomial coefficient $\binom{n}{n/2}$, on a logarithmic scale. The first two and the last one have an asymptotic slope of $3/4$ and $1$, respectively.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=9cm]{comparison_walsh_bound.pdf}
+	\caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue.}
+	\label{fig:walsh_bound_comparison}
+\end{figure}
+
+\begin{table}
+	\centering
+	\begin{minipage}{0.24\textwidth}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			$n$ & $\approx B_n$ \\
+			\hline
+			$2$  & $4.00 \cdot 10^{0}$  \\
+			$4$  & $1.40 \cdot 10^{1}$  \\
+			$6$  & $3.60 \cdot 10^{1}$  \\
+			$8$  & $1.14 \cdot 10^{2}$  \\
+			$10$ & $2.88 \cdot 10^{2}$  \\
+			$12$ & $8.20 \cdot 10^{2}$  \\
+			$14$ & $2.32 \cdot 10^{3}$  \\
+			$16$ & $6.01 \cdot 10^{3}$  \\
+			$18$ & $1.82 \cdot 10^{4}$  \\
+			$20$ & $4.85 \cdot 10^{4}$  \\
+			\hline
+		\end{tabular}
+	\end{minipage}%
+	\begin{minipage}{0.24\textwidth}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			$n$ & $\approx B_n$ \\
+			\hline
+			$22$ & $1.40 \cdot 10^{5}$  \\
+			$24$ & $3.92 \cdot 10^{5}$  \\
+			$26$ & $1.14 \cdot 10^{6}$  \\
+			$28$ & $3.12 \cdot 10^{6}$  \\
+			$30$ & $8.90 \cdot 10^{6}$  \\
+			$32$ & $2.50 \cdot 10^{7}$  \\
+			$34$ & $7.14 \cdot 10^{7}$  \\
+			$36$ & $2.04 \cdot 10^{8}$  \\
+			$38$ & $5.75 \cdot 10^{8}$  \\
+			$40$ & $1.62 \cdot 10^{9}$  \\
+			\hline
+		\end{tabular}
+	\end{minipage}%
+	\begin{minipage}{0.24\textwidth}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			$n$ & $\approx B_n$ \\
+			\hline
+			$42$ & $4.59 \cdot 10^{9}$  \\
+			$44$ & $1.29 \cdot 10^{10}$ \\
+			$46$ & $3.63 \cdot 10^{10}$ \\
+			$48$ & $1.02 \cdot 10^{11}$ \\
+			$50$ & $2.88 \cdot 10^{11}$ \\
+			$52$ & $8.06 \cdot 10^{11}$ \\
+			$54$ & $2.30 \cdot 10^{12}$ \\
+			$56$ & $6.45 \cdot 10^{12}$ \\
+			$58$ & $1.83 \cdot 10^{13}$ \\
+			$60$ & $5.14 \cdot 10^{13}$ \\
+			\hline
+		\end{tabular}
+	\end{minipage}%
+	\begin{minipage}{0.24\textwidth}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			$n$ & $\approx B_n$ \\
+			\hline
+			$62$ & $1.47 \cdot 10^{14}$ \\
+			$64$ & $4.09 \cdot 10^{14}$ \\
+			$66$ & $1.17 \cdot 10^{15}$ \\
+			$68$ & $3.25 \cdot 10^{15}$ \\
+			$70$ & $9.34 \cdot 10^{15}$ \\
+			$72$ & $2.60 \cdot 10^{16}$ \\
+			$74$ & $7.44 \cdot 10^{16}$ \\
+			$76$ & $2.08 \cdot 10^{17}$ \\
+			$78$ & $5.97 \cdot 10^{17}$ \\
+			$80$ & $1.65 \cdot 10^{18}$ \\
+			\hline
+		\end{tabular}
+	\end{minipage}
+	\caption{Approximate values of $B_n$ for various $n$}
+	\label{table:walsh_bounds}
+\end{table}
+
+
+
+
+
+
+
+\section{Other parameters}
 \subsection{Algebraic immunity of $f$}
 
 \begin{proposition}[Algebraic immunity of $f$]
