@@ -257,7 +257,7 @@ Let $n\in \N^*$, even, we call revisited HWBF and denote by $f$ the Boolean func
 
 Since $f$ is the sum of a quadratic function and a weightweise affine function, it is a weightwise quadratic function. 
 Using the formalism of Definition~\ref{def:wwdegd} $f$ is the WWQ function defined by:% $f_0=0$ and for $k\in [1,n]$ $f_k=x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$.
-\[f_0=0, \quad \text{ and } \quad \forall k \in [1,n], \, f_k= \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}.\]
+\[f_0=0, \quad \text{ and } \quad \forall k \in [1,n], \, f_k=x_k+\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}.\]
 
 This form allows to derive the restricted Walsh transform of $f$, which can be a useful tool to study the balancedness and bound the nonlinearity of a function.
 %Maybe add examples, such as OM24, M24
@@ -383,7 +383,7 @@ where $\pi$ is the permutation sending the first $n/2$ elements to the odd posit
 \end{proposition}
 
 \begin{proof}
-Using Proposition~\ref{prop:restrWT}, the restricted Walsh transform of $f$ can the be written as \[
+Using Proposition~\ref{prop:restrWT}, the restricted Walsh transform of $f$ can then be written as \[
 \wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x}=\Dnka{n}{k}{d},\]
 where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
 
