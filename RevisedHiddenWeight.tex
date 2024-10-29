@@ -207,7 +207,7 @@ We summarize the known results on the cryptographic criteria of weightwise affin
 
 \pmnote{complete the following prop, + references}
 
-\begin{property}[Cryptographic properties of functions from $\WD{1}{n}$ \label{prop:wwd1}]
+\begin{Prop}[Cryptographic properties of functions from $\WD{1}{n}$ \label{prop:wwd1}]
 Let $n\in \N^*$, the following hold for functions in $\WD{1}{n}$.
 \begin{itemize}
 	\item Nonlinearity of majority functions.
@@ -220,7 +220,7 @@ Let $n\in \N^*$, the following hold for functions in $\WD{1}{n}$.
 	
 	
 	
-\end{property}
+\end{Prop}
 
 
 
@@ -685,7 +685,7 @@ Applying this, we get:
     \[
         \left|-z^2+2z+1\right|^2=\left(z^2-2z-1\right)\left(\overline z^2-2\overline z-1\right)=6-\left(z^2+\overline z^2\right)=6-2\mathrm{Re}\left(z^2\right),
     \]
-    where $\mathrm{Re}\left(z^2\right)$ denotes the real part of $z^2$. Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $|z|=1$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ is $6-2(-1)=8$. 
+    where $\mathrm{Re}\left(z^2\right)$ denotes the real part of $z^2$. Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $\dis$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ is $6-2(-1)=8$. 
      
     
 \end{proof}
@@ -768,17 +768,20 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
 
 
 \subsection{Generalization to a family of weightwise quadratic functions}\label{sec:general}
+In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic function such that for all $k\in [1,n]$ $f_k$ has exactly $t$ quadratic terms with no shared variables.
+
+
+
 
 \begin{definition}
-	Let $n\in \N$ be an even number and $t \in \N $ no greater than $n/2$, we denote by $d_{t,n}$ the function given by: $d_{t,n}(x)=\sum_{i=1}^t x_{2i-1} x_{2i}$.
+	Let $n\in \N^*$ be an even number and $t \in \N $ no greater than $n/2$, we denote by $d_{t,n}$ the function given by: $d_{t,n}(x)=\sum_{i=1}^t x_{2i-1} x_{2i}$.
 	
 	%	by $\Dnka{n}{k}{a}$:
 	%	\[\Dnka{n}{k}{a}= \sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\]
 \end{definition}
 
 In particular, $d_{n/2,n}(x)=d_n(x)$. 
-
-We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}$
+We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}$:
 
 \begin{proposition}\label{proposition:dtn}
 	Let $t, n\in \N$ with $n$ even and $t\le n/2$, the following holds on $d_{t,n}$ for all $k\in [0,n]$:
@@ -788,12 +791,20 @@ We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}
 \begin{proof}
 	We rewrite the restricted Walsh transform, denoting $x\in \F_2^n$ by $(y,z)$ where $y\in \F_2^{2t}$ and $z \in \F_2^{n-2t}$, and similarly denoting $a$ by $(b,c)$:
 	
+%	\begin{align*}
+%	\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,t}(y)+by +cz}\\
+%	&=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,t}(y)+by +cz}\\
+%	&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,t}(y)+by} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{cz}\right)\\
+%	&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.%\qedhere
+%	\end{align*}	
+
 	\begin{align*}
-	\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,t}(y)+by +cz}\\
-	&=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,t}(y)+by +cz}\\
-	&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,t}(y)+by} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{cz}\right)\\
-	&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.\qedhere
-	\end{align*}	
+\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+a \cdot x}=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\
+&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,2t}(y)+b \cdot y} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{c \cdot z}\right)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.%\qedhere
+\end{align*}	
+
+
+
 \end{proof}
 
 \begin{definition}\label{defi:P_a_t}
@@ -820,7 +831,7 @@ We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}
     \end{align*}
 \end{proof}
 
-Consequently, we get a generalization of Theorem \ref{theorem:bound_D_nka}:
+Consequently, we get a generalization of Theorem~\ref{theorem:bound_D_nka}:
 
 \begin{theorem}\label{theorem:bound_D_nka_generalized}
     Let $t, n\in \N$ with $n$ even and $t\le n/2$. For every $a\in\F_2^n$ and every $k\in[0,n]$, it holds that:
@@ -830,10 +841,12 @@ Consequently, we get a generalization of Theorem \ref{theorem:bound_D_nka}:
 \end{theorem}
 
 \begin{proof}
-    By applying Property \ref{property:cauchy_estimate}, we get that a bound on $|\wtk{d_{t,n}}{k}(a)|$ is given by the maximum $M'$ on the circle $|z|=1$ of $|P_b(z)|\cdot|(1+z)^u\cdot(1-z)^v|$. As previously established, $|P_b(z)|$ is bounded on $|z|=1$ by $(2\sqrt 2)^t=2^{3t/2}$, and $|(1+z)^u\cdot(1-z)^v|$ is bounded on $|z|=1$ by $2^{u+v}=2^{n-2t}$. Therefore, we conclude that $M'$ is bounded by $2^{3t/2}2^{n-2t}=2^{n-t/2}$, and hence this is also a bound for $|\wtk{d_{t,n}}{k}(a)|$. 
+    By applying Property \ref{property:cauchy_estimate}, we get that a bound on $|\wtk{d_{t,n}}{k}(a)|$ is given by the maximum $M'$ on the circle $\dis$ of $|P_b(z)|\cdot|(1+z)^u\cdot(1-z)^v|$. 
+    As previously established in Theorem~\ref{theorem:bound_D_nka}, $|P_b(z)|$ is bounded on $\dis$ by $(2\sqrt 2)^t=2^{3t/2}$, and $|(1+z)^u\cdot(1-z)^v|$ is bounded on $\dis$ by $2^{u+v}=2^{n-2t}$. 
+    Therefore, we conclude that $M'$ is bounded by $2^{3t/2}2^{n-2t}=2^{n-t/2}$, and hence this is also a bound for $|\wtk{d_{t,n}}{k}(a)|$. 
 \end{proof}
 
-\begin{Corollary}
+\begin{Corollary}\label{cor:gen}
     Let $t, n\in \N$ with $n$ even and $t\le n/2$. For every $a\in\F_2^n$, the following holds:
     \[
         |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{n-t/2}.
@@ -844,22 +857,34 @@ Consequently, we get a generalization of Theorem \ref{theorem:bound_D_nka}:
     Analogous to the proof of Corollary \ref{cor:bound_walsh_cauchy}.
 \end{proof}
 
-When one is given an explicit value for $t$ in terms of $n$, one can be more careful when employing the proof strategy of Theorem~\ref{theorem:bound_D_nka_generalized}. Let us for instance consider the case $t=n/3$:
+
+When a specific value of $t$ is given in terms of $n$, the proof strategy for Theorem~\ref{theorem:bound_D_nka_generalized} can be applied more precisely. For instance, we consider the case where $t = n/3$:
+
+
 
 \begin{proposition}\label{proposition:walsh_t_over_3}
-    Let $n\in\N$ be divisible by $6$. Then for every $a\in\F_2^n$ and every $k\in[0,n]$, it holds that:
+    Let $n\in\N^*$ be divisible by $6$. 
+    Then, for every $a\in\F_2^n$ and every $k\in[0,n]$, it holds that:
     \[
-        |\wtk{d_{n/3,n}}{k}(a)|\leq2^{3n/4},\quad|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}.
+        |\wtk{d_{n/3,n}}{k}(a)|\leq2^{3n/4},\quad \text{and }\quad|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}.
     \]
 \end{proposition}
 
 \begin{proof}
-    As before, we want to bound the maximum of $|P_{a,t}(z)|$ on $|z|=1$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[0,n]$. Write $a=(b,c)$ with $b\in\F_2^{2t}$ and let $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}. Since we want to find a bound of $|P_{a,t}(z)|$ on $|z|=1$ which works for all $a\in\F_2^n$, it makes sense to only consider those $a$ which are actually candidates for maximizing $|P_{a,t}(z)|$, namely those for which only one among $(p,q,r)$ is non-zero, and for which only one among $(u,v)$ is non-zero. This leaves us with the following cases to consider for $(p,q,r;u,v)$:
+    As before, we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[1,n]$. 
+    We write $a=(b,c)$ with $b\in\F_2^{2t}$ and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}. 
+    
+   To find a bound for $|P_{a,t}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we focus only on values of $a$ which are candidates for maximizing $|P_{a,t}(z)|$. 
+   Specifically, we consider cases where only one of $(p,q,r)$ is non-zero, and for which only and only one of $(u,v)$ is non-zero. 
+   
+\pmnote{What is the argument: "maximum implies only one is non-zero" }
+
+   This leaves us with the following cases to consider for $(p,q,r;u,v)$:
     \begin{gather*}
         (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0),\\
          (t,0,0;0,n-2t),\quad(0,t,0;0,n-2t),\quad(0,0,t;0,n-2t).
     \end{gather*}
-    Since swapping both $(p,q)$ and $(u,v)$ has the same effect as replacing $z$ by $-z$ in $P_{a,t}(z)$ and therefore does not change the maximum of $|P_{a,t}(z)|$ on $|z|=1$, we can further restrict ourselves to the following tuples for $(p,q,r;u,v)$:
+    Since swapping both $(p,q)$ and $(u,v)$ has the same effect as replacing $z$ by $-z$ in $P_{a,t}(z)$ and therefore does not change the maximum of $|P_{a,t}(z)|$ on $\dis$, we can further restrict ourselves to the following tuples for $(p,q,r;u,v)$:
     \[
         (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0).
     \]
@@ -868,20 +893,35 @@ When one is given an explicit value for $t$ in terms of $n$, one can be more car
         P_{a,t}(z)=[(-z^2+2z+1)(1+z)]^t.
     \]
     Writing $z=\cos\alpha+\mathrm i\sin\alpha$, we obtain:
+    
+    \pmnote{@Tim, add intermediate computation in the following:}
     \[
         |P_{a,t}(z)|^2=[(6-2\cos2\alpha)(2+2\cos\alpha)]^t.
     \]
-    Through calculus, one finds that $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$, and hence that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude that $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$ and that $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
+    \pmnote{@Tim, for the following, by calculus, you mean using some software? In this case we can add a footnote saying in practice we did it with xxx.
+    	
+    Can you give a plot of $(\alpha,(6-2\cos2\alpha)(2+2\cos\alpha))$ and add the line corresponding to $y=9/4$?
+    }
+
+    Through calculus, one finds that $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$, and hence that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude  $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$, and $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
 \end{proof}
 
+
+\pmnote{for the remark, add how they are obtained (from a script in xxx). 
+We can give the scripts in supplementary material when submitting, of add the link of a github if you agree to have them public.
+
+
+}
+
 \begin{remark}
-    The proof of Proposition~\ref{proposition:walsh_t_over_3} can be redone for other values of $t$. In Figure~\ref{fig:walsh_bounds_generalization}, we provide bounds of the form $\max_{a\in\F_2^n}|\wt{d_{\alpha n/40,n}}(a)|\leq 1+n\cdot 2^{\beta n}$, where $\alpha\in[0,20]$ is represented on the $x$-axis and $\beta$ is represented on the $y$-axis. 
+    The proof of Proposition~\ref{proposition:walsh_t_over_3} can be extended to other values of $t$. 
+    In Figure~\ref{fig:walsh_bounds_generalization}, we provide bounds of the form $\max_{a\in\F_2^n}|\wt{d_{\alpha n/40,n}}(a)|\leq 1+n\cdot 2^{\beta n}$, where $\alpha\in[0,20]$ is represented on the $x$-axis and $\beta$ is represented on the $y$-axis. 
 \end{remark}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=9cm]{walsh_bounds_generalization.pdf}
-	\caption{For each point $(\alpha,\beta)$, we have $\max_{a\in\F_2^n}|\wt{d_{\alpha n/40,n}}(a)|\leq 1+n\cdot 2^{\beta n}$.}
+	\caption{Improvements on Corollary~\ref{cor:gen}. For each point $(\alpha,\beta)$, we have $\max_{a\in\F_2^n}|\wt{d_{\alpha n/40,n}}(a)|\leq 1+n\cdot 2^{\beta n}$.}
     \label{fig:walsh_bounds_generalization}
 \end{figure}
 
