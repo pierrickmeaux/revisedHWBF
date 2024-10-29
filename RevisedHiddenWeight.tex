@@ -169,13 +169,19 @@ When $n$ is even, the nonlinearity of a function can reach at most $2^{n-1}-2^{n
 
 The $n$-variable \emph{Boolean symmetric functions} are those that are constant on each slice $\Ekn{k}{n}$ for $k\in [0,n]$. 
 This class has been assiduously studied in the context of cryptography, see \eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,IEEE:CheLu11,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
-In this article we mainly consider the slice indicator functions.
+In this article we mainly consider the slice indicator functions and the majority functions.
 %\begin{definition}[Elementary symmetric functions]
 %Let $i\in [0,n]$, the elementary symmetric function of degree $i$ in $n$ variables, denoted $\sigma_{i,n}$, is the function which ANF contains all monomials of degree $i$ and no monomials of other degrees. 
 %\end{definition}
 \begin{definition}[Slice indicator functions]\label{def:slice}
  Let $k\in [0,n]$, the indicator function of the slice of weight $k$ is defined as:
  \[\forall  x\in \mathbb{F}_2^{n}, \quad \phikn{k}{n}(x) = 1 \text{ if and only if } \w(x) = k.\]
+\end{definition}
+
+
+
+\pmnote{add}
+\begin{definition}[Majority functions]\label{def:maj}
 \end{definition}
 
 Bigger families of function can be obtained by considering functions of bounded degree on each slice, it corresponds to the concept of weightwise degree-$d$ function introduced in~\cite{DAM:GinMea22} for $d=1$ and~\cite{DAM:MeaOza24} for the general case. 
@@ -205,14 +211,18 @@ In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ a
 We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
 
 
-\pmnote{complete the following prop, + references}
+\pmnote{complete the following prop. Choose between nonlinearity or $\max_{a\in\mathbb F_2^n}|\wt f(a)|$}
 
-\begin{Prop}[Cryptographic properties of functions from $\WD{1}{n}$ \label{prop:wwd1}]
-Let $n\in \N^*$, the following hold for functions in $\WD{1}{n}$.
+\begin{Prop}[Cryptographic properties of functions from $\WD{2}{n}$ \label{prop:wwd1}]
+Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$. 
 \begin{itemize}
-	\item Nonlinearity of majority functions.
-	\item Nonlinearity of HWBF.
-	\item Nonlinearity bound WWA.
+	\item For the majority function
+	
+	$\max_{a\in\mathbb F_2^n}|\wt f(a)|$ (adapt from Theorem 3 \cite{DCC:DalMaiSar06})
+	\item value for HWBF. (from~\cite{DAM:WCST14}))
+	
+	\item  bound for the cyclic weightwise linear (adapt Theorem 1 of \cite{DAM:MeaOza24})
+	\item  bound for the cyclic weightwise quadratic function $t$  (adapt Theorem 2 of \cite{DAM:MeaOza24})
 \end{itemize}
 	
 
