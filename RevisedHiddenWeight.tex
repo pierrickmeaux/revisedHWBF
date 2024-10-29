@@ -139,8 +139,8 @@ For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k 
 %	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
 %	Additionally we denote $\AN(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0\}$.
 %\end{definition}
-\begin{definition}[Nonlinearity %and weightwise nonlinearity
-	] \label{def:nl}
+\begin{definition}[Nonlinearity]%and weightwise nonlinearity
+	\label{def:nl}
 	The nonlinearity $\NL(f)$ of a Boolean function $f\in \BN$, where $n$ is a positive integer, is the minimum Hamming distance between $f$ and all the affine functions in $\BN$:
 	\[ \NL(f) = \min_{g,\, \degg(g)\leq 1} \{ \hd(f,g) \}{,} \]
 	where $g(x)=a\cdot x+\varepsilon$, $a\in \F_2^n, \varepsilon\in \F_2$. 	
@@ -491,12 +491,16 @@ Finally, in Section~\ref{sec:general}, we demonstrate how this result can be ext
 
 
 
-\subsection{Study of $\Dnka nka$ through generating functions}\label{sec:genfunc}
-For $a\in\F_2^n$, we denote by $p=p(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(0,0)$, by $q=q(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(1,1)$, and by $r=r(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})\in\{(0,1),(1,0)\}$. We then have $p+q+r=n/2$. 
-We consider further the integer polynomial $P_a(z)$ given by the following expression:
-\[
-P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
-\]
+
+\subsection{Study of $\Dnka nka$ through Generating Functions}\label{sec:genfunc}
+
+\begin{definition}\label{defi:P_a}
+    For $a\in\F_2^n$, denote by $p=p(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(0,0)$, by $q=q(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(1,1)$, and by $r=r(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})\in\{(0,1),(1,0)\}$. We then have $p+q+r=n/2$. Consider further the integer polynomial $P_a(z)$ given by the following expression:
+    \[
+    P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
+    \]
+\end{definition}
+
 
 \begin{proposition}\label{proposition:generating_fct}
 	It holds that $\sum_{k\in\Z}\Dnka nka z^k= P_a(z)$.
@@ -644,7 +648,7 @@ We recall Cauchy's estimate on holomorphic functions:
 \begin{Prop}[Cauchy's estimate \eg~\cite{rudin1987}, Theorem 10.26]\label{property:cauchy_estimate}
     Let $w$ be a complex number, and let $R>0$ be some radius. If $f$ is a holomorphic function defined on an open set containing every complex number $z$ satisfying $|z-w|<R$, then for every integer $k\geq 0$, the $k$-th derivative of $f$ evaluated at $w$ can be bounded, in absolute value, as follows:
     \[
-        \left|\frac{\dd^k}{\dd^k z}f(w)\right|\leq\frac{k!\cdot M_R}{R^k},
+        \left|\frac{\dd^k}{\dd^k z}f(z)\vert_{z=w}\right|\leq\frac{k!\cdot M_R}{R^k},
     \]
     where $M_R$ is the maximum of $|f(z)|$ on the circle $|z-w|=R$.
 \end{Prop}
@@ -792,12 +796,17 @@ We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}
 	\end{align*}	
 \end{proof}
 
-This leads to the following generating function:
+\begin{definition}\label{defi:P_a_t}
+    Let $t, n\in \N$ with $n$ even and $t\le n/2$. Given $a=(b,c)\in\F_2^n$ with $b\in\F_2^{2t}$, denote $n-2t-\w(c)$ and $\w(c)$ by $u$ and $v$, respectively. We  then introduce the following polynomial:
+    \[
+        P_{a,t}(z)=P_b(z)\cdot(1+z)^u\cdot(1-z)^v.
+    \]
+\end{definition}
 
 \begin{proposition}
-    Let $t, n\in \N$ with $n$ even and $t\le n/2$. Let $a=(b,c)\in\F_2^n$ with $b\in\F_2^{2t}$. Denote $n-2t-\w(c)$ and $\w(c)$ by $u$ and $v$, respectively. Then the following holds:
+    Let $t, n\in \N$ with $n$ even and $t\le n/2$. Let $a\in\F_2^n$. The following holds true: 
     \[
-        \sum_{k\in\Z}\wtk{d_{t,n}}{k}(a)z^k=P_b(z)\cdot(1+z)^u\cdot(1-z)^v.
+        \sum_{k\in\Z}\wtk{d_{t,n}}{k}(a)z^k=P_{a,t}(z).
     \]
 \end{proposition}
 
@@ -806,14 +815,15 @@ This leads to the following generating function:
     \begin{align*}
         \sum_{k\in\Z}\wtk{d_{t,n}}{k}(a)z^k&=\sum_{\ell=0}^{2t}\Dnka{2t}{\ell}{b}z^\ell\sum_{k\in\Z}\kraw{k-\ell}{\w(c)}{n-2t}z^{k-\ell}\\
         &=\left(\sum_{\ell=0}^{2t}\Dnka{2t}{\ell}{b}z^\ell\right)\cdot(1+z)^u\cdot(1-z)^v\\
-        &=P_b(z)\cdot(1+z)^u\cdot(1-z)^v.\qedhere
+        &=P_b(z)\cdot(1+z)^u\cdot(1-z)^v\\
+        &=P_{a,t}(z).\qedhere
     \end{align*}
 \end{proof}
 
 Consequently, we get a generalization of Theorem \ref{theorem:bound_D_nka}:
 
-\begin{theorem}
-    Let $t, n\in \N$ with $n$ even and $t\le n/2$. For every $a\in\F_2^n$, it holds that:
+\begin{theorem}\label{theorem:bound_D_nka_generalized}
+    Let $t, n\in \N$ with $n$ even and $t\le n/2$. For every $a\in\F_2^n$ and every $k\in[0,n]$, it holds that:
     \[
         |\wtk{d_{t,n}}{k}(a)|\leq 2^{n-t/2}.
     \]
@@ -824,7 +834,7 @@ Consequently, we get a generalization of Theorem \ref{theorem:bound_D_nka}:
 \end{proof}
 
 \begin{Corollary}
-    For every $a\in\F_2^n$, the following holds:
+    Let $t, n\in \N$ with $n$ even and $t\le n/2$. For every $a\in\F_2^n$, the following holds:
     \[
         |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{n-t/2}.
     \]
@@ -833,6 +843,47 @@ Consequently, we get a generalization of Theorem \ref{theorem:bound_D_nka}:
 \begin{proof}
     Analogous to the proof of Corollary \ref{cor:bound_walsh_cauchy}.
 \end{proof}
+
+When one is given an explicit value for $t$ in terms of $n$, one can be more careful when employing the proof strategy of Theorem~\ref{theorem:bound_D_nka_generalized}. Let us for instance consider the case $t=n/3$:
+
+\begin{proposition}\label{proposition:walsh_t_over_3}
+    Let $n\in\N$ be divisible by $6$. Then for every $a\in\F_2^n$ and every $k\in[0,n]$, it holds that:
+    \[
+        |\wtk{d_{n/3,n}}{k}(a)|\leq2^{3n/4},\quad|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    As before, we want to bound the maximum of $|P_{a,t}(z)|$ on $|z|=1$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[0,n]$. Write $a=(b,c)$ with $b\in\F_2^{2t}$ and let $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}. Since we want to find a bound of $|P_{a,t}(z)|$ on $|z|=1$ which works for all $a\in\F_2^n$, it makes sense to only consider those $a$ which are actually candidates for maximizing $|P_{a,t}(z)|$, namely those for which only one among $(p,q,r)$ is non-zero, and for which only one among $(u,v)$ is non-zero. This leaves us with the following cases to consider for $(p,q,r;u,v)$:
+    \begin{gather*}
+        (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0),\\
+         (t,0,0;0,n-2t),\quad(0,t,0;0,n-2t),\quad(0,0,t;0,n-2t).
+    \end{gather*}
+    Since swapping both $(p,q)$ and $(u,v)$ has the same effect as replacing $z$ by $-z$ in $P_{a,t}(z)$ and therefore does not change the maximum of $|P_{a,t}(z)|$ on $|z|=1$, we can further restrict ourselves to the following tuples for $(p,q,r;u,v)$:
+    \[
+        (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0).
+    \]
+    Let us for instance find an upper bound of $|P_{a,t}(z)|$ in case $(p,q,r;u,v)=(t,0,0;n-2t,0)$. Since $n-2t=t$ by assumption, we get:
+    \[
+        P_{a,t}(z)=[(-z^2+2z+1)(1+z)]^t.
+    \]
+    Writing $z=\cos\alpha+\mathrm i\sin\alpha$, we obtain:
+    \[
+        |P_{a,t}(z)|^2=[(6-2\cos2\alpha)(2+2\cos\alpha)]^t.
+    \]
+    Through calculus, one finds that $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$, and hence that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude that $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$ and that $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
+\end{proof}
+
+\begin{remark}
+    The proof of Proposition~\ref{proposition:walsh_t_over_3} can be redone for other values of $t$. In Figure~\ref{fig:walsh_bounds_generalization}, we provide bounds of the form $\max_{a\in\F_2^n}|\wt{d_{\alpha n/40,n}}(a)|\leq 1+n\cdot 2^{\beta n}$, where $\alpha\in[0,20]$ is represented on the $x$-axis and $\beta$ is represented on the $y$-axis. 
+\end{remark}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=9cm]{walsh_bounds_generalization.pdf}
+	\caption{For each point $(\alpha,\beta)$, we have $\max_{a\in\F_2^n}|\wt{d_{\alpha n/40,n}}(a)|\leq 1+n\cdot 2^{\beta n}$.}
+    \label{fig:walsh_bounds_generalization}
+\end{figure}
 
 \section{Experiments and comparisons}
 
