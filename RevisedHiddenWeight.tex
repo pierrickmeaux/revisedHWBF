@@ -929,7 +929,7 @@ We can give the scripts in supplementary material when submitting, of add the li
 
 
 
-\subsection{Bounding the Walsh transform of $f$ experimentally}
+\subsection{Bounding the Walsh transform of $f$ experimentally}\label{sec:expwt}
 
 We have just deduced that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
 
@@ -957,7 +957,22 @@ To achieve this, we first precompute the expanded polynomials $(-z^2 + 2z + 1)^p
 
 Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded polynomials $(-z^2 + 2z + 1)^p$, $(-z^2 - 2z + 1)^q$, and $(z^2 + 1)^r$. These two multiplications are once more performed in $\mathcal{O}(n \log n)$. Given that there are $\mathcal{O}(n^2)$ such triplets $(p,q,r)$, the complexity of this step totals $\mathcal{O}(n^3 \log n)$. Therefore, this final step is the primary computational bottleneck, making the overall complexity of the procedure also $\mathcal{O}(n^3 \log n)$.
 
-Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table \ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
+
+
+
+\subsection{Comparison of the nonlinearity}
+
+\pmnote{under construction}
+
+In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, HWBF and the cyclic weightwise quadratic function $t$  from~\cite{DAM:MeaOza24}. 
+More precisely, we compare the value $\max_{a\in\mathbb F_2^n}|\wt f(a)|$, the smaller the maximum the better the nonlinearity. 
+For majority and HWBF, we use the exact values recalled in Property~\ref{prop:wwd1}, for the function $t$ we use the upper bound proven in~\cite{DAM:MeaOza24}. 
+For the revisited HWBF, we consider the theoretical bound from Theorem~\ref{cor:bound_walsh_cauchy} and the experimental one from Section~\ref{sec:expwt}
+
+
+
+
+Table~\ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table~\ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
 
 \begin{table}
 	\centering
@@ -977,7 +992,7 @@ Table \ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)
 		$22$ & $34\,232$ & $140\,392$ \\
 		$24$ & $109\,648$ & $392\,168$ \\ \hline
 	\end{tabular}
-	\caption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ vs.\ our bound $B_n$}
+	\caption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ compared to the bound $B_n$}
 	\label{table:max_walsh_vs_bound}
 \end{table}
 
