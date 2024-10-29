@@ -477,15 +477,23 @@ Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equi
 
 
 
-
-
-
-
-
 \section{Extensive study of $\Dnka nka$ and bounds on the Walsh spectrum of $f$}
 
-\subsection{Study of $\Dnka nka$ through Generating Functions}\label{sec:genfunc}
-For $a\in\F_2^n$, denote by $p=p(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(0,0)$, by $q=q(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(1,1)$, and by $r=r(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})\in\{(0,1),(1,0)\}$. We then have $p+q+r=n/2$. Consider further the integer polynomial $P_a(z)$ given by the following expression:
+In this section, we study the values of $\Dnka nka$ using generating functions. First, in Section~\ref{sec:genfunc} we establish key properties of these quantities. Then, in Section~\ref{sec:Cauchy}, we apply Cauchy's estimate to bound the absolute values of $\Dnka nka$, which enables us to bound the absolute values of the Walsh transform coefficients of $f$ and consequently, the nonlinearity.
+Finally, in Section~\ref{sec:general}, we demonstrate how this result can be extended to bound the nonlinearity of a family of weightwise quadratic functions.
+
+
+
+
+
+
+
+
+
+
+\subsection{Study of $\Dnka nka$ through generating functions}\label{sec:genfunc}
+For $a\in\F_2^n$, we denote by $p=p(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(0,0)$, by $q=q(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(1,1)$, and by $r=r(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})\in\{(0,1),(1,0)\}$. We then have $p+q+r=n/2$. 
+We consider further the integer polynomial $P_a(z)$ given by the following expression:
 \[
 P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
 \]
@@ -495,8 +503,8 @@ P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
 \end{proposition}
 
 \begin{proof}
-	Proceed by induction on even $n\geq 0$. 
-	For the base case $n=0$, for $a\in\F_2^0$, we have $P_a(z)=1$, while $\Dnka 0ka=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise. 
+	We proceed by induction on even $n\geq 0$. 
+	For the base case $n=0$, for $a\in\F_2^0$, we have $P_a(z)=1$, while $\Dnka 0ka=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise (from Proposition~\ref{prop:recursiveDnka}). 
 	For the inductive step, let $n\geq 2$ be even, and assume that the corresponding formula holds for $n-2$. Using the recursive formula for $\Dnka nka$ with the notation $a=(b,a_{n-1},a_n)$, we have:
 	\begin{align*}
 	\begin{split}
@@ -513,15 +521,17 @@ P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
     In particular, since $P_a(z)$ only depends on the triplet $(p,q,r)$, we deduce that also $\Dnka nka$ only depends on the triplet $(p,q,r)$; therefore, it makes sense to introduce the notation $\mathsf D_{n,k}^{p,q,r}=\Dnka nka$, where $a\in\mathbb F_2^n$ is any vector with $(p(a),q(a),r(a))=(p,q,r)$. We will make use of this notation later on.
 \end{remark}
 
+
+
+
 \begin{proposition}\label{proposition:symmetry}
 	For every integer $k$, we have:
-	\[
-	\Dnka n{n-k}a=(-1)^{p+q+k}\Dnka nka.
-	\]
+	\[	\Dnka n{n-k}a=(-1)^{p+q+k}\Dnka nka.	\]
 \end{proposition}
 
 \begin{proof}
-	Define the degree $n$ polynomial $Q_a(z)$ in such a way that the coefficient of $z^k$ in $Q_a(z)$ is equal to the coefficient of $z^{n-k}$ in $P_a(z)$. Then we have:
+	We define the reverse polynomial  $Q_a(z)$ such as the degree $n$ polynomial where each coefficient of $z^k$ in $Q_a(z)$ is equal to the coefficient of $z^{n-k}$ in $P_a(z)$. 
+	Then we have:
 	\begin{align*}
 	Q_a(z)&=z^nP_a(1/z)\\
 	&=(z^2+2z-1)^p\cdot(z^2-2z-1)^q\cdot(z^2+1)^r\\
@@ -540,16 +550,22 @@ P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
 \end{proof}
 
 Another immediate case for zero coefficients is the following:
+
+
 \begin{proposition}
     If $p=q$ and $k$ is odd, then $\Dnka nka=0=\Dnka n{n-k}a$.
 \end{proposition}
 
 \begin{proof}
-    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p\cdot(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ of $z^k$ for odd $k$ must be zero in $P_a(z)$. It follows that also $\Dnka n{n-k}a=0$ by Proposition \ref{proposition:symmetry}.
+    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p\cdot(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ of $z^k$ for odd $k$ must be zero in $P_a(z)$. It follows that also $\Dnka n{n-k}a=0$ by Proposition~\ref{proposition:symmetry}.
 \end{proof}
 
+
+
+
+
 \begin{remark}\label{remark:D_nka_differentiation}
-    We can also use Proposition \ref{proposition:generating_fct} to obtain $\Dnka nka$ through differentiation:
+    We can also use Proposition \ref{proposition:generating_fct} to obtain $\Dnka nka$ through differentiation and evaluation in $0$:
     \[
         k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}.
     \]
@@ -565,11 +581,11 @@ Another immediate case for zero coefficients is the following:
             $2$&$2(p-q)^2-3(p+q)+r$\\ \hline
             $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
     	\end{tabular}
-    	\caption{Values of $\Dnka{n}{k}{a}$ for small $k$}\label{tab:Dnka_small_k}
+    	\caption{Values of $\Dnka{n}{k}{a}$ for small values of $k$}\label{tab:Dnka_small_k}
     \end{table}
 \end{remark}
 
-With this, we can get more cases in which $\Dnka nka=0$:
+From differentiation, we can get more cases in which $\Dnka nka=0$:
 
 \begin{proposition}\mbox{}
     \begin{enumerate}
@@ -585,23 +601,33 @@ With this, we can get more cases in which $\Dnka nka=0$:
 \end{proof}
 
 \begin{remark}
-    There are still instances where $\Dnka nka=0$ which have not been described by the above. For instance, we have $\Dnka{34}4a=0$ if $\{p,q\}=\{1,2\}$.
+    There are other instances where $\Dnka nka=0$ which have not been described by the above. For instance, we have $\Dnka{34}4a=0$ if $\{p,q\}=\{1,2\}$.
 \end{remark}
 
 Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
 
+
 \begin{proposition}\mbox{}
     \begin{enumerate}
         \item The sum and alternating sum over $k$ of the $\Dnka nka$ are, respectively:
-        \begin{gather*}
-            \sum_{k=0}^n\Dnka nka=(-1)^{q}2^{n/2},\\
-            \sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
-        \end{gather*}
+ %       \begin{gather*}
+ %           \sum_{k=0}^n\Dnka nka=(-1)^{q}2^{n/2},\\
+ %           \sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
+ %       \end{gather*}
+\[
+ \sum_{k=0}^n\Dnka nka=(-1)^{q}2^{n/2}, \quad \text{and} \quad
+ \sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
+\]
         \item The sum over the even and the odd $k$ of the the $\Dnka nka$ are, respectively:
-        \begin{gather*}
-            \sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big),\\
-            \sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
-        \end{gather*}
+ %       \begin{gather*}
+  %          \sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big),\\
+   %         \sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
+    %    \end{gather*}   
+\[
+\sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big), \quad \text{ and } \quad 
+\sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
+\]
+    
     \end{enumerate}
 
 \end{proposition}
@@ -610,17 +636,24 @@ Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums
 	For the sum and the alternating sum, it is enough to compute $P_a(1)$ and $P_a(-1)$, respectively. The sum of the $\Dnka nka$ over the even (respectively, odd) $k$ is obtained by adding (respectively, subtracting) these two sums and dividing by $2$.
 \end{proof}
 
-\subsection{Bounding the Walsh transform of $f$ using the Cauchy estimate}
+\subsection{Bounding the Walsh transform of $f$ using the Cauchy estimate}\label{sec:Cauchy}
 
-Recall the Cauchy estimate on holomorphic functions:
 
-\begin{Prop}[\cite{rudin1987}, Theorem 10.26]\label{property:cauchy_estimate}
+We recall Cauchy's estimate on holomorphic functions:
+
+\begin{Prop}[Cauchy's estimate \eg~\cite{rudin1987}, Theorem 10.26]\label{property:cauchy_estimate}
     Let $w$ be a complex number, and let $R>0$ be some radius. If $f$ is a holomorphic function defined on an open set containing every complex number $z$ satisfying $|z-w|<R$, then for every integer $k\geq 0$, the $k$-th derivative of $f$ evaluated at $w$ can be bounded, in absolute value, as follows:
     \[
         \left|\frac{\dd^k}{\dd^k z}f(w)\right|\leq\frac{k!\cdot M_R}{R^k},
     \]
     where $M_R$ is the maximum of $|f(z)|$ on the circle $|z-w|=R$.
 \end{Prop}
+
+
+\pmnote{I would recall between parentheses somewhere that we denote by $|.|$ the complex norm here, which corresponds to the absolute value on $\R$
+
+verify if $w$ and $z$ are coherent.
+}
 
 Applying this, we get:
 
@@ -632,17 +665,25 @@ Applying this, we get:
 \end{theorem}
 
 \begin{proof}
-    Recall from Remark \ref{remark:D_nka_differentiation} that $k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}$. Choosing $f=P_a$, $w=0$ and $R=1$ in Property \ref{property:cauchy_estimate} then gives:
+    From Remark~\ref{remark:D_nka_differentiation} we have: $k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}$. Choosing $f=P_a$, $w=0$ and $R=1$ in Property \ref{property:cauchy_estimate} then gives:
     \[
         |\Dnka nka|=\frac{1}{k!}\left|\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}\right|\leq M,
     \]
-    where $M$ is the maximum of $|P_a(z)|$ on the circle $|z|=1$. We claim, and prove below, that the maximum of $\left|-z^2+2z+1\right|$ on $|z|=1$ is $2\sqrt 2$. This implies that the maximum of $\left|-z^2-2z+1\right|$ on $|z|=1$ is $2\sqrt 2$ as well. Since the maximum of $\left|z^2+1\right|$ on $|z|=1$ is $2<2\sqrt 2$, it follows that $|\Dnka nka|\leq M\leq (2\sqrt 2)^{p+q}2^r\leq (2\sqrt 2)^{n/2}$.
+    where $M$ is the maximum of $|P_a(z)|$ on the circle %$|z|=1$. 
+    $\dis=\{ z \in \C,  |z|=1  \}$
+    We claim, and prove below, that the maximum of $\left|-z^2+2z+1\right|$ on $\dis$ is $2\sqrt 2$. 
+    This implies that the maximum of $\left|-z^2-2z+1\right|$ on $\dis$ is $2\sqrt 2$ as well. 
+    Since the maximum of $\left|z^2+1\right|$ on $\dis$ is $2<2\sqrt 2$, it follows that $|\Dnka nka|\leq M\leq (2\sqrt 2)^{p+q}2^r\leq (2\sqrt 2)^{n/2}$.
 
-    It remains to prove that the maximum of $\left|-z^2+2z+1\right|^2$ on $|z|=1$ equals $8$. Using that $|w|^2=w\overline w$ for every complex number $w$, we obtain for $|z|=1$:
+	We prove that the maximum of $\left|-z^2+2z+1\right|$ on $\dis$ is $2\sqrt 2$ by showing that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ equals $8$.
+    %It remains to prove that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ equals $8$. 
+    Using that $|w|^2=w\overline w$ for every complex number $w$, we obtain for all $z\in \dis$:
     \[
         \left|-z^2+2z+1\right|^2=\left(z^2-2z-1\right)\left(\overline z^2-2\overline z-1\right)=6-\left(z^2+\overline z^2\right)=6-2\mathrm{Re}\left(z^2\right),
     \]
-    where $\mathrm{Re}\left(z^2\right)$ denotes the real part of $z^2$. Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $|z|=1$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $|z|=1$ is $6-2(-1)=8$.
+    where $\mathrm{Re}\left(z^2\right)$ denotes the real part of $z^2$. Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $|z|=1$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ is $6-2(-1)=8$. 
+     
+    
 \end{proof}
 
 \begin{Corollary}\label{cor:bound_walsh_cauchy}
@@ -650,13 +691,17 @@ Applying this, we get:
     \[
         |\wt f(a)|\leq 1+n\cdot 2^{3n/4}.
     \]
+Equivalently, 
+%$\NL(f)\ge 2^{n-1} - \frac{1 + n 2^{\frac{3}{4}n}} {2}$.
+$\NL(f)\ge 2^{n-1} - \frac{1}{2} -2^{\frac{3n}{4} + \log n -1}$.
 \end{Corollary}
 
 \begin{proof}
-    We have previously established that $\wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}$. Then, applying Proposition \ref{theorem:bound_D_nka} yields:
+    We have previously established in Proposition~\ref{prop:WT} that $\wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}$. Then, applying Theorem~\ref{theorem:bound_D_nka} yields:
     \[
-        |\wt{f}(a)|\leq 1+\sum_{k=1}^n\left|\Dnka{n}{k}{b+\pi(e_k)}\right|\leq 1+ n\cdot 2^{3n/4}.\qedhere
+        |\wt{f}(a)|\leq 1+\sum_{k=1}^n\left|\Dnka{n}{k}{b+\pi(e_k)}\right|\leq 1+ n\cdot 2^{3n/4}.%\qedhere
     \]
+The bound on the nonlinearity comes from the second expression of Definition~\ref{def:nl}.
 \end{proof}
 
 \mycomment{One can also prove the following:
@@ -717,7 +762,8 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
 
 
 
-\subsection{Generalization}
+
+\subsection{Generalization to a family of weightwise quadratic functions}\label{sec:general}
 
 \begin{definition}
 	Let $n\in \N$ be an even number and $t \in \N $ no greater than $n/2$, we denote by $d_{t,n}$ the function given by: $d_{t,n}(x)=\sum_{i=1}^t x_{2i-1} x_{2i}$.
