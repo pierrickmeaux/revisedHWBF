@@ -920,14 +920,13 @@ When a specific value of $t$ is given as a function of $n$, the proof strategy f
     \[
         P_{a,t}(z)=[(-z^2+2z+1)(1+z)]^t.
     \]
-    Writing $z=\cos\alpha+\mathrm i\sin\alpha$ and $z=\cos2\alpha+\mathrm i\sin2\alpha$, we have:
+    Writing $z=\ee^{\ii\alpha}$ and using that $|w|^2=w\overline w$ for every complex number $w$, we have:
     \begin{align*}
-        |-z^2+2z+1|^2&=|-z^2+2z+1|^2\\
-        &=|-\cos2\alpha-\mathrm i\sin2\alpha+2\cos\alpha+2\mathrm i\sin\alpha+1|^2\\
-        &=(-\cos2\alpha+2\cos\alpha+1)^2+(-\sin2\alpha+2\sin\alpha)^2\\
-        &=6-2\cos(2\alpha);
+        |-z^2+2z+1|^2&=\left(-\ee^{2\ii\alpha}+2\ee^{\ii\alpha}+1\right)\left(-\ee^{-2\ii\alpha}+2\ee^{-\ii\alpha}+1\right)\\
+        &=6-\ee^{2\ii\alpha}-\ee^{-2\ii\alpha}\\
+        &=6-2\cos2\alpha;
     \end{align*}
-    the last equality can be obtained by expanding and applying classical trigonometric identities, or by making use of a computer algebra system such as \textsc{SageMath}. We similarly obtain that $|1+z|^2=2+2\cos\alpha$. Combining both, we get:
+    the last equality uses that $\ee^{2\ii\alpha}=\cos2\alpha+\ii\sin2\alpha$. We similarly obtain that $|1+z|^2=2+2\cos\alpha$. Combining both, we get:
     
     \pmnote{@Tim, add intermediate computation in the following: \color{blue} Tim: Done}
     
