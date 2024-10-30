@@ -179,12 +179,15 @@ In this article we mainly consider the slice indicator functions and the majorit
 \end{definition}
 
 
-
-\pmnote{add}
-\begin{definition}[Majority functions]\label{def:maj}
+\pmnote{\color{blue} Tim: Check below}
+\begin{definition}[Majority function]\label{def:maj}
+    The \emph{majority function} in $n$ variables is the Boolean function $f\in\BN$ defined as:
+    \[
+        f(x)=0\iff\w(x)\leq\frac n2.
+    \]
 \end{definition}
 
-Bigger families of function can be obtained by considering functions of bounded degree on each slice, it corresponds to the concept of weightwise degree-$d$ function introduced in~\cite{DAM:GinMea22} for $d=1$ and~\cite{DAM:MeaOza24} for the general case. 
+Bigger families of functions can be obtained by considering functions of bounded degree on each slice, it corresponds to the concept of weightwise degree-$d$ function introduced in~\cite{DAM:GinMea22} for $d=1$ and~\cite{DAM:MeaOza24} for the general case. 
 
 \begin{definition}[Weightwise degree-$d$ functions (~\cite{DAM:MeaOza24} Definition 12)]\label{def:wwdegd}
 	Let $n\in \N^*$ and for $k\in[0,n]$ $\phikn{k}{n}$ denotes the indicator function of $\Ekn{k}{n}$. 
@@ -198,7 +201,7 @@ Various weightwise affine functions (\ie belonging to $\WD{1}{n}$) have been exh
 The most known example of weightwise affine function is the hidden weight bit function introduced in~\cite{IEEE:Bryant91}, the one obtained by fixing $f_0=0$ and $f_k=x_k$ for $k \in [n]$. The cryptographic properties of this function have been studied in~\cite{DAM:WCST14}, showing good algebraic properties for this function.
 
 \begin{definition}[Hidden Weight Bit Function (HWBF)]\label{def:hwbf}
-	Let $n\in \N^*$we call Hidden Weight Bit Function (HWBF) the $n$-variable Boolean function defined by:
+	For $n\in \N^*$, we call Hidden Weight Bit Function (HWBF) the $n$-variable Boolean function defined by:
 	\[h(x)= \left\{ 
 	\begin{array}{l l}
 	0 & \quad \text{ if } \w(x) =0, \\
@@ -211,25 +214,22 @@ In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ a
 We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
 
 
-\pmnote{complete the following prop. Choose between nonlinearity or $\max_{a\in\mathbb F_2^n}|\wt f(a)|$}
+\pmnote{complete the following prop. Choose between nonlinearity or $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ \color{blue} Tim: I started, but please do the remaining two items.}
 
-\begin{Prop}[Cryptographic properties of functions from $\WD{2}{n}$ \label{prop:wwd1}]
+\begin{Prop}[Cryptographic properties of functions from $\WD{2}{n}$, \cite{DCC:DalMaiSar06,DAM:WCST14,DAM:MeaOza24,DAM:MeaOza24}\label{prop:wwd1}]
 Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$. 
 \begin{itemize}
-	\item For the majority function
-	
-	$\max_{a\in\mathbb F_2^n}|\wt f(a)|$ (adapt from Theorem 3 \cite{DCC:DalMaiSar06})
-	\item value for HWBF. (from~\cite{DAM:WCST14}))
-	
+    \item The majority function $f\in\WD{2}{n}$ introduced in Definition~\ref{def:maj} satisfies:
+    \[
+        \NL(f)=2^{n-1}-\binom{n-1}{\frac n2}.
+    \]
+    \item The HWBF $f\in\WD{2}{n}$ introduced in Definition~\ref{def:hwbf} satisfies:
+    \[
+        \NL(f)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
+    \]
 	\item  bound for the cyclic weightwise linear (adapt Theorem 1 of \cite{DAM:MeaOza24})
 	\item  bound for the cyclic weightwise quadratic function $t$  (adapt Theorem 2 of \cite{DAM:MeaOza24})
 \end{itemize}
-	
-
-	
-	
-	
-	
 \end{Prop}
 
 
@@ -663,8 +663,11 @@ We recall Cauchy's estimate on holomorphic functions:
     where $M_R$ is the maximum of $|f(z)|$ on the circle $|z-w|=R$.
 \end{Prop}
 
+\begin{remark}
+    Property~\ref{property:cauchy_estimate} is typically employed to bound the absolute value of complex numbers. Naturally, the bound remains valid when the complex number is real, as will be the case in our application.
+\end{remark}
 
-\pmnote{I would recall between parentheses somewhere that we denote by $|.|$ the complex norm here, which corresponds to the absolute value on $\R$
+\pmnote{I would recall between parentheses somewhere that we denote by $|.|$ the complex norm here, which corresponds to the absolute value on $\R${ \color{blue} Tim :OK, check above remark.}
 
 verify if $w$ and $z$ are coherent.
 }
@@ -868,9 +871,25 @@ Consequently, we get a generalization of Theorem~\ref{theorem:bound_D_nka}:
 \end{proof}
 
 
-When a specific value of $t$ is given in terms of $n$, the proof strategy for Theorem~\ref{theorem:bound_D_nka_generalized} can be applied more precisely. For instance, we consider the case where $t = n/3$:
+When a specific value of $t$ is given as a function of $n$, the proof strategy for Theorem~\ref{theorem:bound_D_nka_generalized} can be applied with greater precision. For example, we examine the case where $t=n/3$ in the below Proposition~\ref{proposition:walsh_t_over_3}. Before proceeding, we include a brief lemma that will clarify the proof of that proposition.
 
+\begin{lemma}\label{lemma:maximizing_args}
+    Let $N$ be a non-negative number and $D\subseteq\C$ a set of complex numbers. For every integer $1\leq i\leq N$, consider a non-negative integer $m_i$ as well as complex functions $f_{i,1},\dots,f_{i,k_i}$ defined on the set $D$. Assume that the following maximum exists (which holds for instance if the functions $f_{i,j}$ are continuous and $D$ is topologically compact):
+    \[
+        M=\max_{\substack{\forall 1\leq i\leq N:\,p_{i,1}+\cdots+p_{i,k_i}=m_i\\z\in D}}\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j}(z)^{p_{i,j}}\right|.
+    \]
+    Then there exist integers $j_1,\dots,j_N$ with $1\leq j_i\leq k_i$ such that the following holds:
+    \[
+        M=\max_{z\in D}\left|\prod_{i=1}^Nf_{i,j_i}(z)^{m_i}\right|.
+    \]
+\end{lemma}
 
+\begin{proof}
+    Let us choose the integers $p_{i,j}$ and the complex number $z\in D$ to maximize the quantity $\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j}(z)^{p_{i,j}}\right|$. Note that this in particular means that $\sum_{j=1}^{k_i}p_{i,j}=m_i$ for every $1\leq i\leq N$. Next, for every $1\leq i\leq N$, choose $1\leq j_i\leq k_i$ such that $|f_{i,j_i}(z)|\geq|f_{i,j}(z)|$ for every $1\leq j\leq k_i$. Then we have:
+    \[
+        M=\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j}(z)^{p_{i,j}}\right|\leq\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j_i}(z)^{p_{i,j}}\right|=\left|\prod_{i=1}^Nf_{i,j_i}(z)^{\sum_{j=1}^{k_i}p_{i,j}}\right|=\left|\prod_{i=1}^Nf_{i,j}(z)^{m_i}\right|\leq M.\qedhere
+    \]
+\end{proof}
 
 \begin{proposition}\label{proposition:walsh_t_over_3}
     Let $n\in\N^*$ be divisible by $6$. 
@@ -884,10 +903,9 @@ When a specific value of $t$ is given in terms of $n$, the proof strategy for Th
     As before, we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[1,n]$. 
     We write $a=(b,c)$ with $b\in\F_2^{2t}$ and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}. 
     
-   To find a bound for $|P_{a,t}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we focus only on values of $a$ which are candidates for maximizing $|P_{a,t}(z)|$. 
-   Specifically, we consider cases where only one of $(p,q,r)$ is non-zero, and for which only and only one of $(u,v)$ is non-zero. 
+   To find a bound for $|P_{a,t}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we would like to bound the quantity $\max_{a\in\F_2^n,z\in\dis}|P_{a,t}(z)|$. Moving through all $a\in\F_2^n$ is equivalent to moving through all tuples $(p,q,r;u,v)$ of non-negative integers which satisfy $p+q+r=t$ and $u+v=n-2t$. It follows from Lemma~\ref{lemma:maximizing_args} that it is enough to consider only the cases for which only one of $p,q,r$ is non-zero, and for which only one of $u,v$ is non-zero. 
    
-\pmnote{What is the argument: "maximum implies only one is non-zero" }
+\pmnote{What is the argument: "maximum implies only one is non-zero" \color{blue} Tim: OK, check above lemma}
 
    This leaves us with the following cases to consider for $(p,q,r;u,v)$:
     \begin{gather*}
@@ -902,23 +920,39 @@ When a specific value of $t$ is given in terms of $n$, the proof strategy for Th
     \[
         P_{a,t}(z)=[(-z^2+2z+1)(1+z)]^t.
     \]
-    Writing $z=\cos\alpha+\mathrm i\sin\alpha$, we obtain:
+    Writing $z=\cos\alpha+\mathrm i\sin\alpha$ and $z=\cos2\alpha+\mathrm i\sin2\alpha$, we have:
+    \begin{align*}
+        |-z^2+2z+1|^2&=|-z^2+2z+1|^2\\
+        &=|-\cos2\alpha-\mathrm i\sin2\alpha+2\cos\alpha+2\mathrm i\sin\alpha+1|^2\\
+        &=(-\cos2\alpha+2\cos\alpha+1)^2+(-\sin2\alpha+2\sin\alpha)^2\\
+        &=6-2\cos(2\alpha);
+    \end{align*}
+    the last equality can be obtained by expanding and applying classical trigonometric identities, or by making use of a computer algebra system such as \textsc{SageMath}. We similarly obtain that $|1+z|^2=2+2\cos\alpha$. Combining both, we get:
     
-    \pmnote{@Tim, add intermediate computation in the following:}
+    \pmnote{@Tim, add intermediate computation in the following: \color{blue} Tim: Done}
+    
     \[
-        |P_{a,t}(z)|^2=[(6-2\cos2\alpha)(2+2\cos\alpha)]^t.
+        |P_{a,t}(z)|^2=\left(|-z^2+2z+1|^2\cdot|1+z|^2\right)^t=[(6-2\cos2\alpha)(2+2\cos\alpha)]^t.
     \]
+    
     \pmnote{@Tim, for the following, by calculus, you mean using some software? In this case we can add a footnote saying in practice we did it with xxx.
     	
     Can you give a plot of $(\alpha,(6-2\cos2\alpha)(2+2\cos\alpha))$ and add the line corresponding to $y=9/4$?
-    }
-
-    Through calculus, one finds that $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$, and hence that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude  $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$, and $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
+    \color{blue} Tim: Done}
+    
+    Since $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$ as shown in Figure~\ref{fig:trigo_bound} (which can also be formally checked using classical tricks from calculus), we obtain that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude  $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$, and $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
 \end{proof}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=9cm]{trigo_bound.pdf}
+	\caption{The function $\alpha\mapsto(6-2\cos2\alpha)(2+2\cos\alpha)$ in blue, and the line $y=2^{9/2}$ in red.}
+    \label{fig:trigo_bound}
+\end{figure}
 
 
 \pmnote{for the remark, add how they are obtained (from a script in xxx). 
-We can give the scripts in supplementary material when submitting, of add the link of a github if you agree to have them public.
+We can give the scripts in supplementary material when submitting, of add the link of a github if you agree to have them public. \color{blue} Tim: I added the script to GitHub. You can decide what we do with it.
 
 
 }
