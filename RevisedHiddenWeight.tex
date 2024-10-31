@@ -179,11 +179,10 @@ In this article we mainly consider the slice indicator functions and the majorit
 \end{definition}
 
 
-\pmnote{\color{blue} Tim: Check below}
 \begin{definition}[Majority function]\label{def:maj}
-    The \emph{majority function} in $n$ variables is the Boolean function $f\in\BN$ defined as:
+    The \emph{majority function} in $n$ variables is the Boolean function $\textsf{Maj}\in\BN$ defined as:
     \[
-        f(x)=0\iff\w(x)\leq\frac n2.
+        \textsf{Maj}(x)=0\iff\w(x)<n/2.
     \]
 \end{definition}
 
@@ -210,13 +209,16 @@ The most known example of weightwise affine function is the hidden weight bit fu
 
 \end{definition}
 
-In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$ and lower bounds are given for the nonlinearity. 
-We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
+In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$ and lower bounds are given for the nonlinearity for all $n$. 
+These bounds involve sums of binomial coefficients. For simplicity, in the following we provide only the nonlinearity values of the majority function and HWBF, as these bounds will be used for comparison.
 
 
-\pmnote{complete the following prop. Choose between nonlinearity or $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ \color{blue} Tim: I started, but please do the remaining two items.}
+%We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
 
-\begin{Prop}[Cryptographic properties of functions from $\WD{2}{n}$, \cite{DCC:DalMaiSar06,DAM:WCST14,DAM:MeaOza24,DAM:MeaOza24}\label{prop:wwd1}]
+
+%\pmnote{complete the following prop. Choose between nonlinearity or $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ \color{blue} Tim: I started, but please do the remaining two items.}
+\iffalse
+\begin{Prop}[Nonlinearity of some functions from $\WD{1}{n}$, \cite{DCC:DalMaiSar06,DAM:WCST14,DAM:MeaOza24}\label{prop:wwd1}]
 Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$. 
 \begin{itemize}
     \item The majority function $f\in\WD{2}{n}$ introduced in Definition~\ref{def:maj} satisfies:
@@ -229,6 +231,21 @@ Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$.
     \]
 	\item  bound for the cyclic weightwise linear (adapt Theorem 1 of \cite{DAM:MeaOza24})
 	\item  bound for the cyclic weightwise quadratic function $t$  (adapt Theorem 2 of \cite{DAM:MeaOza24})
+\end{itemize}
+\end{Prop}
+\fi 
+
+\begin{Prop}[Nonlinearity of some functions from $\WD{1}{n}$\label{prop:wwd1}]
+Let $n\in \N^*$ even, the following hold for the following functions in $\WD{1}{n}$: 
+\begin{itemize}
+	\item (\eg ~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\textsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
+	\[
+	\NL(\textsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
+	\]
+	\item (\cite{DAM:WCST14}, Theorem $3$) The HWBF $h$ introduced in Definition~\ref{def:hwbf} satisfies:
+	\[
+	\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
+	\]	
 \end{itemize}
 \end{Prop}
 
@@ -1140,7 +1157,7 @@ We observe that the above method provides a much tighter bound than the one from
 			\hline
 		\end{tabular}
 	\end{minipage}
-	\caption{Approximate values of $B_n$ for various $n$}
+	\caption{Approximate values of $B_n$ for various values of $n$}
 	\label{table:walsh_bounds}
 \end{table}
 
@@ -1152,6 +1169,7 @@ We observe that the above method provides a much tighter bound than the one from
 
 In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, HWBF and the cyclic weightwise quadratic function $t$  from~\cite{DAM:MeaOza24}. 
 More precisely, we compare the value $\max_{a\in\mathbb F_2^n}|\wt f(a)|$, the smaller the maximum the better the nonlinearity. 
+
 For majority and HWBF, we use the exact values recalled in Property~\ref{prop:wwd1}, for the function $t$ we use the upper bound proven in~\cite{DAM:MeaOza24}. 
 For the revisited HWBF, we consider the theoretical bound from Theorem~\ref{cor:bound_walsh_cauchy} and the experimental one from Section~\ref{sec:expwt}
 
