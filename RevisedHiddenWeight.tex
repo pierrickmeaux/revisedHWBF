@@ -935,42 +935,45 @@ When a specific value of $t$ is given as a function of $n$, the proof strategy f
     \]    
 
     
-    Since $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$ as shown in Figure~\ref{fig:trigo_bound} (which can also be formally proven using derivatives), we obtain that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude  $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$, and $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
+    Since $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$ as shown in Figure~\ref{fig:trigo_bound} (which can also be formally proven using derivatives), we obtain that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. 
+    The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$, and $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
 \end{proof}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=9cm]{trigo_bound.pdf}
-	\caption{Graph of the function $\alpha\mapsto(6-2\cos)2\alpha))(2+2\cos\alpha)$ in blue, and the line $y=2^{9/2}$ in red.}
+	\caption{Graph of the function $\alpha\mapsto(6-2\cos(2\alpha))(2+2\cos\alpha)$ in blue, and the line $y=2^{9/2}$ in red.}
     \label{fig:trigo_bound}
 \end{figure}
 
 
-\pmnote{for the remark, add how they are obtained (from a script in xxx). 
-We can give the scripts in supplementary material when submitting, of add the link of a github if you agree to have them public. \color{blue} Tim: I added the script to GitHub. You can decide what we do with it.
-
-
-}
+%\pmnote{for the remark, add how they are obtained (from a script in xxx). 
+%We can give the scripts in supplementary material when submitting, of add the link of a github if you agree to have them public. \color{blue} Tim: I added the script to GitHub. You can decide what we do with it.}
 
 \begin{remark}
     The proof of Proposition~\ref{proposition:walsh_t_over_3} can be extended to other values of $t$. 
-    In Figure~\ref{fig:walsh_bounds_generalization}, we provide bounds of the form $\max_{a\in\F_2^n}|\wt{d_{\alpha n/40,n}}(a)|\leq 1+n\cdot 2^{\beta n}$, where $\alpha\in[0,20]$ is represented on the $x$-axis and $\beta$ is represented on the $y$-axis. 
+    In Figure~\ref{fig:walsh_bounds_generalization}, we provide bounds of the form $\max_{a\in\F_2^n}|\wt{d_{ r n/40,n}}(a)|\leq 1+n\cdot 2^{ s n}$ obtained with a script in \textsf{SageMath}, where the integer $r \in[0,20]$ is represented on the $x$-axis and $s$ is represented on the $y$-axis. 
 \end{remark}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=9cm]{walsh_bounds_generalization.pdf}
-	\caption{Improvements on Corollary~\ref{cor:gen}. For each point $(\alpha,\beta)$, we have $\max_{a\in\F_2^n}|\wt{d_{\alpha n/40,n}}(a)|\leq 1+n\cdot 2^{\beta n}$.}
+	\caption{Improvements on Corollary~\ref{cor:gen}. For each point $(r,s)$, we have $\max_{a\in\F_2^n}|\wt{d_{ r n/40,n}}(a)|\leq 1+n\cdot 2^{s n}$.}
     \label{fig:walsh_bounds_generalization}
 \end{figure}
 
 \section{Experiments and comparisons}
 
+In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revised HWBF for values of $n$ up to $80$. 
+We then compare the nonlinearity of this function to that of other functions suited to similar use cases, such as the HWBF of weightwise cyclic functions from~\cite{DAM:MeaOza24}.
+
 
 
 \subsection{Bounding the Walsh transform of $f$ experimentally}\label{sec:expwt}
 
-We have just deduced that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
+%We have just deduced that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
+
+Following Corollary~\ref{cor:bound_walsh_cauchy} we deduce that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this part, we discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
 
 %This method is based on the identity (\ref{eqn:walsh_from_D}). 
 This method is based on the identity given in Proposition~\ref{prop:WT}.
@@ -980,7 +983,7 @@ In the following discussion, we outline a method to determine an upper bound on 
 \[
 \max_{a\in\F_2^n}|\wt f(a)|=\max\Big(\max_{a\in\F_2^n}\wt f(a),-\min_{a\in\F_2^n}\wt f(a)\Big).
 \]
-For each $1\leq k\leq n/2$, select $\{\alpha_k,\beta_k,\gamma_k\}=\{0,\pm 1\}$ with $\gamma_k\neq 0$ such that the following expression is defined and maximized:
+For each $1\leq k\leq n/2$, we select $\{\alpha_k,\beta_k,\gamma_k\}=\{0,\pm 1\}$ with $\gamma_k\neq 0$ such that the following expression is defined and maximized:
 \[
 B_k^{p,q,r}=\mathsf D_{n,k}^{p+\alpha_k,q+\beta_k,r+\gamma_k}+\mathsf D_{n,k+n/2}^{p+\alpha_k',q+\beta_k',r+\gamma_k'}.
 \]
@@ -990,7 +993,7 @@ This implies that $\Dnka{n}{k}{b_k}+\Dnka{n}{k+n/2}{b_{k+n/2}}\leq B_k^{p,q,r}$ 
 \end{equation}
 Under the assumption that the values of $\mathsf{D}_{n,k}^{p,q,r}$ have already been computed for all triplets $(p,q,r)$ satisfying $p+q+r=n/2$, the bound in equation (\ref{eqn:bound_walsh}) can be determined with a computational complexity of $\mathcal{O}(n^3)$. This is because there are $\mathcal{O}(n^2)$ possible triplets $(p,q,r)$ that meet the condition $p+q+r=n/2$, and the summation itself can be computed in $\mathcal{O}(n)$.
 
-Consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $0 \leq k \leq n$ and for all triplets $(p,q,r)$ where $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, according to Proposition \ref{proposition:generating_fct}, it is sufficient to expand the polynomials $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$.
+We consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $0 \leq k \leq n$ and for all triplets $(p,q,r)$ where $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, according to Proposition \ref{proposition:generating_fct}, it is sufficient to expand the polynomials $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$.
 
 To achieve this, we first precompute the expanded polynomials $(-z^2 + 2z + 1)^p$ for each $1 \leq p \leq n/2$. This can be done recursively using the formula $(-z^2 + 2z + 1)^{p+1} = (-z^2 + 2z + 1) \cdot (-z^2 + 2z + 1)^p$. For each $p$, we need to compute the product of two expanded polynomials of degree at most $n/2$, which requires $\mathcal{O}(n \log n)$ computations . Performing this for every $p$ results in a total complexity of $\mathcal{O}(n^2 \log n)$. The same approach is used to expand the polynomials $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$, resulting in an overall complexity of $\mathcal{O}(n^2 \log n)$ for this precomputational step.
 
@@ -998,21 +1001,18 @@ Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded 
 
 
 
+\pmnote{add a link to the public github or name of the name of this code in supplementary materials}
 
-\subsection{Comparison of the nonlinearity}
 
-\pmnote{under construction}
+%Table~\ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table~\ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
 
-In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, HWBF and the cyclic weightwise quadratic function $t$  from~\cite{DAM:MeaOza24}. 
-More precisely, we compare the value $\max_{a\in\mathbb F_2^n}|\wt f(a)|$, the smaller the maximum the better the nonlinearity. 
-For majority and HWBF, we use the exact values recalled in Property~\ref{prop:wwd1}, for the function $t$ we use the upper bound proven in~\cite{DAM:MeaOza24}. 
-For the revisited HWBF, we consider the theoretical bound from Theorem~\ref{cor:bound_walsh_cauchy} and the experimental one from Section~\ref{sec:expwt}
-
+In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ for small values of $n$ (calculated using \textsf{SageMath}) to the upper bound $B_n$ obtained through the above method and the one from Corollary~\ref{cor:bound_walsh_cauchy}. 
+Additionally, Table~\ref{table:walsh_bounds} provides the values of the bound $B_n$ for all even values of $n$ from $1$ to $80$.
+We observe that the above method provides a much tighter bound than the one from Corollary~\ref{cor:bound_walsh_cauchy}, and its polynomial complexity enables us to extend the analysis far beyond what is feasible with a full computation of the Walsh spectrum (\( \mathcal{O}(n 2^n) \)).
 
 
 
-Table~\ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table~\ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
-
+\iffalse
 \begin{table}
 	\centering
 	\begin{tabular}{|c|c|c|}
@@ -1034,15 +1034,33 @@ Table~\ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)
 	\caption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ compared to the bound $B_n$}
 	\label{table:max_walsh_vs_bound}
 \end{table}
+\fi
 
-Figure \ref{fig:walsh_bound_comparison} compares our experimental bound $B_n$ to the theoretical bound $1+n\cdot 2^{3n/4}$ and the binomial coefficient $\binom{n}{n/2}$, on a logarithmic scale. The first two and the last one have an asymptotic slope of $3/4$ and $1$, respectively.
 
-\begin{figure}
+
+\begin{table}
 	\centering
-	\includegraphics[width=9cm]{comparison_walsh_bound.pdf}
-	\caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue.}
-	\label{fig:walsh_bound_comparison}
-\end{figure}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		$n$ & $\max_{a\in\F_2^n}|W_f(a)|$ & $B_n$  & $\lfloor 1+n \cdot 2^{3n/4} \rfloor$\\ \hline
+		$2$  & $2$     & $4$  &  $6$ \\
+		$4$  & $8$     & $14$  & $33$  \\
+		$6$  & $20$    & $36$   & $136$\\
+		$8$  & $52$    & $114$  & $513$ \\
+		$10$ & $108$   & $288$  & $1\,811$\\
+		$12$ & $292$   & $820$  & $6\,145$ \\
+		$14$ & $700$   & $2\,316$ & $20\,275$ \\
+		$16$ & $2\,176$  & $6\,006$ & $65\,637$ \\
+		$18$ & $4\,964$  & $18\,192$ & $208\,535$ \\
+		$20$ & $14\,968$ & $48\,480$ & $655\,361$ \\
+		$22$ & $34\,232$ & $140\,392$ & $2\,039 \,002$ \\
+		$24$ & $109\,648$ & $392\,168$ & $6\,291 \,457$  \\ \hline
+	\end{tabular}
+	\caption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ compared to the bound $B_n$ and the one from Corollary~\ref{cor:bound_walsh_cauchy}.}
+	\label{table:max_walsh_vs_bound}
+\end{table}
+
+
 
 \begin{table}
 	\centering
@@ -1126,6 +1144,30 @@ Figure \ref{fig:walsh_bound_comparison} compares our experimental bound $B_n$ to
 	\label{table:walsh_bounds}
 \end{table}
 
+
+
+\subsection{Comparison of the nonlinearity}
+
+\pmnote{under construction}
+
+In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, HWBF and the cyclic weightwise quadratic function $t$  from~\cite{DAM:MeaOza24}. 
+More precisely, we compare the value $\max_{a\in\mathbb F_2^n}|\wt f(a)|$, the smaller the maximum the better the nonlinearity. 
+For majority and HWBF, we use the exact values recalled in Property~\ref{prop:wwd1}, for the function $t$ we use the upper bound proven in~\cite{DAM:MeaOza24}. 
+For the revisited HWBF, we consider the theoretical bound from Theorem~\ref{cor:bound_walsh_cauchy} and the experimental one from Section~\ref{sec:expwt}
+
+
+
+
+
+Figure~\ref{fig:walsh_bound_comparison} compares the experimental bound $B_n$ to the theoretical bound $1+n\cdot 2^{3n/4}$ and the binomial coefficient $\binom{n}{n/2}$, on a logarithmic scale. The first two and the last one have an asymptotic slope of $3/4$ and $1$, respectively.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=9cm]{comparison_walsh_bound.pdf}
+	\caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue.}
+	\label{fig:walsh_bound_comparison}
+\end{figure}
 
 
 
