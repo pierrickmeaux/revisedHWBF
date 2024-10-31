@@ -660,19 +660,19 @@ We recall Cauchy's estimate on holomorphic functions:
     \[
         \left|\frac{\dd^k}{\dd^k z}f(z)\vert_{z=w}\right|\leq\frac{k!\cdot M_R}{R^k},
     \]
-    where $M_R$ is the maximum of $|f(z)|$ on the circle $|z-w|=R$.
+%    where $M_R$ is the maximum of $|f(z)|$ on the circle $|z-w|=R$.
+where $M_R$ is the maximum of the absolute value of $f$, $|f(z)|$ on the circle defined by $|z-w|=R$.
 \end{Prop}
 
-\begin{remark}
-    Property~\ref{property:cauchy_estimate} is typically employed to bound the absolute value of complex numbers. Naturally, the bound remains valid when the complex number is real, as will be the case in our application.
-\end{remark}
+%\pmnote{ The point for the remark was to recall that we use the notation "$| \cdot |$" for absolute value over the complex, since before we used it only to denote "cardinal" or absolute value over integers.}
 
-\pmnote{I would recall between parentheses somewhere that we denote by $|.|$ the complex norm here, which corresponds to the absolute value on $\R${ \color{blue} Tim :OK, check above remark.}
+%\begin{remark}
+%    Property~\ref{property:cauchy_estimate} is typically employed to bound the absolute value of complex numbers. Naturally, the bound remains valid when the complex number is real, as will be the case in our application.
+%\end{remark}
 
-verify if $w$ and $z$ are coherent.
-}
 
-Applying this, we get:
+
+Applying the property, we get:
 
 \begin{theorem}\label{theorem:bound_D_nka}
     For every $a\in\F_2^n$ and every integer $k\geq 0$, it holds that:
@@ -793,8 +793,9 @@ In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weigh
 	%	\[\Dnka{n}{k}{a}= \sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\]
 \end{definition}
 
-In particular, $d_{n/2,n}(x)=d_n(x)$. 
-We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}$:
+In particular, $d_{\frac{n}{2},n}(x)=d_n(x)$. 
+%We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}$:
+We focus on the restricted Walsh spectrum of any function $d_{t,n}$:
 
 \begin{proposition}\label{proposition:dtn}
 	Let $t, n\in \N$ with $n$ even and $t\le n/2$, the following holds on $d_{t,n}$ for all $k\in [0,n]$:
@@ -905,7 +906,9 @@ When a specific value of $t$ is given as a function of $n$, the proof strategy f
     
    To find a bound for $|P_{a,t}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we would like to bound the quantity $\max_{a\in\F_2^n,z\in\dis}|P_{a,t}(z)|$. Moving through all $a\in\F_2^n$ is equivalent to moving through all tuples $(p,q,r;u,v)$ of non-negative integers which satisfy $p+q+r=t$ and $u+v=n-2t$. It follows from Lemma~\ref{lemma:maximizing_args} that it is enough to consider only the cases for which only one of $p,q,r$ is non-zero, and for which only one of $u,v$ is non-zero. 
    
-\pmnote{What is the argument: "maximum implies only one is non-zero" \color{blue} Tim: OK, check above lemma}
+%\pmnote{What is the argument: "maximum implies only one is non-zero" \color{blue} Tim: OK, check above lemma}
+
+%\pmnote{perfect.}
 
    This leaves us with the following cases to consider for $(p,q,r;u,v)$:
     \begin{gather*}
@@ -924,28 +927,21 @@ When a specific value of $t$ is given as a function of $n$, the proof strategy f
     \begin{align*}
         |-z^2+2z+1|^2&=\left(-\ee^{2\ii\alpha}+2\ee^{\ii\alpha}+1\right)\left(-\ee^{-2\ii\alpha}+2\ee^{-\ii\alpha}+1\right)\\
         &=6-\ee^{2\ii\alpha}-\ee^{-2\ii\alpha}\\
-        &=6-2\cos2\alpha;
+        &=6-2\cos (2\alpha),
     \end{align*}
-    the last equality uses that $\ee^{2\ii\alpha}=\cos2\alpha+\ii\sin2\alpha$. We similarly obtain that $|1+z|^2=2+2\cos\alpha$. Combining both, we get:
-    
-    \pmnote{@Tim, add intermediate computation in the following: \color{blue} Tim: Done}
-    
+    where the last equality uses that $\ee^{2\ii\alpha}=\cos(2\alpha)+\ii\sin(2\alpha)$. We similarly obtain that $|1+z|^2=2+2\cos\alpha$. Combining both, we get:   
     \[
         |P_{a,t}(z)|^2=\left(|-z^2+2z+1|^2\cdot|1+z|^2\right)^t=[(6-2\cos2\alpha)(2+2\cos\alpha)]^t.
-    \]
+    \]    
+
     
-    \pmnote{@Tim, for the following, by calculus, you mean using some software? In this case we can add a footnote saying in practice we did it with xxx.
-    	
-    Can you give a plot of $(\alpha,(6-2\cos2\alpha)(2+2\cos\alpha))$ and add the line corresponding to $y=9/4$?
-    \color{blue} Tim: Done}
-    
-    Since $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$ as shown in Figure~\ref{fig:trigo_bound} (which can also be formally checked using classical tricks from calculus), we obtain that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude  $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$, and $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
+    Since $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$ as shown in Figure~\ref{fig:trigo_bound} (which can also be formally proven using derivatives), we obtain that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude  $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$, and $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
 \end{proof}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=9cm]{trigo_bound.pdf}
-	\caption{The function $\alpha\mapsto(6-2\cos2\alpha)(2+2\cos\alpha)$ in blue, and the line $y=2^{9/2}$ in red.}
+	\caption{Graph of the function $\alpha\mapsto(6-2\cos)2\alpha))(2+2\cos\alpha)$ in blue, and the line $y=2^{9/2}$ in red.}
     \label{fig:trigo_bound}
 \end{figure}
 
