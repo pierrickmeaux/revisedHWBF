@@ -94,6 +94,8 @@
 \definecolor{mycolor}{rgb}{0.75,0.95,0.05}
 \newcommand{\pmnote}[1]{\colorbox{mycolor}{\parbox{0.9\linewidth}{[{\footnotesize {\bf PM:} { {#1}}}]}}}
 
+\newcommand{\tsnote}[1]{\colorbox{orange}{\footnotesize\color{white}\textbf{TS: }#1}}
+
 \definecolor{unmellowyellow}{rgb}{1.0, 1.0, 0.4}
 \newcommand{\agnote}[1]{\colorbox{unmellowyellow}{\parbox{0.9\linewidth}{[{\footnotesize {\bf AG:} { {#1}}}]}}}
 %% Sets
@@ -200,7 +202,8 @@
 \newcommand{\Ekn}[2]{\mathsf{E}_{#1,#2}}
 \newcommand{\Code}[2]{\mathsf{P}_{#1,#2}}
 \newcommand{\mdist}[2]{\mathsf{d}_{#1,#2}}
-\newcommand{\Dnka}[3]{\mathsf{D}_{#1,#2,#3}}
+\newcommand{\Dka}[2]{\mathsf{D}_{#1}(#2)}
+\newcommand{\Dnka}[3]{\Dka{#2}{#3}}
 
 \newcommand{\dis}{\mathsf{c_1}}
 
@@ -235,7 +238,7 @@
 \newcommand{\Span}{\mathsf{Span}}
 \newcommand{\rank}{\mathsf{rank}}
 %Walsh transform
-\newcommand{\wt}[1]{W_{#1}} 
+\newcommand{\wt}[1]{\mathcal W_{#1}} 
 \newcommand{\Wsupp}[1]{\mathsf{Wsupp}_{#1}} 
 %restricted Walsh transform W_k,a (f)
 \newcommand{\wtk}[2]{\mathcal{W}_{#1,#2}} 

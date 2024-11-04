@@ -573,7 +573,7 @@ Finally, in Section~\ref{sec:general}, we demonstrate how this result can be ext
 \end{proof}
 
 \begin{Corollary}
-	If $r$ is odd, then for $k=n/2$, we have: $\Dnka n{n/2}a=0.$
+	If $r$ is odd, then for $k=n/2$, we have $\Dnka n{n/2}a=0.$
 \end{Corollary}
 
 \begin{proof}
@@ -789,7 +789,7 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
     \begin{figure}
         \centering
         \includegraphics[width=7cm]{cauchy_estimate.pdf}
-        \caption{Cauchy estimate in blue vs.\ binomial coefficients in red}
+        \caption{Cauchy estimate in blue vs.\ binomial coefficients in red.}
         \label{fig:cauchy_estimate}
     \end{figure}
 \end{remark}}
@@ -798,7 +798,7 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
 
 
 \subsection{Generalization to a family of weightwise quadratic functions}\label{sec:general}
-In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic function such that for all $k\in [1,n]$ $f_k$ has exactly $t$ quadratic terms with no shared variables.
+In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic function such that for all $k\in [1,n]$, the function $f_k$ has exactly $t$ quadratic terms with no shared variables.
 
 
 
@@ -886,7 +886,7 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     Let $t, n\in \N$ with $n$ even and $t\le n/2$. 
     We define $\lambda=t/n\in\left[0,\frac 12\right]$, as well as:
     \[
-        \mu(\lambda)=
+        \mu(\lambda)=\mu=
         \begin{cases}
             \frac{\lambda+1}{2}+\frac12\log_2\left(\frac{\left(-\lambda^2+2\lambda+\lambda\sqrt{\lambda^2-4\lambda+2}\right)^\lambda}{\left(1-\lambda+\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}\right)&\text{if $\lambda>\frac 16$,}\\
             1-\lambda&\text{if $\lambda\leq\frac 16$.}\\
@@ -929,26 +929,29 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     \[
         |P_{a,t}(z)|^2=\left(\left|-z^2+2z+1\right|^{2\lambda}|1+z|^{2(1-2\lambda)}\right)^n=\left((6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}\right)^n.
     \]
-    The goal will be to prove that the maximum of $g(\alpha)=(6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$ for $\alpha\in[-\pi,\pi]$ is equal to $2^{2\mu}$; the maximum of $|P_{a,t}(z)|$ on $\dis$ will then be $\left(2^{2\mu}\right)^{n/2}=2^{\mu n}$. Since $g$ is an even function, it is enough to focus on the interval $\alpha\in[0,\pi]$.
-
-
-    To begin, computing the first derivative of $g$ and applying the double angle formulas $\cos(2\alpha)=2\cos^2\alpha-1$ and $\sin(2\alpha)=2\cos\alpha\sin\alpha$ gives:
     
-        \pmnote{Add intermediate computations for the derivative for verifiability}
+    The goal will be to prove that the maximum of $g_\lambda(\alpha)=g(\alpha)=(6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$ for $\alpha\in[-\pi,\pi]$ is equal to $2^{2\mu}$; the maximum of $|P_{a,t}(z)|$ on $\dis$ will then be $\left(2^{2\mu}\right)^{n/2}=2^{\mu n}$. Since $g$ is an even function, it is enough to focus on the interval $\alpha\in[0,\pi]$; the function $g$ is represented for several different values of $0\leq\lambda<\frac 12$ in Figure~\ref{fig:family_curves_g}.
 
-    \[
-        \frac{\dd}{\dd\alpha}g(\alpha)=8(6-2\cos(2\alpha))^{\lambda-1}(2+2\cos\alpha)^{-2\lambda}\sin\alpha\left(\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2\right).
-    \]
+    \begin{figure}
+    	\centering
+    	\includegraphics[width=9cm]{family_curves_g.pdf}
+    	\caption{The curves of $\alpha\mapsto g_\lambda(\alpha)$ for the values $\lambda=\frac{i}{25}$ from $i=0$ (blue) to $i=24$ (red).}
+    	\label{fig:family_curves_g}
+    \end{figure}
+    
+    Writing $g(\alpha)=g_1(\alpha)^{\lambda}g_2(\alpha)^{1-2\lambda}$ for $g_1(\alpha)=6-2\cos(2\alpha)$ and $g_2(\alpha)=2+2\cos\alpha$, we compute the first derivative of $g$, and apply the double angle formulas $\cos(2\alpha)=2\cos^2\alpha-1$ and $\sin(2\alpha)=2\cos\alpha\sin\alpha$:
+    \begin{align*}
+         \frac{\dd}{\dd\alpha}g(\alpha)&=g_1(\alpha)^{\lambda-1}g_2(\alpha)^{-2\lambda}\left(\lambda g_2(\alpha)\frac{\dd}{\dd\alpha}g_1(\alpha)+(1-2\lambda)g_1(\alpha)\frac{\dd}{\dd\alpha}g_2(\alpha)\right)\\
+         &=g_1(\alpha)^{\lambda-1}g_2(\alpha)^{-2\lambda}\left(\lambda(2+2\cos\alpha)\cdot4\sin(2\alpha)+(1-2\lambda)(6-2\cos(2\alpha))(-2\sin\alpha)\right)\\
+         &=g_1(\alpha)^{\lambda-1}g_2(\alpha)^{-2\lambda}\left(\lambda(2+2\cos\alpha)\cdot4\cdot2\cos\alpha\sin\alpha+(1-2\lambda)\left(8-4\cos^2\alpha\right)(-2\sin\alpha)\right)\\
+         &=8g_1(\alpha)^{\lambda-1}g_2(\alpha)^{-2\lambda}\sin\alpha\left(2\lambda \cos\alpha(1+\cos\alpha)-(1-2\lambda)\left(2-\cos^2\alpha\right)\right)\\
+         &=8g_1(\alpha)^{\lambda-1}g_2(\alpha)^{-2\lambda}\sin\alpha\left(\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2\right).
+    \end{align*}
+    
     The only interesting zeros of $\frac{\dd}{\dd\alpha}g(\alpha)$ are those of the last factor 
     $\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2$: those of the factor $8(6-2\cos(2\alpha))^{\lambda-1}(2+2\cos\alpha)^{-2\lambda}$ will make $g(\alpha)$ vanish and will therefore not maximize $g(\alpha)$, and those for $\sin\alpha$ are $\alpha=0$ and $\alpha=\pi$, with corresponding values $g(0)=2^{2-2\lambda}$ and $g(\pi)=0$.
     
-    Our first claim is that the equation $\mathcal E:\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2=0$ has a unique solution $\cos\alpha=-\lambda+\sqrt{\lambda^2-4\lambda+2}$ if $\lambda\geq\frac 16$ and has no solution $\cos\alpha$ otherwise. To see this, we consider $\mathcal E$ as an equation of second degree in $\cos\alpha$, which leads to the two solution candidates $\cos\alpha=-\lambda\pm\sqrt{\lambda^2-4\lambda+2}$. 
-    
-        \pmnote{factor 2 missing?}
-    
-    
-    \pmnote{why do you exclude, for $\lambda=0.5$ it is in the range isn't it?}
-    
+    Our first claim is that the equation $\mathcal E:\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2=0$ has a unique solution $\cos\alpha=-\lambda+\sqrt{\lambda^2-4\lambda+2}$ if $\lambda\geq\frac 16$ and has no solution $\cos\alpha$ otherwise. To see this, we consider $\mathcal E$ as an equation of second degree in $\cos\alpha$, which leads to the two solution candidates $\cos\alpha=-\lambda\pm\sqrt{\lambda^2-4\lambda+2}$.
      
     We can exclude the solution $\cos\alpha=-\lambda-\sqrt{\lambda^2-4\lambda+2}$ since $\cos\alpha\in[-1,1]$. The other solution needs to be excluded for the same reason if $\lambda<\frac 16$.
 
@@ -968,7 +971,7 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     \[
         g(\alpha_0)=\frac{\left(-8\lambda^2+16\lambda+8\lambda\sqrt{\lambda^2-4\lambda+2}\right)^{\lambda}}{\left(2-2\lambda+2\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}=2^{2\mu}.
     \]
-    This is exactly what we wanted to prove, and we have therefore covered the case $(p,q,r;u,v)=(t,0,0;n-2t,0)$ entirely. In a similar fashion, it can be proven that $|P_{a,t}(z)|$ is also bounded by $2^{\mu n}$ on $\dis$ for the remaining two cases of $(p,q,r;u,v)$. In fact, for $(p,q,r;u,v)=(0,t,0;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h_1(\alpha):=(6-2\cos(2\alpha))^\lambda(2-2\cos\alpha)^{1-2\lambda}$, which has the same maximum as $g(\alpha)$ because $h_1\left(\frac{\pi}{2}+\alpha\right)=g\left(\frac{\pi}{2}-\alpha\right)$; for $(p,q,r;u,v)=(0,0,t;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h_2(\alpha):=(2+2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$, whose maximum is bounded by the maximum of $g(\alpha)$ because $h_2(\alpha)\leq g(\alpha)$.
+    This is exactly what we wanted to prove, and we have therefore covered the case $(p,q,r;u,v)=(t,0,0;n-2t,0)$ entirely. In a similar fashion, it can be proven that $|P_{a,t}(z)|$ is also bounded by $2^{\mu n}$ on $\dis$ for the remaining two cases of $(p,q,r;u,v)$. In fact, for $(p,q,r;u,v)=(0,t,0;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h_1(\alpha)=(6-2\cos(2\alpha))^\lambda(2-2\cos\alpha)^{1-2\lambda}$, which has the same maximum as $g(\alpha)$ because $h_1\left(\frac{\pi}{2}+\alpha\right)=g\left(\frac{\pi}{2}-\alpha\right)$; for $(p,q,r;u,v)=(0,0,t;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h_2(\alpha)=(2+2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$, whose maximum is bounded by the maximum of $g(\alpha)$ because $h_2(\alpha)\leq g(\alpha)$.
 \end{proof}
 
 The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theorem:bound_D_nka_generalized} is represented in Figure~\ref{fig:curve_exponents_lambda_mu}.
@@ -976,7 +979,7 @@ The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theo
 \begin{figure}
 	\centering
 	\includegraphics[width=10cm]{curve_exponents_lambda_mu.pdf}
-	\caption{The curve of $\lambda\mapsto\mu(\lambda)$ with $0\leq\lambda\leq\frac 12$ from Theorem~\ref{theorem:bound_D_nka_generalized}}
+	\caption{The curve of $\lambda\mapsto\mu(\lambda)$ with $0\leq\lambda\leq\frac 12$ from Theorem~\ref{theorem:bound_D_nka_generalized}.}
 	\label{fig:curve_exponents_lambda_mu}
 \end{figure}
 
@@ -1021,7 +1024,9 @@ Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded 
 
 
 
-\pmnote{add a link to the public github or name of the name of this code in supplementary materials \color{blue} Tim: Is on GitHub now: \texttt{Bounding\_Walsh.ipynb}}
+\pmnote{add a link to the public github or name of the name of this code in supplementary materials.}
+
+\tsnote{Is on GitHub now: \texttt{Bounding\_Walsh.ipynb}}
 
 
 %Table~\ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table~\ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
@@ -1186,7 +1191,7 @@ Figure~\ref{fig:walsh_bound_comparison} compares the experimental bound $B_n$ to
 \begin{figure}
 	\centering
 	\includegraphics[width=9cm]{comparison_walsh_bound.pdf}
-	\caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue.}
+	\caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue. \tsnote{Updated plot, but the description now needs to be changed.}}
 	\label{fig:walsh_bound_comparison}
 \end{figure}
 
