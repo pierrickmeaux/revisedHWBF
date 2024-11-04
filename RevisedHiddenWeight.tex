@@ -704,7 +704,7 @@ Applying the property, we get:
         |\Dnka nka|=\frac{1}{k!}\left|\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}\right|\leq M,
     \]
     where $M$ is the maximum of $|P_a(z)|$ on the circle %$|z|=1$. 
-    $\dis=\{ z \in \C,  |z|=1  \}$
+    $\dis=\{ z \in \C,  |z|=1  \}$.
     We claim, and prove below, that the maximum of $\left|-z^2+2z+1\right|$ on $\dis$ is $2\sqrt 2$. 
     This implies that the maximum of $\left|-z^2-2z+1\right|$ on $\dis$ is $2\sqrt 2$ as well. 
     Since the maximum of $\left|z^2+1\right|$ on $\dis$ is $2<2\sqrt 2$, it follows that $|\Dnka nka|\leq M\leq (2\sqrt 2)^{p+q}2^r\leq (2\sqrt 2)^{n/2}$.
@@ -862,34 +862,7 @@ We focus on the restricted Walsh spectrum of any function $d_{t,n}$:
     \end{align*}
 \end{proof}
 
-Consequently, we get a generalization of Theorem~\ref{theorem:bound_D_nka}:
-
-\begin{theorem}\label{theorem:bound_D_nka_generalized}
-    Let $t, n\in \N$ with $n$ even and $t\le n/2$. For every $a\in\F_2^n$ and every $k\in[0,n]$, it holds that:
-    \[
-        |\wtk{d_{t,n}}{k}(a)|\leq 2^{n-t/2}.
-    \]
-\end{theorem}
-
-\begin{proof}
-    By applying Property \ref{property:cauchy_estimate}, we get that a bound on $|\wtk{d_{t,n}}{k}(a)|$ is given by the maximum $M'$ on the circle $\dis$ of $|P_b(z)|\cdot|(1+z)^u\cdot(1-z)^v|$. 
-    As previously established in Theorem~\ref{theorem:bound_D_nka}, $|P_b(z)|$ is bounded on $\dis$ by $(2\sqrt 2)^t=2^{3t/2}$, and $|(1+z)^u\cdot(1-z)^v|$ is bounded on $\dis$ by $2^{u+v}=2^{n-2t}$. 
-    Therefore, we conclude that $M'$ is bounded by $2^{3t/2}2^{n-2t}=2^{n-t/2}$, and hence this is also a bound for $|\wtk{d_{t,n}}{k}(a)|$. 
-\end{proof}
-
-\begin{Corollary}\label{cor:gen}
-    Let $t, n\in \N$ with $n$ even and $t\le n/2$. For every $a\in\F_2^n$, the following holds:
-    \[
-        |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{n-t/2}.
-    \]
-\end{Corollary}
-
-\begin{proof}
-    Analogous to the proof of Corollary \ref{cor:bound_walsh_cauchy}.
-\end{proof}
-
-
-When a specific value of $t$ is given as a function of $n$, the proof strategy for Theorem~\ref{theorem:bound_D_nka_generalized} can be applied with greater precision. For example, we examine the case where $t=n/3$ in the below Proposition~\ref{proposition:walsh_t_over_3}. Before proceeding, we include a brief lemma that will clarify the proof of that proposition.
+With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below. Before that, we still require a preliminary result:
 
 \begin{lemma}\label{lemma:maximizing_args}
     Let $N$ be a non-negative number and $D\subseteq\C$ a set of complex numbers. For every integer $1\leq i\leq N$, consider a non-negative integer $m_i$ as well as complex functions $f_{i,1},\dots,f_{i,k_i}$ defined on the set $D$. Assume that the following maximum exists (which holds for instance if the functions $f_{i,j}$ are continuous and $D$ is topologically compact):
@@ -909,15 +882,24 @@ When a specific value of $t$ is given as a function of $n$, the proof strategy f
     \]
 \end{proof}
 
-\begin{proposition}\label{proposition:walsh_t_over_3}
-    Let $n\in\N^*$ be divisible by $6$. 
-    Then, for every $a\in\F_2^n$ and every $k\in[0,n]$, it holds that:
+\begin{theorem}\label{theorem:bound_D_nka_generalized}
+    Let $t, n\in \N$ with $n$ even and $t\le n/2$. Define $\lambda:=t/n\in\left[0,\frac 12\right]$, as well as:
     \[
-        |\wtk{d_{n/3,n}}{k}(a)|\leq2^{3n/4},\quad \text{and }\quad|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}.
+        \mu:=\mu(\lambda):=
+        \begin{cases}
+            \frac{\lambda+1}{2}+\frac12\log_2\left(\frac{\left(-\lambda^2+2\lambda+\lambda\sqrt{\lambda^2-4\lambda+2}\right)^\lambda}{\left(1-\lambda+\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}\right)&\text{if $\lambda>\frac 16$,}\\
+            1-\lambda&\text{if $\lambda\leq\frac 16$.}\\
+        \end{cases}
     \]
-\end{proposition}
+    Then for all $a\in\F_2^n$ and $k\in[0,n]$, the following hold true:
+    \[
+        |\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n},\quad |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}.
+    \]
+\end{theorem}
 
 \begin{proof}
+    To begin, observe that the inequality $|\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}$ will follow from the inequality $|\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n}$ using precisely the arguments of the proof of Corollary~\ref{cor:bound_walsh_cauchy}, so that we are only required to prove the first inequality.
+    
     As before, we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[1,n]$. 
     We write $a=(b,c)$ with $b\in\F_2^{2t}$ and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}. 
     
@@ -936,11 +918,11 @@ When a specific value of $t$ is given as a function of $n$, the proof strategy f
     \[
         (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0).
     \]
-    Let us for instance find an upper bound of $|P_{a,t}(z)|$ in case $(p,q,r;u,v)=(t,0,0;n-2t,0)$. Since $n-2t=t$ by assumption, we get:
+    Let us start by bounding $|P_{a,t}(z)|$ on $\dis$ in case $(p,q,r;u,v)=(t,0,0;n-2t,0)$. Since $t=\lambda n$, we can write:
     \[
-        P_{a,t}(z)=[(-z^2+2z+1)(1+z)]^t.
+        P_{a,t}(z)=\left((-z^2+2z+1)^{\lambda}(1+z)^{1-2\lambda}\right)^n.
     \]
-    Writing $z=\ee^{\ii\alpha}$ and using that $|w|^2=w\overline w$ for every complex number $w$, we have:
+    Writing $z=\ee^{\ii\alpha}$ and $z^2=\ee^{2\ii\alpha}$ for $\alpha\in[-\pi,\pi]$, and using that $|w|^2=w\overline w$ for every complex number $w$, we get:
     \begin{align*}
         |-z^2+2z+1|^2&=\left(-\ee^{2\ii\alpha}+2\ee^{\ii\alpha}+1\right)\left(-\ee^{-2\ii\alpha}+2\ee^{-\ii\alpha}+1\right)\\
         &=6-\ee^{2\ii\alpha}-\ee^{-2\ii\alpha}\\
@@ -948,43 +930,52 @@ When a specific value of $t$ is given as a function of $n$, the proof strategy f
     \end{align*}
     where the last equality uses that $\ee^{2\ii\alpha}=\cos(2\alpha)+\ii\sin(2\alpha)$. We similarly obtain that $|1+z|^2=2+2\cos\alpha$. Combining both, we get:   
     \[
-        |P_{a,t}(z)|^2=\left(|-z^2+2z+1|^2\cdot|1+z|^2\right)^t=[(6-2\cos(2\alpha))(2+2\cos\alpha)]^t.
-    \]    
+        |P_{a,t}(z)|^2=\left(\left|-z^2+2z+1\right|^{2\lambda}|1+z|^{2(1-2\lambda)}\right)^n=\left((6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}\right)^n.
+    \]
+    The goal will be to prove that the maximum of $g(\alpha):=(6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$ for $\alpha\in[-\pi,\pi]$ is equal to $2^{2\mu}$; the maximum of $|P_{a,t}(z)|$ on $\dis$ will then be $\left(2^{2\mu}\right)^{n/2}=2^{\mu n}$. Since $g$ is an even function, it is enough to focus on the interval $\alpha\in[0,\pi]$.
 
+    To begin, computing the first derivative of $g$ and applying the \textit{double angle formulas} $\cos(2\alpha)=2\cos^2\alpha-1$ and $\sin(2\alpha)=2\cos\alpha\sin\alpha$ gives:
+    \[
+        \frac{\dd}{\dd\alpha}g(\alpha)=8(6-2\cos(2\alpha))^{\lambda-1}(2+2\cos\alpha)^{-2\lambda}\sin\alpha\left(\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2\right).
+    \]
+    The only interesting zeros of $\frac{\dd}{\dd\alpha}g(\alpha)$ are those of the last factor 
+    $\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2$: those of the factor $8(6-2\cos(2\alpha))^{\lambda-1}(2+2\cos\alpha)^{-2\lambda}$ will make $g(\alpha)$ vanish and will therefore not maximize $g(\alpha)$, and those for $\sin\alpha$ are $\alpha=0$ and $\alpha=\pi$.
     
-    Since $|(6-2\cos2\alpha)(2+2\cos\alpha)|<2^{9/2}$ as shown in Figure~\ref{fig:trigo_bound} (which can also be formally proven using derivatives), we obtain that $|P_{a,t}(z)|<2^{9t/4}=2^{3n/4}$. 
-    The same upper bound works for the remaining two candidates for $(p,q,r;u,v)$, and we can therefore conclude $|\wtk{d_{n/3,n}}{k}(a)|\leq 2^{3n/4}$, and $|\wt{d_{n/3,n}}(a)|\leq 1+n\cdot 2^{3n/4}$.
+    Our first claim is that the equation $\mathcal E:\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2=0$ either has a unique solution $\cos\alpha=-\lambda+\sqrt{\lambda^2-4\lambda+2}$ if $\lambda\geq\frac 16$, and has no solution $\cos\alpha$ otherwise. To see this, we consider $\mathcal E$ as an equation of second degree in $\cos\alpha$, it leads to the two solutions $\cos\alpha=-\lambda\pm\sqrt{\lambda^2-4\lambda+2}$. We can exclude the solution $\cos\alpha=-\lambda-\sqrt{\lambda^2-4\lambda+2}$ since $\cos\alpha\in[-1,1]$. The other solution needs to be excluded for the same reason if $\lambda<\frac 16$.
+
+    Our next claim is that $\frac{\dd^2}{\dd^2\alpha}g(\alpha)\vert_{\alpha=0}$ has the same sign as $6\lambda -1$. Indeed, by definition of the second derivative, we have:
+    \begin{align*}
+        \frac{\dd^2}{\dd^2\alpha}g(\alpha)\vert_{\alpha=0}
+        &=\lim_{\alpha\to 0}\frac{\frac{\dd}{\dd\alpha}g(\alpha)}{\alpha}\\
+        &=\lim_{\alpha\to 0}8(6-2\cos(2\alpha))^{\lambda-1}(2+2\cos\alpha)^{-2\lambda}\cdot\frac{\sin\alpha}{\alpha}\cdot\left(\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2\right)\\
+        &=8\cdot4^{\lambda-1}\cdot 4^{-2\lambda}\cdot 1\cdot(6\lambda -1)\\
+        &=2^{1-2\lambda}(6\lambda -1).
+    \end{align*}
+
+    Therefore, in case $\lambda<\frac 16$, we can conclude from the two claims that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and this maximum is then equal to $2^{2-2\lambda}=2^{2\mu}$, as required. For $\lambda=\frac 16$, the solution to the equation $\mathcal E$ is $\cos\alpha=1$, again implying $\alpha_0=0$, and we obtain the same maximum of $2^{2\mu}$. In case $\lambda>\frac 16$, the two claims imply that $g(\alpha)$ reaches its maximum at the two values $\alpha_0\in[0,pi]$ for which $\cos\alpha_0=-\lambda+\sqrt{\lambda^2-4\lambda+2}$. For such $\alpha$, the \textit{double angle formula} for the cosine implies that $\cos(2\alpha_0)=2\lambda^2-4\lambda+2-2\lambda\sqrt{\lambda^2-4\lambda+2}$. If we replace $\cos(\alpha_0)$ and $\cos(2\alpha_0)$ by their respective values, we obtain that the maximum of $g(\alpha)$ on $\alpha\in[0,\pi]$ is given by the following value:
+    \[
+        g(\alpha_0)=\frac{\left(-8\lambda^2+16\lambda+8\lambda\sqrt{\lambda^2-4\lambda+2}\right)^{\lambda}}{\left(2-2\lambda+2\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}=2^{2\mu}.
+    \]
+    This is exactly what we wanted to prove, and we have therefore covered the case $(p,q,r;u,v)=(t,0,0;n-2t,0)$ entirely. In a similar fashion, it can be proven that $|P_{a,t}(z)|$ is also bounded by $2^{\mu n}$ on $\dis$  for the remaining two cases of $(p,q,r;u,v)$.
 \end{proof}
+
+The curve $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theorem:bound_D_nka_generalized} is represented in Figure~\ref{fig:curve_exponents_lambda_mu}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=9cm]{trigo_bound.pdf}
-	\caption{Graph of the function $\alpha\mapsto(6-2\cos(2\alpha))(2+2\cos\alpha)$ in blue, and the line $y=2^{9/2}$ in red.}
-    \label{fig:trigo_bound}
+	\includegraphics[width=9cm]{curve_exponents_lambda_mu.pdf}
+	\caption{The curve $\lambda\mapsto\mu(\lambda)$ from Theorem~\ref{theorem:bound_D_nka_generalized}}
+	\label{fig:curve_exponents_lambda_mu}
 \end{figure}
 
 
 %\pmnote{for the remark, add how they are obtained (from a script in xxx). 
 %We can give the scripts in supplementary material when submitting, of add the link of a github if you agree to have them public. \color{blue} Tim: I added the script to GitHub. You can decide what we do with it.}
 
-\begin{remark}
-    The proof of Proposition~\ref{proposition:walsh_t_over_3} can be extended to other values of $t$. 
-    In Figure~\ref{fig:walsh_bounds_generalization}, we provide bounds of the form $\max_{a\in\F_2^n}|\wt{d_{ r n/40,n}}(a)|\leq 1+n\cdot 2^{ s n}$ obtained with a script in \textsf{SageMath}, where the integer $r \in[0,20]$ is represented on the $x$-axis and $s$ is represented on the $y$-axis. 
-\end{remark}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=9cm]{walsh_bounds_generalization.pdf}
-	\caption{Improvements on Corollary~\ref{cor:gen}. For each point $(r,s)$, we have $\max_{a\in\F_2^n}|\wt{d_{ r n/40,n}}(a)|\leq 1+n\cdot 2^{s n}$.}
-    \label{fig:walsh_bounds_generalization}
-\end{figure}
-
 \section{Experiments and comparisons}
 
 In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revised HWBF for values of $n$ up to $80$. 
 We then compare the nonlinearity of this function to that of other functions suited to similar use cases, such as the HWBF of weightwise cyclic functions from~\cite{DAM:MeaOza24}.
-
-
 
 \subsection{Bounding the Walsh transform of $f$ experimentally}\label{sec:expwt}
 
