@@ -121,10 +121,10 @@ For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k 
 
 \begin{definition}[Walsh transform and restricted Walsh transform]\label{def:walsh_transform}
 	Let $f\in \Bn{n}$ be a Boolean function, its Walsh transform $\wt{f}$ at $a \in \F_2^n$ is defined as:
-	\[  \wt{f} (a) := \sum_{x \in \F_2^n} (-1)^{f(x) +  a \cdot x }.\]
-	%	The Walsh support is the set $\Wsupp{f}:=\{ a\in \F_2^n\, | \, \wt{f} (a) \neq 0 \}$.
+	\[  \wt{f} (a) = \sum_{x \in \F_2^n} (-1)^{f(x) +  a \cdot x }.\]
+	%	The Walsh support is the set $\Wsupp{f}=\{ a\in \F_2^n\, | \, \wt{f} (a) \neq 0 \}$.
 	Let $f\in \Bn{n}$, $S \subset \F_2^n$, its Walsh transform restricted to $S$ at $a \in \F_2^n$ is defined as:
-	\[  \wt{f,S} (a) := \sum_{x\in S} (-1)^{f(x)+a \cdot x}.\]
+	\[  \wt{f,S} (a) = \sum_{x\in S} (-1)^{f(x)+a \cdot x}.\]
 	For $S=\Ekn{k}{n}$ we denote $\wt{f,\Ekn{k}{n}} (a)$ by $\wtk{f}{k}(a)$.%, and for $a= 0_{n}$ we denote $\wtk{f}{k}(a)$ as $\wtk{f}{k}(0)$.
 \end{definition}
 
@@ -883,32 +883,27 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
 \end{proof}
 
 \begin{theorem}\label{theorem:bound_D_nka_generalized}
-    Let $t, n\in \N$ with $n$ even and $t\le n/2$. Define $\lambda:=t/n\in\left[0,\frac 12\right]$, as well as:
+    Let $t, n\in \N$ with $n$ even and $t\le n/2$. 
+    We define $\lambda=t/n\in\left[0,\frac 12\right]$, as well as:
     \[
-        \mu:=\mu(\lambda):=
+        \mu(\lambda)=
         \begin{cases}
             \frac{\lambda+1}{2}+\frac12\log_2\left(\frac{\left(-\lambda^2+2\lambda+\lambda\sqrt{\lambda^2-4\lambda+2}\right)^\lambda}{\left(1-\lambda+\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}\right)&\text{if $\lambda>\frac 16$,}\\
             1-\lambda&\text{if $\lambda\leq\frac 16$.}\\
         \end{cases}
     \]
-    Then for all $a\in\F_2^n$ and $k\in[0,n]$, the following hold true:
+    Then, for all $a\in\F_2^n$ and $k\in[0,n]$, the following hold true:
     \[
-        |\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n},\quad |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}.
+        |\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n},\quad \text{and} \quad  |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}.
     \]
 \end{theorem}
 
 \begin{proof}
-    To begin, observe that the inequality $|\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}$ will follow from the inequality $|\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n}$ using precisely the arguments of the proof of Corollary~\ref{cor:bound_walsh_cauchy}, so that we are only required to prove the first inequality.
+    To begin, we observe that the inequality $|\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}$ will follow from the inequality $|\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n}$ using precisely the arguments of the proof of Corollary~\ref{cor:bound_walsh_cauchy}, so that we are only required to prove the first inequality.
     
-    As before, we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[1,n]$. 
-    We write $a=(b,c)$ with $b\in\F_2^{2t}$ and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}. 
-    
+    As before (in the proof of Theorem~\ref{theorem:bound_D_nka}, we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[1,n]$. 
+    We write $a=(b,c)$ with $b\in\F_2^{2t}$ and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}.    
    To find a bound for $|P_{a,t}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we would like to bound the quantity $\max_{a\in\F_2^n,z\in\dis}|P_{a,t}(z)|$. Moving through all $a\in\F_2^n$ is equivalent to moving through all tuples $(p,q,r;u,v)$ of non-negative integers which satisfy $p+q+r=t$ and $u+v=n-2t$. It follows from Lemma~\ref{lemma:maximizing_args} that it is enough to consider only the cases for which only one of $p,q,r$ is non-zero, and for which only one of $u,v$ is non-zero. 
-   
-%\pmnote{What is the argument: "maximum implies only one is non-zero" \color{blue} Tim: OK, check above lemma}
-
-%\pmnote{perfect.}
-
    This leaves us with the following cases to consider for $(p,q,r;u,v)$:
     \begin{gather*}
         (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0),\\
@@ -932,16 +927,29 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     \[
         |P_{a,t}(z)|^2=\left(\left|-z^2+2z+1\right|^{2\lambda}|1+z|^{2(1-2\lambda)}\right)^n=\left((6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}\right)^n.
     \]
-    The goal will be to prove that the maximum of $g(\alpha):=(6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$ for $\alpha\in[-\pi,\pi]$ is equal to $2^{2\mu}$; the maximum of $|P_{a,t}(z)|$ on $\dis$ will then be $\left(2^{2\mu}\right)^{n/2}=2^{\mu n}$. Since $g$ is an even function, it is enough to focus on the interval $\alpha\in[0,\pi]$.
+    The goal will be to prove that the maximum of $g(\alpha)=(6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$ for $\alpha\in[-\pi,\pi]$ is equal to $2^{2\mu}$; the maximum of $|P_{a,t}(z)|$ on $\dis$ will then be $\left(2^{2\mu}\right)^{n/2}=2^{\mu n}$. Since $g$ is an even function, it is enough to focus on the interval $\alpha\in[0,\pi]$.
 
     To begin, computing the first derivative of $g$ and applying the \textit{double angle formulas} $\cos(2\alpha)=2\cos^2\alpha-1$ and $\sin(2\alpha)=2\cos\alpha\sin\alpha$ gives:
+    
+    \pmnote{Add intermediate computations for the derivative for verifiability}
+    
+    
+    
     \[
         \frac{\dd}{\dd\alpha}g(\alpha)=8(6-2\cos(2\alpha))^{\lambda-1}(2+2\cos\alpha)^{-2\lambda}\sin\alpha\left(\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2\right).
     \]
     The only interesting zeros of $\frac{\dd}{\dd\alpha}g(\alpha)$ are those of the last factor 
     $\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2$: those of the factor $8(6-2\cos(2\alpha))^{\lambda-1}(2+2\cos\alpha)^{-2\lambda}$ will make $g(\alpha)$ vanish and will therefore not maximize $g(\alpha)$, and those for $\sin\alpha$ are $\alpha=0$ and $\alpha=\pi$.
     
-    Our first claim is that the equation $\mathcal E:\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2=0$ either has a unique solution $\cos\alpha=-\lambda+\sqrt{\lambda^2-4\lambda+2}$ if $\lambda\geq\frac 16$, and has no solution $\cos\alpha$ otherwise. To see this, we consider $\mathcal E$ as an equation of second degree in $\cos\alpha$, it leads to the two solutions $\cos\alpha=-\lambda\pm\sqrt{\lambda^2-4\lambda+2}$. We can exclude the solution $\cos\alpha=-\lambda-\sqrt{\lambda^2-4\lambda+2}$ since $\cos\alpha\in[-1,1]$. The other solution needs to be excluded for the same reason if $\lambda<\frac 16$.
+    Our first claim is that the equation $\mathcal E:\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2=0$ either has a unique solution $\cos\alpha=-\lambda+\sqrt{\lambda^2-4\lambda+2}$ if $\lambda\geq\frac 16$, and has no solution $\cos\alpha$ otherwise. To see this, we consider $\mathcal E$ as an equation of second degree in $\cos\alpha$, it leads to the two solutions $\cos\alpha=-\lambda\pm\sqrt{\lambda^2-4\lambda+2}$.
+    
+    \pmnote{factor 2 missing?}
+    
+    
+    \pmnote{why do you exclude, for $\lambda=0.5$ it is in the range isn't it?}
+    
+    
+     We can exclude the solution $\cos\alpha=-\lambda-\sqrt{\lambda^2-4\lambda+2}$ since $\cos\alpha\in[-1,1]$. The other solution needs to be excluded for the same reason if $\lambda<\frac 16$.
 
     Our next claim is that $\frac{\dd^2}{\dd^2\alpha}g(\alpha)\vert_{\alpha=0}$ has the same sign as $6\lambda -1$. Indeed, by definition of the second derivative, we have:
     \begin{align*}
@@ -952,7 +960,8 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
         &=2^{1-2\lambda}(6\lambda -1).
     \end{align*}
 
-    Therefore, in case $\lambda<\frac 16$, we can conclude from the two claims that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and this maximum is then equal to $2^{2-2\lambda}=2^{2\mu}$, as required. For $\lambda=\frac 16$, the solution to the equation $\mathcal E$ is $\cos\alpha=1$, again implying $\alpha_0=0$, and we obtain the same maximum of $2^{2\mu}$. In case $\lambda>\frac 16$, the two claims imply that $g(\alpha)$ reaches its maximum at the two values $\alpha_0\in[0,pi]$ for which $\cos\alpha_0=-\lambda+\sqrt{\lambda^2-4\lambda+2}$. For such $\alpha$, the \textit{double angle formula} for the cosine implies that $\cos(2\alpha_0)=2\lambda^2-4\lambda+2-2\lambda\sqrt{\lambda^2-4\lambda+2}$. If we replace $\cos(\alpha_0)$ and $\cos(2\alpha_0)$ by their respective values, we obtain that the maximum of $g(\alpha)$ on $\alpha\in[0,\pi]$ is given by the following value:
+    Therefore, in case $\lambda<\frac 16$, we can conclude from the two claims that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and this maximum is then equal to $2^{2-2\lambda}=2^{2\mu}$, as required. For $\lambda=\frac 16$, the solution to the equation $\mathcal E$ is $\cos\alpha=1$, again implying $\alpha_0=0$, and we obtain the same maximum of $2^{2\mu}$. 
+    In case $\lambda>\frac 16$, the two claims imply that $g(\alpha)$ reaches its maximum at the two values $\alpha_0\in[0,\pi]$ for which $\cos\alpha_0=-\lambda+\sqrt{\lambda^2-4\lambda+2}$. For such $\alpha$, the \textit{double angle formula} for the cosine implies that $\cos(2\alpha_0)=2\lambda^2-4\lambda+2-2\lambda\sqrt{\lambda^2-4\lambda+2}$. If we replace $\cos(\alpha_0)$ and $\cos(2\alpha_0)$ by their respective values, we obtain that the maximum of $g(\alpha)$ on $\alpha\in[0,\pi]$ is given by the following value:
     \[
         g(\alpha_0)=\frac{\left(-8\lambda^2+16\lambda+8\lambda\sqrt{\lambda^2-4\lambda+2}\right)^{\lambda}}{\left(2-2\lambda+2\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}=2^{2\mu}.
     \]
