@@ -34,8 +34,6 @@
 
 \def\rmdefault{ptm}
 
-
-
 \usepackage{setspace}
 \usepackage{color}
 \ifnum\full=1
@@ -316,3 +314,9 @@
 \newcommand{\mycomment}[1]{} %Comment out entire parts
 \usepackage{mleftright}
 \mleftright %Less space when using \left and \right
+
+
+\newcommand{\tablecaption}[1]{%
+   \vspace{1.5pt} % Adds space above the caption
+   \caption{#1} % Displays the caption text
+}

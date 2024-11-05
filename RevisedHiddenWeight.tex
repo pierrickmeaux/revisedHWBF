@@ -395,7 +395,7 @@ In the following, we show how the Walsh transform of $f$ can be written in terms
 		$\Dnka{2}{1}{a}$ &$2$& $0$ & $-2$\\ \hline
 		$\Dnka{2}{2}{a}$ &$-1$&$1$ & $-1$\\ \hline
 	\end{tabular}
-	\caption{Values of $\Dnka{2}{k}{a}$}\label{tab:Dnka}
+	\tablecaption{Values of $\Dnka{2}{k}{a}$}\label{tab:Dnka}
 \end{table}
 
 
@@ -419,7 +419,7 @@ Accordingly, if $k\le n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has we
 Otherwise,  when $k> n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2-1$, with one couple of consecutive elements (the first one with an odd index) being $(0,0)$ and all the others $(0,1)$. 
 
 Denoting by $b$ the vector $\pi(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh transform of $f$ in $a$ as:
-\[ \wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}.\]
+\[ \wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}.\qedhere\]
 \end{proof}
 
 \subsection{Balancedness of $f$}\label{sec:balancedness}
@@ -612,7 +612,7 @@ Another immediate case for zero coefficients is the following:
             $2$&$2(p-q)^2-3(p+q)+r$\\ \hline
             $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
     	\end{tabular}
-    	\caption{Values of $\Dnka{n}{k}{a}$ for small values of $k$}\label{tab:Dnka_small_k}
+    	\tablecaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$}\label{tab:Dnka_small_k}
     \end{table}
 \end{remark}
 
@@ -715,9 +715,7 @@ Applying the property, we get:
     \[
         \left|-z^2+2z+1\right|^2=\left(z^2-2z-1\right)\left(\overline z^2-2\overline z-1\right)=6-\left(z^2+\overline z^2\right)=6-2\mathrm{Re}\left(z^2\right),
     \]
-    where $\mathrm{Re}\left(z^2\right)$ denotes the real part of $z^2$. Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $\dis$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ is $6-2(-1)=8$. 
-     
-    
+    where $\mathrm{Re}\left(z^2\right)$ denotes the real part of $z^2$. Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $\dis$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ is $6-2(-1)=8$.
 \end{proof}
 
 \begin{Corollary}\label{cor:bound_walsh_cauchy}
@@ -831,7 +829,7 @@ We focus on the restricted Walsh spectrum of any function $d_{t,n}$:
 
 	\begin{align*}
 \wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+a \cdot x}=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\
-&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,2t}(y)+b \cdot y} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{c \cdot z}\right)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.%\qedhere
+&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,2t}(y)+b \cdot y} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{c \cdot z}\right)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.\qedhere
 \end{align*}	
 
 
@@ -934,7 +932,7 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
 
     \begin{figure}
     	\centering
-    	\includegraphics[width=9cm]{family_curves_g.pdf}
+    	\includegraphics[width=11cm]{family_curves_g.pdf}
     	\caption{The curves of $\alpha\mapsto g_\lambda(\alpha)$ for the values $\lambda=\frac{i}{25}$ from $i=0$ (blue) to $i=24$ (red).}
     	\label{fig:family_curves_g}
     \end{figure}
@@ -1056,7 +1054,7 @@ We observe that the above method provides a much tighter bound than the one from
 		$22$ & $34\,232$ & $140\,392$ \\
 		$24$ & $109\,648$ & $392\,168$ \\ \hline
 	\end{tabular}
-	\caption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ compared to the bound $B_n$}
+	\tablecaption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ compared to the bound $B_n$}
 	\label{table:max_walsh_vs_bound}
 \end{table}
 \fi
@@ -1081,7 +1079,7 @@ We observe that the above method provides a much tighter bound than the one from
 		$22$ & $34\,232$ & $140\,392$ & $2\,039 \,002$ \\
 		$24$ & $109\,648$ & $392\,168$ & $6\,291 \,457$  \\ \hline
 	\end{tabular}
-	\caption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ compared to the bound $B_n$ and the one from Corollary~\ref{cor:bound_walsh_cauchy}.}
+	\tablecaption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ compared to the bound $B_n$ and the one from Corollary~\ref{cor:bound_walsh_cauchy}.}
 	\label{table:max_walsh_vs_bound}
 \end{table}
 
@@ -1165,7 +1163,7 @@ We observe that the above method provides a much tighter bound than the one from
 			\hline
 		\end{tabular}
 	\end{minipage}
-	\caption{Approximate values of $B_n$ for various values of $n$}
+	\tablecaption{Approximate values of $B_n$ for various values of $n$}
 	\label{table:walsh_bounds}
 \end{table}
 
