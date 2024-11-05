@@ -192,6 +192,8 @@ Bigger families of functions can be obtained by considering functions of bounded
 	Let $n\in \N^*$ and for $k\in[0,n]$ $\phikn{k}{n}$ denotes the indicator function of $\Ekn{k}{n}$. 
 	An $n$-variable Boolean function $f$, written as $f=\sum_{k=0}^n f_k \phikn{k}{n}$, is called weightwise degree-$d$ if and only if for each $k\in [0,n]$ $f_k$ coincide with a function of degree at most $d$ over $\Ekn{k}{n}$. 
 		The set of weightwise degree-$d$ functions is denoted by $\WD{d}{n}$.
+		
+Additionally, a weightwise degree-$d$ function is called cyclic weightwise degree-$d$ function if for all $i\in [1,n]$ it holds $f_i(x)=f_0(O^i(x))$, where $O^i$ denotes the cyclic shift by $i$ positions, $O^i(x_1,\dots,x_n)=(x_{1+i \mod n},\dots,x_{n+i \mod n})$, the representative modulo being taken as an integer between $1$ and $n$.
 \end{definition}
 
 
@@ -210,7 +212,7 @@ The most known example of weightwise affine function is the hidden weight bit fu
 \end{definition}
 
 In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$ and lower bounds are given for the nonlinearity for all $n$. 
-These bounds involve sums of binomial coefficients. For simplicity, in the following we provide only the nonlinearity values of the majority function and HWBF, as these bounds will be used for comparison.
+These bounds focus on cyclic weightwise quadratic functions and involve sums of binomial coefficients. For simplicity, in the following we provide only the nonlinearity values of the majority function and HWBF, as these bounds will be used for comparison.
 
 
 %We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
@@ -1175,26 +1177,66 @@ We observe that the above method provides a much tighter bound than the one from
 
 \pmnote{under construction}
 
-In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, HWBF and the cyclic weightwise quadratic function $t$  from~\cite{DAM:MeaOza24}. 
-More precisely, we compare the value $\max_{a\in\mathbb F_2^n}|\wt f(a)|$, the smaller the maximum the better the nonlinearity. 
-
-For majority and HWBF, we use the exact values recalled in Property~\ref{prop:wwd1}, for the function $t$ we use the upper bound proven in~\cite{DAM:MeaOza24}. 
-For the revisited HWBF, we consider the theoretical bound from Theorem~\ref{cor:bound_walsh_cauchy} and the experimental one from Section~\ref{sec:expwt}
+In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, HWBF and the cyclic weighwise functions studied in~\cite{DAM:MeaOza24}. 
 
 
+%In Figure~\ref{fig:walsh_bound_comparison} we compare the value $\max_{a\in\mathbb F_2^n}|\wt f(a)|$, the smaller the maximum the better the nonlinearity. We display the values for $n$ up to $80$, which is sufficient to compare the asymptotic behavior of the different bounds. 
+%The violet and orange curves correspond to the upper bounds proven in~\cite{DAM:MeaOza24}. The violet one corresponds to the bound holding for all cyclic weightwise linear function such that $f_0(x)=b\cdot x$ with $\w(b)$ odd. It gives for example an upper bound for the HWBF. The orange one corresponds to the bound holding the cyclic weightwise quadratic function given by $f_0(x)=x_1+x_2x_3$. 
+%The blue curve corresponds to both the majority and HWBF function, whose exact nonlinearity are recalled in Property~\ref{prop:wwd1}. We use only one curve since on a logarithmic scale the difference of nonlinearity between these two functions is too small to differentiate the curves. 
+%Regarding the revisited HWBF introduced in Definition~\ref{def:revHWBF}, the red curve corresponds to the theoretical bound from Corollary~\ref{cor:bound_walsh_cauchy}, and the green one the experimental approach of Section~\ref{sec:expwt}.
 
-
-
-Figure~\ref{fig:walsh_bound_comparison} compares the experimental bound $B_n$ to the theoretical bound $1+n\cdot 2^{3n/4}$ and the binomial coefficient $\binom{n}{n/2}$, on a logarithmic scale. The first two and the last one have an asymptotic slope of $3/4$ and $1$, respectively.
-
+In Figure~\ref{fig:walsh_bound_comparison}, we compare the values of $\max_{a \in \mathbb{F}_2^n} |\wt f(a)|$, where a smaller maximum indicates better nonlinearity (see Definition~\ref{def:nl}). 
+We present values for $n$ up to $80$, which is sufficient for examining the asymptotic behavior of the different bounds.
+The violet and orange curves represent the upper bounds  in~\cite{DAM:MeaOza24}. The violet curve corresponds to the bound that holds for all cyclic weightwise linear functions where $ f_0(x) = b \cdot x $ with $\w(b)$ odd, providing, for example, an upper bound for the HWBF. The orange curve corresponds to the bound for the cyclic weightwise quadratic function defined by $f_0(x) = x_1 + x_2 x_3$.
+The blue curve represents both the majority and HWBF functions, whose exact nonlinearities are given in Property~\ref{prop:wwd1}. We use a single curve here because, on a logarithmic scale, the nonlinearity difference between these two functions is too small to distinguish between them.
+For the revisited HWBF introduced in Definition~\ref{def:revHWBF}, the red curve corresponds to the theoretical bound from Corollary~\ref{cor:bound_walsh_cauchy}, while the green curve represents the experimental results from Section~\ref{sec:expwt}.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=9cm]{comparison_walsh_bound.pdf}
-	\caption{On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue. \tsnote{Updated plot, but the description now needs to be changed.}}
+	\caption{
+		%Maximum of the absolute value of the Walsh spectrum of different functions, in logarithmic scale, for even values of $n$. In violet and orange are the bounds for the cyclic weigtwise linear functions and one cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}. In blue is the value for the majority function and HWBF. The theoretical bound (Corollary~\ref{cor:bound_walsh_cauchy}) for the function $f$ is in red and the experimental one $B_n$ (Section~\ref{sec:expwt}) is in green.}		
+		%On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue. \tsnote{Updated plot, but the description now needs to be changed.}}
+		Maximum absolute values of the Walsh spectrum for various functions, shown on a logarithmic scale for even values of $n$. 
+		The violet and orange curves represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}. The blue curve shows values for the majority function and HWBF. The theoretical bound for the function $f$ (from Corollary~\ref{cor:bound_walsh_cauchy}) is in red, and the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
 	\label{fig:walsh_bound_comparison}
 \end{figure}
 
+
+
+We observe significantly better performance for the newly introduced function $f$ compared to the majority function and HWBF, with the proven bound exhibiting an asymptotic slope of $ 3/4$ as opposed to $1$. The two bounds proven in~\cite{DAM:MeaOza24} also have an asymptotic slope of $1$.
+The gap between the red and green curves, both representing upper bounds on $ \max_{a \in \mathbb{F}_2^n} |\wt f(a)| $ (with only the formula for the red curve proven for all even $n$), suggests that the true values may follow an even better slope than $ 3/4$.
+
+In Table~\ref{table:comparisonsNL}, we compare the specific nonlinearity values of the functions under consideration. Among the various weightwise quadratic functions studied so far, we observe that $f$ has the highest nonlinearity from $n=10$ onward.
+
+
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c| c|c|c|c| c|c|c|}
+		\hline
+		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
+	\hline	
+    	HWBF   & $4$  & $20$  & $88$  &  $372$ & $1544$ & $6344$ & $25904$  \\  	
+   %4 10 20 44 88 186 372 772 1544 3172 6344 12952 25904
+		\hline
+Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
+\hline
+		%cyclic $f_0=x_1+x_2x_3$
+    	t~\cite{DAM:MeaOza24}   & $4$  & $22$  & $96$  &  $404$ & $1672$ & $6854$ & $27884$\\
+    	%4 10 22 46 96 196 404 816 1672 3358 6854 13722 27884
+\hline	
+%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
+    	u~\cite{DAM:MeaOza24}   & $4$  & $24$  & $104$  &  $456$ & $1888$ & $7816$ & $31616$ \\
+    	%4 10 24 48 104 220 456 924 1888 3862 7816 15748 31616
+\hline				
+		
+		$f$  & $4$  & $22$  & $102$  &  $458$ & $1902$ & $7842$ & $31680$\\
+\hline
+	\end{tabular}
+	\caption{Comparison of the nonlinearity.}
+	\label{table:comparisonsNL}
+\end{table}
 
 
 
