@@ -603,20 +603,20 @@ Another immediate case for zero coefficients is the following:
         k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}.
     \]
     Using this formula, we can for instance use a computer algebra system to deduce $\Dnka nka$ for small values of $k$, see Table \ref{tab:Dnka_small_k}. Note that even though the expression for $\Dnka n3a$ involves a division by $3$, its evaluation at specific values for $(p,q,r)$ will always yield integers. Indeed, either $p-q\equiv 0\bmod 3$, or $(p-q)^2\equiv 1\bmod 3$, in which case $2(p-q)^2+7\equiv 0\bmod 3$.
-    
-    \begin{table}
-    	\centering
-    	\begin{tabular}{|c|c|}
-    		\hline
-    		$k$ & $\Dnka nka$\\ \hline
-    		$0$&$1$\\ \hline
-            $1$&$2(p-q)$\\ \hline
-            $2$&$2(p-q)^2-3(p+q)+r$\\ \hline
-            $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
-    	\end{tabular}
-    	\tablecaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$}\label{tab:Dnka_small_k}
-    \end{table}
 \end{remark}
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        $k$ & $\Dnka nka$\\ \hline
+        $0$&$1$\\ \hline
+        $1$&$2(p-q)$\\ \hline
+        $2$&$2(p-q)^2-3(p+q)+r$\\ \hline
+        $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
+    \end{tabular}
+    \tablecaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$}\label{tab:Dnka_small_k}
+\end{table}
 
 From differentiation, we can get more cases in which $\Dnka nka=0$:
 
@@ -680,7 +680,7 @@ We recall Cauchy's estimate on holomorphic functions:
         \left|\frac{\dd^k}{\dd^k z}f(z)\vert_{z=w}\right|\leq\frac{k!\cdot M_R}{R^k},
     \]
 %    where $M_R$ is the maximum of $|f(z)|$ on the circle $|z-w|=R$.
-where $M_R$ is the maximum of the absolute value of $f$, $|f(z)|$ on the circle defined by $|z-w|=R$.
+where$M_R=\max\{|f(z)|:z\in\C\text{ and } |z-w|=R\}$, the maximum of the absolute value of $f$ on the circle defined by the equation $|z-w|=R$.
 \end{Prop}
 
 %\pmnote{ The point for the remark was to recall that we use the notation "$| \cdot |$" for absolute value over the complex, since before we used it only to denote "cardinal" or absolute value over integers.}
@@ -896,14 +896,14 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     Then, for all $a\in\F_2^n$ and $k\in[0,n]$, the following hold true:
 
     \[
-        |\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n},\quad \text{and} \quad  |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}.
+        |\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n}\quad \text{and} \quad  |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}.
     \]
 \end{theorem}
 
 \begin{proof}
     To begin, we observe that the inequality $|\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}$ will follow from the inequality $|\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n}$ using precisely the arguments of the proof of Corollary~\ref{cor:bound_walsh_cauchy}, so that we are only required to prove the first inequality. Also, since the case $\lambda=\frac 12$ corresponds to Theorem~\ref{theorem:bound_D_nka}, we will henceforth assume $\lambda<\frac 12$.
     
-    As before (in the proof of Theorem~\ref{theorem:bound_D_nka}, we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[1,n]$. 
+    As before in the proof of Theorem~\ref{theorem:bound_D_nka}, we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[1,n]$. 
     We write $a=(b,c)$ with $b\in\F_2^{2t}$ and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}.    
    To find a bound for $|P_{a,t}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we would like to bound the quantity $\max_{a\in\F_2^n,z\in\dis}|P_{a,t}(z)|$. Moving through all $a\in\F_2^n$ is equivalent to moving through all tuples $(p,q,r;u,v)$ of non-negative integers which satisfy $p+q+r=t$ and $u+v=n-2t$. It follows from Lemma~\ref{lemma:maximizing_args} that it is enough to consider only the cases for which only one of $p,q,r$ is non-zero, and for which only one of $u,v$ is non-zero. 
    This leaves us with the following cases to consider for $(p,q,r;u,v)$:
@@ -966,7 +966,7 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     \end{align*}
 
 
-    Therefore, in case $\lambda<\frac 16$, we can conclude from the two claims that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and this maximum is then equal to $2^{2-2\lambda}=2^{2\mu}$, as required. For $\lambda=\frac 16$, the solution to the equation $\mathcal E$ is $\cos\alpha=1$, again implying that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and we obtain the same maximum of $2^{2\mu}$. In case $\lambda>\frac 16$, the two claims imply that $g(\alpha)$ reaches its maximum at the two values $\alpha_0\in[0,\pi]$ for which $\cos\alpha_0=-\lambda+\sqrt{\lambda^2-4\lambda+2}$. For such $\alpha$, the double angle formula for the cosine implies that $\cos(2\alpha_0)=2\lambda^2-4\lambda+2-2\lambda\sqrt{\lambda^2-4\lambda+2}$. If we replace $\cos\alpha_0$ and $\cos(2\alpha_0)$ by their respective values, we obtain that the maximum of $g(\alpha)$ for $\alpha\in[0,\pi]$ is given by the following value:
+    Therefore, in case $\lambda<\frac 16$, we can conclude from the two claims that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and this maximum is then equal to $2^{2-2\lambda}=2^{2\mu}$, as required. For $\lambda=\frac 16$, the solution to the equation $\mathcal E$ is $\cos\alpha=1$, again implying that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and we obtain the same maximum of $2^{2\mu}$. In case $\lambda>\frac 16$, the two claims imply that $g(\alpha)$ reaches its maximum at the two values $\alpha_0\in[0,\pi]$ for which $\cos\alpha_0=-\lambda+\sqrt{\lambda^2-4\lambda+2}$. For such $\alpha_0$, the double angle formula for the cosine implies that $\cos(2\alpha_0)=2\lambda^2-4\lambda+2-2\lambda\sqrt{\lambda^2-4\lambda+2}$. If we replace $\cos\alpha_0$ and $\cos(2\alpha_0)$ by their respective values, we obtain that the maximum of $g(\alpha)$ for $\alpha\in[0,\pi]$ is given by the following value:
 
     \[
         g(\alpha_0)=\frac{\left(-8\lambda^2+16\lambda+8\lambda\sqrt{\lambda^2-4\lambda+2}\right)^{\lambda}}{\left(2-2\lambda+2\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}=2^{2\mu}.

@@ -320,3 +320,11 @@
    \vspace{1.5pt} % Adds space above the caption
    \caption{#1} % Displays the caption text
 }
+
+\let\leq=\leqslant %Replace symbol for \leq
+\let\geq=\geqslant %Replace symbol for \geq
+
+%No line break before lists
+\makeatletter
+\@beginparpenalty=10000
+\makeatother
