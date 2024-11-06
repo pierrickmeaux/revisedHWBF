@@ -237,22 +237,35 @@ Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$.
 \end{Prop}
 \fi 
 
-\begin{Prop}[Nonlinearity of some functions from $\WD{1}{n}$\label{prop:wwd1}]
-Let $n\in \N^*$ even, the following hold for the following functions in $\WD{1}{n}$: 
-\begin{itemize}
-	\item (\eg ~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\textsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
-	\[
-	\NL(\textsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
-	\]
-	\item (\cite{DAM:WCST14}, Theorem $3$) The HWBF $h$ introduced in Definition~\ref{def:hwbf} satisfies:
-	\[
-	\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
-	\]	
-\end{itemize}
+%\begin{Prop}[Nonlinearity of some functions from $\WD{1}{n}$\label{prop:wwd1}]
+%Let $n\in \N^*$ even, the following hold for the following functions in $\WD{1}{n}$: 
+%\begin{itemize}
+%	\item (\eg ~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\textsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
+%	\[
+%	\NL(\textsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
+%	\]
+%	\item (\cite{DAM:WCST14}, Theorem $3$) The HWBF $h$ introduced in Definition~\ref{def:hwbf} satisfies:
+%	\[
+%	\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
+%	\]	
+%\end{itemize}
+%\end{Prop}
+
+
+\begin{Prop}[Properties of some functions from $\WD{1}{n}$\label{prop:wwd1}]
+	Let $n\in \N^*$ even, the following hold for the following functions in $\WD{1}{n}$: 
+	\begin{itemize}
+		\item (\eg ~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\textsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
+		\[
+		\NL(\textsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
+		\]
+		\item (\cite{DAM:WCST14}, Theorem $3$) The HWBF $h$ introduced in Definition~\ref{def:hwbf} satisfies:
+		\[
+		\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
+		\]	
+		\item (\cite{DAM:WCST14}, Theorem $1$) The HWBF $h$ introduced in Definition~\ref{def:hwbf} satisfies $\forall n \ge 3$, $\degg(h)=n-1$. 	
+	\end{itemize}
 \end{Prop}
-
-
-
 
 
 
@@ -1241,10 +1254,24 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 
 
 \section{Other parameters}
+
+\pmnote{under construction}
+
+\begin{proposition}[Algebraic degree of $f$]
+	Let $n\in \N$ be even, greater than $4$, and $f$ defined as in Definition~\ref{def:revHWBF}, the following holds: $\degg(f)= n-1$.
+\end{proposition}
+\begin{proof}
+	We write $f$ as $q+h$ where $q$ is the quadratic function $\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}$ and $h$ is the HWBF.
+	Using Property~\ref{prop:wwd1} Item $3$, $h$ has degree $n-1\ge 3$, and the function $q$ has no monomial of degree higher than $2$, therefore $\degg(f)=\degg(h)=n+1$.
+	
+	
+\end{proof}
+
+
 \subsection{Algebraic immunity of $f$}
 
 \begin{proposition}[Algebraic immunity of $f$]
-	Let $n\in \N$ be even, $f$ defined as
+	Let $n\in \N$ be even, $f$ defined (as in Definition~\ref{def:revHWBF}) as
 	$f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k$ and $h$ denote the $n$-variable HWBF, the following holds:
 	\[\AI(f)\ge \AI(h)-2.\]
 \end{proposition}
@@ -1259,6 +1286,27 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 \end{proof}
 
 From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the HWBF is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for $f$.
+
+
+ \begin{table}[h!]
+	 \centering
+	 \begin{tabular}{|c|c|c|c|c|}
+		 \hline
+		 $n$ & Nonlinearity & Is Balanced & Algebraic Degree & Algebraic Immunity \\
+		 \hline
+		 2   & 1             & False       & 2               & 1                   \\
+		 4   & 4             & True        & 3               & 2                   \\
+		 6   & 22            & False       & 5               & 3                   \\
+		 8   & 102           & True        & 7               & 4                   \\
+		 10  & 458           & False       & 9               & 5                   \\
+		 12  & 1902          & True        & 11              & 6                   \\
+		 14  & 7842          & False       & 13              & 6                   \\
+		 16  & 31680         & True        & 15              & —                   \\
+		 \hline
+		 \end{tabular}
+	 \tablecaption{Characteristics of Boolean Functions for Different $n$ Values}
+	 \end{table}
+
 
 
 
