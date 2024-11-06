@@ -1255,7 +1255,9 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 
 \section{Other parameters}
 
-\pmnote{under construction}
+\pmnote{under construction, waiting for the parameters for the FAI}
+
+\subsection{Degree}
 
 \begin{proposition}[Algebraic degree of $f$]
 	Let $n\in \N$ be even, greater than $4$, and $f$ defined as in Definition~\ref{def:revHWBF}, the following holds: $\degg(f)= n-1$.
@@ -1268,7 +1270,33 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 \end{proof}
 
 
-\subsection{Algebraic immunity of $f$}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c| c|c|c|c| c|c|c|}
+		\hline
+		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
+		\hline	
+		HWBF   & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$  \\  	
+		\hline
+		Majority   & $4$  & $4$  & $8$  &  $8$ & $8$ & $8$ & $16$  \\
+		\hline
+		%cyclic $f_0=x_1+x_2x_3$
+		t~\cite{DAM:MeaOza24}   & $2$  & $5$  & $6$  &  $9$ & $11$ & $13$ & $14$\\
+		\hline	
+		%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
+		u~\cite{DAM:MeaOza24}   & $2$  & $4$  & $6$  &  $8$ & $10$ & $12$ & $14$ \\
+		\hline				
+		
+		$f$  & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$\\
+		\hline
+	\end{tabular}
+	\tablecaption{Comparison of the degree.}
+	\label{table:comparisonsDeg}
+\end{table}
+
+
+
+\subsection{Algebraic immunity}
 
 \begin{proposition}[Algebraic immunity of $f$]
 	Let $n\in \N$ be even, $f$ defined (as in Definition~\ref{def:revHWBF}) as
@@ -1287,7 +1315,7 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 
 From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the HWBF is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for $f$.
 
-
+\iffalse
  \begin{table}[h!]
 	 \centering
 	 \begin{tabular}{|c|c|c|c|c|}
@@ -1301,14 +1329,40 @@ From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the HWBF is at least
 		 10  & 458           & False       & 9               & 5                   \\
 		 12  & 1902          & True        & 11              & 6                   \\
 		 14  & 7842          & False       & 13              & 6                   \\
-		 16  & 31680         & True        & 15              & —                   \\
+		 16  & 31680         & True        & 15              & 7                   \\
 		 \hline
 		 \end{tabular}
 	 \tablecaption{Characteristics of Boolean Functions for Different $n$ Values}
 	 \end{table}
+\fi
 
 
 
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c| c|c|c|c| c|c|c|}
+		\hline
+		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
+		\hline	
+		HWBF   & $2$  & $3$  & $4$  &  $4$ & $5$ & $5$ & $6$  \\  	
+		\hline
+		Majority   & $2$  & $3$  & $4$  &  $5$ & $6$ & $7$ & $8$  \\
+		\hline
+		%cyclic $f_0=x_1+x_2x_3$
+		t~\cite{DAM:MeaOza24}   & $2$  & $3$  & $4$  &  $5$ & $5$ & $6$ & $7$\\
+		\hline	
+		%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
+		u~\cite{DAM:MeaOza24}   & $2$  & $3$  & $4$  &  $5$ & $6$ & $6$ & $7$ \\
+		\hline						
+		$f$  & $2$  & $3$  & $4$  &  $5$ & $6$ & $6$ & $7$\\
+		\hline
+	\end{tabular}
+	\tablecaption{Comparison of the algebraic immunity.}
+	\label{table:comparisonsAI}
+\end{table}
+
+\section{Conclusion and open questions}
+\pmnote{TODO or remove}
 
 \newpage
 
