@@ -78,6 +78,39 @@ Contributions: new function as addition of HWBF and quadratic bent function. We 
 }
 
 
+recent developpement stream ciphers
+
+\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24}
+
+
+
+
+
+HHE \cite{CCS:NaeLauVai11}
+
+
+
+
+
+
+FLIP~\cite{EC:MJSC16}
+
+RASTA~\cite{C:Rasta}
+
+FiLIP~\cite{INDO:MCJS19}
+
+
+HWBF:
+
+
+\cite{IEEE:Bryant91}
+
+\cite{IEEE:Carlet22}
+
+\cite{eprint:CarPar23}
+
+\cite{DAM:MeaOza24}
+
 
 
 
@@ -148,10 +181,13 @@ For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k 
 	\[ \NL(f) = 2^{n-1}- \frac{1}{2} \max_{a\in \F_2^n}{|\wt{f}(a)|}. \]
 \end{definition}
 
-When $n$ is even, the nonlinearity of a function can reach at most $2^{n-1}-2^{n/2 -1}$. Functions reaching this maximum are called bent functions. The quadratic function $d_n$ given by: $d_n(x)=\sum_{i \text{ odd}}^n x_i x_{i+1}$ is an example of bent function.
+When $n$ is even, the nonlinearity of a function can reach at most $2^{n-1}-2^{n/2 -1}$. Functions reaching this maximum are called bent functions, due to their multiple applications and importance they have been the focus of multiple works \eg \cite{Rothaus76,FSE:Dobbertin95,DBLP:conf/itw/BudaghyanCH11,Tokareva15,Mesnager16}. 
+The quadratic function $d_n$ given by: $d_n(x)=\sum_{i \text{ odd}}^n x_i x_{i+1}$ is an example of bent function.
 
 
+The algebraic degree of multiples of a Boolean function is a crucial criterion for various attacks on stream ciphers that utilize a Boolean function as a filter. The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\cite{C:Courtois03} on filtered LFSRs have motivated the study of cryptographic properties such as algebraic immunity and fast algebraic immunity, investigated in numerous works (\eg \cite{C:HawRos04,ISC:JiaZhaWan13})). 
 
+Nowadays, these parameters are systematically determined for any function considered as a filter.
 
 
 
@@ -161,6 +197,16 @@ When $n$ is even, the nonlinearity of a function can reach at most $2^{n-1}-2^{n
 	where $\degg(g)$ is the algebraic degree of $g$.
 	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
 \end{definition}
+
+
+
+\begin{definition}[Fast algebraic immunity, \eg \cite{EC:ACGKMR06}]\label{def:fai} The fast algebraic immunity of a Boolean function $f\in \Bfn{n}$ is defined as $\FAI(f)=\min \{ 2 \AI(f), \min _{1 \le \degg(g)<\AI(f)} (\degg(g)+ \degg(fg))\}$.
+\end{definition}
+	
+
+
+
+
 
 \subsection{Symmetric Functions, HWBF and weightwise degree-d functions}
 
@@ -442,7 +488,7 @@ Denoting by $b$ the vector $\pi(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh
 In this part we determine for which values of $n$ the function $f$ is balanced, using the expression of its Walsh transform in terms of $\Dnka{n}{k}{a}$ and the recursive relation of these quantities.
 
 
-\begin{theorem}[Balancedness of $f$]
+\begin{theorem}[Balancedness of $f$]\label{th:bal}
 	Let $n \in \N^*$ even, and $f$ be the $n$-variable function from Definition~\ref{def:revHWBF}, the following holds on its Walsh transform in $0_n$:
 	\[\wt{f}(0_n)= \left \{
 	\begin{array}{l l}
@@ -1002,7 +1048,7 @@ The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theo
 %\pmnote{for the remark, add how they are obtained (from a script in xxx). 
 %We can give the scripts in supplementary material when submitting, of add the link of a github if you agree to have them public. \color{blue} Tim: I added the script to GitHub. You can decide what we do with it.}
 
-\section{Experiments and comparisons}
+\section{Experiments and comparisons}\label{sec:expAndComp}
 
 In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revised HWBF for values of $n$ up to $80$. 
 We then compare the nonlinearity of this function to that of other functions suited to similar use cases, such as the HWBF of weightwise cyclic functions from~\cite{DAM:MeaOza24}.
@@ -1188,7 +1234,6 @@ We observe that the above method provides a much tighter bound than the one from
 
 \subsection{Comparison of the nonlinearity}
 
-\pmnote{under construction}
 
 In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, HWBF and the cyclic weighwise functions studied in~\cite{DAM:MeaOza24}. 
 
@@ -1257,9 +1302,12 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 
 \section{Other parameters}
 
-\pmnote{under construction, waiting for the parameters for the FAI}
+In this part we give the other cryptographic parameters of the function $f$. Since its balancedness is characterized by Theorem~\ref{th:bal} and its nonlinearity deeply analyzed in Section~\ref{sec:Cauchy} and Section~\ref{sec:expAndComp}, in the following we focus on the algebraic properties. More precisely we analyze the degree, algebraic immunity and fast algebraic immunity of $f$, providing comparisons with other weightwise quadratic functions.
 
-\subsection{Degree}
+
+%\pmnote{under construction, waiting for the parameters for the FAI}
+
+%\subsection{Degree}
 
 \begin{proposition}[Algebraic degree of $f$]
 	Let $n\in \N$ be even, greater than $4$, and $f$ defined as in Definition~\ref{def:revHWBF}, the following holds: $\degg(f)= n-1$.
@@ -1271,6 +1319,8 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 	
 \end{proof}
 
+
+In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of different weightwise quadratic function. We observe that $f$ is the function with higher degree, jointly with the HWBF. 
 
 \begin{table}[h]
 	\centering
@@ -1298,7 +1348,7 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 
 
 
-\subsection{Algebraic immunity}
+%\subsection{Algebraic immunity}
 
 \begin{proposition}[Algebraic immunity of $f$]
 	Let $n\in \N$ be even, $f$ defined (as in Definition~\ref{def:revHWBF}) as
@@ -1315,7 +1365,14 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 	Summarizing, for any non null annihilator $g$ of $f$ or $f+1$ we get $\degg(g)\ge \AI(h)-2$, it allows to conclude $\AI(f)\ge \AI(h)-2$.
 \end{proof}
 
-From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the HWBF is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for $f$.
+From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the HWBF is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for $f$. 
+In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various weightwise quadratic functions. We observe that the function $f$ demonstrates the best performance after the majority function, which is known to achieve optimal algebraic immunity.
+
+
+
+
+
+
 
 \iffalse
  \begin{table}[h!]
@@ -1361,6 +1418,31 @@ From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the HWBF is at least
 	\end{tabular}
 	\tablecaption{Comparison of the algebraic immunity.}
 	\label{table:comparisonsAI}
+\end{table}
+
+Additionally, we considered the fast algebraic immunity of $f$ (see Definition~\ref{def:FAI}). In Table~\ref{table:FAI} we give the best couples $(d,e)$ encountered for the function $f$, where $fg=h$, $\degg(g)=d, \degg(h)=e$. 
+
+
+These various results on the algebraic properties of $f$ suggest that it possesses strong resistance against standard attacks. Additionally, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered LFSRs or in homomorphically-friendly schemes like FLIP and FiLIP.
+
+
+
+
+
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+		\hline
+		$ n $      & $4$     & $6$     & $8$     & $10$    & $12$    & $14$    & $16$    & $18$    \\ \hline
+		$(d, e)$ & $(1,2)$ & $(1,3)$ & $(1,5)$  & $(1,7)$ & $(1,9)$ & $(1,11)$ & $(1,13)$ & $(1,15)$ \\ 
+		 &     &    & $(2,4)$  & $(2,6)$ & $(2,8)$ & $(2,10)$ & $(2,12)$ & $(2,14)$\\ 
+		 &     &    &     & $(3,5)$ & $(3,6)$ & $(3,9)$ & $(3,11)$ & $(3,13)$\\ 
+		 &     &    &     &  &  &  & $(4,9)$ & $(4,11)$\\ 
+	 &     &    &     &  &  &  &  & $(5,10)$ \\ \hline
+	\end{tabular}
+	\caption{Lowest possible values of $(d, e)$ for different values of $ n$}
+	\label{table:FAI}
 \end{table}
 
 \section{Conclusion and open questions}
