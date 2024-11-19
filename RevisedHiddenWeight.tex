@@ -19,10 +19,10 @@
 
 
 \begin{document}
-	\title{Revisited hidden weight bit function}
+	\title{The revisited hidden weight bit function}
 
 	
-	\titlerunning{Revisited Hidden weight bit function}
+	\titlerunning{The revisited Hidden weight bit function}
 \author{
 	Pierrick M\'eaux\inst{1},
 	Tim Seuré\inst{1}, 
@@ -63,54 +63,78 @@
 
 \section{Introduction}
 
-\pmnote{short intro:
+%\pmnote{short intro:
 
-HWBF introduced in x, interesting for its cryptographic criteria and easy implementation. cryptographic properties studied in y such as balancedness, algebraic immunity and nonlinearity. 
-New potential uses in a stream cipher, or modifications. Use: transciphering and works aiming at finding Boolean functions easy to evaluate homomorphically, input oblivious algorithms. 
-Nonlinearity a bit low for direct use.
-
-
-
-Contributions: new function as addition of HWBF and quadratic bent function. We show when the function is balanced, formalize and study its nonlinearity. Bounds on the nonlinearity of $f$, generalization to a family of function, and an algorithm for estimating the nonlinearity for $n$ up to $80$. Comparisons with other functions and practical values of the parameters for $n$ up to $20$.
+%HWBF introduced in x, interesting for its cryptographic criteria and easy implementation. cryptographic properties studied in y such as balancedness, algebraic immunity and nonlinearity. 
+%New potential uses in a stream cipher, or modifications. Use: transciphering and works aiming at finding Boolean functions easy to evaluate homomorphically, input oblivious algorithms. 
+%Nonlinearity a bit low for direct use.
 
 
 
-}
+%Contributions: new function as addition of HWBF and quadratic bent function. We show when the function is balanced, formalize and study its nonlinearity. Bounds on the nonlinearity of $f$, generalization to a family of function, and an algorithm for estimating the nonlinearity for $n$ up to $80$. Comparisons with other functions and practical values of the parameters for $n$ up to $20$.
 
 
-recent developpement stream ciphers
+%}
 
-\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24}
+\iffalse
+%prompt
+
+The Hamming Weight Bit Function (HWBF) has received a lot of attention since its introduction by Bryant
+in $1991$~\cite{IEEE:Bryant91}, it has been considered as the simplest example of function with binary decision
+diagram of exponential size~\cite{IEEE:Bryant91,TIA:BoLSW99}. 
+The facility of implementing this function in different models of computation since it consists in computing the Hamming weight of the input and applying a simple linear function, and it relatively good cryptographic properties exhibited in~\cite{DAM:WCST14} (balancedness, nonlinearity, degree and algebraic immunity) made it an interesting starting point candidate to design the filter of some streamcipher constructions. 
+
+Recently, new developpements in stream ciphers lead to reconsider this function.
+The new potential uses of stream ciphers with filter functions on a larger number number of variables such as Hybrid Homomorphic Encryption~\cite{CCS:NaeLauVai11} (HHE) gave a regain of interest in these functions. HHE aims at finding Boolean functions efficient to evaluate as an input oblivious algorithm. 
+For example various new binary stream ciphers have been designed since $2016$ such as Kreyvium~\cite{JOC:CCFLNP18}, FLIP~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, FiLIP~\cite{INDO:MCJS19} and Dasta~\cite{TOSC:BeiLea20}. 
+Currently, the designs with Boolean functions with more than one hundred variables as a filter are the ones leading to the HHE with best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24}.
+%cite FHE for MPC?
+
+The nonlinearity of the HWBF being low for a direct use as filter function, several generalizations have been considered recently, aiming at strengthening this parameter and keeping or improving the others cryptographic relevent parameters such as balancedness, algebraic degree and and algebraic immunity. In these generalizations we count the functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23,DAM:MeaOza24}. The later article considers some functions obtained by computing the Hamming weight of the input and then simply applying a quadratic Boolean function.
+
+In this article we consider another function that is weightwise quadratic, obtained by xoring the HWBF and a bent quadratic function. Therefore, we exhibit a family of Boolean functions both easy to compute and with good parameters, improving over the ones exhibited in~\cite{DAM:MeaOza24}. Various of the techniques we introduce to determine the nonlinearity are of independent interest, and allow to bound the maximum of the absolute Walsh spectrum for a wider family of weightwise quadratic functions. 
+Our contributions are the following:
+
+\begin{itemize}
+	\item In Section~\ref{sec:defAndBal}, we defined the revisited HWBF $f$, and study its balancedness. This part is done by studying the (restricted) Walsh transform of some quadratic functions over sets of fixed Hamming weight, called slices. A recursive relation between these values allows to determine for which values of $n$ the function is balanced.
+	\item In Section~\ref{sec:dnk}, we link the maximum Walsh coefficients of the revisited HWBF to the coefficients of generating functions and use techniques from complex analysis to prove lower bounds on the nonlinearity of $f$. 
+	Differing from usual results in Boolean function used in cryptography, this allows us to determine a good enough bound on the nonlinearity for a larger family of functions, and for all even number of variables $n$.
+	\item In Section~\ref{sec:expAndComp}, we explain techniques to get a better bound for bounded values of $n$, giving a tighter bound for the nonlinearity of $f$ up to $n=80$. In this parts with experiments, we compare the bounds we obtain and the real value of the nonlinearity between $f$ and other weightwise quadratic functions such as the majority function, the HWBF, and the two main examples from~\cite{DAM:MeaOza24}. These results show a neat advantage for the revisited HWBF relatively the nonlinearity compared to function with similar computation costs.
+	\item In Section~\ref{sec:otherParameters} we analyze the other cryptographic relevant parameters of $f$, such as degree, algebraic immunity and fast algebraic immunity. Similarly to the comparison for the nonlinearity the revisited HWBF performs better or similarly to the function with similar computation costs.
+		
+\end{itemize}
+
+\fi
+
+The Hamming Weight Bit Function (HWBF) has attracted significant attention since its introduction by Bryant in 1991~\cite{IEEE:Bryant91}. It has been regarded as the simplest example of a function whose binary decision diagram has exponential size~\cite{IEEE:Bryant91,TIA:BoLSW99}. The ease of implementing this function across various computational models—owing to its reliance on computing the Hamming weight of the input and applying a simple linear function—combined with its relatively strong cryptographic properties, as demonstrated in~\cite{DAM:WCST14} (e.g., balancedness, nonlinearity, degree, and algebraic immunity), has made it an intriguing candidate for use as a filter function in stream cipher constructions.
+
+Recent developments in stream ciphers have reignited interest in this function. The emergence of new applications for stream ciphers with filter functions on a larger number of variables—such as Hybrid Homomorphic Encryption (HHE)~\cite{CCS:NaeLauVai11}—has further emphasized the relevance of such functions. HHE requires Boolean functions that can be efficiently evaluated in an input-oblivious algorithm. For instance, several new binary stream ciphers have been proposed since 2016, including Kreyvium~\cite{JOC:CCFLNP18}, FLIP~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, FiLIP~\cite{INDO:MCJS19}, and Dasta~\cite{TOSC:BeiLea20}. Currently, designs employing Boolean functions with more than one hundred variables as filters lead to HHE schemes with the best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24}.
+
+The HWBF, while efficient to compute, suffers from low nonlinearity, which limits its direct application as a filter function. Consequently, various generalizations have been explored to enhance this parameter while preserving or improving other cryptographically relevant properties, such as balancedness, algebraic degree, and algebraic immunity. Notable examples include functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23} and~\cite{DAM:MeaOza24}. The latter work considers functions obtained by computing the Hamming weight of the input and applying a quadratic Boolean function, called weightwise quadratic functions.
+
+In this article, we propose a new generalization of the HWBF, a weightwise quadratic function constructed by XORing the HWBF with a bent quadratic function. This leads to a family of Boolean functions that are computationally efficient and exhibit superior cryptographic properties compared to previous constructions. 
+Additionally, the techniques we introduce to analyze nonlinearity have broader applicability and provide bounds on the maximum absolute Walsh spectrum for a wider class of weightwise quadratic functions.
 
 
 
 
+Our contributions are as follows:
+\begin{itemize}
+	\item Balancedness analysis (Section~\ref{sec:defAndBal}):
+We define the revisited HWBF, called $f$, and analyze its balancedness. This involves studying the (restricted) Walsh transform of specific quadratic functions over sets of fixed Hamming weights (called slices). By establishing recursive relations for these values, we determine for which values of $n$ the function is balanced.
 
-HHE \cite{CCS:NaeLauVai11}
+\item Nonlinearity bounds (Section~\ref{sec:dnk}):
+We relate the maximum Walsh coefficients of the revisited HWBF to the coefficients of generating functions and employ complex analysis techniques to prove lower bounds on the nonlinearity of $f$. 
+Unlike most studies on Boolean functions used in cryptography, this approach yields strong nonlinearity bounds for a broader class of functions and for all even numbers of variables $n$.
 
+\item Experimental results and comparisons (Section~\ref{sec:expAndComp}): 
+For bounded values of $n$, we employ specific techniques to refine the nonlinearity bounds of $f$, providing tighter estimates up to $n = 80$. Through experiments, we compare these bounds with actual nonlinearity values for $f$ and other weightwise quadratic functions, such as the majority function, HWBF, and the two main examples in~\cite{DAM:MeaOza24}. 
+Our results highlight the revisited HWBF's superior nonlinearity relative to functions with similar computational costs.
 
+\item Analysis of other cryptographic parameters (Section~\ref{sec:otherParameters}):  
+We evaluate other cryptographically relevant parameters of $f$, including degree, algebraic immunity, and fast algebraic immunity. Similar to the nonlinearity analysis, the revisited HWBF outperforms or matches other functions with comparable computational costs.
 
-
-
-
-FLIP~\cite{EC:MJSC16}
-
-RASTA~\cite{C:Rasta}
-
-FiLIP~\cite{INDO:MCJS19}
-
-
-HWBF:
-
-
-\cite{IEEE:Bryant91}
-
-\cite{IEEE:Carlet22}
-
-\cite{eprint:CarPar23}
-
-\cite{DAM:MeaOza24}
-
+\end{itemize}
 
 
 
@@ -329,7 +353,7 @@ We use Krawtchouk polynomials and some of their properties to prove one of our r
 
 
 
-\section{Revisited HWBF and balancedness}
+\section{Revisited HWBF and balancedness}\label{sec:defAndBal}
 %\subsection{Restricted Walsh transform of $f$ in a recursive fashion}
 
 In this part we formally define the revisited HWBF function $f$ and introduce a quantity that allows us to study its balancedness and nonlinearity.
@@ -565,7 +589,7 @@ Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equi
 
 
 
-\section{Extensive study of $\Dnka nka$ and bounds on the Walsh spectrum of $f$}
+\section{Extensive study of $\Dnka nka$ and bounds on the Walsh spectrum of $f$}\label{sec:dnk}
 
 In this section, we study the values of $\Dnka nka$ using generating functions. First, in Section~\ref{sec:genfunc} we establish key properties of these quantities. Then, in Section~\ref{sec:Cauchy}, we apply Cauchy's estimate to bound the absolute values of $\Dnka nka$, which enables us to bound the absolute values of the Walsh transform coefficients of $f$ and consequently, the nonlinearity.
 Finally, in Section~\ref{sec:general}, we demonstrate how this result can be extended to bound the nonlinearity of a family of weightwise quadratic functions.
@@ -1300,7 +1324,7 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 
 
 
-\section{Other parameters}
+\section{Other parameters}\label{sec:otherParameters}
 
 In this part we give the other cryptographic parameters of the function $f$. Since its balancedness is characterized by Theorem~\ref{th:bal} and its nonlinearity deeply analyzed in Section~\ref{sec:Cauchy} and Section~\ref{sec:expAndComp}, in the following we focus on the algebraic properties. More precisely we analyze the degree, algebraic immunity and fast algebraic immunity of $f$, providing comparisons with other weightwise quadratic functions.
 
