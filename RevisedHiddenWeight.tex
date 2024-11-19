@@ -57,7 +57,7 @@
 	
 	\begin{abstract}
 	
-		
+\pmnote{add a small abstract, usually summary of introduction}		
 	\end{abstract}
 
 
@@ -106,9 +106,12 @@ Our contributions are the following:
 
 \fi
 
+\pmnote{proofread and modify introduction}
+
 The Hamming Weight Bit Function (HWBF) has attracted significant attention since its introduction by Bryant in 1991~\cite{IEEE:Bryant91}. It has been regarded as the simplest example of a function whose binary decision diagram has exponential size~\cite{IEEE:Bryant91,TIA:BoLSW99}. The ease of implementing this function across various computational models—owing to its reliance on computing the Hamming weight of the input and applying a simple linear function—combined with its relatively strong cryptographic properties, as demonstrated in~\cite{DAM:WCST14} (e.g., balancedness, nonlinearity, degree, and algebraic immunity), has made it an intriguing candidate for use as a filter function in stream cipher constructions.
 
-Recent developments in stream ciphers have reignited interest in this function. The emergence of new applications for stream ciphers with filter functions on a larger number of variables—such as Hybrid Homomorphic Encryption (HHE)~\cite{CCS:NaeLauVai11}—has further emphasized the relevance of such functions. HHE requires Boolean functions that can be efficiently evaluated in an input-oblivious algorithm. For instance, several new binary stream ciphers have been proposed since 2016, including Kreyvium~\cite{JOC:CCFLNP18}, FLIP~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, FiLIP~\cite{INDO:MCJS19}, and Dasta~\cite{TOSC:BeiLea20}. Currently, designs employing Boolean functions with more than one hundred variables as filters lead to HHE schemes with the best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24}.
+Recent developments in stream ciphers have reignited interest in this function. The emergence of new applications for stream ciphers with filter functions on a larger number of variables—such as Hybrid Homomorphic Encryption (HHE)~\cite{CCS:NaeLauVai11}—has further emphasized the relevance of such functions. HHE requires Boolean functions that can be efficiently evaluated in an input-oblivious algorithm. For instance, several new binary stream ciphers have been proposed since 2016, including Kreyvium~\cite{JOC:CCFLNP18}, FLIP~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, FiLIP~\cite{INDO:MCJS19}, Dasta~\cite{TOSC:BeiLea20} and Fasta~\cite{CTRSA:CidIndRad22}. 
+Currently, designs employing Boolean functions with more than one hundred variables as filters lead to HHE schemes with the best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24,eprint:AGHM24}.
 
 The HWBF, while efficient to compute, suffers from low nonlinearity, which limits its direct application as a filter function. Consequently, various generalizations have been explored to enhance this parameter while preserving or improving other cryptographically relevant properties, such as balancedness, algebraic degree, and algebraic immunity. Notable examples include functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23} and~\cite{DAM:MeaOza24}. The latter work considers functions obtained by computing the Hamming weight of the input and applying a quadratic Boolean function, called weightwise quadratic functions.
 
@@ -140,9 +143,11 @@ We evaluate other cryptographically relevant parameters of $f$, including degree
 
 \section{Preliminaries}
 
+
+\pmnote{Add here the other notations we took if not explained locally or in the other parts of preliminaries}
+
 For $v$ a binary vector of length $n$ we denote by $\w(v)$ its Hamming weight: $\w(v)=|\{i\in [1,n] \, | \, x_i=1\}|$.
 
-\pmnote{Preliminaries to adapt}
 
 
 \subsection{Boolean functions and cryptographic parameters}
@@ -209,7 +214,7 @@ When $n$ is even, the nonlinearity of a function can reach at most $2^{n-1}-2^{n
 The quadratic function $d_n$ given by: $d_n(x)=\sum_{i \text{ odd}}^n x_i x_{i+1}$ is an example of bent function.
 
 
-The algebraic degree of multiples of a Boolean function is a crucial criterion for various attacks on stream ciphers that utilize a Boolean function as a filter. The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\cite{C:Courtois03} on filtered LFSRs have motivated the study of cryptographic properties such as algebraic immunity and fast algebraic immunity, investigated in numerous works (\eg \cite{C:HawRos04,ISC:JiaZhaWan13})). 
+The algebraic degree of multiples of a Boolean function is a crucial criterion for various attacks on stream ciphers that utilize a Boolean function as a filter. The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\cite{C:Courtois03} on filtered LFSRs have motivated the study of cryptographic properties such as algebraic immunity and fast algebraic immunity, investigated in numerous works (\eg \cite{FSE:Armknecht04,C:HawRos04,ISC:JiaZhaWan13})). 
 
 Nowadays, these parameters are systematically determined for any function considered as a filter.
 
@@ -224,7 +229,7 @@ Nowadays, these parameters are systematically determined for any function consid
 
 
 
-\begin{definition}[Fast algebraic immunity, \eg \cite{EC:ACGKMR06}]\label{def:fai} The fast algebraic immunity of a Boolean function $f\in \Bfn{n}$ is defined as $\FAI(f)=\min \{ 2 \AI(f), \min _{1 \le \degg(g)<\AI(f)} (\degg(g)+ \degg(fg))\}$.
+\begin{definition}[Fast algebraic immunity, \eg \cite{EC:ACGKMR06}]\label{def:FAI} The fast algebraic immunity of a Boolean function $f\in \Bfn{n}$ is defined as $\FAI(f)=\min \{ 2 \AI(f), \min _{1 \le \degg(g)<\AI(f)} (\degg(g)+ \degg(fg))\}$.
 \end{definition}
 	
 
@@ -720,6 +725,9 @@ From differentiation, we can get more cases in which $\Dnka nka=0$:
     There are other instances where $\Dnka nka=0$ which have not been described by the above. For instance, we have $\Dnka{34}4a=0$ if $\{p,q\}=\{1,2\}$.
 \end{remark}
 
+\pmnote{Show me screenshots proving that 2 and 4 are correct}
+
+
 Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
 
 
@@ -1107,11 +1115,11 @@ To achieve this, we first precompute the expanded polynomials $(-z^2 + 2z + 1)^p
 
 Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded polynomials $(-z^2 + 2z + 1)^p$, $(-z^2 - 2z + 1)^q$, and $(z^2 + 1)^r$. These two multiplications are once more performed in $\mathcal{O}(n \log n)$. Given that there are $\mathcal{O}(n^2)$ such triplets $(p,q,r)$, the complexity of this step totals $\mathcal{O}(n^3 \log n)$. Therefore, this final step is the primary computational bottleneck, making the overall complexity of the procedure also $\mathcal{O}(n^3 \log n)$.
 
+\pmnote{Create a public github with all the code (not the .tex) used relatively to the article. We will give this link for the public version. Fot the anonymous one we will not mention the git, and only add the files in supplementary material.}
 
+%\pmnote{add a link to the public github or name of the name of this code in supplementary materials.}
 
-\pmnote{add a link to the public github or name of the name of this code in supplementary materials.}
-
-\tsnote{Is on GitHub now: \texttt{Bounding\_Walsh.ipynb}}
+%\tsnote{Is on GitHub now: \texttt{Bounding\_Walsh.ipynb}}
 
 
 %Table~\ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table~\ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
@@ -1470,7 +1478,13 @@ These various results on the algebraic properties of $f$ suggest that it possess
 \end{table}
 
 \section{Conclusion and open questions}
-\pmnote{TODO or remove}
+\pmnote{add a small conclusion (summary of contributions), and elaborate on an opean question, for example on how the Cauchy estimate could be used for more families, other quadratic functions or more easily higher degree ones.}
+
+\ifnum\anon=0
+\section{Acknowledgments}
+Pierrick Méaux was supported by the ERC Advanced Grant no. 787390.
+\fi
+
 
 \newpage
 
