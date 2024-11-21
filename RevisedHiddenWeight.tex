@@ -57,7 +57,7 @@
 }	
 	
 	\begin{abstract}
-	The Hidden Weight Bit Function (\hwbf{}) has drawn considerable attention for its simplicity and cryptographic potential. Despite its ease of implementation and favorable algebraic properties, its low nonlinearity limits its direct application in modern cryptographic designs. In this work, we revisit the \hwbf{} and propose a new weightwise quadratic variant obtained by combining the \hwbf{} with a bent function. This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. %Tim: Check abstract
+	The Hidden Weight Bit Function (\hwbf{}) has drawn considerable attention for its simplicity and cryptographic potential. Despite its ease of implementation and favorable algebraic properties, its low nonlinearity limits its direct application in modern cryptographic designs. In this work, we revisit the \hwbf{} and propose a new weightwise quadratic variant obtained by combining the \hwbf{} with a bent function. This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. 
 	\end{abstract}
 
 
@@ -96,7 +96,7 @@ In this article we consider another function that is weightwise quadratic, obtai
 Our contributions are the following:
 
 \begin{itemize}
-	\item In Section~\ref{sec:defAndBal}, we defined the revisited \hwbf{} $f$, and study its balancedness. This part is done by studying the (restricted) Walsh transform of some quadratic functions over sets of fixed Hamming weight, called slices. A recursive relation between these values allows to determine for which values of $n$ the function is balanced.
+	\item In Section~\ref{sec:defAndBal}, we define the revisited \hwbf{} $f$, and study its balancedness. This part is done by studying the (restricted) Walsh transform of some quadratic functions over sets of fixed Hamming weight, called slices. A recursive relation between these values allows to determine for which values of $n$ the function is balanced.
 	\item In Section~\ref{sec:dnk}, we link the maximum Walsh coefficients of the revisited \hwbf{} to the coefficients of generating functions and use techniques from complex analysis to prove lower bounds on the nonlinearity of $f$. 
 	Differing from usual results in Boolean function used in cryptography, this allows us to determine a good enough bound on the nonlinearity for a larger family of functions, and for all even number of variables $n$.
 	\item In Section~\ref{sec:expAndComp}, we explain techniques to get a better bound for bounded values of $n$, giving a tighter bound for the nonlinearity of $f$ up to $n=80$. In this parts with experiments, we compare the bounds we obtain and the real value of the nonlinearity between $f$ and other weightwise quadratic functions such as the majority function, the \hwbf{}, and the two main examples from~\cite{DAM:MeaOza24}. These results show a neat advantage for the revisited \hwbf{} relatively the nonlinearity compared to function with similar computation costs.
@@ -135,7 +135,7 @@ Additionally, the techniques we introduce to analyze nonlinearity have broader a
 
 \section{Preliminaries}
 
-Throughout this paper, $n$ will always denote a positive integer. Further, our intervals will only contain integers, so that for instance $[0,n]=\{0,1,\dots,n\}$. The set of binary vectors of length $n$ will be denoted by $\F_2^n$. The entries of a binary vector $x\in\F_2^n$ will always be denoted by $x_1,\dots,x_n$. We denote the scalar product of two binary vectors $x,y\in\F_2^n$ by $x\cdot y=\sum_{i=1}^nx_iy_i\in\F_2$. The Hamming weight of a binary vector $x\in\F_2^n$ is denoted by $\w(x)=|\{i\in [1,n]:x_i=1\}|$.%Tim: Check
+Throughout this paper, $n$ will always denote a positive integer. Further, our intervals will only contain integers, so that for instance $[0,n]=\{0,1,\dots,n\}$. The set of binary vectors of length $n$ will be denoted by $\F_2^n$. The entries of a binary vector $x\in\F_2^n$ will always be denoted by $x_1,\dots,x_n$. We denote the scalar product of two binary vectors $x,y\in\F_2^n$ by $x\cdot y=\sum_{i=1}^nx_iy_i\in\F_2$. The Hamming weight of a binary vector $x\in\F_2^n$ is denoted by $\w(x)=|\{i\in [1,n]:x_i=1\}|$.
 
 \subsection{Boolean functions and cryptographic parameters}
 
@@ -187,7 +187,7 @@ Below, for a Boolean function $f\in\BN$, we write $f+1$ for the Boolean function
 %	Additionally we denote $\AN(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0\}$.
 %\end{definition}
 
-\begin{definition}[Nonlinearity]%and weightwise nonlinearity
+\begin{definition}[Nonlinearity \eg{}~\cite{Carlet20} Page 79]%and weightwise nonlinearity
 	\label{def:nl}
 	The nonlinearity $\NL(f)$ of a Boolean function $f\in \BN$ is the minimum Hamming distance between $f$ and all the affine functions in $\BN$:
 	\[ \NL(f) = \min\{ \hd(f,g):g\in\BN,\degg(g)\leq 1\}{,} \]
@@ -199,7 +199,7 @@ When $n$ is even, the nonlinearity of a Boolean function in $n$ variables can re
 The quadratic function $d_n\in\BN$ given by $d_n(x)=\sum_{i=1}^{n/2}x_{2i-1}x_{2i}$ is an example for such a bent function.
 
 \bigskip
-The algebraic degree of multiples of a Boolean function is a crucial quantity for various attacks on stream ciphers that utilize a Boolean function as a filter. %Tim: Check previous sentence
+The algebraic degree of multiples of a Boolean function is a crucial quantity for various attacks on stream ciphers that utilize a Boolean function as a filter. 
 The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\cite{C:Courtois03} on filtered \textsf{LFSR}s have motivated the study of cryptographic properties such as algebraic immunity and fast algebraic immunity, investigated in numerous works, \eg{} \cite{FSE:Armknecht04,C:HawRos04,ISC:JiaZhaWan13})). Nowadays, these parameters are systematically determined for any function considered as a filter.
 
 \begin{definition}[Annihilator, algebraic immunity~\cite{EC:MeiPasCar04}] \label{def:ai}
@@ -261,7 +261,7 @@ These bounds focus on cyclic weightwise quadratic functions and involve sums of 
 %We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
 
 
-%\pmnote{complete the following prop. Choose between nonlinearity or $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ \color{blue} Tim: I started, but please do the remaining two items.}
+
 \iffalse
 \begin{Prop}[Nonlinearity of some functions from $\WD{1}{n}$, \cite{DCC:DalMaiSar06,DAM:WCST14,DAM:MeaOza24}\label{prop:wwd1}]
 Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$. 
@@ -315,7 +315,7 @@ Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$.
 \subsection{Krawtchouk polynomials}
 We use Krawtchouk polynomials and some of their properties to prove one of our main results. We give the necessary preliminaries here and refer to \eg{}~\cite{book:MacSlo78} for more details.
 
-\begin{definition}[Krawtchouk Polynomials]\label{def:Kraw}
+\begin{definition}[Krawtchouk polynomials]\label{def:Kraw}
 	The $n$-th Krawtchouk polynomial of degree $k\in[0,n]$ is given by:
     \[
         \displaystyle \kraw{k}{x}{n}=\sum_{j=0}^{k} (-1)^j \binom{x}{j} \binom{n-x}{k-j}.
@@ -324,7 +324,7 @@ We use Krawtchouk polynomials and some of their properties to prove one of our m
     \[
         (1+z)^{n-x} (1-z)^x=\sum_{k=0}^\infty \kraw{k}{x}{n} z^k.
     \]
-\end{definition} %Tim: This is different from the Wiki
+\end{definition} 
 
 
 
@@ -1050,8 +1050,6 @@ The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theo
 \end{figure}
 
 
-%\pmnote{for the remark, add how they are obtained (from a script in xxx). 
-%We can give the scripts in supplementary material when submitting, of add the link of a github if you agree to have them public. \color{blue} Tim: I added the script to GitHub. You can decide what we do with it.}
 
 \section{Experiments and comparisons}\label{sec:expAndComp}
 
