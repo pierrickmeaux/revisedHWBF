@@ -19,10 +19,11 @@
 
 
 \begin{document}
-	\title{The revisited hidden weight bit function}
+    \setcounter{page}{1} 
+	\title{The Revisited Hidden Weight Bit Function}
 
 	
-	\titlerunning{The revisited Hidden weight bit function}
+	\titlerunning{The Revisited Hidden Weight Bit Function}
 \author{
 	Pierrick M\'eaux\inst{1},
 	Tim Seuré\inst{1}, 
@@ -39,7 +40,7 @@
 	%\and
 %		University of Luxembourg, Luxembourg\\ \email{pierrick.meaux@uni.lu}
 	\and
-	Shanghai Jiao Tong University, Shanghai, China.\\
+	Shanghai Jiao Tong University, Shanghai, China\\
 	\email{dengtang@sjtu.edu.cn}
 }
 
@@ -56,8 +57,7 @@
 }	
 	
 	\begin{abstract}
-	
-\pmnote{add a small abstract, usually summary of introduction}		
+	The Hidden Weight Bit Function (\hwbf{}) has drawn considerable attention for its simplicity and cryptographic potential. Despite its ease of implementation and favorable algebraic properties, its low nonlinearity limits its direct application in modern cryptographic designs. In this work, we revisit the \hwbf{} and propose a new weightwise quadratic variant obtained by combining the \hwbf{} with a bent function. This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. %Tim: Check abstract
 	\end{abstract}
 
 
@@ -79,115 +79,100 @@
 \iffalse
 %prompt
 
-The Hamming Weight Bit Function (HWBF) has received a lot of attention since its introduction by Bryant
+The Hidden Weight Bit Function (\hwbf{}) has received a lot of attention since its introduction by Bryant
 in $1991$~\cite{IEEE:Bryant91}, it has been considered as the simplest example of function with binary decision
 diagram of exponential size~\cite{IEEE:Bryant91,TIA:BoLSW99}. 
-The facility of implementing this function in different models of computation since it consists in computing the Hamming weight of the input and applying a simple linear function, and it relatively good cryptographic properties exhibited in~\cite{DAM:WCST14} (balancedness, nonlinearity, degree and algebraic immunity) made it an interesting starting point candidate to design the filter of some streamcipher constructions. 
+The facility of implementing this function in different models of computation since it consists in computing the Hamming weight of the input and applying a simple linear function, and it relatively good cryptographic properties exhibited in~\cite{DAM:WCST14} (balancedness, nonlinearity, degree and algebraic immunity) made it an interesting starting point candidate to design the filter of some stream cipher constructions. 
 
-Recently, new developpements in stream ciphers lead to reconsider this function.
-The new potential uses of stream ciphers with filter functions on a larger number number of variables such as Hybrid Homomorphic Encryption~\cite{CCS:NaeLauVai11} (HHE) gave a regain of interest in these functions. HHE aims at finding Boolean functions efficient to evaluate as an input oblivious algorithm. 
+Recently, new developments in stream ciphers lead to reconsider this function.
+The new potential uses of stream ciphers with filter functions on a larger number number of variables such as Hybrid Homomorphic Encryption~\cite{CCS:NaeLauVai11} (\textsf{HHE}) gave a regain of interest in these functions. \textsf{HHE} aims at finding Boolean functions efficient to evaluate as an input oblivious algorithm. 
 For example various new binary stream ciphers have been designed since $2016$ such as Kreyvium~\cite{JOC:CCFLNP18}, FLIP~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, FiLIP~\cite{INDO:MCJS19} and Dasta~\cite{TOSC:BeiLea20}. 
-Currently, the designs with Boolean functions with more than one hundred variables as a filter are the ones leading to the HHE with best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24}.
+Currently, the designs with Boolean functions with more than one hundred variables as a filter are the ones leading to the \textsf{HHE} with best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24}.
 %cite FHE for MPC?
 
-The nonlinearity of the HWBF being low for a direct use as filter function, several generalizations have been considered recently, aiming at strengthening this parameter and keeping or improving the others cryptographic relevent parameters such as balancedness, algebraic degree and and algebraic immunity. In these generalizations we count the functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23,DAM:MeaOza24}. The later article considers some functions obtained by computing the Hamming weight of the input and then simply applying a quadratic Boolean function.
+The nonlinearity of the \hwbf{} being low for a direct use as filter function, several generalizations have been considered recently, aiming at strengthening this parameter and keeping or improving the others cryptographic relevant parameters such as balancedness, algebraic degree and and algebraic immunity. In these generalizations we count the functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23,DAM:MeaOza24}. The later article considers some functions obtained by computing the Hamming weight of the input and then simply applying a quadratic Boolean function.
 
-In this article we consider another function that is weightwise quadratic, obtained by xoring the HWBF and a bent quadratic function. Therefore, we exhibit a family of Boolean functions both easy to compute and with good parameters, improving over the ones exhibited in~\cite{DAM:MeaOza24}. Various of the techniques we introduce to determine the nonlinearity are of independent interest, and allow to bound the maximum of the absolute Walsh spectrum for a wider family of weightwise quadratic functions. 
+In this article we consider another function that is weightwise quadratic, obtained by \textsf{XOR}-ing the \hwbf{} and a bent quadratic function. Therefore, we exhibit a family of Boolean functions both easy to compute and with good parameters, improving over the ones exhibited in~\cite{DAM:MeaOza24}. Various of the techniques we introduce to determine the nonlinearity are of independent interest, and allow to bound the maximum of the absolute Walsh spectrum for a wider family of weightwise quadratic functions. 
 Our contributions are the following:
 
 \begin{itemize}
-	\item In Section~\ref{sec:defAndBal}, we defined the revisited HWBF $f$, and study its balancedness. This part is done by studying the (restricted) Walsh transform of some quadratic functions over sets of fixed Hamming weight, called slices. A recursive relation between these values allows to determine for which values of $n$ the function is balanced.
-	\item In Section~\ref{sec:dnk}, we link the maximum Walsh coefficients of the revisited HWBF to the coefficients of generating functions and use techniques from complex analysis to prove lower bounds on the nonlinearity of $f$. 
+	\item In Section~\ref{sec:defAndBal}, we defined the revisited \hwbf{} $f$, and study its balancedness. This part is done by studying the (restricted) Walsh transform of some quadratic functions over sets of fixed Hamming weight, called slices. A recursive relation between these values allows to determine for which values of $n$ the function is balanced.
+	\item In Section~\ref{sec:dnk}, we link the maximum Walsh coefficients of the revisited \hwbf{} to the coefficients of generating functions and use techniques from complex analysis to prove lower bounds on the nonlinearity of $f$. 
 	Differing from usual results in Boolean function used in cryptography, this allows us to determine a good enough bound on the nonlinearity for a larger family of functions, and for all even number of variables $n$.
-	\item In Section~\ref{sec:expAndComp}, we explain techniques to get a better bound for bounded values of $n$, giving a tighter bound for the nonlinearity of $f$ up to $n=80$. In this parts with experiments, we compare the bounds we obtain and the real value of the nonlinearity between $f$ and other weightwise quadratic functions such as the majority function, the HWBF, and the two main examples from~\cite{DAM:MeaOza24}. These results show a neat advantage for the revisited HWBF relatively the nonlinearity compared to function with similar computation costs.
-	\item In Section~\ref{sec:otherParameters} we analyze the other cryptographic relevant parameters of $f$, such as degree, algebraic immunity and fast algebraic immunity. Similarly to the comparison for the nonlinearity the revisited HWBF performs better or similarly to the function with similar computation costs.
+	\item In Section~\ref{sec:expAndComp}, we explain techniques to get a better bound for bounded values of $n$, giving a tighter bound for the nonlinearity of $f$ up to $n=80$. In this parts with experiments, we compare the bounds we obtain and the real value of the nonlinearity between $f$ and other weightwise quadratic functions such as the majority function, the \hwbf{}, and the two main examples from~\cite{DAM:MeaOza24}. These results show a neat advantage for the revisited \hwbf{} relatively the nonlinearity compared to function with similar computation costs.
+	\item In Section~\ref{sec:otherParameters} we analyze the other cryptographic relevant parameters of $f$, such as degree, algebraic immunity and fast algebraic immunity. Similarly to the comparison for the nonlinearity the revisited \hwbf{} performs better or similarly to the function with similar computation costs.
 		
 \end{itemize}
 
 \fi
 
-\pmnote{proofread and modify introduction}
+The Hidden Weight Bit Function (\hwbf{}) has attracted significant attention since its introduction by Bryant in 1991~\cite{IEEE:Bryant91}. It has been regarded as the simplest example of a function whose binary decision diagram has exponential size~\cite{IEEE:Bryant91,TIA:BoLSW99}. The ease of implementing this function across various computational models—owing to its reliance on computing the Hamming weight of the input and applying a simple linear function—combined with its relatively strong cryptographic properties as demonstrated in~\cite{DAM:WCST14} (\eg, balancedness, nonlinearity, degree, and algebraic immunity), has made it a noteworthy candidate for use as a filter function in stream cipher constructions.
 
-The Hamming Weight Bit Function (HWBF) has attracted significant attention since its introduction by Bryant in 1991~\cite{IEEE:Bryant91}. It has been regarded as the simplest example of a function whose binary decision diagram has exponential size~\cite{IEEE:Bryant91,TIA:BoLSW99}. The ease of implementing this function across various computational models—owing to its reliance on computing the Hamming weight of the input and applying a simple linear function—combined with its relatively strong cryptographic properties, as demonstrated in~\cite{DAM:WCST14} (e.g., balancedness, nonlinearity, degree, and algebraic immunity), has made it an intriguing candidate for use as a filter function in stream cipher constructions.
+Recent developments in stream ciphers have reignited interest in this function. The emergence of new applications for stream ciphers with filter functions on a larger number of variables—such as Hybrid Homomorphic Encryption (\textsf{HHE})~\cite{CCS:NaeLauVai11}—has further emphasized the relevance of such functions. \textsf{HHE} requires Boolean functions that can be efficiently evaluated in an input-oblivious algorithm. For instance, several new binary stream ciphers have been proposed since 2016, including Kreyvium~\cite{JOC:CCFLNP18}, FLIP~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, FiLIP~\cite{INDO:MCJS19}, Dasta~\cite{TOSC:BeiLea20} and Fasta~\cite{CTRSA:CidIndRad22}. 
+Currently, designs employing Boolean functions with more than one hundred variables as filters lead to \textsf{HHE} schemes with the best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24,eprint:AGHM24}.
 
-Recent developments in stream ciphers have reignited interest in this function. The emergence of new applications for stream ciphers with filter functions on a larger number of variables—such as Hybrid Homomorphic Encryption (HHE)~\cite{CCS:NaeLauVai11}—has further emphasized the relevance of such functions. HHE requires Boolean functions that can be efficiently evaluated in an input-oblivious algorithm. For instance, several new binary stream ciphers have been proposed since 2016, including Kreyvium~\cite{JOC:CCFLNP18}, FLIP~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, FiLIP~\cite{INDO:MCJS19}, Dasta~\cite{TOSC:BeiLea20} and Fasta~\cite{CTRSA:CidIndRad22}. 
-Currently, designs employing Boolean functions with more than one hundred variables as filters lead to HHE schemes with the best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24,eprint:AGHM24}.
+The \hwbf{}, while efficient to compute, suffers from low nonlinearity, which limits its direct application as a filter function. Consequently, various generalizations have been explored to enhance this parameter while preserving or improving other cryptographically relevant properties, such as balancedness, algebraic degree, and algebraic immunity. Notable examples include functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23} and~\cite{DAM:MeaOza24}. The latter work considers functions obtained by computing the Hamming weight of the input and applying a quadratic Boolean function, so-called weightwise quadratic functions.
 
-The HWBF, while efficient to compute, suffers from low nonlinearity, which limits its direct application as a filter function. Consequently, various generalizations have been explored to enhance this parameter while preserving or improving other cryptographically relevant properties, such as balancedness, algebraic degree, and algebraic immunity. Notable examples include functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23} and~\cite{DAM:MeaOza24}. The latter work considers functions obtained by computing the Hamming weight of the input and applying a quadratic Boolean function, called weightwise quadratic functions.
-
-In this article, we propose a new generalization of the HWBF, a weightwise quadratic function constructed by XORing the HWBF with a bent quadratic function. This leads to a family of Boolean functions that are computationally efficient and exhibit superior cryptographic properties compared to previous constructions. 
-Additionally, the techniques we introduce to analyze nonlinearity have broader applicability and provide bounds on the maximum absolute Walsh spectrum for a wider class of weightwise quadratic functions.
-
-
-
-
-Our contributions are as follows:
+\bigskip
+In this article, we propose a new generalization of the \hwbf{}, a weightwise quadratic function constructed by \textsf{XOR}-ing the \hwbf{} with a bent quadratic function. This leads to a family of Boolean functions that are computationally efficient and feature superior cryptographic properties compared to previous constructions. 
+Additionally, the techniques we introduce to analyze nonlinearity have broader applicability and provide bounds on the maximum absolute Walsh spectrum for a wider class of weightwise quadratic functions. Our contributions are as follows:
 \begin{itemize}
-	\item Balancedness analysis (Section~\ref{sec:defAndBal}):
-We define the revisited HWBF, called $f$, and analyze its balancedness. This involves studying the (restricted) Walsh transform of specific quadratic functions over sets of fixed Hamming weights (called slices). By establishing recursive relations for these values, we determine for which values of $n$ the function is balanced.
+	\item\emph{Balancedness analysis} (Section~\ref{sec:defAndBal}): We define the revisited \hwbf{} in $n$ variables, hereafter denoted by $f$, and analyze its balancedness. This involves studying the (restricted) Walsh transform of specific quadratic functions over sets of fixed Hamming weights (called slices). By establishing recursive relations for these values, we determine for which values of $n$ the function is balanced.
 
-\item Nonlinearity bounds (Section~\ref{sec:dnk}):
-We relate the maximum Walsh coefficients of the revisited HWBF to the coefficients of generating functions and employ complex analysis techniques to prove lower bounds on the nonlinearity of $f$. 
-Unlike most studies on Boolean functions used in cryptography, this approach yields strong nonlinearity bounds for a broader class of functions and for all even numbers of variables $n$.
-
-\item Experimental results and comparisons (Section~\ref{sec:expAndComp}): 
-For bounded values of $n$, we employ specific techniques to refine the nonlinearity bounds of $f$, providing tighter estimates up to $n = 80$. Through experiments, we compare these bounds with actual nonlinearity values for $f$ and other weightwise quadratic functions, such as the majority function, HWBF, and the two main examples in~\cite{DAM:MeaOza24}. 
-Our results highlight the revisited HWBF's superior nonlinearity relative to functions with similar computational costs.
-
-\item Analysis of other cryptographic parameters (Section~\ref{sec:otherParameters}):  
-We evaluate other cryptographically relevant parameters of $f$, including degree, algebraic immunity, and fast algebraic immunity. Similar to the nonlinearity analysis, the revisited HWBF outperforms or matches other functions with comparable computational costs.
-
+    \item \emph{Nonlinearity bounds} (Section~\ref{sec:dnk}):
+    We relate the maximum Walsh coefficients of the revisited \hwbf{} to the coefficients of generating functions and employ complex analysis techniques to prove lower bounds on the nonlinearity of $f$. 
+    Unlike most studies on Boolean functions used in cryptography, this approach yields strong nonlinearity bounds for a broader class of functions and for all even $n$.
+    
+    \item \emph{Experimental results and comparisons} (Section~\ref{sec:expAndComp}): 
+    For bounded values of $n$, we employ specific techniques to refine the nonlinearity bounds of $f$, providing tighter estimates up to $n = 80$. Through experiments, we compare these bounds with actual nonlinearity values for $f$ and other weightwise quadratic functions, such as the majority function, the \hwbf{}, and the two main examples in~\cite{DAM:MeaOza24}. 
+    Our results highlight the revisited \hwbf{}'s superior nonlinearity relative to functions with similar computational costs.
+    
+    \item \emph{Analysis of other cryptographic parameters} (Section~\ref{sec:otherParameters}):  
+    We evaluate other cryptographically relevant parameters of $f$, including degree, algebraic immunity, and fast algebraic immunity. Similar to the nonlinearity analysis, the revisited \hwbf{} outperforms or matches other functions with comparable computational costs.
 \end{itemize}
 
 
 
 \section{Preliminaries}
 
-
-\pmnote{Add here the other notations we took if not explained locally or in the other parts of preliminaries}
-
-For $v$ a binary vector of length $n$ we denote by $\w(v)$ its Hamming weight: $\w(v)=|\{i\in [1,n] \, | \, x_i=1\}|$.
-
-
+Throughout this paper, $n$ will always denote a positive integer. Further, our intervals will only contain integers, so that for instance $[0,n]=\{0,1,\dots,n\}$. The set of binary vectors of length $n$ will be denoted by $\F_2^n$. The entries of a binary vector $x\in\F_2^n$ will always be denoted by $x_1,\dots,x_n$. We denote the scalar product of two binary vectors $x,y\in\F_2^n$ by $x\cdot y=\sum_{i=1}^nx_iy_i\in\F_2$. The Hamming weight of a binary vector $x\in\F_2^n$ is denoted by $\w(x)=|\{i\in [1,n]:x_i=1\}|$.%Tim: Check
 
 \subsection{Boolean functions and cryptographic parameters}
 
 In this part we recall general concepts on Boolean functions and their cryptographic properties we use in this article. 
-For a deeper introduction on Boolean functions and their cryptographic parameters we refer to the book~\cite{Carlet20} and to~\cite{TOSC:CarMeaRot17} for the weightwise properties, also called properties on the slices.
-For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k  \}$ and call it slice of the Boolean hypercube (of dimension $n$). 
+For a deeper introduction on Boolean functions and their cryptographic parameters, we refer to the book~\cite{Carlet20}, and to~\cite{TOSC:CarMeaRot17} for properties on slices, so-called weightwise properties.
 
 %Accordingly, the Boolean hypercube is partitioned into $n+1$ slices where the elements have the same Hamming weight.
 
-\begin{definition}[Boolean Function]\label{def:bool_f}
-	A Boolean function $f$ in $n$ variables is a function from $\F_2^n$ to $\F_2$. 
-	The set of all Boolean functions in $n$ variables is denoted by $\BN$, and we denote $\BN^*$ the set without the null function.
+\begin{definition}[Slice]
+    For $k \in [0,n]$, we introduce the set $\Ekn{k}{n}=\{x\in \F_2^n:\w(x)=k\}$, and call it the $k$-th slice of the Boolean hypercube (of dimension $n$). 
 \end{definition}
 
+\begin{definition}[Boolean function, support]\label{def:bool_f}
+	A Boolean function in $n$ variables is a function from $\F_2^n$ to $\F_2$. The set of all Boolean functions in $n$ variables is denoted by $\BN$, and we denote this set without the null function by $\BN^*$.
+\end{definition}
 
-\begin{definition}[Balancedness]\label{def:balancedness}
-	A Boolean function $f\in \BN$ is called balanced if $|\supp(f)|=2^{n-1}=|\supp(f+1)|$. 
+Below, for a Boolean function $f\in\BN$, we write $f+1$ for the Boolean function $g\in\BN$ which satisfies $g(x)=f(x)+1$ for every $x\in\F_2^n$.
+
+\begin{definition}[Support, balancedness]\label{def:balancedness}
+	Consider a Boolean function $f\in\BN$. Then the support of $f$ is defined as $\supp(f)=\{x\in\F_2^n:f(x)\neq 0\}$. The function $f$ is called balanced if it satisfies the equalities $|\supp(f)|=2^{n-1}=|\supp(f+1)|$. 
 	
-%	For $k\in [0,n]$ the function is said balanced on the slice $k$ if $||\suppk{k}(f)|-|\suppk{k}(f+1)| |\le 1$. In particular when $|\Ekn{k}{n}|$ is even $|\suppk{k}(f)|=|\suppk{k}(f+1)|=|\Ekn{k}{n}|/2$.
+%	For $k\in [0,n]$ the function is said balanced on the slice $k$ if $||\suppk{k}(f)|-|\suppk{k}(f+1)| |\leq 1$. In particular when $|\Ekn{k}{n}|$ is even $|\suppk{k}(f)|=|\suppk{k}(f+1)|=|\Ekn{k}{n}|/2$.
 \end{definition}
 
 \begin{definition}[Algebraic Normal Form (ANF) and degree]\label{def:anf}
-	We call Algebraic Normal Form of a Boolean function $f$ its $n$-variable polynomial representation over $\F_2$ (\textit{i.e.} belonging to $\F_2[x_1,\dots,x_n]/(x_1^2+x_1,\dots,x_n^2+x_n)$):
-	\[f(x_1,\dots,x_n)= \sum_{I \subseteq [1,n]} a_I \left( \prod_{i \in I} x_i \right) \]%x_1,\dots,x_n=\sum_{I \subseteq [1,n]} a_I x^I,\]
-	where $a_I\in \F_2$. 	
-	The (algebraic) degree of $f$, denoted $\degg(f)$ is: \[\degg(f)=\
-	\max_{I\subseteq [1,n]}\{ |I|\, | \, a_I=1\}  \text{ if $f$ is not null},0  \text{ otherwise}.\]
+	We call Algebraic Normal Form of a Boolean function $f\in\BN$ its unique representation as an element of the ring $\F_2[x_1,\dots,x_n]/(x_1^2+x_1,\dots,x_n^2+x_n)$, and we represent it as follows:
+	\[f(x_1,\dots,x_n)= \sum_{I \subseteq [1,n]} a_I \left( \prod_{i \in I} x_i \right), \]%x_1,\dots,x_n=\sum_{I \subseteq [1,n]} a_I x^I,\]
+	where $a_I\in \F_2$. The (algebraic) degree of $f$ is defined by $\degg(f)=0$ in case $f$ is the null function, and $\degg(f)=\max\{ |I|:I\subseteq[1,n],a_I=1\}$ otherwise.
 \end{definition}
 
 
 
 
 \begin{definition}[Walsh transform and restricted Walsh transform]\label{def:walsh_transform}
-	Let $f\in \Bn{n}$ be a Boolean function, its Walsh transform $\wt{f}$ at $a \in \F_2^n$ is defined as:
-	\[  \wt{f} (a) = \sum_{x \in \F_2^n} (-1)^{f(x) +  a \cdot x }.\]
-	%	The Walsh support is the set $\Wsupp{f}=\{ a\in \F_2^n\, | \, \wt{f} (a) \neq 0 \}$.
-	Let $f\in \Bn{n}$, $S \subset \F_2^n$, its Walsh transform restricted to $S$ at $a \in \F_2^n$ is defined as:
-	\[  \wt{f,S} (a) = \sum_{x\in S} (-1)^{f(x)+a \cdot x}.\]
-	For $S=\Ekn{k}{n}$ we denote $\wt{f,\Ekn{k}{n}} (a)$ by $\wtk{f}{k}(a)$.%, and for $a= 0_{n}$ we denote $\wtk{f}{k}(a)$ as $\wtk{f}{k}(0)$.
+	The Walsh transform at $a \in \F_2^n$ of a Boolean function $f\in\BN$ restricted to a subset $S\subseteq \F_2^n$ is defined as:
+    \[  \wt{f,S} (a) = \sum_{x\in S} (-1)^{f(x)+a \cdot x}.\]
+    The Walsh transform of $f$ is then defined as $\wt{f}=\wt{f,\F_2^n}$. For $k\in[0,n]$, we also set $\wt{f,k}=\wt{f,\Ekn{k}{n}}$.
 \end{definition}
 
 
@@ -201,83 +186,66 @@ For $k \in [0,n]$ we denote $\Ekn{k}{n}$ the set $\{x\in \F_2^n \, | \, \w(x)=k 
 %	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
 %	Additionally we denote $\AN(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0\}$.
 %\end{definition}
+
 \begin{definition}[Nonlinearity]%and weightwise nonlinearity
 	\label{def:nl}
-	The nonlinearity $\NL(f)$ of a Boolean function $f\in \BN$, where $n$ is a positive integer, is the minimum Hamming distance between $f$ and all the affine functions in $\BN$:
-	\[ \NL(f) = \min_{g,\, \degg(g)\leq 1} \{ \hd(f,g) \}{,} \]
-	where $g(x)=a\cdot x+\varepsilon$, $a\in \F_2^n, \varepsilon\in \F_2$. 	
-	The nonlinearity can also be defined from the Walsh transform:
+	The nonlinearity $\NL(f)$ of a Boolean function $f\in \BN$ is the minimum Hamming distance between $f$ and all the affine functions in $\BN$:
+	\[ \NL(f) = \min\{ \hd(f,g):g\in\BN,\degg(g)\leq 1\}{,} \]
+	where the Hamming distance between $f$ and $g$ is defined as $\hd(f,g)=|\{x\in\F_2^n:f(x)\neq g(x)\}|$. Alternatively, the nonlinearity of $f\in\BN$ can also be defined in terms of its Walsh transform:
 	\[ \NL(f) = 2^{n-1}- \frac{1}{2} \max_{a\in \F_2^n}{|\wt{f}(a)|}. \]
 \end{definition}
 
-When $n$ is even, the nonlinearity of a function can reach at most $2^{n-1}-2^{n/2 -1}$. Functions reaching this maximum are called bent functions, due to their multiple applications and importance they have been the focus of multiple works \eg \cite{Rothaus76,FSE:Dobbertin95,DBLP:conf/itw/BudaghyanCH11,Tokareva15,Mesnager16}. 
-The quadratic function $d_n$ given by: $d_n(x)=\sum_{i \text{ odd}}^n x_i x_{i+1}$ is an example of bent function.
+When $n$ is even, the nonlinearity of a Boolean function in $n$ variables can reach at most $2^{n-1}-2^{n/2 -1}$. Functions reaching this maximum are called bent functions. Due to their broad applications and importance, they have been the focus of multiple works, \eg{} \cite{Rothaus76,FSE:Dobbertin95,DBLP:conf/itw/BudaghyanCH11,Tokareva15,Mesnager16}. 
+The quadratic function $d_n\in\BN$ given by $d_n(x)=\sum_{i=1}^{n/2}x_{2i-1}x_{2i}$ is an example for such a bent function.
 
+\bigskip
+The algebraic degree of multiples of a Boolean function is a crucial quantity for various attacks on stream ciphers that utilize a Boolean function as a filter. %Tim: Check previous sentence
+The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\cite{C:Courtois03} on filtered \textsf{LFSR}s have motivated the study of cryptographic properties such as algebraic immunity and fast algebraic immunity, investigated in numerous works, \eg{} \cite{FSE:Armknecht04,C:HawRos04,ISC:JiaZhaWan13})). Nowadays, these parameters are systematically determined for any function considered as a filter.
 
-The algebraic degree of multiples of a Boolean function is a crucial criterion for various attacks on stream ciphers that utilize a Boolean function as a filter. The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\cite{C:Courtois03} on filtered LFSRs have motivated the study of cryptographic properties such as algebraic immunity and fast algebraic immunity, investigated in numerous works (\eg \cite{FSE:Armknecht04,C:HawRos04,ISC:JiaZhaWan13})). 
-
-Nowadays, these parameters are systematically determined for any function considered as a filter.
-
-
-
-\begin{definition}[Algebraic immunity~\cite{EC:MeiPasCar04}] \label{def:ai}
-	The algebraic immunity of a Boolean function $f\in \Bfn{n}$, denoted as $\AI(f)$, is defined as:
-	\[ \AI(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0 \; \text{or} \; (f + 1)g = 0 \}{,} \]
-	where $\degg(g)$ is the algebraic degree of $g$.
-	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
+\begin{definition}[Annihilator, algebraic immunity~\cite{EC:MeiPasCar04}] \label{def:ai}
+	Let $f\in\BN$ be a Boolean function. Then a function $g\in\BN^*$ is called an annihilator of $f$ if it satisfies $fg=0$. The algebraic immunity of $f$ is then defined as:
+	\[ \AI(f) = \min\{ \degg(g):\text{$g\in\BN^*$ is an annihilator of $f$ or $f+1$}\}.\]
 \end{definition}
 
 
 
-\begin{definition}[Fast algebraic immunity, \eg \cite{EC:ACGKMR06}]\label{def:FAI} The fast algebraic immunity of a Boolean function $f\in \Bfn{n}$ is defined as $\FAI(f)=\min \{ 2 \AI(f), \min _{1 \le \degg(g)<\AI(f)} (\degg(g)+ \degg(fg))\}$.
+\begin{definition}[Fast algebraic immunity, \eg{} \cite{EC:ACGKMR06}]\label{def:FAI} The fast algebraic immunity of a Boolean function $f\in \Bfn{n}$ is defined as:
+\[
+    \FAI(f)=\min \{ 2 \AI(f), \min\{\degg(g)+ \degg(fg):g\in\BN,1\leq\degg(g)<\AI(f)\}\}
+\]
+
 \end{definition}
-	
 
+\subsection{Symmetric Functions, \hwbf{} and weightwise degree-d functions}
 
-
-
-
-\subsection{Symmetric Functions, HWBF and weightwise degree-d functions}
-
-
-
-
-The $n$-variable \emph{Boolean symmetric functions} are those that are constant on each slice $\Ekn{k}{n}$ for $k\in [0,n]$. 
-This class has been assiduously studied in the context of cryptography, see \eg \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,IEEE:CheLu11,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
-In this article we mainly consider the slice indicator functions and the majority functions.
+The Boolean symmetric functions in $n$ variables are those that are constant on each slice $\Ekn{k}{n}$ for $k\in [0,n]$. 
+This class has been thoroughly studied in the context of cryptography, see \eg{} \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,IEEE:CheLu11,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
+In this article, the symmetric functions that we consider will mainly be the slice indicator function and the majority function.
 %\begin{definition}[Elementary symmetric functions]
 %Let $i\in [0,n]$, the elementary symmetric function of degree $i$ in $n$ variables, denoted $\sigma_{i,n}$, is the function which ANF contains all monomials of degree $i$ and no monomials of other degrees. 
 %\end{definition}
-\begin{definition}[Slice indicator functions]\label{def:slice}
- Let $k\in [0,n]$, the indicator function of the slice of weight $k$ is defined as:
- \[\forall  x\in \mathbb{F}_2^{n}, \quad \phikn{k}{n}(x) = 1 \text{ if and only if } \w(x) = k.\]
+\begin{definition}[Slice indicator functions]\label{def:slice} The indicator function of the slice of weight $k\in[0,n]$ is the function $\phikn kn\in\BN$ defined by $\phikn kn(x)=1$ if and only if $\w(x)=k$.
 \end{definition}
 
 
 \begin{definition}[Majority function]\label{def:maj}
-    The \emph{majority function} in $n$ variables is the Boolean function $\textsf{Maj}\in\BN$ defined as:
-    \[
-        \textsf{Maj}(x)=0\iff\w(x)<n/2.
-    \]
+    The majority function in $n$ variables is the Boolean function $\mathsf{Maj}_n\in\BN$ defined by $\mathsf{Maj}_n(x)=1$ if and only if $\w(x)\geq n/2$.
 \end{definition}
 
-Bigger families of functions can be obtained by considering functions of bounded degree on each slice, it corresponds to the concept of weightwise degree-$d$ function introduced in~\cite{DAM:GinMea22} for $d=1$ and~\cite{DAM:MeaOza24} for the general case. 
+Bigger families of functions can be obtained by considering functions of bounded degree on each slice. This corresponds to the concept of weightwise degree-$d$ functions introduced in~\cite{DAM:GinMea22} for $d=1$ and~\cite{DAM:MeaOza24} for the general case. 
 
-\begin{definition}[Weightwise degree-$d$ functions (~\cite{DAM:MeaOza24} Definition 12)]\label{def:wwdegd}
-	Let $n\in \N^*$ and for $k\in[0,n]$ $\phikn{k}{n}$ denotes the indicator function of $\Ekn{k}{n}$. 
-	An $n$-variable Boolean function $f$, written as $f=\sum_{k=0}^n f_k \phikn{k}{n}$, is called weightwise degree-$d$ if and only if for each $k\in [0,n]$ $f_k$ coincide with a function of degree at most $d$ over $\Ekn{k}{n}$. 
-		The set of weightwise degree-$d$ functions is denoted by $\WD{d}{n}$.
-		
-Additionally, a weightwise degree-$d$ function is called cyclic weightwise degree-$d$ function if for all $i\in [1,n]$ it holds $f_i(x)=f_0(O^i(x))$, where $O^i$ denotes the cyclic shift by $i$ positions, $O^i(x_1,\dots,x_n)=(x_{1+i \mod n},\dots,x_{n+i \mod n})$, the representative modulo being taken as an integer between $1$ and $n$.
+\begin{definition}[Weightwise degree-\textit{d} functions (~\cite{DAM:MeaOza24} Definition 12)]\label{def:wwdegd}
+    A Boolean function $f\in\BN^*$ is called weightwise degree-$d$ if it can be written under the form $f=\sum_{k=0}^n f_k \phikn{k}{n}$ with $f_k\in\BN$ of degree at most $d$. The set of weightwise degree-$d$ functions is denoted by $\WD{d}{n}$.
+	Additionally, a weightwise degree-$d$ function $f=\sum_{k=0}^n f_k \phikn{k}{n}$ is called a cyclic weightwise degree-$d$ function if for all $k\in [0,n]$ and all $x\in\F_2^n$, it holds that $f_k(x)=f_0(O^k(x))$, where $O^k:\F_2^n\to\F_2^n$ is the cyclic shift by $k$ positions, defined by $O^k(x_1,\dots,x_n)=(x_{(1+k)\bmod n},\dots,x_{(n+k)\bmod n})$, the representatives modulo $n$ being taken as integers in $[1,n]$.
 \end{definition}
 
 
 
-Various weightwise affine functions (\ie belonging to $\WD{1}{n}$) have been exhibited such as in~\cite{TOSC:CarMeaRot17} where the bent functions in Propositions $1$ and $2$ are weightwise affine or in~\cite{DAM:GinMea22} to show than no weightwise perfectly balanced function is weightwise affine for $n\ge 8$. 
-The most known example of weightwise affine function is the hidden weight bit function introduced in~\cite{IEEE:Bryant91}, the one obtained by fixing $f_0=0$ and $f_k=x_k$ for $k \in [n]$. The cryptographic properties of this function have been studied in~\cite{DAM:WCST14}, showing good algebraic properties for this function.
+Various weightwise affine functions (\ie{} belonging to $\WD{1}{n}$) have been exhibited, such as in~\cite{TOSC:CarMeaRot17} where the bent functions in Propositions $1$ and $2$ are weightwise affine, or in~\cite{DAM:GinMea22} to show than no weightwise perfectly balanced function is weightwise affine for $n\geq 8$. 
+The arguably best known example of weightwise affine function is the hidden weight bit function introduced in~\cite{IEEE:Bryant91}, the one obtained by fixing $f_0=0$ and $f_k=x_k$ for $k \in [1,n]$. The cryptographic properties of this function have been studied in~\cite{DAM:WCST14}, showing good algebraic properties for this function.
 
-\begin{definition}[Hidden Weight Bit Function (HWBF)]\label{def:hwbf}
-	For $n\in \N^*$, we call Hidden Weight Bit Function (HWBF) the $n$-variable Boolean function defined by:
+\begin{definition}[Hidden Weight Bit Function (\hwbf{})]\label{def:hwbf}
+    We call Hidden Weight Bit Function (\hwbf{}) the Boolean function $h\in\BN$ defined by:
 	\[h(x)= \left\{ 
 	\begin{array}{l l}
 	0 & \quad \text{ if } \w(x) =0, \\
@@ -286,8 +254,8 @@ The most known example of weightwise affine function is the hidden weight bit fu
 
 \end{definition}
 
-In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$ and lower bounds are given for the nonlinearity for all $n$. 
-These bounds focus on cyclic weightwise quadratic functions and involve sums of binomial coefficients. For simplicity, in the following we provide only the nonlinearity values of the majority function and HWBF, as these bounds will be used for comparison.
+In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$, and lower bounds are given for the nonlinearity for all $n$. 
+These bounds focus on cyclic weightwise quadratic functions and involve sums of binomial coefficients. For simplicity, in the following we provide only the nonlinearity values of the majority function and \hwbf{}, as these bounds will be used for comparison.
 
 
 %We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
@@ -302,7 +270,7 @@ Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$.
     \[
         \NL(f)=2^{n-1}-\binom{n-1}{\frac n2}.
     \]
-    \item The HWBF $f\in\WD{2}{n}$ introduced in Definition~\ref{def:hwbf} satisfies:
+    \item The \hwbf{} $f\in\WD{2}{n}$ introduced in Definition~\ref{def:hwbf} satisfies:
     \[
         \NL(f)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
     \]
@@ -315,7 +283,7 @@ Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$.
 %\begin{Prop}[Nonlinearity of some functions from $\WD{1}{n}$\label{prop:wwd1}]
 %Let $n\in \N^*$ even, the following hold for the following functions in $\WD{1}{n}$: 
 %\begin{itemize}
-%	\item (\eg ~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\textsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
+%	\item (\eg{} ~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\textsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
 %	\[
 %	\NL(\textsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
 %	\]
@@ -328,43 +296,48 @@ Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$.
 
 
 \begin{Prop}[Properties of some functions from $\WD{1}{n}$\label{prop:wwd1}]
-	Let $n\in \N^*$ even, the following hold for the following functions in $\WD{1}{n}$: 
+	Let $n\geq 2$ be an even integer.
 	\begin{itemize}
-		\item (\eg ~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\textsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
+		\item (\eg{}~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\mathsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
 		\[
-		\NL(\textsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
+		\NL(\mathsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
 		\]
-		\item (\cite{DAM:WCST14}, Theorem $3$) The HWBF $h$ introduced in Definition~\ref{def:hwbf} satisfies:
+		\item (\cite{DAM:WCST14}, Theorem $3$) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies:
 		\[
 		\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
 		\]	
-		\item (\cite{DAM:WCST14}, Theorem $1$) The HWBF $h$ introduced in Definition~\ref{def:hwbf} satisfies $\forall n \ge 3$, $\degg(h)=n-1$. 	
+		\item (\cite{DAM:WCST14}, Theorem $1$) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies $\degg(h)=n-1$ for all $n\geq 4$.
 	\end{itemize}
 \end{Prop}
 
 
 
 \subsection{Krawtchouk polynomials}
-We use Krawtchouk polynomials and some of their properties to prove one of our results, we give the necessary preliminaries here and refer to \eg ~\cite{book:MacSlo78} for more details.
+We use Krawtchouk polynomials and some of their properties to prove one of our main results. We give the necessary preliminaries here and refer to \eg{}~\cite{book:MacSlo78} for more details.
 
 \begin{definition}[Krawtchouk Polynomials]\label{def:Kraw}
-	The Krawtchouk polynomial of degree $k$, with $0\leq k\leq n$ is given by: $ \displaystyle \kraw{k}{\ell}{n}=\sum_{j=0}^{k} (-1)^j \binom{\ell}{j} \binom{n-\ell}{k-j}$. 
-	
-	Krawtchouk polynomials are characterized by the generating series: $ \displaystyle (1+z)^{n-x} (1-z)^x=\sum_{k=0}^\infty \kraw{k}{x}{n} z^k$.
-\end{definition}
+	The $n$-th Krawtchouk polynomial of degree $k\in[0,n]$ is given by:
+    \[
+        \displaystyle \kraw{k}{x}{n}=\sum_{j=0}^{k} (-1)^j \binom{x}{j} \binom{n-x}{k-j}.
+    \]
+    Alternatively, the Krawtchouk polynomials can be implicitly defined as the coefficients of the generating series for $(1+z)^{n-x} (1-z)^x$:
+    \[
+        (1+z)^{n-x} (1-z)^x=\sum_{k=0}^\infty \kraw{k}{x}{n} z^k.
+    \]
+\end{definition} %Tim: This is different from the Wiki
 
 
 
 
 
 
-\section{Revisited HWBF and balancedness}\label{sec:defAndBal}
+\section{Revisited \hwbf{} and balancedness}\label{sec:defAndBal}
 %\subsection{Restricted Walsh transform of $f$ in a recursive fashion}
 
-In this part we formally define the revisited HWBF function $f$ and introduce a quantity that allows us to study its balancedness and nonlinearity.
+In this part, we will formally define the revisited \hwbf{} function and introduce a quantity that allows us to study its balancedness and nonlinearity.
 
-\begin{definition}[Revisited HWBF]\label{def:revHWBF}
-Let $n\in \N^*$, even, we call revisited HWBF and denote by $f$ the Boolean function defined as:
+\begin{definition}[Revisited \hwbf{}]\label{def:revHWBF}
+Let $n\in \N^*$, even, we call revisited \hwbf{} and denote by $f$ the Boolean function defined as:
 \[f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k.\]
 \end{definition}
 
@@ -372,8 +345,8 @@ Let $n\in \N^*$, even, we call revisited HWBF and denote by $f$ the Boolean func
 %We study the function $f$ in an even number of variables $n$ defined as the following:
 %\[f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k.\]
 
-Since $f$ is the sum of a quadratic function and a weightweise affine function, it is a weightwise quadratic function. 
-Using the formalism of Definition~\ref{def:wwdegd} $f$ is the WWQ function defined by:% $f_0=0$ and for $k\in [1,n]$ $f_k=x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$.
+Since $f$ is the sum of a quadratic function and a weightwise affine function, it is a weightwise quadratic function. 
+Using the formalism of Definition~\ref{def:wwdegd}, $f$ is the weightwise quadratic function defined by:% $f_0=0$ and for $k\in [1,n]$ $f_k=x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$.
 \[f_0=0, \quad \text{ and } \quad \forall k \in [1,n], \, f_k=x_k+\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}.\]
 
 This form allows to derive the restricted Walsh transform of $f$, which can be a useful tool to study the balancedness and bound the nonlinearity of a function.
@@ -424,7 +397,7 @@ We can give a recursive relation for $\Dnka{n}{k}{a}$.
 Let $n\in \N$ be an even number, $k$ an integer in the range $[0,n]$ and $a\in \F_2^n$. the Following holds on $\Dnka{n}{k}{a}$:
 \begin{itemize}
 	\item For $n=0$, $\Dnka{0}{k}{a}=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise.
-	\item if $n\ge 2$, denoting  $b=(a_1,\cdots,a_{n-2})$ and $y=(x_1,\cdots,x_{n-2})$, we get:
+	\item if $n\geq 2$, denoting  $b=(a_1,\cdots,a_{n-2})$ and $y=(x_1,\cdots,x_{n-2})$, we get:
 	\[\Dnka{n}{k}{a}=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.\]
 \end{itemize}
 
@@ -432,7 +405,7 @@ Let $n\in \N$ be an even number, $k$ an integer in the range $[0,n]$ and $a\in \
 \end{proposition}
 
 \begin{proof}
-For $n\ge 2$ we can rewrite $\Dnka{n}{k}{a}$:
+For $n\geq 2$ we can rewrite $\Dnka{n}{k}{a}$:
 
 \begin{align*}
 \Dnka{n}{k}{a}&=\sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\\
@@ -505,7 +478,7 @@ Using Proposition~\ref{prop:restrWT}, the restricted Walsh transform of $f$ can 
 where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
 
 Calling $\pi$ this permutation, since $c=a+e_k+\sum_{i=n/2+1}^n e_i$, we can write $d=\pi(c)=\pi(a)+ \pi(e_k)+ (0,1,0,1,\ldots,0,1)$. 
-Accordingly, if $k\le n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2+1$, with one couple of consecutive elements (the first one with an odd index) being $(1,1)$ and all the others $(0,1)$. 
+Accordingly, if $k\leq n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2+1$, with one couple of consecutive elements (the first one with an odd index) being $(1,1)$ and all the others $(0,1)$. 
 Otherwise,  when $k> n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2-1$, with one couple of consecutive elements (the first one with an odd index) being $(0,0)$ and all the others $(0,1)$. 
 
 Denoting by $b$ the vector $\pi(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh transform of $f$ in $a$ as:
@@ -817,8 +790,8 @@ Applying the property, we get:
         |\wt f(a)|\leq 1+n\cdot 2^{3n/4}.
     \]
 Equivalently, 
-%$\NL(f)\ge 2^{n-1} - \frac{1 + n 2^{\frac{3}{4}n}} {2}$.
-$\NL(f)\ge 2^{n-1} - \frac{1}{2} -2^{\frac{3n}{4} + \log n -1}$.
+%$\NL(f)\geq 2^{n-1} - \frac{1 + n 2^{\frac{3}{4}n}} {2}$.
+$\NL(f)\geq 2^{n-1} - \frac{1}{2} -2^{\frac{3n}{4} + \log n -1}$.
 \end{Corollary}
 
 \begin{proof}
@@ -906,7 +879,7 @@ In particular, $d_{\frac{n}{2},n}(x)=d_n(x)$.
 We focus on the restricted Walsh spectrum of any function $d_{t,n}$:
 
 \begin{proposition}\label{proposition:dtn}
-	Let $t, n\in \N$ with $n$ even and $t\le n/2$, the following holds on $d_{t,n}$ for all $k\in [0,n]$:
+	Let $t, n\in \N$ with $n$ even and $t\leq n/2$, the following holds on $d_{t,n}$ for all $k\in [0,n]$:
 	\[\wtk{d_{t,n}}{k}(a)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t},\]
 	where $b$ denotes the first $2t$ elements of $a$ and $c$ the last $n-2t$ elements.
 \end{proposition}
@@ -930,14 +903,14 @@ We focus on the restricted Walsh spectrum of any function $d_{t,n}$:
 \end{proof}
 
 \begin{definition}\label{defi:P_a_t}
-    Let $t, n\in \N$ with $n$ even and $t\le n/2$. Given $a=(b,c)\in\F_2^n$ with $b\in\F_2^{2t}$, denote $n-2t-\w(c)$ and $\w(c)$ by $u$ and $v$, respectively. We  then introduce the following polynomial:
+    Let $t, n\in \N$ with $n$ even and $t\leq n/2$. Given $a=(b,c)\in\F_2^n$ with $b\in\F_2^{2t}$, denote $n-2t-\w(c)$ and $\w(c)$ by $u$ and $v$, respectively. We  then introduce the following polynomial:
     \[
         P_{a,t}(z)=P_b(z)\cdot(1+z)^u\cdot(1-z)^v.
     \]
 \end{definition}
 
 \begin{proposition}
-    Let $t, n\in \N$ with $n$ even and $t\le n/2$. Let $a\in\F_2^n$. The following holds true: 
+    Let $t, n\in \N$ with $n$ even and $t\leq n/2$. Let $a\in\F_2^n$. The following holds true: 
     \[
         \sum_{k\in\Z}\wtk{d_{t,n}}{k}(a)z^k=P_{a,t}(z).
     \]
@@ -974,7 +947,7 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
 \end{proof}
 
 \begin{theorem}\label{theorem:bound_D_nka_generalized}
-    Let $t, n\in \N$ with $n$ even and $t\le n/2$. 
+    Let $t, n\in \N$ with $n$ even and $t\leq n/2$. 
     We define $\lambda=t/n\in\left[0,\frac 12\right]$, as well as:
     \[
         \mu(\lambda)=\mu=
@@ -1082,8 +1055,8 @@ The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theo
 
 \section{Experiments and comparisons}\label{sec:expAndComp}
 
-In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revised HWBF for values of $n$ up to $80$. 
-We then compare the nonlinearity of this function to that of other functions suited to similar use cases, such as the HWBF of weightwise cyclic functions from~\cite{DAM:MeaOza24}.
+In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revised \hwbf{} for values of $n$ up to $80$. 
+We then compare the nonlinearity of this function to that of other functions suited to similar use cases, such as the \hwbf{} of weightwise cyclic functions from~\cite{DAM:MeaOza24}.
 
 \subsection{Bounding the Walsh transform of $f$ experimentally}\label{sec:expwt}
 
@@ -1267,7 +1240,7 @@ We observe that the above method provides a much tighter bound than the one from
 \subsection{Comparison of the nonlinearity}
 
 
-In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, HWBF and the cyclic weighwise functions studied in~\cite{DAM:MeaOza24}. 
+In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, \hwbf{} and the cyclic weighwise functions studied in~\cite{DAM:MeaOza24}. 
 
 
 %In Figure~\ref{fig:walsh_bound_comparison} we compare the value $\max_{a\in\mathbb F_2^n}|\wt f(a)|$, the smaller the maximum the better the nonlinearity. We display the values for $n$ up to $80$, which is sufficient to compare the asymptotic behavior of the different bounds. 
@@ -1277,9 +1250,9 @@ In this part we compare the nonlinearity of the function $f$ from Definition~\re
 
 In Figure~\ref{fig:walsh_bound_comparison}, we compare the values of $\max_{a \in \mathbb{F}_2^n} |\wt f(a)|$, where a smaller maximum indicates better nonlinearity (see Definition~\ref{def:nl}). 
 We present values for $n$ up to $80$, which is sufficient for examining the asymptotic behavior of the different bounds.
-The violet and orange curves represent the upper bounds  in~\cite{DAM:MeaOza24}. The violet curve corresponds to the bound that holds for all cyclic weightwise linear functions where $ f_0(x) = b \cdot x $ with $\w(b)$ odd, providing, for example, an upper bound for the HWBF. The orange curve corresponds to the bound for the cyclic weightwise quadratic function defined by $f_0(x) = x_1 + x_2 x_3$.
-The blue curve represents both the majority and HWBF functions, whose exact nonlinearities are given in Property~\ref{prop:wwd1}. We use a single curve here because, on a logarithmic scale, the nonlinearity difference between these two functions is too small to distinguish between them.
-For the revisited HWBF introduced in Definition~\ref{def:revHWBF}, the red curve corresponds to the theoretical bound from Corollary~\ref{cor:bound_walsh_cauchy}, while the green curve represents the experimental results from Section~\ref{sec:expwt}.
+The violet and orange curves represent the upper bounds  in~\cite{DAM:MeaOza24}. The violet curve corresponds to the bound that holds for all cyclic weightwise linear functions where $ f_0(x) = b \cdot x $ with $\w(b)$ odd, providing, for example, an upper bound for the \hwbf{}. The orange curve corresponds to the bound for the cyclic weightwise quadratic function defined by $f_0(x) = x_1 + x_2 x_3$.
+The blue curve represents both the majority and \hwbf{} functions, whose exact nonlinearities are given in Property~\ref{prop:wwd1}. We use a single curve here because, on a logarithmic scale, the nonlinearity difference between these two functions is too small to distinguish between them.
+For the revisited \hwbf{} introduced in Definition~\ref{def:revHWBF}, the red curve corresponds to the theoretical bound from Corollary~\ref{cor:bound_walsh_cauchy}, while the green curve represents the experimental results from Section~\ref{sec:expwt}.
 
 \begin{figure}
 	\centering
@@ -1288,13 +1261,13 @@ For the revisited HWBF introduced in Definition~\ref{def:revHWBF}, the red curve
 		%Maximum of the absolute value of the Walsh spectrum of different functions, in logarithmic scale, for even values of $n$. In violet and orange are the bounds for the cyclic weigtwise linear functions and one cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}. In blue is the value for the majority function and HWBF. The theoretical bound (Corollary~\ref{cor:bound_walsh_cauchy}) for the function $f$ is in red and the experimental one $B_n$ (Section~\ref{sec:expwt}) is in green.}		
 		%On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue. \tsnote{Updated plot, but the description now needs to be changed.}}
 		Maximum absolute values of the Walsh spectrum for various functions, shown on a logarithmic scale for even values of $n$. 
-		The violet and orange curves represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}. The blue curve shows values for the majority function and HWBF. The theoretical bound for the function $f$ (from Corollary~\ref{cor:bound_walsh_cauchy}) is in red, and the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
+		The violet and orange curves represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}. The blue curve shows values for the majority function and \hwbf{}. The theoretical bound for the function $f$ (from Corollary~\ref{cor:bound_walsh_cauchy}) is in red, and the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
 	\label{fig:walsh_bound_comparison}
 \end{figure}
 
 
 
-We observe significantly better performance for the newly introduced function $f$ compared to the majority function and HWBF, with the proven bound exhibiting an asymptotic slope of $ 3/4$ as opposed to $1$. The two bounds proven in~\cite{DAM:MeaOza24} also have an asymptotic slope of $1$.
+We observe significantly better performance for the newly introduced function $f$ compared to the majority function and \hwbf{}, with the proven bound exhibiting an asymptotic slope of $ 3/4$ as opposed to $1$. The two bounds proven in~\cite{DAM:MeaOza24} also have an asymptotic slope of $1$.
 The gap between the red and green curves, both representing upper bounds on $ \max_{a \in \mathbb{F}_2^n} |\wt f(a)| $ (with only the formula for the red curve proven for all even $n$), suggests that the true values may follow an even better slope than $ 3/4$.
 
 In Table~\ref{table:comparisonsNL}, we compare the specific nonlinearity values of the functions under consideration. Among the various weightwise quadratic functions studied so far, we observe that $f$ has the highest nonlinearity from $n=10$ onward.
@@ -1307,7 +1280,7 @@ In Table~\ref{table:comparisonsNL}, we compare the specific nonlinearity values 
 		\hline
 		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
 	\hline	
-    	HWBF   & $4$  & $20$  & $88$  &  $372$ & $1544$ & $6344$ & $25904$  \\  	
+    	\hwbf{}   & $4$  & $20$  & $88$  &  $372$ & $1544$ & $6344$ & $25904$  \\  	
    %4 10 20 44 88 186 372 772 1544 3172 6344 12952 25904
 		\hline
 Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
@@ -1345,14 +1318,14 @@ In this part we give the other cryptographic parameters of the function $f$. Sin
 	Let $n\in \N$ be even, greater than $4$, and $f$ defined as in Definition~\ref{def:revHWBF}, the following holds: $\degg(f)= n-1$.
 \end{proposition}
 \begin{proof}
-	We write $f$ as $q+h$ where $q$ is the quadratic function $\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}$ and $h$ is the HWBF.
-	Using Property~\ref{prop:wwd1} Item $3$, $h$ has degree $n-1\ge 3$, and the function $q$ has no monomial of degree higher than $2$, therefore $\degg(f)=\degg(h)=n+1$.
+	We write $f$ as $q+h$ where $q$ is the quadratic function $\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}$ and $h$ is the \hwbf{}.
+	Using Property~\ref{prop:wwd1} Item $3$, $h$ has degree $n-1\geq 3$, and the function $q$ has no monomial of degree higher than $2$, therefore $\degg(f)=\degg(h)=n+1$.
 	
 	
 \end{proof}
 
 
-In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of different weightwise quadratic function. We observe that $f$ is the function with higher degree, jointly with the HWBF. 
+In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of different weightwise quadratic function. We observe that $f$ is the function with higher degree, jointly with the \hwbf{}. 
 
 \begin{table}[h]
 	\centering
@@ -1360,7 +1333,7 @@ In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of differen
 		\hline
 		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
 		\hline	
-		HWBF   & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$  \\  	
+		\hwbf{}   & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$  \\  	
 		\hline
 		Majority   & $4$  & $4$  & $8$  &  $8$ & $8$ & $8$ & $16$  \\
 		\hline
@@ -1384,20 +1357,20 @@ In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of differen
 
 \begin{proposition}[Algebraic immunity of $f$]
 	Let $n\in \N$ be even, $f$ defined (as in Definition~\ref{def:revHWBF}) as
-	$f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k$ and $h$ denote the $n$-variable HWBF, the following holds:
-	\[\AI(f)\ge \AI(h)-2.\]
+	$f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k$ and $h$ denote the $n$-variable \hwbf{}, the following holds:
+	\[\AI(f)\geq \AI(h)-2.\]
 \end{proposition}
 \begin{proof}
 	Let denote by $q$ the quadratic function $\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}$, it allows to write $h=f+q$. 
 	Let $g\neq 0$ be an annihilator of $f+ \varepsilon$ of minimum degree (where $\varepsilon \in \{0,1\}$), then the following holds:
 	\[g (1+q) (h+\varepsilon) = g(1+q) (f+\varepsilon + q)=0, \]
 	hence $g (1+q)$ is an annihilator of $h+ \varepsilon$. 
-	If $g (1+q)\ne 0$ then $\degg(g(1+q)) \le \degg(g)+2$ and we obtain $\degg(g)\ge \AI(h) -2$. 
-	Otherwise, $g (1+q)= 0$ implies that $g$ annihilates $1+q$ and therefore $0=g (f+\varepsilon + 1 +q)=g(h+ \varepsilon +1)$ that is $\degg(g)\ge \AI(h)$. 
-	Summarizing, for any non null annihilator $g$ of $f$ or $f+1$ we get $\degg(g)\ge \AI(h)-2$, it allows to conclude $\AI(f)\ge \AI(h)-2$.
+	If $g (1+q)\ne 0$ then $\degg(g(1+q)) \leq \degg(g)+2$ and we obtain $\degg(g)\geq \AI(h) -2$. 
+	Otherwise, $g (1+q)= 0$ implies that $g$ annihilates $1+q$ and therefore $0=g (f+\varepsilon + 1 +q)=g(h+ \varepsilon +1)$ that is $\degg(g)\geq \AI(h)$. 
+	Summarizing, for any non null annihilator $g$ of $f$ or $f+1$ we get $\degg(g)\geq \AI(h)-2$, it allows to conclude $\AI(f)\geq \AI(h)-2$.
 \end{proof}
 
-From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the HWBF is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for $f$. 
+From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the \hwbf{} is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for $f$. 
 In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various weightwise quadratic functions. We observe that the function $f$ demonstrates the best performance after the majority function, which is known to achieve optimal algebraic immunity.
 
 
@@ -1435,7 +1408,7 @@ In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various
 		\hline
 		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
 		\hline	
-		HWBF   & $2$  & $3$  & $4$  &  $4$ & $5$ & $5$ & $6$  \\  	
+		\hwbf{}   & $2$  & $3$  & $4$  &  $4$ & $5$ & $5$ & $6$  \\  	
 		\hline
 		Majority   & $2$  & $3$  & $4$  &  $5$ & $6$ & $7$ & $8$  \\
 		\hline
