@@ -135,7 +135,7 @@ Additionally, the techniques we introduce to analyze nonlinearity have broader a
 
 \section{Preliminaries}
 
-Throughout this paper, $n\geq 0$ will always denote a non-negative integer. Further, our intervals will only contain integers, so that for instance $[0,n]=\{0,1,\dots,n\}$. The set of binary vectors of length $n$ will be denoted by $\F_2^n$, with zero vector written as $0_n$. The canonical basis of $\F_2^n$ will be written as $\{e_1,\dots,e_n\}$; therefore, $e_i\in\F_2^n$ is the vector which is zero everywhere, except at position $i$. The entries of a binary vector $x\in\F_2^n$ will always be denoted by $x_1,\dots,x_n$. Given a permutation $\pi:[1,n]\to[1,n]$ and a vector $x\in\F_2^n$, we define $\pi(x)=(x_{\pi(i)})_{i\in[1,n]}\in\F_2^n$. We write the scalar product of two binary vectors $x,y\in\F_2^n$ as $x\cdot y=\sum_{i=1}^nx_iy_i\in\F_2$. The Hamming weight of a binary vector $x\in\F_2^n$ is denoted by $\w(x)=|\{i\in [1,n]:x_i=1\}|$.
+Throughout this paper, $n\geq 0$ will always denote a non-negative integer. Further, our intervals will only contain integers, so that for instance $[0,n]=\{0,1,\dots,n\}$. The set of binary vectors of length $n$ will be denoted by $\F_2^n$, with zero vector written as $0_n$. The canonical basis of $\F_2^n$ will be written as $\{e_1,\dots,e_n\}$; therefore, $e_i\in\F_2^n$ is the vector which is zero everywhere, except at position $i$. The entries of a binary vector $x\in\F_2^n$ will always be denoted by $x_1,\dots,x_n$. We write the scalar product of two binary vectors $x,y\in\F_2^n$ as $x\cdot y=\sum_{i=1}^nx_iy_i\in\F_2$. The Hamming weight of a binary vector $x\in\F_2^n$ is denoted by $\w(x)=|\{i\in [1,n]:x_i=1\}|$.
 
 \subsection{Boolean functions and cryptographic parameters}
 
@@ -325,6 +325,10 @@ We use Krawtchouk polynomials and some of their properties to prove one of our m
 \end{definition} 
 
 
+
+
+
+
 \section{Revisited \hwbf{} and balancedness}\label{sec:defAndBal}
 %\subsection{Restricted Walsh transform of $f$ in a recursive fashion}
 
@@ -332,30 +336,44 @@ In this part, we will formally define the revisited \hwbf{} function and introdu
 
 \begin{definition}[Revisited \hwbf{}]\label{def:revHWBF}
 For an even integer $n\geq 0$, we call revisited \hwbf{} the Boolean function $f\in\BN$ defined as:
-\[f(x)=\sum_{i=1}^{n/2}(x_i+1) x_{i+\frac{n}{2}} + \sum_{k=1}^nx_k\phikn{k}{n}(x).\]
+\[f(x)=\sum_{i=1}^{n/2}(x_{2i-1}+1)x_{2i}+ \sum_{k=1}^n x_k\phikn{k}{n}(x).\]
 \end{definition}
 
+%We study the function $f$ in an even number of variables $n$ defined as the following:
+%\[f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k.\]
 
-Since $f$ is the sum of a quadratic function and a weightwise affine function, it is a weightwise quadratic function. Using the formalism of Definition~\ref{def:wwdegd}, $f$ is the weightwise quadratic function defined by $f_0(x)=0$ and $f_k(x)=x_k+\sum_{i=1}^{n/2}(x_i+1) x_{i+n/2}$ for $k\in[1,n]$. This form allows to derive the restricted Walsh transform of $f$, which can be a useful tool to study the balancedness and bound the nonlinearity of a function.
+Since $f$ is the sum of a quadratic function and a weightwise affine function, it is a weightwise quadratic function. 
+Using the formalism of Definition~\ref{def:wwdegd}, $f$ is the weightwise quadratic function defined by $f_0(x)=0$ and $f_k(x)=\sum_{i=1}^{n/2}(x_{2i-1}+1)x_{2i}+x_k$ for all $k\in[1,n]$. This form allows to derive the restricted Walsh transform of $f$, which can be a useful tool to study the balancedness and bound the nonlinearity of a function.
 %Maybe add examples, such as OM24, M24
+
+\begin{definition}
+    For an even integer $n\geq 0$, we introduce the Boolean function $d_n\in\BN$ given by:
+    \[
+        d_n(x)=\sum_{i=1}^{n/2}x_{2i-1}x_{2i}.
+    \]
+\end{definition}
+
 %We study the restricted Walsh transform  of $f$ to bound its nonlinearity.
 \begin{proposition}\label{prop:restrWT}
-Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Consider any binary vector $a\in\F_2^n$, and define $c=a+e_k+\sum_{i=n/2+1}^n e_i$. Then the restricted Walsh transform of $f$ satisfies:
-\[\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+n/2}+ c \cdot x}.\]
+Let $n\geq 2$ be an even integer. Let $a\in\F_2^n$ and let $k\in[1,n]$. If we put $c=a+e_k+\sum_{i=1}^{n/2}e_{2i}$, then the restricted Walsh transform of the revisited \hwbf{} $f\in\BN$ satisfies:
+\[
+    \wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{d_n(x)+c\cdot x}=\wtk{d_n}{k}(c).
+\]
 \end{proposition}
+
 \begin{proof}
-We compute:
 %\begin{align*}
 %	\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+a \cdot x}
 %	=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}+ a \cdot x}\\
 %	&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x},
 %\end{align*}
 %\begin{align*}
+We compute:
 \begin{align*}
     \wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+a \cdot x}\\
-	&=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}+ a \cdot x}\\
-	&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+n/2}+\left(x_k+\sum_{i=n/2+1}^{n}x_i+a\cdot x\right)}\\
-    &=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+n/2}+ c \cdot x}.\qedhere
+    &=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2}(x_{2i-1}+1)x_{2i}+x_k+a \cdot x}\\
+    &=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2}x_{2i-1}x_{2i}+\left(x_k+\sum_{i=1}^{n/2}x_{2i}+a \cdot x\right)}\\
+    &=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2}x_{2i-1}x_{2i}+c\cdot x}.\qedhere
 \end{align*}
 \end{proof}
 
@@ -366,12 +384,12 @@ We compute:
 %\end{align*}
 %where $c$ is the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_i$ where the $e_i$ denotes the canonical vector with "1" in position $i$.
 
-Accordingly, we can study the restricted Walsh transform of the revisited \hwbf{} by analyzing the one of the following Boolean function $d_n\in\BN$:
+Accordingly, we can study the restricted Walsh transform of the \hwbf{} by analyzing the one of $d_n$. We introduce the following notations:
 
 \begin{definition}
-Let $n\geq 0$ be an even integer. Then we define the Boolean function $d_n\in\BN$ by $d_n(x)=\sum_{i=1}^{n/2}x_{2i-1}x_{2i}$. Further, for an integer $k$ and a binary vector $a\in\F_2^n$, we define $\Dnka{n}{k}{a}=0$ if $n\not\in[0,n]$, and otherwise:
+Let $n\geq 0$ be an even integer and $a\in\F_2^n$ a vector. Then for every integer $k$, we define $\Dnka{n}{k}{a}=0$ if $n\not\in[0,n]$, and otherwise:
 \[
-    \Dnka{n}{k}{a}=\sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a\cdot x}.
+    \Dnka{n}{k}{a}= \sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a\cdot x}.
 \]
 \end{definition}
 
@@ -381,7 +399,7 @@ The $\Dnka{n}{k}{a}$ satisfy a recursive relation:
 Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the following hold true:
 \begin{itemize}
     \item We have $\Dnka 00a=1$ and $\Dnka 0ka=0$ if $k\neq 0$.
-    \item If $n\geq 2$, then for $b=(a_1,\dots,a_{n-2})\in\F_2^{n-2}$, we have:
+    \item If $n\geq 2$, then for $b=(a_1,\dots,a_{n-2})$, we have:
     \[\Dnka{n}{k}{a}=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.\]
 \end{itemize}
 \end{proposition}
@@ -417,11 +435,10 @@ Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the
 
 %In this analysis we considered the different cases depending on the values of $a_{n-1}$ and $a_n$, but the same reasoning applies with any $a_i, a_{i+1}$ where $i$ is odd. 
 
-\begin{remark}\label{rmk:dependence_dnka}
-    The recursive formula of Proposition~\ref{prop:recursiveDnka} gives different cases depending on the values of the pair $(a_{n-1},a_n)$. However, the same reasoning applies with any pair of the form $(a_{2i-1}, a_{2i})$ for $i\in[0,n/2]$. Therefore, the value of $\Dnka{n}{k}{a}$ depends only on the number of pairs $(a_{2i-1}, a_{2i})$ in $a$ being $(0,0)$, $(1,1)$, $(0,1)$ or $(1,0)$. We give the values of $\Dnka{2}{k}{a}$ for $n=2$ in Table~\ref{tab:Dnka}. These values together with Proposition~\ref{prop:recursiveDnka} are sufficient to determine any $\Dnka{n}{k}{a}$. We will get back to this in Remark~\ref{rmk:Dnka_dep_pqr}.
-\end{remark}
+The recursive formula of Proposition~\ref{prop:recursiveDnka} gives different cases depending on the values of the pair $(a_{n-1},a_n)$. However, the same reasoning applies with any pair of the form $(a_{2i-1}, a_{2i})$ for $i\in[0,n/2]$. Therefore, the value of $\Dnka{n}{k}{a}$ depends only on the number of pairs $(a_{2i-1}, a_{2i})$ in $a$ being $(0,0)$, $(1,1)$, $(0,1)$ or $(1,0)$.
+We give the values of $\Dnka{2}{k}{a}$ for $n=2$ in Table~\ref{tab:Dnka}. These values together with Proposition~\ref{prop:recursiveDnka} are sufficient to determine any $\Dnka{n}{k}{a}$.
 
-\begin{table}
+\begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -436,40 +453,29 @@ Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the
 In the following, we show how the Walsh transform of $f$ can be written in terms of the $\Dnka{n}{k}{a}$. Then, in Section~\ref{sec:balancedness} we use Proposition~\ref{prop:recursiveDnka} to determine the balancedness of $f$, and in Section~\ref{sec:genfunc} we study the value of $\Dnka{n}{k}{a}$ using generating functions.
 
 \begin{proposition}\label{prop:WT}
-    Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Denote by $\pi:[1,n]\to[1,n]$ the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Let $a\in\F_2^n$ be a binary vector, and let $b=\pi(a)+(0,1,0,1,\ldots,0,1)$. Then the following holds true:
-	\[ \wt{f}(a)=1+\sum_{k=1}^n \Dnka{n}{k}{b+\pi(e_k)}.\]
+    Let $n\geq 0$ be even, and let $a\in\F_2^n$. Put $b=a+\sum_{i=1}^{n/2}e_{2i}$. Then the Walsh transform of the revisited \hwbf{} $f\in\BN$ at $a$ is given by:
+    \[ \wt{f}(a)=1+\sum_{k=1}^n \Dnka{n}{k}{b+e_k}.\]
 \end{proposition}
 
 \begin{proof}
-\tsnote{This may not work?}
-We have by Proposition~\ref{prop:restrWT} that:
+For every $k\in[1,n]$, define $c_k=a+e_k+\sum_{i=1}^{n/2}e_{2i}=b+e_k$. Then, using Proposition~\ref{prop:restrWT}, we get:
 \[
-\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x}=\Dnka{n}{k}{d},\]
-where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
-
-Calling $\pi$ this permutation, since $c=a+e_k+\sum_{i=n/2+1}^n e_i$, we can write $d=\pi(c)=\pi(a)+ \pi(e_k)+ (0,1,0,1,\ldots,0,1)$. 
-Accordingly, if $k\leq n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2+1$, with one couple of consecutive elements (the first one with an odd index) being $(1,1)$ and all the others $(0,1)$. 
-Otherwise,  when $k> n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2-1$, with one couple of consecutive elements (the first one with an odd index) being $(0,0)$ and all the others $(0,1)$. 
-
-Denoting by $b$ the vector $\pi(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh transform of $f$ in $a$ as:
-\[ \wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}.\qedhere\]
+    \wt{f}(a)=1+\sum_{k=1}^n\wtk fk(a)=1+\sum_{k=1}^n\wtk{d_n}k(c_k)=1+\sum_{k=1}^n\Dnka nk{c_k}=1+\sum_{k=1}^n\Dnka nk{b+e_k}.\qedhere
+\]
 \end{proof}
 
 \subsection{Balancedness of $f$}\label{sec:balancedness}
 
-In this part we determine for which values of $n$ the function $f$ is balanced, using the expression of its Walsh transform in terms of $\Dnka{n}{k}{a}$ and the recursive relation of these quantities.
-
+In this part, we determine for which values of $n$ the revisited \hwbf{} $f\in\BN$ is balanced by using the expression of its Walsh transform in terms of the $\Dnka{n}{k}{a}$ together with the recursive relation of these quantities.
 
 \begin{theorem}\label{th:bal}
-	Let $n \in \N^*$ even, and $f$ be the $n$-variable function from Definition~\ref{def:revHWBF}, the following holds on its Walsh transform in $0_n$:
+    For an even integer $n\geq 2$, the following holds true for the Walsh transform of the revisited \hwbf{} $f\in\BN$ at $0_n$:
 	\[\wt{f}(0_n)= \left \{
 	\begin{array}{l l}
 	0 & \text{ if } n/2 \text{ is even, } \\
 	-2 \binom{n/2-1}{(n-2)/4} & \text{ if }  n/2 \text{ is odd.}
 	\end{array}\right.\]
-	
-	Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equiv 2 \mod 4$.
-	
+	Accordingly, $f$ is balanced when $n \equiv 0\bmod 4$ and unbalanced when $n\equiv 2 \bmod 4$.
 \end{theorem}
 
 \begin{proof}
@@ -539,12 +545,23 @@ Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equi
 
 \section{Extensive study of $\Dnka nka$ and bounds on the Walsh spectrum of $f$}\label{sec:dnk}
 
-This section examines the values of $\Dnka nka$ through the use of generating functions. To begin, in Section~\ref{sec:genfunc}, we determine essential characteristics of these values. Subsequently, in Section~\ref{sec:Cauchy}, we employ Cauchy's estimate to bound the absolute values of $\Dnka nka$. This approach allows us to also bound the absolute values of the Walsh transform coefficients of the revisited \hwbf{}, thereby constraining the nonlinearity. Lastly, in Section~\ref{sec:general}, we illustrate how this result can be extended to limit the nonlinearity of a family of weightwise quadratic functions.
+In this section, we study the values of $\Dnka nka$ using generating functions. First, in Section~\ref{sec:genfunc} we establish key properties of these quantities. Then, in Section~\ref{sec:Cauchy}, we apply Cauchy's estimate to bound the absolute values of $\Dnka nka$, which enables us to bound the absolute values of the Walsh transform coefficients of $f$ and consequently, the nonlinearity.
+Finally, in Section~\ref{sec:general}, we demonstrate how this result can be extended to bound the nonlinearity of a family of weightwise quadratic functions.
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Study of $\Dnka nka$ through generating functions}\label{sec:genfunc}
 
 \begin{definition}\label{defi:P_a}
-    Let $n\geq 0$ be an even integer. For $a\in\F_2^n$, we denote by $p=p(a)$ the number of $i\geq 1$ for which $(a_{2i-1},a_{2i})=(0,0)$, by $q=q(a)$ the number of $i\geq 1$ for which $(a_{2i-1},a_{2i})=(1,1)$, and by $r=r(a)$ the number of $i\geq 1$ for which $(a_{2i-1},a_{2i})\in\{(0,1),(1,0)\}$. We then have $p+q+r=n/2$. We further introduce the integer polynomial $P_a(z)$ given by the following expression:
+    Let $n\geq 2$ be an even integer. For $a\in\F_2^n$, denote by $p=p(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(0,0)$, by $q=q(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})=(1,1)$, and by $r=r(a)$ the number of odd $i\geq 1$ for which $(a_i,a_{i+1})\in\{(0,1),(1,0)\}$. We then have $p+q+r=n/2$. Consider further the integer polynomial $P_a(z)$ given by the following expression:
     \[
     P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
     \]
@@ -552,20 +569,17 @@ This section examines the values of $\Dnka nka$ through the use of generating fu
 
 
 \begin{proposition}\label{proposition:generating_fct}
-	For every even integer $n\geq o$ and every binary vector $a\in\F_2^n$, the following holds:
-    \[
-        \sum_{k\in\Z}\Dnka nka z^k= P_a(z).
-    \]
+	It holds that $\sum_{k\in\Z}\Dnka nka z^k= P_a(z)$.
 \end{proposition}
 
 \begin{proof}
 	We proceed by induction on even $n\geq 0$. 
-	For the base case $n=0$, for $a\in\F_2^0$ (the empty vector), we have $P_a(z)=1$, while $\Dnka 00a=1$ and $\Dnka 0ka=0$ if $k\neq 0$ (from Proposition~\ref{prop:recursiveDnka}). 
+	For the base case $n=0$, for $a\in\F_2^0$, we have $P_a(z)=1$, while $\Dnka 0ka=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise (from Proposition~\ref{prop:recursiveDnka}). 
 	For the inductive step, let $n\geq 2$ be even, and assume that the corresponding formula holds for $n-2$. Using the recursive formula for $\Dnka nka$ with the notation $a=(b,a_{n-1},a_n)$, we have:
 	\begin{align*}
 	\begin{split}
 	\sum_{k\in\Z}\Dnka nka z^k&=\sum_{k\in\Z}\Dnka{n-2}kbz^k+\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)\sum_{k\in\Z}\Dnka{n-2}{k-1}{b}z^k\\
-	&\qquad+(-1)^{1+a_{n-1}+a_n}\sum_{k\in\Z}\Dnka{n-2}{k-2}{b}z^k\\
+	&\quad+(-1)^{1+a_{n-1}+a_n}\sum_{k\in\Z}\Dnka{n-2}{k-2}{b}z^k\\
 	&=P_b(z)+\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)zP_b(z)+(-1)^{1+a_{n-1}+a_n}z^2P_b(z)\\
 	&=P_b(z)\cdot\Big(z^2(-1)^{1+a_{n-1}+a_n}+z\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)+1\Big)\\
 	&=P_a(z).\qedhere
@@ -573,17 +587,20 @@ This section examines the values of $\Dnka nka$ through the use of generating fu
 	\end{align*}
 \end{proof}
 
-\begin{remark}\label{rmk:Dnka_dep_pqr}
-    We have already argued in Remark~\ref{rmk:dependence_dnka} that $\Dnka nka$ only depends on $p(a)$, $q(a)$ and $r(a)$. This observation can also be obtained from Proposition~\ref{proposition:generating_fct}: since $P_a(z)$ only depends on $p(a)$, $q(a)$ and $r(a)$ (by definition), we deduce that also $\Dnka nka$ only depends on $p(a)$, $q(a)$ and $r(a)$. Therefore, for any $p,q,r\geq0$ satisfying $p+q+r=n/2$, it makes sense to introduce the notation $\mathsf D_{n,k}^{p,q,r}=\Dnka nka$, where $a\in\mathbb F_2^n$ is any vector with $(p(a),q(a),r(a))=(p,q,r)$. We will make use of this notation later on.
+\begin{remark}
+    In particular, since $P_a(z)$ only depends on the triplet $(p,q,r)$, we deduce that also $\Dnka nka$ only depends on the triplet $(p,q,r)$; therefore, it makes sense to introduce the notation $\mathsf D_{n,k}^{p,q,r}=\Dnka nka$, where $a\in\mathbb F_2^n$ is any vector with $(p(a),q(a),r(a))=(p,q,r)$. We will make use of this notation later on.
 \end{remark}
 
+
+
+
 \begin{proposition}\label{proposition:symmetry}
-	For every even integer $n\geq 2$, for every binary vector $a\in\F_2^n$, and for every integer $k$, the following holds:
+	For every integer $k$, we have:
 	\[	\Dnka n{n-k}a=(-1)^{p+q+k}\Dnka nka.	\]
 \end{proposition}
 
 \begin{proof}
-	We define the reverse polynomial  $Q_a(z)$ as the degree $n$ polynomial where each coefficient of $z^k$ in $Q_a(z)$ is equal to the coefficient of $z^{n-k}$ in $P_a(z)$. 
+	We define the reverse polynomial  $Q_a(z)$ such as the degree $n$ polynomial where each coefficient of $z^k$ in $Q_a(z)$ is equal to the coefficient of $z^{n-k}$ in $P_a(z)$. 
 	Then we have:
 	\begin{align*}
 	Q_a(z)&=z^nP_a(1/z)\\
@@ -591,36 +608,40 @@ This section examines the values of $\Dnka nka$ through the use of generating fu
 	&=(-1)^{p+q}(-z^2-2z+1)^p\cdot(-z^2+2z+1)^q\cdot(z^2+1)^r\\
 	&=(-1)^{p+q}P_a(-z).
 	\end{align*}
-	Therefore, the coefficient of $z^k$ in $Q_a(z)$, which is $\Dnka n{n-k}a$, is equal to the coefficient of $z^k$ in $(-1)^{p+q}P_a(-z)$, which is $(-1)^{p+q+k}\Dnka nka$.
+	Thus the coefficient of $z^k$ in $Q_a(z)$, which is $\Dnka n{n-k}a$, is equal to the coefficient of $z^k$ in $(-1)^{p+q}P_a(-z)$, which is $(-1)^{p+q+k}\Dnka nka$.
 \end{proof}
 
 \begin{Corollary}
-    Let $n\geq 0$ be an even integer, and let $a\in\F_2^n$ be a binary vector. If $r=r(a)$ is odd, then it holds that $\Dnka n{n/2}a=0$.
+	If $r$ is odd, then for $k=n/2$, we have $\Dnka n{n/2}a=0.$
 \end{Corollary}
 
 \begin{proof}
-	By Proposition \ref{proposition:symmetry}, we have $\Dnka n{n/2}a=(-1)^{p+q+n/2}\Dnka n{n/2}a=-\Dnka n{n/2}a$ because $p+q+n/2$ is odd: $p+q+n/2\equiv n/2-p-q\equiv r\equiv 1\bmod 2$.
+	By Proposition \ref{proposition:symmetry}, we have $\Dnka n{n/2}a=(-1)^{p+q+n/2}\Dnka n{n/2}a=-\Dnka n{n/2}a$ because $p+q+n/2\equiv n/2-p-q\equiv r\equiv 1\bmod 2$.
 \end{proof}
 
 Another immediate case for zero coefficients is the following:
 
 
 \begin{proposition}
-    Let $n\geq 0$ be even and $a\in\F_2^n$ a binary vector. If $k$ is an odd integer and  $p=q$, then it holds that $\Dnka nka=0=\Dnka n{n-k}a$.
+    If $p=q$ and $k$ is odd, then $\Dnka nka=0=\Dnka n{n-k}a$.
 \end{proposition}
 
 \begin{proof}
-    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p\cdot(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ in $P_a(z)$ of $z^k$ for odd $k$ must be zero. It follows that also $\Dnka n{n-k}a=0$ by Proposition~\ref{proposition:symmetry}.
+    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p\cdot(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ of $z^k$ for odd $k$ must be zero in $P_a(z)$. It follows that also $\Dnka n{n-k}a=0$ by Proposition~\ref{proposition:symmetry}.
 \end{proof}
 
+
+
+
+
 \begin{remark}\label{remark:D_nka_differentiation}
-    We can also use Proposition \ref{proposition:generating_fct} to obtain $\Dnka nka$ through differentiation and evaluation at $z=0$:
+    We can also use Proposition \ref{proposition:generating_fct} to obtain $\Dnka nka$ through differentiation and evaluation in $0$:
     \[
         k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}.
     \]
     Using this formula, we can for instance use a computer algebra system to deduce $\Dnka nka$ for small values of $k$, see Table \ref{tab:Dnka_small_k}. Note that even though the expression for $\Dnka n3a$ involves a division by $3$, its evaluation at specific values for $(p,q,r)$ will always yield integers. Indeed, either $p-q\equiv 0\bmod 3$, or $(p-q)^2\equiv 1\bmod 3$, in which case $2(p-q)^2+7\equiv 0\bmod 3$.
-\end{remark}
-\begin{table}
+    
+    \begin{table}
     	\centering
     	\begin{tabular}{|c|c|}
     		\hline
@@ -630,8 +651,9 @@ Another immediate case for zero coefficients is the following:
             $2$&$2(p-q)^2-3(p+q)+r$\\ \hline
             $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
     	\end{tabular}
-    	\tablecaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$.}\label{tab:Dnka_small_k}
+    	\tablecaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$}\label{tab:Dnka_small_k}
     \end{table}
+\end{remark}
 
 From differentiation, we can get more cases in which $\Dnka nka=0$:
 
@@ -669,7 +691,7 @@ Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums
  \sum_{k=0}^n\Dnka nka=(-1)^{q}2^{n/2}, \quad \text{and} \quad
  \sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
 \]
-        \item The sum over the even and the odd $k$ of the the $\Dnka nka$ are, respectively:
+        \item The sum over the even and the odd $k$ of the $\Dnka nka$ are, respectively:
  %       \begin{gather*}
   %          \sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big),\\
    %         \sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
@@ -1226,7 +1248,7 @@ In Table~\ref{table:comparisonsNL}, we compare the specific nonlinearity values 
 
 
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{|c| c|c|c|c| c|c|c|}
 		\hline
@@ -1279,7 +1301,7 @@ In this part we give the other cryptographic parameters of the function $f$. Sin
 
 In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of different weightwise quadratic function. We observe that $f$ is the function with higher degree, jointly with the \hwbf{}. 
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{|c| c|c|c|c| c|c|c|}
 		\hline
@@ -1354,7 +1376,7 @@ In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various
 
 
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{|c| c|c|c|c| c|c|c|}
 		\hline
@@ -1387,7 +1409,7 @@ These various results on the algebraic properties of $f$ suggest that it possess
 
 
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
