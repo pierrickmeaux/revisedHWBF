@@ -218,8 +218,8 @@ The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\ci
 
 \subsection{Symmetric Functions, \hwbf{} and weightwise degree-d functions}
 
-The Boolean symmetric functions in $n$ variables are those that are constant on each slice $\Ekn{k}{n}$ for $k\in [0,n]$. 
-This class has been thoroughly studied in the context of cryptography, see \eg{} \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,IEEE:CheLu11,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
+Recall that the Boolean symmetric functions in $n$ variables are those that are constant on the slice $\Ekn{k}{n}$ for every $k\in [0,n]$. 
+This class of functions has been thoroughly studied in the context of cryptography, see \eg{} \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,IEEE:CheLu11,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
 In this article, the symmetric functions that we consider will mainly be the slice indicator function and the majority function.
 %\begin{definition}[Elementary symmetric functions]
 %Let $i\in [0,n]$, the elementary symmetric function of degree $i$ in $n$ variables, denoted $\sigma_{i,n}$, is the function which ANF contains all monomials of degree $i$ and no monomials of other degrees. 
@@ -234,7 +234,7 @@ In this article, the symmetric functions that we consider will mainly be the sli
 
 Bigger families of functions can be obtained by considering functions of bounded degree on each slice. This corresponds to the concept of weightwise degree-$d$ functions introduced in~\cite{DAM:GinMea22} for $d=1$ and~\cite{DAM:MeaOza24} for the general case. 
 
-\begin{definition}[Weightwise degree-\textit{d} functions (~\cite{DAM:MeaOza24} Definition 12)]\label{def:wwdegd}
+\begin{definition}[Weightwise degree-\textit{d} functions, \cite{DAM:MeaOza24} Definition 12]\label{def:wwdegd}
     A Boolean function $f\in\BN^*$ is called weightwise degree-$d$ if it can be written under the form $f=\sum_{k=0}^n f_k \phikn{k}{n}$ with $f_k\in\BN$ of degree at most $d$. The set of weightwise degree-$d$ functions is denoted by $\WD{d}{n}$.
 	Additionally, a weightwise degree-$d$ function $f=\sum_{k=0}^n f_k \phikn{k}{n}$ is called a cyclic weightwise degree-$d$ function if for all $k\in [0,n]$ and all $x\in\F_2^n$, it holds that $f_k(x)=f_0(O^k(x))$, where $O^k:\F_2^n\to\F_2^n$ is the cyclic shift by $k$ positions, defined by $O^k(x_1,\dots,x_n)=(x_{(1+k)\bmod n},\dots,x_{(n+k)\bmod n})$, the representatives modulo $n$ being taken as integers in $[1,n]$.
 \end{definition}
@@ -320,7 +320,7 @@ We use Krawtchouk polynomials and some of their properties to prove one of our m
     \[
         \displaystyle \kraw{k}{x}{n}=\sum_{j=0}^{k} (-1)^j \binom{x}{j} \binom{n-x}{k-j}.
     \]
-    Alternatively, the Krawtchouk polynomials can be implicitly defined as the coefficients of the generating series for $(1+z)^{n-x} (1-z)^x$:
+    Alternatively, the Krawtchouk polynomials can be characterized as the coefficients in the generating function for $(1+z)^{n-x} (1-z)^x$ in the variable $z$:
     \[
         (1+z)^{n-x} (1-z)^x=\sum_{k=0}^\infty \kraw{k}{x}{n} z^k.
     \]
@@ -1053,7 +1053,7 @@ The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theo
 
 \section{Experiments and comparisons}\label{sec:expAndComp}
 
-In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revised \hwbf{} for values of $n$ up to $80$. 
+In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revisited \hwbf{} for values of $n$ up to $80$. 
 We then compare the nonlinearity of this function to that of other functions suited to similar use cases, such as the \hwbf{} of weightwise cyclic functions from~\cite{DAM:MeaOza24}.
 
 \subsection{Bounding the Walsh transform of $f$ experimentally}\label{sec:expwt}
