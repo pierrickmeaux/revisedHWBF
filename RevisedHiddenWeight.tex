@@ -437,22 +437,52 @@ Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the
 In the following, we show how the Walsh transform of $f$ can be written in terms of the $\Dnka{n}{k}{a}$. Then, in Section~\ref{sec:balancedness} we use Proposition~\ref{prop:recursiveDnka} to determine the balancedness of $f$, and in Section~\ref{sec:genfunc} we study the value of $\Dnka{n}{k}{a}$ using generating functions.
 
 \tsnote{@Pierrick, check the below proposition with its proof.}
+
+\pmnote{Part under repair}
+
+
 \begin{proposition}\label{prop:WT}
-    Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Denote by $\pi:[1,n]\to[1,n]$ the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Let $a\in\F_2^n$ be a binary vector, and let $b=\pi(a)+(0,1,0,1,\ldots,0,1)$. Then the following holds true:
+    Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Denote by $\pi:[1,n]\to[1,n]$ the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Let $a\in\F_2^n$ be a binary vector, and let $b=\pi^{-1}(a)+(0,1,0,1,\ldots,0,1)$. Then the following holds true:
 	\[ \wt{f}(a)=1+\sum_{k=1}^n \Dnka{n}{k}{b+\pi(e_k)}.\]
 \end{proposition}
 
 \begin{proof}
 We have by Proposition~\ref{prop:restrWT} that:
-\[
-\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x}=\Dnka{n}{k}{d},\]
-where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
+%\[
+%\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x}=\Dnka{n}{k}{d},\]
+%where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
 
-Calling $\pi$ this permutation, since $c=a+e_k+\sum_{i=n/2+1}^n e_i$, we can write $d=\pi(c)=\pi(a)+ \pi(e_k)+ (0,1,0,1,\ldots,0,1)$. 
-Accordingly, if $k\leq n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2+1$, with one couple of consecutive elements (the first one with an odd index) being $(1,1)$ and all the others $(0,1)$. 
-Otherwise,  when $k> n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2-1$, with one couple of consecutive elements (the first one with an odd index) being $(0,0)$ and all the others $(0,1)$. 
+\begin{align*}
+\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ x_k +a \cdot x + \sum_{i=1}^{n/2} x_{n/2+i}}\\
+&= \sum_{\pi(x) \in \Ekn{k}{n}} (-1)^{f(\pi(x))+a \cdot \pi(x)} =\sum_{\pi(x) \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_{\pi(i)} x_{\pi(i+\frac{n}{2})}+ x_{\pi(k)}+a \cdot \pi(x) + \sum_{i=1}^{n/2} x_{\pi(n/2+i)}}
+\end{align*}
+where $\pi$ is a permutation of $[1,n]$. 
+We consider the permutation $\pi$ mapping the first half of $[1,n]$ to the odd positions and the second half to the even positions:
+\[\pi(i)= \left\{ 
+\begin{array}{l l}
+2i-1 & \quad \text{ if } i\in [1,\frac{n}{2}], \\
+2(i-\frac{n}{2}) & \quad \text{ if } i\in [\frac{n}{2}+1,n].
+\end{array} \right. \] 
+Regarding the restricted Walsh transform of $f$ it gives:
+\begin{align*}
+\wtk{f}{k}(a)&=\sum_{x\in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_{2i-1} x_{2i}+ x_{\pi(k)} + \pi^{-1}(a) \cdot x + \sum_{i=1}^{n/2} x_{2i}}\\
+&= \Dnka{n}{k}{d},
+\end{align*}
+where $d= \pi^{-1}(a) + e_{\pi(k)} +\sum_{i=1}^{n/2} e_{2i}$.
 
-Denoting by $b$ the vector $\pi(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh transform of $f$ in $a$ as:
+
+
+
+%=\Dnka{n}{k}{d},\]
+%where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
+
+
+
+%Calling $\pi$ this permutation, since $c=a+e_k+\sum_{i=n/2+1}^n e_i$, we can write $d=\pi(c)=\pi(a)+ \pi(e_k)+ (0,1,0,1,\ldots,0,1)$. 
+%Accordingly, if $k\leq n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2+1$, with one couple of consecutive elements (the first one with an odd index) being $(1,1)$ and all the others $(0,1)$. 
+%Otherwise,  when $k> n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2-1$, with one couple of consecutive elements (the first one with an odd index) being $(0,0)$ and all the others $(0,1)$. 
+
+Denoting by $b$ the vector $\pi^{-1}(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh transform of $f$ in $a$ as:
 \[ \wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}.\qedhere\]
 \end{proof}
 
@@ -476,12 +506,17 @@ In this part we determine for which values of $n$ the function $f$ is balanced, 
 
 \begin{proof}
 We use the expression of the Walsh transform of $f$ from Proposition~\ref{prop:WT}:
+\begin{align*}
+\wt{f}(0_n)&=1+\sum_{k=1}^n\Dnka{n}{k}{\pi^{-1}(0_n)+(0,1,0,1,\ldots,0,1)+\pi(e_k)}\\
+&=1+\sum_{k=1}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}
+\end{align*}
+
 %In particular, for $a=0_n$ we can study the balancedness of $f$:
 %\begin{align*}
 %\wt{f}(0_n)&=\sum_{k=0}^n\Dnka{n}{k}{(0,1,0,1,\ldots,0,1)+\pi(e_k)}\\
 %&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}
 %\end{align*}
-\[\wt{f}(0_n)=\sum_{k=0}^n\Dnka{n}{k}{(0,1,0,1,\ldots,0,1)+\pi(e_k)}=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\]
+%\[\wt{f}(0_n)=\sum_{k=0}^n\Dnka{n}{k}{(0,1,0,1,\ldots,0,1)+\pi(e_k)}=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\]
 Using the recursive relation from Proposition~\ref{prop:recursiveDnka} we obtain:
 \begin{align*}
 \Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}&= \Dnka{n-2}{k}{(1,1,0,1,\ldots,0,1)} + \Dnka{n-2}{k-2}{(1,1,0,1,\ldots,0,1)} \\
@@ -495,10 +530,8 @@ Similarly, for $\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}$ we get:
 %&= \Dnka{n-2}{k}{(0,0,0,1,\ldots,0,1)} + \Dnka{n-2}{k-2}{(0,0,0,1,\ldots,0,1)} \\
 &=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{(0,0)}\\
 &=\binom{n/2-1}{k/2} \Dnka{2}{0}{(0,0)}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{(0,0)}+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{(0,0)}\\
-&=\binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1}\\
+&=\binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1}.\\
 \end{align*}
-
-
 %We can study the balancedness of $f$ using the $\Dnka{n}{k}{a}$ values.
 Combining both we obtain:
 %\begin{align*}
@@ -510,6 +543,7 @@ Combining both we obtain:
 %&=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
 %&=2 \left( \sum_{i=\lceil n/4 \rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4 \rfloor} \binom{n/2-1}{i}\right).\\
 %\end{align*}
+\iffalse
 \begin{align*}
 \wt{f}(0_n)&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\\
 &=\sum_{k=0}^{\frac{n}{2}} \left(\binom{\frac{n}{2}-1}{\frac{k}{2}} -2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{\frac{n}{2}-1}{\frac{k}{2}} +2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)\\
@@ -518,6 +552,16 @@ Combining both we obtain:
 &=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \sum_{k=0}^{n/2} \binom{\frac{n}{2}-1}{\frac{k-1}{2}}\right)
 =2 \left( \sum_{i=\lceil \frac{n}{4} \rceil}^{\frac{n}{2}-1} \binom {\frac{n}{2}-1}{i} - \sum_{i=0}^{\lfloor\frac{n-2}{4}\rfloor} \binom{\frac{n}{2}-1}{i}\right).\\
 \end{align*}
+\fi
+\begin{align*}
+\wt{f}(0_n)&=1+\sum_{k=1}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\\
+&=\sum_{k=0}^{\frac{n}{2}} \left(\binom{\frac{n}{2}-1}{\frac{k}{2}} -2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{\frac{n}{2}-1}{\frac{k}{2}} +2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)\\
+&=\sum_{k=0}^{n}\left( \binom{\frac{n}{2}-1}{\frac{k}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1}\right) 
++ 2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \sum_{k=0}^{\frac{n}{2}} \binom{\frac{n}{2}-1}{\frac{k-1}{2}}\right)\\
+&=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \sum_{k=0}^{n/2} \binom{\frac{n}{2}-1}{\frac{k-1}{2}}\right)
+=2 \left( \sum_{i=\lceil \frac{n}{4} \rceil}^{\frac{n}{2}-1} \binom {\frac{n}{2}-1}{i} - \sum_{i=0}^{\lfloor\frac{n-2}{4}\rfloor} \binom{\frac{n}{2}-1}{i}\right).\\
+\end{align*}
+
 Then, depending on the parity of $\frac{n}{2}$ we obtain the value of $\wt{f}(0_n)$ (using that $\binom{n}{k}=\binom{n}{n-k}$):
 	\[\wt{f}(0_n)= \left \{
 \begin{array}{l l}
