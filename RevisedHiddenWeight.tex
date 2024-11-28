@@ -32,7 +32,7 @@
 %	Tim Seuré\inst{1}, 
 %	Deng Tang\orcidID{0000-0002-8373-9200}\inst{2}
 }
-\authorrunning{P. M\'eaux, T. Seuré, D. Tang}
+\authorrunning{P.\ M\'eaux, T.\ Seur\'e, D.\ Tang}
 
 	
 \institute{
@@ -59,7 +59,8 @@
 	\begin{abstract}
 	The Hidden Weight Bit Function (\hwbf{}) has drawn considerable attention for its simplicity and cryptographic potential. Despite its ease of implementation and favorable algebraic properties, its low nonlinearity limits its direct application in modern cryptographic designs. In this work, we revisit the \hwbf{} and propose a new weightwise quadratic variant obtained by combining the \hwbf{} with a bent function. This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. 
 	\end{abstract}
-
+    
+\tsnote{@Self, check entire document.}
 
 \section{Introduction}
 
@@ -108,7 +109,7 @@ Our contributions are the following:
 
 The Hidden Weight Bit Function (\hwbf{}) has attracted significant attention since its introduction by Bryant in 1991~\cite{IEEE:Bryant91}. It has been regarded as the simplest example of a function whose binary decision diagram has exponential size~\cite{IEEE:Bryant91,TIA:BoLSW99}. The ease of implementing this function across various computational models—owing to its reliance on computing the Hamming weight of the input and applying a simple linear function—combined with its relatively strong cryptographic properties as demonstrated in~\cite{DAM:WCST14} (\eg, balancedness, nonlinearity, degree, and algebraic immunity), has made it a noteworthy candidate for use as a filter function in stream cipher constructions.
 
-Recent developments in stream ciphers have reignited interest in this function. The emergence of new applications for stream ciphers with filter functions on a larger number of variables—such as Hybrid Homomorphic Encryption (\textsf{HHE})~\cite{CCS:NaeLauVai11}—has further emphasized the relevance of such functions. \textsf{HHE} requires Boolean functions that can be efficiently evaluated in an input-oblivious algorithm. For instance, several new binary stream ciphers have been proposed since 2016, including Kreyvium~\cite{JOC:CCFLNP18}, FLIP~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, FiLIP~\cite{INDO:MCJS19}, Dasta~\cite{TOSC:BeiLea20} and Fasta~\cite{CTRSA:CidIndRad22}. 
+Recent developments in stream ciphers have reignited interest in this function. The emergence of new applications for stream ciphers with filter functions on a larger number of variables—such as Hybrid Homomorphic Encryption (\textsf{HHE})~\cite{CCS:NaeLauVai11}—has further emphasized the relevance of such functions. \textsf{HHE} requires Boolean functions that can be efficiently evaluated in an input-oblivious algorithm. For instance, several new binary stream ciphers have been proposed since 2016, including Kreyvium~\cite{JOC:CCFLNP18}, \textsf{FLIP}~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, \textsf{FiLIP}~\cite{INDO:MCJS19}, Dasta~\cite{TOSC:BeiLea20} and Fasta~\cite{CTRSA:CidIndRad22}. 
 Currently, designs employing Boolean functions with more than one hundred variables as filters lead to \textsf{HHE} schemes with the best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24,eprint:AGHM24}.
 
 The \hwbf{}, while efficient to compute, suffers from low nonlinearity, which limits its direct application as a filter function. Consequently, various generalizations have been explored to enhance this parameter while preserving or improving other cryptographically relevant properties, such as balancedness, algebraic degree, and algebraic immunity. Notable examples include functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23} and~\cite{DAM:MeaOza24}. The latter work considers functions obtained by computing the Hamming weight of the input and applying a quadratic Boolean function, so-called weightwise quadratic functions.
@@ -296,15 +297,15 @@ Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$.
 \begin{Prop}\label{prop:wwd1}
 	Let $n\geq 2$ be an even integer.
 	\begin{itemize}
-		\item (\eg{}~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\mathsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
+		\item (\eg{} Theorem $3$ in~\cite{DCC:DalMaiSar06}) The majority function $\mathsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
 		\[
 		\NL(\mathsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
 		\]
-		\item (\cite{DAM:WCST14}, Theorem $3$) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies:
+		\item (Theorem $3$ in~\cite{DAM:WCST14}) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies:
 		\[
 		\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
 		\]	
-		\item (\cite{DAM:WCST14}, Theorem $1$) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies $\degg(h)=n-1$ for all $n\geq 4$.
+		\item (Theorem $1$ in \cite{DAM:WCST14}) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies $\degg(h)=n-1$ for all $n\geq 4$.
 	\end{itemize}
 \end{Prop}
 
@@ -316,11 +317,11 @@ We use Krawtchouk polynomials and some of their properties to prove one of our m
 \begin{definition}[Krawtchouk polynomials]\label{def:Kraw}
 	The $n$-th Krawtchouk polynomial of degree $k\in[0,n]$ is given by:
     \[
-        \displaystyle \kraw{k}{x}{n}=\sum_{j=0}^{k} (-1)^j \binom{x}{j} \binom{n-x}{k-j}.
+        \kraw{k}{x}{n}=\sum_{j=0}^{k} (-1)^j \binom{x}{j} \binom{n-x}{k-j}.
     \]
-    Alternatively, the Krawtchouk polynomials can be characterized as the coefficients in the generating function for $(1+z)^{n-x} (1-z)^x$ in the variable $z$:
+    If $k<0$, we further define $\kraw{k}{x}{n}=0$. The Krawtchouk polynomials can alternatively be characterized as the coefficients in the generating function for $(1+z)^{n-x} (1-z)^x$ in the variable $z$:
     \[
-        (1+z)^{n-x} (1-z)^x=\sum_{k=0}^\infty \kraw{k}{x}{n} z^k.
+        (1+z)^{n-x} (1-z)^x=\sum_{k\in\Z} \kraw{k}{x}{n} z^k.
     \]
 \end{definition} 
 
@@ -389,11 +390,11 @@ Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the
 \begin{proof}
     We have that $\Dnka 00a=(-1)^0=0$ since $\Ekn 00=\{\epsilon\}$ for the empty vector $\epsilon\in\F_2^0$. That $\Dnka 0ka=0$ if $k\neq 0$ follows directly from the definition. Assume now that $n\geq 2$. By considering binary vectors $x\in\F_2^n$ as $x=(y,x_{n-1},x_n)$ for $y\in\F_2^{n-2}$, we get:
     \begin{align*}
-    \Dnka{n}{k}{a}&=\sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\\
-    &=\sum_{y\in \Ekn{k}{n-2}} (-1)^{d_{n-2}(y) +b y}+
-    \sum_{y\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b y + a_{n-1}}\\
-    &\qquad+\sum_{y\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b y + a_{n}}
-    +\sum_{y\in \Ekn{k-2}{n-2}} (-1)^{d_{n-2}(y) +b y +1 + a_{n-1}+ a_{n}}\\
+    \Dnka{n}{k}{a}&=\sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a\cdot x}\\
+    &=\sum_{y\in \Ekn{k}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y}+
+    \sum_{y\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y + a_{n-1}}\\
+    &\qquad+\sum_{y\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y + a_{n}}
+    +\sum_{y\in \Ekn{k-2}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y +1 + a_{n-1}+ a_{n}}\\
     &=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.\qedhere
     \end{align*}
 \end{proof}
@@ -435,13 +436,13 @@ Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the
 
 In the following, we show how the Walsh transform of $f$ can be written in terms of the $\Dnka{n}{k}{a}$. Then, in Section~\ref{sec:balancedness} we use Proposition~\ref{prop:recursiveDnka} to determine the balancedness of $f$, and in Section~\ref{sec:genfunc} we study the value of $\Dnka{n}{k}{a}$ using generating functions.
 
+\tsnote{@Pierrick, check the below proposition with its proof.}
 \begin{proposition}\label{prop:WT}
     Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Denote by $\pi:[1,n]\to[1,n]$ the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Let $a\in\F_2^n$ be a binary vector, and let $b=\pi(a)+(0,1,0,1,\ldots,0,1)$. Then the following holds true:
 	\[ \wt{f}(a)=1+\sum_{k=1}^n \Dnka{n}{k}{b+\pi(e_k)}.\]
 \end{proposition}
 
 \begin{proof}
-\tsnote{This may not work?}
 We have by Proposition~\ref{prop:restrWT} that:
 \[
 \wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x}=\Dnka{n}{k}{d},\]
@@ -456,6 +457,7 @@ Denoting by $b$ the vector $\pi(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh
 \end{proof}
 
 \subsection{Balancedness of $f$}\label{sec:balancedness}
+\tsnote{@Pierrick, check entire section.}
 
 In this part we determine for which values of $n$ the function $f$ is balanced, using the expression of its Walsh transform in terms of $\Dnka{n}{k}{a}$ and the recursive relation of these quantities.
 
@@ -539,7 +541,7 @@ Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equi
 
 \section{Extensive study of $\Dnka nka$ and bounds on the Walsh spectrum of $f$}\label{sec:dnk}
 
-This section examines the values of $\Dnka nka$ through the use of generating functions. To begin, in Section~\ref{sec:genfunc}, we determine essential characteristics of these values. Subsequently, in Section~\ref{sec:Cauchy}, we employ Cauchy's estimate to bound the absolute values of $\Dnka nka$. This approach allows us to also bound the absolute values of the Walsh transform coefficients of the revisited \hwbf{}, thereby constraining the nonlinearity. Lastly, in Section~\ref{sec:general}, we illustrate how this result can be extended to limit the nonlinearity of a family of weightwise quadratic functions.
+This section examines the values of $\Dnka nka$ through the use of generating functions. To begin, in Section~\ref{sec:genfunc}, we determine essential characteristics of these values. Subsequently, in Section~\ref{sec:Cauchy}, we employ Cauchy's estimate to bound the absolute values of $\Dnka nka$. This approach allows us to also bound the absolute values of the Walsh transform coefficients of the revisited \hwbf{}, thereby constraining the nonlinearity. Lastly, in Section~\ref{sec:general}, we illustrate how this result can be extended to bound the nonlinearity of a family of weightwise quadratic functions.
 
 \subsection{Study of $\Dnka nka$ through generating functions}\label{sec:genfunc}
 
@@ -552,7 +554,7 @@ This section examines the values of $\Dnka nka$ through the use of generating fu
 
 
 \begin{proposition}\label{proposition:generating_fct}
-	For every even integer $n\geq o$ and every binary vector $a\in\F_2^n$, the following holds:
+	For every even integer $n\geq 0$ and every binary vector $a\in\F_2^n$, the following holds:
     \[
         \sum_{k\in\Z}\Dnka nka z^k= P_a(z).
     \]
@@ -578,7 +580,7 @@ This section examines the values of $\Dnka nka$ through the use of generating fu
 \end{remark}
 
 \begin{proposition}\label{proposition:symmetry}
-	For every even integer $n\geq 2$, for every binary vector $a\in\F_2^n$, and for every integer $k$, the following holds:
+	For every even integer $n\geq 0$, for every binary vector $a\in\F_2^n$, and for every integer $k$, the following holds:
 	\[	\Dnka n{n-k}a=(-1)^{p+q+k}\Dnka nka.	\]
 \end{proposition}
 
@@ -606,7 +608,7 @@ Another immediate case for zero coefficients is the following:
 
 
 \begin{proposition}
-    Let $n\geq 0$ be even and $a\in\F_2^n$ a binary vector. If $k$ is an odd integer and  $p=q$, then it holds that $\Dnka nka=0=\Dnka n{n-k}a$.
+    Let $n\geq 0$ be an even integer, and let $a\in\F_2^n$ be a binary vector. If $k$ is an odd integer and  $p=q$, then it holds that $\Dnka nka=0=\Dnka n{n-k}a$.
 \end{proposition}
 
 \begin{proof}
@@ -625,9 +627,9 @@ Another immediate case for zero coefficients is the following:
     	\begin{tabular}{|c|c|}
     		\hline
     		$k$ & $\Dnka nka$\\ \hline
-    		$0$&$1$\\ \hline
-            $1$&$2(p-q)$\\ \hline
-            $2$&$2(p-q)^2-3(p+q)+r$\\ \hline
+    		$0$&$1$\\
+            $1$&$2(p-q)$\\ 
+            $2$&$2(p-q)^2-3(p+q)+r$\\
             $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
     	\end{tabular}
     	\tablecaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$.}\label{tab:Dnka_small_k}
@@ -635,30 +637,29 @@ Another immediate case for zero coefficients is the following:
 
 From differentiation, we can get more cases in which $\Dnka nka=0$:
 
-\begin{proposition}\mbox{}
+\begin{proposition}
+    Let $n\geq 0$ be an even integer, and let $a\in\F_2^n$ be a binary vector.
     \begin{enumerate}
-        \item If $n=16m$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=s(s-1)$, then $\Dnka n2a=0=\Dnka n{k-2}a$.
-        \item If $n=16m+2$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=\left(6s^2+6s+(-1)^s(2s+1)-1\right)/8$, then $\Dnka n3a=0=\Dnka n{k-3}a$.
-        \item If $n=16m+4$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=s^2$, then $\Dnka n2a=0=\Dnka n{k-2}a$.
-        \item If $n=16m+6$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, where $\ell_s=\left(6s^2+6s-(-1)^s(2s+1)+1\right)/8$, then $\Dnka n3a=0=\Dnka n{k-3}a$.
+        \item For every integer $s\geq0$, define $\ell_s=s(s-1)$. If $n=16m$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, then $\Dnka n2a=0=\Dnka n{n-2}a$.
+        \item For every integer $s\geq 0$, define $\ell_s=\left(6s^2+6s+(-1)^s(2s+1)-1\right)/8$. If $n=16m+2$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+2}\}$ for integers $m,s\geq 0$, then $\Dnka n3a=0=\Dnka n{k-3}a$.
+        \item For every integer $s\geq 0$, define $\ell_s=s^2$. If $n=16m+4$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+1}\}$ for integers $m,s\geq 0$, then $\Dnka n2a=0=\Dnka n{n-2}a$.
+        \item For every integer $s\geq 0$, define $\ell_s=\left(6s^2+6s-(-1)^s(2s+1)+1\right)/8$. If $n=16m+6$ and $\{p,q\}=\{m+\ell_s,m+\ell_{s+2}\}$ for integers $m,s\geq 0$, then $\Dnka n3a=0=\Dnka n{n-3}a$.
     \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-    It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$.
+    It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$. This checking can be autotomized by a computer algebra system. For this, we refer to the corresponding \textsf{SageMath} implementation from \cite{githubseure24}.\tsnote{@Pierrick, OK like this?}
 \end{proof}
 
 \begin{remark}
-    There are other instances where $\Dnka nka=0$ which have not been described by the above. For instance, we have $\Dnka{34}4a=0$ if $\{p,q\}=\{1,2\}$.
+    There are other instances where $\Dnka nka=0$ which have not been described by any of the previous results. For instance, we have $\Dnka{34}4a=0$ if $\{p,q\}=\{1,2\}$.
 \end{remark}
-
-\pmnote{Show me screenshots proving that 2 and 4 are correct}
-
 
 Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
 
 
-\begin{proposition}\mbox{}
+\begin{proposition}
+    Let $n\geq 0$ be an even integer, and let $a\in\F_2^n$ be a binary vector.
     \begin{enumerate}
         \item The sum and alternating sum over $k$ of the $\Dnka nka$ are, respectively:
  %       \begin{gather*}
@@ -666,8 +667,8 @@ Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums
  %           \sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
  %       \end{gather*}
 \[
- \sum_{k=0}^n\Dnka nka=(-1)^{q}2^{n/2}, \quad \text{and} \quad
- \sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
+ \sum_{k\in\Z}\Dnka nka=(-1)^{q}2^{n/2} \quad \text{and} \quad
+ \sum_{k\in\Z}(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
 \]
         \item The sum over the even and the odd $k$ of the the $\Dnka nka$ are, respectively:
  %       \begin{gather*}
@@ -675,8 +676,8 @@ Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums
    %         \sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
     %    \end{gather*}   
 \[
-\sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big), \quad \text{ and } \quad 
-\sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
+\sum_{k\in\Z}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big) \quad \text{ and } \quad 
+\sum_{k\in\Z}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
 \]
     
     \end{enumerate}
@@ -692,13 +693,11 @@ Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums
 
 We recall Cauchy's estimate on holomorphic functions:
 
-\begin{Prop}[Cauchy's estimate \eg~\cite{rudin1987}, Theorem 10.26]\label{property:cauchy_estimate}
-    Let $w$ be a complex number, and let $R>0$ be some radius. If $f$ is a holomorphic function defined on an open set containing every complex number $z$ satisfying $|z-w|<R$, then for every integer $k\geq 0$, the $k$-th derivative of $f$ evaluated at $w$ can be bounded, in absolute value, as follows:
+\begin{Prop}[Cauchy's estimate, \eg{} Theorem 10.26 in~\cite{rudin1987}]\label{property:cauchy_estimate}
+    Let $w$ be a complex number, and let $R>0$ be some radius. Let $f$ be a holomorphic function defined on an open set containing every complex number $z$ satisfying $|z-w|\leq R$, and let $M_R$ be the maximum of the absolute value of $f$ on the circle defined by $|z-w|=R$. Then for every integer $k\geq 0$, the $k$-th derivative of $f$ evaluated at $w$ can be bounded, in absolute value, as follows:
     \[
-        \left|\frac{\dd^k}{\dd^k z}f(z)\vert_{z=w}\right|\leq\frac{k!\cdot M_R}{R^k},
+        \left|\frac{\dd^k}{\dd^k z}f(z)\vert_{z=w}\right|\leq\frac{k!\cdot M_R}{R^k}.
     \]
-%    where $M_R$ is the maximum of $|f(z)|$ on the circle $|z-w|=R$.
-where $M_R$ is the maximum of the absolute value of $f$, $|f(z)|$ on the circle defined by $|z-w|=R$.
 \end{Prop}
 
 %\pmnote{ The point for the remark was to recall that we use the notation "$| \cdot |$" for absolute value over the complex, since before we used it only to denote "cardinal" or absolute value over integers.}
@@ -712,48 +711,47 @@ where $M_R$ is the maximum of the absolute value of $f$, $|f(z)|$ on the circle 
 Applying the property, we get:
 
 \begin{theorem}\label{theorem:bound_D_nka}
-    For every $a\in\F_2^n$ and every integer $k\geq 0$, it holds that:
+    Let $n\geq 0$ be an even integer, and let $a\in\F_2^n$ be a binary vector. Then, for every integer $k\in[0,n]$, it holds that:
     \[
         |\Dnka nka|\leq 2^{3n/4}.
     \]
 \end{theorem}
 
 \begin{proof}
-    From Remark~\ref{remark:D_nka_differentiation} we have: $k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}$. Choosing $f=P_a$, $w=0$ and $R=1$ in Property \ref{property:cauchy_estimate} then gives:
+    From Remark~\ref{remark:D_nka_differentiation} we have $k!\cdot\Dnka nka=\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}$. Choosing $f=P_a$, $w=0$ and $R=1$ in Property \ref{property:cauchy_estimate} then gives:
     \[
         |\Dnka nka|=\frac{1}{k!}\left|\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}\right|\leq M,
     \]
-    where $M$ is the maximum of $|P_a(z)|$ on the circle %$|z|=1$. 
-    $\dis=\{ z \in \C,  |z|=1  \}$.
+    where $M$ is the maximum of $|P_a(z)|$ on the complex circle %$|z|=1$. 
+    $\dis=\{ z \in \C: |z|=1  \}$.
     We claim, and prove below, that the maximum of $\left|-z^2+2z+1\right|$ on $\dis$ is $2\sqrt 2$. 
-    This implies that the maximum of $\left|-z^2-2z+1\right|$ on $\dis$ is $2\sqrt 2$ as well. 
+    This implies that the maximum of $\left|-z^2-2z+1\right|$ on $\dis$ is $2\sqrt 2$ as well because $-z^2-2z+1=-(-z)^2+2(-z)+1$. 
     Since the maximum of $\left|z^2+1\right|$ on $\dis$ is $2<2\sqrt 2$, it follows that $|\Dnka nka|\leq M\leq (2\sqrt 2)^{p+q}2^r\leq (2\sqrt 2)^{n/2}$.
 
 	We prove that the maximum of $\left|-z^2+2z+1\right|$ on $\dis$ is $2\sqrt 2$ by showing that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ equals $8$.
     %It remains to prove that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ equals $8$. 
     Using that $|w|^2=w\overline w$ for every complex number $w$, we obtain for all $z\in \dis$:
     \[
-        \left|-z^2+2z+1\right|^2=\left(z^2-2z-1\right)\left(\overline z^2-2\overline z-1\right)=6-\left(z^2+\overline z^2\right)=6-2\mathrm{Re}\left(z^2\right),
+        \left|-z^2+2z+1\right|^2=\left(z^2-2z-1\right)\left(\overline z^2-2\overline z-1\right)=6-\left(z^2+\overline z^2\right)=6-2\mathrm{Re}\left(z^2\right).
     \]
-    where $\mathrm{Re}\left(z^2\right)$ denotes the real part of $z^2$. Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $\dis$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ is $6-2(-1)=8$.
+    Since the minimum of $\mathrm{Re}\left(z^2\right)$ on $\dis$ is $-1$, we conclude that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ is $6-2(-1)=8$.
 \end{proof}
 
 \begin{Corollary}\label{cor:bound_walsh_cauchy}
-    For every $a\in\F_2^n$, it holds that:
+    Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Then for every binary vector $a\in\F_2^n$, it holds that:
     \[
         |\wt f(a)|\leq 1+n\cdot 2^{3n/4}.
     \]
-Equivalently, 
-%$\NL(f)\geq 2^{n-1} - \frac{1 + n 2^{\frac{3}{4}n}} {2}$.
-$\NL(f)\geq 2^{n-1} - \frac{1}{2} -2^{\frac{3n}{4} + \log n -1}$.
+    Equivalently, it holds that
+    %$\NL(f)\geq 2^{n-1} - \frac{1 + n 2^{\frac{3}{4}n}} {2}$.
+    $\NL(f)\geq 2^{n-1} - \frac{1}{2} -2^{3n/4 + \log_2(n) -1}$.
 \end{Corollary}
 
 \begin{proof}
-    We have previously established in Proposition~\ref{prop:WT} that $\wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}$. Then, applying Theorem~\ref{theorem:bound_D_nka} yields:
+    It is enough to prove the bound on $|\wt f(a)|$; the bound on the nonlinearity of $f$ comes from the second expression of Definition~\ref{def:nl}. We have previously established in Proposition~\ref{prop:WT} that $\wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b_k}$ for some vectors $b_k\in\F_2^n$. Then, applying the triangle inequality together with Theorem~\ref{theorem:bound_D_nka} yields:
     \[
-        |\wt{f}(a)|\leq 1+\sum_{k=1}^n\left|\Dnka{n}{k}{b+\pi(e_k)}\right|\leq 1+ n\cdot 2^{3n/4}.%\qedhere
+        |\wt{f}(a)|\leq 1+\sum_{k=1}^n\left|\Dnka{n}{k}{b_k}\right|\leq 1+ n\cdot 2^{3n/4}.\qedhere
     \]
-The bound on the nonlinearity comes from the second expression of Definition~\ref{def:nl}.
 \end{proof}
 
 \mycomment{One can also prove the following:
@@ -816,29 +814,24 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
 
 
 \subsection{Generalization to a family of weightwise quadratic functions}\label{sec:general}
-In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic function such that for all $k\in [1,n]$, the function $f_k$ has exactly $t$ quadratic terms with no shared variables.
-
-
-
+In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic functions $f$ such that for every $k\in [1,n]$, the function $f_k$ in Definition~\ref{def:wwdegd} has exactly $t$ quadratic terms with no shared variables.
 
 \begin{definition}
-	Let $n\in \N^*$ be an even number and $t \in \N $ no greater than $n/2$, we denote by $d_{t,n}$ the function given by: $d_{t,n}(x)=\sum_{i=1}^t x_{2i-1} x_{2i}$.
-	
+	For an even integer $n\geq 0$ and any integer $t\in[0,n/2]$, we define the Boolean function $d_{t,n}\in\BN$ by $d_{t,n}(x)=\sum_{i=1}^t x_{2i-1} x_{2i}$.
 	%	by $\Dnka{n}{k}{a}$:
 	%	\[\Dnka{n}{k}{a}= \sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\]
 \end{definition}
 
-In particular, $d_{\frac{n}{2},n}(x)=d_n(x)$. 
+In particular, it holds that $d_{n/2,n}(x)=d_n(x)$. 
 %We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}$:
-We focus on the restricted Walsh spectrum of any function $d_{t,n}$:
+We now focus on the restricted Walsh transform of $d_{t,n}$:
 
 \begin{proposition}\label{proposition:dtn}
-	Let $t, n\in \N$ with $n$ even and $t\leq n/2$, the following holds on $d_{t,n}$ for all $k\in [0,n]$:
-	\[\wtk{d_{t,n}}{k}(a)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t},\]
-	where $b$ denotes the first $2t$ elements of $a$ and $c$ the last $n-2t$ elements.
+    Let $n\geq 0$ be an even integer, and let $t\in[0,n/2]$. Let $a\in\F_2^n$ be a binary vector, and write $a=(b,c)$ with $b\in\F_2^{2t}$ and $c\in\F_2^{n-2t}$. Then the following holds for all $k\in [0,n]$:
+	\[\wtk{d_{t,n}}{k}(a)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b}\cdot\kraw{k-\ell}{\w(c)}{n-2t}.\]
 \end{proposition}
 \begin{proof}
-	We rewrite the restricted Walsh transform, denoting $x\in \F_2^n$ by $(y,z)$ where $y\in \F_2^{2t}$ and $z \in \F_2^{n-2t}$, and similarly denoting $a$ by $(b,c)$:
+    By considering binary vectors $x\in\F_2^n$ as $x=(y,z)$ with $y\in\F_2^{2t}$ and $z\in\F_2^{n-2t}$, we get:
 	
 %	\begin{align*}
 %	\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,t}(y)+by +cz}\\
@@ -846,10 +839,9 @@ We focus on the restricted Walsh spectrum of any function $d_{t,n}$:
 %	&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,t}(y)+by} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{cz}\right)\\
 %	&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.%\qedhere
 %	\end{align*}	
-
 	\begin{align*}
-\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+a \cdot x}=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\
-&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,2t}(y)+b \cdot y} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{c \cdot z}\right)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.\qedhere
+\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+a \cdot x}\\&=\sum_{(y,z)\in\Ekn{k}{n}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\&=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\
+&=\sum_{\ell=0}^{2t}\left(\sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{2t}(y)+b \cdot y}\right)\left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{c \cdot z}\right)\\&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b}\cdot\kraw{k-\ell}{\w(c)}{n-2t}.\qedhere
 \end{align*}	
 
 
@@ -857,14 +849,14 @@ We focus on the restricted Walsh spectrum of any function $d_{t,n}$:
 \end{proof}
 
 \begin{definition}\label{defi:P_a_t}
-    Let $t, n\in \N$ with $n$ even and $t\leq n/2$. Given $a=(b,c)\in\F_2^n$ with $b\in\F_2^{2t}$, denote $n-2t-\w(c)$ and $\w(c)$ by $u$ and $v$, respectively. We  then introduce the following polynomial:
+    Let $n\geq 0$ be an even integer, and let $t\in[0,n/2]$. Let $a=(b,c)\in\F_2^n$ be a binary vector with $b\in\F_2^{2t}$ and $c\in\F_2^{n-2t}$. By letting $u=u_t(a)=n-2t-\w(c)$ and $v=v_t(a)=\w(c)$, we introduce the polynomial $P_{a,t}(z)$ given by the following expression:
     \[
         P_{a,t}(z)=P_b(z)\cdot(1+z)^u\cdot(1-z)^v.
     \]
 \end{definition}
 
 \begin{proposition}
-    Let $t, n\in \N$ with $n$ even and $t\leq n/2$. Let $a\in\F_2^n$. The following holds true: 
+    For every even integer $n\geq 0$, every integer $t\in[0,n/2]$ and every binary vector $a\in\F_2^n$, the following holds:
     \[
         \sum_{k\in\Z}\wtk{d_{t,n}}{k}(a)z^k=P_{a,t}(z).
     \]
@@ -880,56 +872,54 @@ We focus on the restricted Walsh spectrum of any function $d_{t,n}$:
     \end{align*}
 \end{proof}
 
-With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below. Before that, we still require a preliminary result:
+With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below. Before that, we still require a technical preliminary result:
 
 \begin{lemma}\label{lemma:maximizing_args}
-    Let $N$ be a non-negative number and $D\subseteq\C$ a set of complex numbers. For every integer $1\leq i\leq N$, consider a non-negative integer $m_i$ as well as complex functions $f_{i,1},\dots,f_{i,k_i}$ defined on the set $D$. Assume that the following maximum exists (which holds for instance if the functions $f_{i,j}$ are continuous and $D$ is topologically compact):
+    Let $N\geq 1$ be an integer and $D\subseteq\C$ a set of complex numbers. For every $i\in[1,N]$, consider an integer $m_i\geq 0$ as well as complex functions $f_{i,1},\dots,f_{i,k_i}$ defined on the set $D$. Assume that the following maximum exists (which holds for instance if the functions $f_{i,j}$ are continuous and $D$ is topologically compact):
     \[
-        M=\max_{\substack{\forall 1\leq i\leq N:\,p_{i,1}+\cdots+p_{i,k_i}=m_i\\z\in D}}\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j}(z)^{p_{i,j}}\right|.
+        M=\max_{\substack{\forall i\in[1,N]:\,p_{i,1}+\cdots+p_{i,k_i}=m_i\\z\in D}}\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j}(z)^{p_{i,j}}\right|.
     \]
-    Then there exist integers $j_1,\dots,j_N$ with $1\leq j_i\leq k_i$ such that the following holds:
+    Then there exist integers $j_1,\dots,j_N$ with $j_i\in[1,k_i]$ such that the following holds:
     \[
         M=\max_{z\in D}\left|\prod_{i=1}^Nf_{i,j_i}(z)^{m_i}\right|.
     \]
 \end{lemma}
 
 \begin{proof}
-    Let us choose the integers $p_{i,j}$ and the complex number $z\in D$ to maximize the quantity $\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j}(z)^{p_{i,j}}\right|$. Note that this in particular means that $\sum_{j=1}^{k_i}p_{i,j}=m_i$ for every $1\leq i\leq N$. Next, for every $1\leq i\leq N$, choose $1\leq j_i\leq k_i$ such that $|f_{i,j_i}(z)|\geq|f_{i,j}(z)|$ for every $1\leq j\leq k_i$. Then we have:
+    Let us choose the integers $p_{i,j}\geq 0$ satisfying $\sum_{j=1}^{k_i}p_{i,j}=m_i$ for every $i\in[1,N]$ together with the complex number $z\in D$ to maximize the quantity $\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j}(z)^{p_{i,j}}\right|$. Next, for every $i\in[1,N]$, choose $j_i\in[1,k_i]$ such that $|f_{i,j_i}(z)|\geq|f_{i,j}(z)|$ for every $j\in[1,k_i]$. Then we have:
     \[
-        M=\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j}(z)^{p_{i,j}}\right|\leq\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j_i}(z)^{p_{i,j}}\right|=\left|\prod_{i=1}^Nf_{i,j_i}(z)^{\sum_{j=1}^{k_i}p_{i,j}}\right|=\left|\prod_{i=1}^Nf_{i,j}(z)^{m_i}\right|\leq M.\qedhere
+        M=\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j}(z)^{p_{i,j}}\right|\leq\left|\prod_{i=1}^N\prod_{j=1}^{k_i}f_{i,j_i}(z)^{p_{i,j}}\right|=\left|\prod_{i=1}^Nf_{i,j_i}(z)^{\sum_{j=1}^{k_i}p_{i,j}}\right|=\left|\prod_{i=1}^Nf_{i,j_i}(z)^{m_i}\right|\leq M.\qedhere
     \]
 \end{proof}
 
 \begin{theorem}\label{theorem:bound_D_nka_generalized}
-    Let $t, n\in \N$ with $n$ even and $t\leq n/2$. 
-    We define $\lambda=t/n\in\left[0,\frac 12\right]$, as well as:
+    Let $n\geq 0$ be an even integer, and let $t\in[0,n/2]$. We define $\lambda=t/n$, as well as:
     \[
-        \mu(\lambda)=\mu=
+        \mu=\mu(\lambda)=
         \begin{cases}
             \frac{\lambda+1}{2}+\frac12\log_2\left(\frac{\left(-\lambda^2+2\lambda+\lambda\sqrt{\lambda^2-4\lambda+2}\right)^\lambda}{\left(1-\lambda+\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}\right)&\text{if $\lambda>\frac 16$,}\\
             1-\lambda&\text{if $\lambda\leq\frac 16$.}\\
         \end{cases}
     \]
-
-    Then, for all $a\in\F_2^n$ and $k\in[0,n]$, the following hold true:
+    Then, for all $a\in\F_2^n$ and all $k\in[0,n]$, the following hold true:
 
     \[
-        |\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n},\quad \text{and} \quad  |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}.
+        |\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n}\quad \text{and} \quad  |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}.
     \]
 \end{theorem}
 
 \begin{proof}
-    To begin, we observe that the inequality $|\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}$ will follow from the inequality $|\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n}$ using precisely the arguments of the proof of Corollary~\ref{cor:bound_walsh_cauchy}, so that we are only required to prove the first inequality. Also, since the case $\lambda=\frac 12$ corresponds to Theorem~\ref{theorem:bound_D_nka}, we will henceforth assume $\lambda<\frac 12$.
+    To begin, we observe that the inequality $|\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}$ will follow from the inequality $|\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n}$ using precisely the arguments of the proof of Corollary~\ref{cor:bound_walsh_cauchy}, so that we are only required to prove the first inequality. Also, since the case $\lambda=1/2$ corresponds to Theorem~\ref{theorem:bound_D_nka}, we will henceforth assume $\lambda<1/2$.
     
-    As before (in the proof of Theorem~\ref{theorem:bound_D_nka}), we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[1,n]$. 
-    We write $a=(b,c)$ with $b\in\F_2^{2t}$ and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}.    
+    As before (in the proof of Theorem~\ref{theorem:bound_D_nka}), we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[0,n]$. 
+    We write $a=(b,c)$ with $b\in\F_2^{2t}$ and $c\in\F_2^{n-2t}$, and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}.    
    To find a bound for $|P_{a,t}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we would like to bound the quantity $\max_{a\in\F_2^n,z\in\dis}|P_{a,t}(z)|$. Moving through all $a\in\F_2^n$ is equivalent to moving through all tuples $(p,q,r;u,v)$ of non-negative integers which satisfy $p+q+r=t$ and $u+v=n-2t$. It follows from Lemma~\ref{lemma:maximizing_args} that it is enough to consider only the cases for which only one of $p,q,r$ is non-zero, and for which only one of $u,v$ is non-zero. 
    This leaves us with the following cases to consider for $(p,q,r;u,v)$:
     \begin{gather*}
         (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0),\\
          (t,0,0;0,n-2t),\quad(0,t,0;0,n-2t),\quad(0,0,t;0,n-2t).
     \end{gather*}
-    Since swapping both $(p,q)$ and $(u,v)$ has the same effect as replacing $z$ by $-z$ in $P_{a,t}(z)$ and therefore does not change the maximum of $|P_{a,t}(z)|$ on $\dis$, we can further restrict ourselves to the following tuples for $(p,q,r;u,v)$:
+    Since replacing $(p,q)$ and $(u,v)$ by $(q,p)$ and $(v,u)$ has the same effect as replacing $z$ by $-z$ in $P_{a,t}(z)$ and therefore does not change the maximum of $|P_{a,t}(z)|$ on $\dis$, we can further restrict ourselves to the following tuples for $(p,q,r;u,v)$:
     \[
         (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0).
     \]
@@ -948,12 +938,13 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
         |P_{a,t}(z)|^2=\left(\left|-z^2+2z+1\right|^{2\lambda}|1+z|^{2(1-2\lambda)}\right)^n=\left((6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}\right)^n.
     \]
     
-    The goal will be to prove that the maximum of $g_\lambda(\alpha)=g(\alpha)=(6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$ for $\alpha\in[-\pi,\pi]$ is equal to $2^{2\mu}$; the maximum of $|P_{a,t}(z)|$ on $\dis$ will then be $\left(2^{2\mu}\right)^{n/2}=2^{\mu n}$. Since $g$ is an even function, it is enough to focus on the interval $\alpha\in[0,\pi]$; the function $g$ is represented for several different values of $0\leq\lambda<\frac 12$ in Figure~\ref{fig:family_curves_g}.
+    The goal will be to prove that the maximum of $g^{(\lambda)}(\alpha)=g(\alpha)=(6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$ for $\alpha\in[-\pi,\pi]$ is equal to $2^{2\mu}$; the maximum of $|P_{a,t}(z)|$ on $\dis$ will then be $\left(2^{2\mu}\right)^{n/2}=2^{\mu n}$. Since $g$ is an even function, it is enough to focus on the interval $\alpha\in[0,\pi]$; the function $g$ is represented for several different values of $0\leq\lambda<1/2$ in Figure~\ref{fig:family_curves_g}.
 
     \begin{figure}
     	\centering
     	\includegraphics[width=11cm]{family_curves_g.pdf}
-    	\caption{The curves of $\alpha\mapsto g_\lambda(\alpha)$ for the values $\lambda=\frac{i}{25}$ from $i=0$ (blue) to $i=24$ (red).}
+        \vspace{-4mm}
+    	\caption{The curves of $\alpha\mapsto g^{(\lambda)}(\alpha)$ for the values $\lambda=\frac{i}{50}$ from $i=0$ (red) to $i=24$ (blue).}
     	\label{fig:family_curves_g}
     \end{figure}
     
@@ -967,15 +958,15 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     \end{align*}
     
     The only interesting zeros of $\frac{\dd}{\dd\alpha}g(\alpha)$ are those of the last factor 
-    $\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2$: those of the factor $8(6-2\cos(2\alpha))^{\lambda-1}(2+2\cos\alpha)^{-2\lambda}$ will make $g(\alpha)$ vanish and will therefore not maximize $g(\alpha)$, and those for $\sin\alpha$ are $\alpha=0$ and $\alpha=\pi$, with corresponding values $g(0)=2^{2-2\lambda}$ and $g(\pi)=0$.
+    $\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2$: those of the factor $8g_1(\alpha)^{\lambda-1}g_2(\alpha)^{-2\lambda}$ will make $g(\alpha)$ vanish and will therefore not maximize $g(\alpha)$, and those for $\sin\alpha$ are $\alpha=0$ and $\alpha=\pi$, with corresponding values $g(0)=2^{2-2\lambda}$ and $g(\pi)=0$.
     
-    Our first claim is that the equation $\mathcal E:\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2=0$ has a unique solution $\cos\alpha=-\lambda+\sqrt{\lambda^2-4\lambda+2}$ if $\lambda\geq\frac 16$ and has no solution $\cos\alpha$ otherwise. To see this, we consider $\mathcal E$ as an equation of second degree in $\cos\alpha$, which leads to the two solution candidates $\cos\alpha=-\lambda\pm\sqrt{\lambda^2-4\lambda+2}$.
+    Our first claim is that the equation $\mathcal E:\cos^2\alpha+2\lambda\cos\alpha+4\lambda-2=0$ has a unique solution $\cos\alpha=-\lambda+\sqrt{\lambda^2-4\lambda+2}$ if $\lambda\geq 1/6$ and has no solution $\cos\alpha$ otherwise. To see this, we consider $\mathcal E$ as an equation of second degree in $\cos\alpha$, which leads to the two solution candidates $\cos\alpha=-\lambda\pm\sqrt{\lambda^2-4\lambda+2}$.
      
-    We can exclude the solution $\cos\alpha=-\lambda-\sqrt{\lambda^2-4\lambda+2}$ since $\cos\alpha\in[-1,1]$ (and $\lambda\in [0,1/2[$). 
-    The other solution needs to be excluded for the same reason if $\lambda<\frac 16$.
+    We can exclude the solution $\cos\alpha=-\lambda-\sqrt{\lambda^2-4\lambda+2}$ since $\cos\alpha\in[-1,1]$ (and $\lambda\in [0,1/2)$). 
+    The other solution needs to be excluded for the same reason if $\lambda<1/6$.
 
 
-    Our next claim is that $\frac{\dd^2}{\dd^2\alpha}g(\alpha)\vert_{\alpha=0}$ has the same sign as $6\lambda -1$. To see why, we apply the definition of the second derivative:
+    Our second claim is that $\frac{\dd^2}{\dd^2\alpha}g(\alpha)\vert_{\alpha=0}$ has the same sign as $6\lambda -1$. To see why, we apply the definition of the second derivative:
     \begin{align*}
         \frac{\dd^2}{\dd^2\alpha}g(\alpha)\vert_{\alpha=0}
         &=\lim_{\alpha\to 0}\frac{\frac{\dd}{\dd\alpha}g(\alpha)}{\alpha}\\
@@ -983,15 +974,13 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
         &=8\cdot4^{\lambda-1}\cdot 4^{-2\lambda}\cdot 1\cdot(6\lambda -1)\\
         &=2^{1-2\lambda}(6\lambda -1).
     \end{align*}
-
-
-    Therefore, in case $\lambda<\frac 16$, we can conclude from the two claims that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and this maximum is then equal to $2^{2-2\lambda}=2^{2\mu}$, as required. For $\lambda=\frac 16$, the solution to the equation $\mathcal E$ is $\cos\alpha=1$, again implying that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and we obtain the same maximum of $2^{2\mu}$. In case $\lambda>\frac 16$, the two claims imply that $g(\alpha)$ reaches its maximum at the unique $\alpha_0\in[0,\pi]$ for which $\cos\alpha_0=-\lambda+\sqrt{\lambda^2-4\lambda+2}$. For this $\alpha_0$, the double angle formula for the cosine implies that $\cos(2\alpha_0)=4\lambda^2-8\lambda+3-4\lambda\sqrt{\lambda^2-4\lambda+2}$. If we replace $\cos\alpha_0$ and $\cos(2\alpha_0)$ by their respective values, we obtain that the maximum of $g(\alpha)$ for $\alpha\in[0,\pi]$ is given by the following value:
+    
+    Therefore, in case $\lambda<1/6$, we can conclude from the two claims that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and this maximum is then equal to $2^{2-2\lambda}=2^{2\mu}$, as required. For $\lambda=1/6$, the solution to the equation $\mathcal E$ is $\cos\alpha=1$, again implying that $g(\alpha)$ reaches its maximum at $\alpha_0=0$, and we obtain the same maximum of $2^{2\mu}$. In case $\lambda>1/6$, the two claims imply that $g(\alpha)$ reaches its maximum at the unique $\alpha_0\in[0,\pi]$ for which $\cos\alpha_0=-\lambda+\sqrt{\lambda^2-4\lambda+2}$. For this $\alpha_0$, the double angle formula for the cosine implies that $\cos(2\alpha_0)=4\lambda^2-8\lambda+3-4\lambda\sqrt{\lambda^2-4\lambda+2}$. If we replace $\cos\alpha_0$ and $\cos(2\alpha_0)$ by their respective values, we obtain that the maximum of $g(\alpha)$ for $\alpha\in[0,\pi]$ is given by the following value:
     \[
         g(\alpha_0)=\frac{\left(-8\lambda^2+16\lambda+8\lambda\sqrt{\lambda^2-4\lambda+2}\right)^{\lambda}}{\left(2-2\lambda+2\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}=2^{2\mu}.
     \]
     %This is exactly what we wanted to prove, 
-    This is equivalent to the first equation in the theorem statement, 
-    and we have therefore covered the case $(p,q,r;u,v)=(t,0,0;n-2t,0)$ entirely. In a similar fashion, it can be proven that $|P_{a,t}(z)|$ is also bounded by $2^{\mu n}$ on $\dis$ for the remaining two cases of $(p,q,r;u,v)$. In fact, for $(p,q,r;u,v)=(0,t,0;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h_1(\alpha)=(6-2\cos(2\alpha))^\lambda(2-2\cos\alpha)^{1-2\lambda}$, which has the same maximum as $g(\alpha)$ because $h_1\left(\frac{\pi}{2}+\alpha\right)=g\left(\frac{\pi}{2}-\alpha\right)$; for $(p,q,r;u,v)=(0,0,t;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h_2(\alpha)=(2+2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$, whose maximum is bounded by the maximum of $g(\alpha)$ because $h_2(\alpha)\leq g(\alpha)$.
+    With this, we have covered the case $(p,q,r;u,v)=(t,0,0;n-2t,0)$ entirely. In a similar fashion, it can be proven that $|P_{a,t}(z)|$ is also bounded by $2^{\mu n}$ on $\dis$ for the remaining two cases of $(p,q,r;u,v)$. In fact, for $(p,q,r;u,v)=(0,t,0;n-2t,0)$, one can proceed in exactly the same way, and for $(p,q,r;u,v)=(0,0,t;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h(\alpha)=(2+2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$, whose maximum is bounded by the maximum of $g(\alpha)$ because $0\leq h(\alpha)\leq g(\alpha)$.
 \end{proof}
 
 The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theorem:bound_D_nka_generalized} is represented in Figure~\ref{fig:curve_exponents_lambda_mu}.
@@ -999,6 +988,7 @@ The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theo
 \begin{figure}
 	\centering
 	\includegraphics[width=10cm]{curve_exponents_lambda_mu.pdf}
+    \vspace{-5mm}
 	\caption{The curve of $\lambda\mapsto\mu(\lambda)$ with $0\leq\lambda\leq\frac 12$ from Theorem~\ref{theorem:bound_D_nka_generalized}.}
 	\label{fig:curve_exponents_lambda_mu}
 \end{figure}
@@ -1007,18 +997,20 @@ The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theo
 
 \section{Experiments and comparisons}\label{sec:expAndComp}
 
-In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revisited \hwbf{} for values of $n$ up to $80$. 
-We then compare the nonlinearity of this function to that of other functions suited to similar use cases, such as the \hwbf{} of weightwise cyclic functions from~\cite{DAM:MeaOza24}.
+\tsnote{@Pierrick, this entire section needs updating because of Proposition 3.}
+
+In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revisited \hwbf{} for even $n\in[1,80]$. 
+We then compare the nonlinearity of this function to that of other functions suited to similar use cases, such as the \hwbf{} or weightwise cyclic functions from~\cite{DAM:MeaOza24}.
 
 \subsection{Bounding the Walsh transform of $f$ experimentally}\label{sec:expwt}
 
 %We have just deduced that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
 
-Following Corollary~\ref{cor:bound_walsh_cauchy} we deduce that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this part, we discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
+Following Corollary~\ref{cor:bound_walsh_cauchy}, we deduce that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every even integer $n\geq 0$ and every Boolean vector $a\in\F_2^n$, where $f\in\BN$ denotes the revisited \hwbf{}. This is a pessimistic bound. In this part, we discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
 
 %This method is based on the identity (\ref{eqn:walsh_from_D}). 
 This method is based on the identity given in Proposition~\ref{prop:WT}.
-For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $1\leq k\leq n$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$. Observe that for every $1\leq k\leq n$, we have $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\leq n/2$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
+For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $k\in[1,n]$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$. Observe that for every $k\in[1,n]$, we have $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\in[0,n/2]$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
 
 In the following discussion, we outline a method to determine an upper bound on $\max_{a\in\F_2^n}\wt f(a)$. A similar approach can be applied to find a lower bound on $\min_{a\in\F_2^n}\wt f(a)$, and by utilizing both, we can also obtain an upper bound on $\max_{a\in\F_2^n}|\wt f(a)|$ by making use of the following identity:
 \[
@@ -1232,21 +1224,21 @@ In Table~\ref{table:comparisonsNL}, we compare the specific nonlinearity values 
 		\hline
 		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
 	\hline	
-    	\hwbf{}   & $4$  & $20$  & $88$  &  $372$ & $1544$ & $6344$ & $25904$  \\  	
+    	\hwbf{}   & $4$  & $20$  & $88$  &  $372$ & $1\,544$ & $6\,344$ & $25\,904$  \\  	
    %4 10 20 44 88 186 372 772 1544 3172 6344 12952 25904
-		\hline
-Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
-\hline
-		%cyclic $f_0=x_1+x_2x_3$
-    	t~\cite{DAM:MeaOza24}   & $4$  & $22$  & $96$  &  $404$ & $1672$ & $6854$ & $27884$\\
-    	%4 10 22 46 96 196 404 816 1672 3358 6854 13722 27884
-\hline	
-%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
-    	u~\cite{DAM:MeaOza24}   & $4$  & $24$  & $104$  &  $456$ & $1888$ & $7816$ & $31616$ \\
-    	%4 10 24 48 104 220 456 924 1888 3862 7816 15748 31616
-\hline				
 		
-		$f$  & $4$  & $22$  & $102$  &  $458$ & $1902$ & $7842$ & $31680$\\
+Majority   & $5$  & $22$  & $93$  &  $386$ & $1\,586$ & $6\,476$ & $26\,333$  \\
+
+		%cyclic $f_0=x_1+x_2x_3$
+    	$t$~\cite{DAM:MeaOza24}   & $4$  & $22$  & $96$  &  $404$ & $1\,672$ & $6\,854$ & $27\,884$\\
+    	%4 10 22 46 96 196 404 816 1672 3358 6854 13722 27884
+
+%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
+    	$u$~\cite{DAM:MeaOza24}   & $4$  & $24$  & $104$  &  $456$ & $1\,888$ & $7\,816$ & $31\,616$ \\
+    	%4 10 24 48 104 220 456 924 1888 3862 7816 15748 31616
+	
+		
+		Revisited \hwbf{}  & $4$  & $22$  & $102$  &  $458$ & $1\,902$ & $7\,842$ & $31\,680$\\
 \hline
 	\end{tabular}
 	\tablecaption{Comparison of the nonlinearity.}
@@ -1259,44 +1251,42 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1586$ & $6476$ & $26333$  \\
 
 \section{Other parameters}\label{sec:otherParameters}
 
-In this part we give the other cryptographic parameters of the function $f$. Since its balancedness is characterized by Theorem~\ref{th:bal} and its nonlinearity deeply analyzed in Section~\ref{sec:Cauchy} and Section~\ref{sec:expAndComp}, in the following we focus on the algebraic properties. More precisely we analyze the degree, algebraic immunity and fast algebraic immunity of $f$, providing comparisons with other weightwise quadratic functions.
+In this section, we present additional cryptographic parameters for the \hwbf{} $f\in\BN$. While Theorem~\ref{th:bal} describes its balancedness and Sections~\ref{sec:Cauchy} and \ref{sec:expAndComp} thoroughly explore its nonlinearity, our focus here will be on its algebraic characteristics. Specifically, we will examine the degree, the algebraic immunity, and the fast algebraic immunity of $f$, and offer comparisons with other weightwise quadratic functions.
 
 
 %\pmnote{under construction, waiting for the parameters for the FAI}
 
 %\subsection{Degree}
 
-\begin{proposition}[Algebraic degree of $f$]
-	Let $n\in \N$ be even, greater than $4$, and $f$ defined as in Definition~\ref{def:revHWBF}, the following holds: $\degg(f)= n-1$.
+\begin{proposition}
+	Let $n\geq 4$ be even, and let $f\in\BN$ be the revisited \hwbf{}. Then $\degg(f)=n-1$.
 \end{proposition}
 \begin{proof}
-	We write $f$ as $q+h$ where $q$ is the quadratic function $\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}$ and $h$ is the \hwbf{}.
-	Using Property~\ref{prop:wwd1} Item $3$, $h$ has degree $n-1\geq 3$, and the function $q$ has no monomial of degree higher than $2$, therefore $\degg(f)=\degg(h)=n+1$.
-	
-	
+	We write $f=q+h$, where $q\in\BN$ is given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}$ and $h\in\BN$ is the \hwbf{}.
+	The function $h$ has degree $n-1\geq 3$ by Property~\ref{prop:wwd1}, and the function $q$ has no monomial of degree higher than $2$, so that $\degg(f)=\degg(h)=n-1$.
 \end{proof}
 
 
-In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of different weightwise quadratic function. We observe that $f$ is the function with higher degree, jointly with the \hwbf{}. 
+In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of different weightwise quadratic function. We observe that the revisited \hwbf{} is the function with highest degree, together with the \hwbf{}. 
 
 \begin{table}
 	\centering
 	\begin{tabular}{|c| c|c|c|c| c|c|c|}
 		\hline
 		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
-		\hline	
+		\hline
 		\hwbf{}   & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$  \\  	
-		\hline
-		Majority   & $4$  & $4$  & $8$  &  $8$ & $8$ & $8$ & $16$  \\
-		\hline
-		%cyclic $f_0=x_1+x_2x_3$
-		t~\cite{DAM:MeaOza24}   & $2$  & $5$  & $6$  &  $9$ & $11$ & $13$ & $14$\\
-		\hline	
-		%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
-		u~\cite{DAM:MeaOza24}   & $2$  & $4$  & $6$  &  $8$ & $10$ & $12$ & $14$ \\
-		\hline				
 		
-		$f$  & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$\\
+		Majority   & $4$  & $4$  & $8$  &  $8$ & $8$ & $8$ & $16$  \\
+		
+		%cyclic $f_0=x_1+x_2x_3$
+		$t$~\cite{DAM:MeaOza24}   & $2$  & $5$  & $6$  &  $9$ & $11$ & $13$ & $14$\\
+		
+		%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
+		$u$~\cite{DAM:MeaOza24}   & $2$  & $4$  & $6$  &  $8$ & $10$ & $12$ & $14$ \\
+		
+		
+		Revisited \hwbf{}  & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$\\
 		\hline
 	\end{tabular}
 	\tablecaption{Comparison of the degree.}
@@ -1307,23 +1297,21 @@ In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of differen
 
 %\subsection{Algebraic immunity}
 
-\begin{proposition}[Algebraic immunity of $f$]
-	Let $n\in \N$ be even, $f$ defined (as in Definition~\ref{def:revHWBF}) as
-	$f(x_1,\cdots,x_n)=\left(\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}\right) + \sum_{k=1}^n \phikn{k}{n} x_k$ and $h$ denote the $n$-variable \hwbf{}, the following holds:
+\begin{proposition}
+    Let $n\geq 4$ be even, let $f\in\BN$ be the revisited \hwbf{}, and let $h\in\BN$ be the \hwbf{}. Then the following holds:
 	\[\AI(f)\geq \AI(h)-2.\]
 \end{proposition}
+
 \begin{proof}
-	Let denote by $q$ the quadratic function $\sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}$, it allows to write $h=f+q$. 
-	Let $g\neq 0$ be an annihilator of $f+ \varepsilon$ of minimum degree (where $\varepsilon \in \{0,1\}$), then the following holds:
-	\[g (1+q) (h+\varepsilon) = g(1+q) (f+\varepsilon + q)=0, \]
-	hence $g (1+q)$ is an annihilator of $h+ \varepsilon$. 
-	If $g (1+q)\ne 0$ then $\degg(g(1+q)) \leq \degg(g)+2$ and we obtain $\degg(g)\geq \AI(h) -2$. 
-	Otherwise, $g (1+q)= 0$ implies that $g$ annihilates $1+q$ and therefore $0=g (f+\varepsilon + 1 +q)=g(h+ \varepsilon +1)$ that is $\degg(g)\geq \AI(h)$. 
-	Summarizing, for any non null annihilator $g$ of $f$ or $f+1$ we get $\degg(g)\geq \AI(h)-2$, it allows to conclude $\AI(f)\geq \AI(h)-2$.
+	Denote by $q\in\BN$ the quadratic function given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$, allowing to write $h=f+q$.
+    Let $g\in\BN^*$ with $\degg(g)=\AI(f)$ be an annihilator of $f+ \varepsilon$ for some $\varepsilon\in\{0,1\}$. Then the following holds:
+	\[g\cdot(q+1) \cdot(h+\varepsilon) = g\cdot(q+1)\cdot(f+q+\varepsilon)=g\cdot(q+1)\cdot(f+\epsilon)+g\cdot(q+1)\cdot q=0+0=0.\]
+	Hence $g\cdot(q+1)$ is an annihilator of $h+ \varepsilon$. 
+	If $g\cdot(q+1)\ne 0$, it follows that $\AI(h)\leq\degg(g\cdot(q+1))\leq\degg(g)+\degg(q+1)$, and therefore that $\AI(f)=\degg(g)\geq\AI(h)-\degg(q+1)=\AI(h)-2$. If $g\cdot(q+1)=0$, then $0=g\cdot(f+\epsilon+q+1)=g\cdot(h+\epsilon+1)$, showing that $\AI(f)=\degg(g)\geq\AI(h)$.
 \end{proof}
 
-From~\cite{DAM:WCST14} Theorem 4, the algebraic immunity of the \hwbf{} is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for $f$. 
-In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various weightwise quadratic functions. We observe that the function $f$ demonstrates the best performance after the majority function, which is known to achieve optimal algebraic immunity.
+From Theorem 4 in~\cite{DAM:WCST14}, the algebraic immunity of the \hwbf{} is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for the revisited \hwbf{}.
+In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various weightwise quadratic functions. We observe that the revisited \hwbf{} demonstrates the best performance after the majority function; the latter is known to achieve optimal algebraic immunity.
 
 
 
@@ -1361,26 +1349,22 @@ In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various
 		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
 		\hline	
 		\hwbf{}   & $2$  & $3$  & $4$  &  $4$ & $5$ & $5$ & $6$  \\  	
-		\hline
 		Majority   & $2$  & $3$  & $4$  &  $5$ & $6$ & $7$ & $8$  \\
-		\hline
 		%cyclic $f_0=x_1+x_2x_3$
-		t~\cite{DAM:MeaOza24}   & $2$  & $3$  & $4$  &  $5$ & $5$ & $6$ & $7$\\
-		\hline	
+		$t$~\cite{DAM:MeaOza24}   & $2$  & $3$  & $4$  &  $5$ & $5$ & $6$ & $7$\\
 		%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
-		u~\cite{DAM:MeaOza24}   & $2$  & $3$  & $4$  &  $5$ & $6$ & $6$ & $7$ \\
-		\hline						
-		$f$  & $2$  & $3$  & $4$  &  $5$ & $6$ & $6$ & $7$\\
+		$u$~\cite{DAM:MeaOza24}   & $2$  & $3$  & $4$  &  $5$ & $6$ & $6$ & $7$ \\					
+		Revisited \hwbf{}   & $2$  & $3$  & $4$  &  $5$ & $6$ & $6$ & $7$\\
 		\hline
 	\end{tabular}
 	\tablecaption{Comparison of the algebraic immunity.}
 	\label{table:comparisonsAI}
 \end{table}
 
-Additionally, we considered the fast algebraic immunity of $f$ (see Definition~\ref{def:FAI}). In Table~\ref{table:FAI} we give the best couples $(d,e)$ encountered for the function $f$, where $fg=h$, $\degg(g)=d, \degg(h)=e$. 
+Lastly, we considered the fast algebraic immunity of the revisited \hwbf{} $f$. In Table~\ref{table:FAI}, we give the best couples $(d,e)$ encountered for the function $f$, where $\degg(g)=d$ and $\degg(h)=e$ for functions $g$ and $h$ satisfying $fg=h$.
 
-
-These various results on the algebraic properties of $f$ suggest that it possesses strong resistance against standard attacks. Additionally, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered LFSRs or in homomorphically-friendly schemes like FLIP and FiLIP.
+\bigskip
+These various results on the algebraic properties of $f$ suggest that it possesses strong resistance against standard attacks. Furthermore, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered \textsf{LFSR}s or in homomorphically-friendly schemes like \textsf{FLIP} and \textsf{FiLIP}.
 
 
 
@@ -1403,11 +1387,14 @@ These various results on the algebraic properties of $f$ suggest that it possess
 \end{table}
 
 \section{Conclusion and open questions}
-\pmnote{add a small conclusion (summary of contributions), and elaborate on an opean question, for example on how the Cauchy estimate could be used for more families, other quadratic functions or more easily higher degree ones.}
+
+In this work, we introduced the revisited Hidden Weight Bit Function (\hwbf{}), a weightwise quadratic Boolean function with improved cryptographic properties over existing constructions. We analyzed its balancedness, and using generating functions in combination with complex analysis, we derived new lower bounds on its nonlinearity, demonstrating that the revisited \hwbf{} achieves superior nonlinearity compared to other functions with similar computational costs. We further examined other cryptographic parameters such as degree, algebraic immunity, and fast algebraic immunity, confirming that the revisited \hwbf{} matches or outperforms comparable functions in these aspects.
+
+Our approach makes use of generating functions and Cauchy’s estimate to bound the maximum absolute Walsh spectrum of weightwise quadratic functions. This naturally leads to the following question: do the employed techniques, particularly the use of Cauchy’s estimate, extend to different families of Boolean functions? Exploring this could potentially lead to the discovery of new functions with even better cryptographic properties.
 
 \ifnum\anon=0
 \section{Acknowledgments}
-Pierrick Méaux was supported by the ERC Advanced Grant no. 787390.
+Pierrick Méaux was funded by the European Research Council (\textsf{ERC}) under the Advanced Grant program (reference number: 787390). Tim Seuré acknowledges the support of the Luxembourgish “Fonds National de la Recherche” (\textsf{FNR}) through an Individual Grant (reference number: 17936291).
 \fi
 
 

@@ -279,8 +279,19 @@
 \newcommand{\dsv}[1]{\mathbf{m}_{#1}}
 \newcommand{\svv}[1]{\mathbf{s}_{#1}}
 
+% Define a custom theorem style for bold optional arguments
+\newtheoremstyle{boldoptional} % Name of the style
+  {3pt}                        % Space above
+  {3pt}                        % Space below
+  {\itshape}                   % Body font
+  {}                           % Indent amount
+  {\bfseries}                  % Theorem head font
+  {.}                          % Punctuation after theorem head
+  { }                          % Space after theorem head
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (\textbf{#3})}} % Bold optional argument
 
-
+% Apply the new style to Property
+\theoremstyle{boldoptional}
 \newtheorem{Prop}{Property}
 \newtheorem{Cons}{Construction}
 
