@@ -1251,7 +1251,7 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1\,586$ & $6\,476$ & $26\,333$  \\
 
 \section{Other parameters}\label{sec:otherParameters}
 
-In this section, we present additional cryptographic parameters for the \hwbf{} $f\in\BN$. While Theorem~\ref{th:bal} describes its balancedness and Sections~\ref{sec:Cauchy} and \ref{sec:expAndComp} thoroughly explore its nonlinearity, our focus here will be on its algebraic characteristics. Specifically, we will examine the degree, the algebraic immunity, and the fast algebraic immunity of $f$, and offer comparisons with other weightwise quadratic functions.
+In this section, we present additional cryptographic parameters for the revisited \hwbf{} $f\in\BN$. While Theorem~\ref{th:bal} describes its balancedness and Sections~\ref{sec:Cauchy} and \ref{sec:expAndComp} thoroughly explore its nonlinearity, our focus here will be on its algebraic characteristics. Specifically, we will examine the degree, the algebraic immunity, and the fast algebraic immunity of $f$, and offer comparisons with other weightwise quadratic functions.
 
 
 %\pmnote{under construction, waiting for the parameters for the FAI}
@@ -1361,7 +1361,8 @@ In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various
 	\label{table:comparisonsAI}
 \end{table}
 
-Lastly, we considered the fast algebraic immunity of the revisited \hwbf{} $f$. In Table~\ref{table:FAI}, we give the best couples $(d,e)$ encountered for the function $f$, where $\degg(g)=d$ and $\degg(h)=e$ for functions $g$ and $h$ satisfying $fg=h$.
+\bigskip
+Lastly, we also considered the fast algebraic immunity of the revisited \hwbf{} $f$. In Table~\ref{table:FAI}, we give the best couples $(d,e)$ encountered for the function $f$, where $\degg(g)=d$ and $\degg(h)=e$ for functions $g$ and $h$ satisfying $fg=h$.
 
 \bigskip
 These various results on the algebraic properties of $f$ suggest that it possesses strong resistance against standard attacks. Furthermore, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered \textsf{LFSR}s or in homomorphically-friendly schemes like \textsf{FLIP} and \textsf{FiLIP}.
@@ -1382,7 +1383,7 @@ These various results on the algebraic properties of $f$ suggest that it possess
 		 &     &    &     &  &  &  & $(4,9)$ & $(4,11)$\\ 
 	 &     &    &     &  &  &  &  & $(5,10)$ \\ \hline
 	\end{tabular}
-	\tablecaption{Lowest possible values of $(d, e)$ for different values of $n$.}
+	\tablecaption{Lowest possible values of $(d, e)$ for different values of $n$.\tsnote{Aren't the roles of $d$ and $e$ reversed?}}
 	\label{table:FAI}
 \end{table}
 
