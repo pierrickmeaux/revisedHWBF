@@ -456,8 +456,8 @@ We have by Proposition~\ref{prop:restrWT} that:
 \wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ x_k +a \cdot x + \sum_{i=1}^{n/2} x_{n/2+i}}\\
 &= \sum_{\pi(x) \in \Ekn{k}{n}} (-1)^{f(\pi(x))+a \cdot \pi(x)} =\sum_{\pi(x) \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_{\pi(i)} x_{\pi(i+\frac{n}{2})}+ x_{\pi(k)}+a \cdot \pi(x) + \sum_{i=1}^{n/2} x_{\pi(n/2+i)}}
 \end{align*}
-where $\pi$ is a permutation of $[1,n]$. 
-We consider the permutation $\pi$ mapping the first half of $[1,n]$ to the odd positions and the second half to the even positions:
+where $\pi$ can be any permutation over $[1,n]$. 
+In particular, we consider the permutation $\pi$ mapping the first half of $[1,n]$ to the odd positions and the second half to the even positions:
 \[\pi(i)= \left\{ 
 \begin{array}{l l}
 2i-1 & \quad \text{ if } i\in [1,\frac{n}{2}], \\
@@ -488,6 +488,8 @@ Denoting by $b$ the vector $\pi^{-1}(a)+(0,1,0,1,\ldots,0,1)$, we can write the 
 
 \subsection{Balancedness of $f$}\label{sec:balancedness}
 \tsnote{@Pierrick, check entire section.}
+
+\pmnote{Under revision}
 
 In this part we determine for which values of $n$ the function $f$ is balanced, using the expression of its Walsh transform in terms of $\Dnka{n}{k}{a}$ and the recursive relation of these quantities.
 
@@ -693,6 +695,13 @@ From differentiation, we can get more cases in which $\Dnka nka=0$:
 
 \begin{proof}
     It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$. This checking can be autotomized by a computer algebra system. For this, we refer to the corresponding \textsf{SageMath} implementation from \cite{githubseure24}.\tsnote{@Pierrick, OK like this?}
+    
+    \pmnote{I think it works for the eprint (use the "ifnum\anon=" to be sure we do not forget it in an anonymous submission.
+    
+    I do not know if this will create a reference in your google scholar later one. Personally I would prevent that by just giving the link in the text, to avoid to have a reference that will have only 1 citation. 
+    	
+    	)}
+    
 \end{proof}
 
 \begin{remark}
@@ -1430,6 +1439,9 @@ These various results on the algebraic properties of $f$ suggest that it possess
 	\tablecaption{Lowest possible values of $(d, e)$ for different values of $n$.\tsnote{Aren't the roles of $d$ and $e$ reversed?}}
 	\label{table:FAI}
 \end{table}
+
+
+\pmnote{ degree of $h$, denoted by $e$ here is always greater than the AI, whereas $\degg(g)=d$ is smaller. It is consistent}
 
 \section{Conclusion and open questions}
 
