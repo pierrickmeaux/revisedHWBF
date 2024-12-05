@@ -260,40 +260,6 @@ These bounds focus on cyclic weightwise quadratic functions and involve sums of 
 %We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
 
 
-
-\iffalse
-\begin{Prop}[Nonlinearity of some functions from $\WD{1}{n}$, \cite{DCC:DalMaiSar06,DAM:WCST14,DAM:MeaOza24}\label{prop:wwd1}]
-Let $n\in \N^*$ even, the following hold for functions in $\WD{2}{n}$. 
-\begin{itemize}
-    \item The majority function $f\in\WD{2}{n}$ introduced in Definition~\ref{def:maj} satisfies:
-    \[
-        \NL(f)=2^{n-1}-\binom{n-1}{\frac n2}.
-    \]
-    \item The \hwbf{} $f\in\WD{2}{n}$ introduced in Definition~\ref{def:hwbf} satisfies:
-    \[
-        \NL(f)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
-    \]
-	\item  bound for the cyclic weightwise linear (adapt Theorem 1 of \cite{DAM:MeaOza24})
-	\item  bound for the cyclic weightwise quadratic function $t$  (adapt Theorem 2 of \cite{DAM:MeaOza24})
-\end{itemize}
-\end{Prop}
-\fi 
-
-%\begin{Prop}[Nonlinearity of some functions from $\WD{1}{n}$\label{prop:wwd1}]
-%Let $n\in \N^*$ even, the following hold for the following functions in $\WD{1}{n}$: 
-%\begin{itemize}
-%	\item (\eg{} ~\cite{DCC:DalMaiSar06}, Theorem $3$) The majority function $\textsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
-%	\[
-%	\NL(\textsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
-%	\]
-%	\item (\cite{DAM:WCST14}, Theorem $3$) The HWBF $h$ introduced in Definition~\ref{def:hwbf} satisfies:
-%	\[
-%	\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
-%	\]	
-%\end{itemize}
-%\end{Prop}
-
-
 \begin{Prop}\label{prop:wwd1}
 	Let $n\geq 2$ be an even integer.
 	\begin{itemize}
@@ -429,151 +395,83 @@ Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the
 		$a$ & $(0,0)$ & $(0,1)$ & $(1,1)$ \\ \hline
 		$\Dnka{2}{0}{a}$ &$1$&$1$ & $1$\\
 		$\Dnka{2}{1}{a}$ &$2$& $0$ & $-2$\\
-		$\Dnka{2}{2}{a}$ &$-1$&$1$ & $-1$\\
+		$\Dnka{2}{2}{a}$ &$-1$&$1$ & $-1$\\ \hline
 	\end{tabular}
 	\tablecaption{Values of $\Dnka{2}{k}{a}$ for $n=2$.}\label{tab:Dnka}
 \end{table}
 
 In the following, we show how the Walsh transform of $f$ can be written in terms of the $\Dnka{n}{k}{a}$. Then, in Section~\ref{sec:balancedness} we use Proposition~\ref{prop:recursiveDnka} to determine the balancedness of $f$, and in Section~\ref{sec:genfunc} we study the value of $\Dnka{n}{k}{a}$ using generating functions.
 
-\tsnote{@Pierrick, check the below proposition with its proof.}
-
-\pmnote{Part under repair}
-
-
 \begin{proposition}\label{prop:WT}
-    Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Denote by $\pi:[1,n]\to[1,n]$ the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Let $a\in\F_2^n$ be a binary vector, and let $b=\pi^{-1}(a)+(0,1,0,1,\ldots,0,1)$. Then the following holds true:
+	Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Denote by $\pi:[1,n]\to[1,n]$ the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Let $a\in\F_2^n$ be a binary vector, and let $b=\pi^{-1}(a)+(0,1,0,1,\ldots,0,1)$. Then the following holds true:
 	\[ \wt{f}(a)=1+\sum_{k=1}^n \Dnka{n}{k}{b+\pi(e_k)}.\]
 \end{proposition}
 
 \begin{proof}
-We have by Proposition~\ref{prop:restrWT} that:
-%\[
-%\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x}=\Dnka{n}{k}{d},\]
-%where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
-
-\begin{align*}
-\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ x_k +a \cdot x + \sum_{i=1}^{n/2} x_{n/2+i}}\\
-&= \sum_{\pi(x) \in \Ekn{k}{n}} (-1)^{f(\pi(x))+a \cdot \pi(x)} =\sum_{\pi(x) \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_{\pi(i)} x_{\pi(i+\frac{n}{2})}+ x_{\pi(k)}+a \cdot \pi(x) + \sum_{i=1}^{n/2} x_{\pi(n/2+i)}}
-\end{align*}
-where $\pi$ can be any permutation over $[1,n]$. 
-In particular, we consider the permutation $\pi$ mapping the first half of $[1,n]$ to the odd positions and the second half to the even positions:
-\[\pi(i)= \left\{ 
-\begin{array}{l l}
-2i-1 & \quad \text{ if } i\in [1,\frac{n}{2}], \\
-2(i-\frac{n}{2}) & \quad \text{ if } i\in [\frac{n}{2}+1,n].
-\end{array} \right. \] 
-Regarding the restricted Walsh transform of $f$ it gives:
-\begin{align*}
-\wtk{f}{k}(a)&=\sum_{x\in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_{2i-1} x_{2i}+ x_{\pi(k)} + \pi^{-1}(a) \cdot x + \sum_{i=1}^{n/2} x_{2i}}\\
-&= \Dnka{n}{k}{d},
-\end{align*}
-where $d= \pi^{-1}(a) + e_{\pi(k)} +\sum_{i=1}^{n/2} e_{2i}$.
-
-
-
-
-%=\Dnka{n}{k}{d},\]
-%where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
-
-
-
-%Calling $\pi$ this permutation, since $c=a+e_k+\sum_{i=n/2+1}^n e_i$, we can write $d=\pi(c)=\pi(a)+ \pi(e_k)+ (0,1,0,1,\ldots,0,1)$. 
-%Accordingly, if $k\leq n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2+1$, with one couple of consecutive elements (the first one with an odd index) being $(1,1)$ and all the others $(0,1)$. 
-%Otherwise,  when $k> n/2$, the vector $(\pi(e_k)+ (0,1,0,1,\ldots,0,1))$ has weight $n/2-1$, with one couple of consecutive elements (the first one with an odd index) being $(0,0)$ and all the others $(0,1)$. 
-
-Denoting by $b$ the vector $\pi^{-1}(a)+(0,1,0,1,\ldots,0,1)$, we can write the Walsh transform of $f$ in $a$ as:
-\[ \wt{f}(a)=1+\sum_{k=1}^n\Dnka{n}{k}{b+\pi(e_k)}.\qedhere\]
+	For every $k\in[1,n]$, we have by Proposition~\ref{prop:restrWT} that:
+	%\[
+	%\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x}=\Dnka{n}{k}{d},\]
+	%where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
+	\begin{align*}
+		\wt{f}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+a\cdot x}\\
+		&=\sum_{\pi(x) \in \Ekn{k}{n}} (-1)^{f(\pi(x))+a \cdot \pi(x)}\\
+		&=\sum_{\pi(x) \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_{\pi(i)} x_{\pi(i+n/2)}+ x_{\pi(k)}+a \cdot \pi(x)+ \sum_{i=1}^{n/2} x_{\pi(i+n/2)}}\\
+		&=\sum_{\pi(x) \in \Ekn{k}{n}}(-1)^{d_n(x)+x_{\pi(k)}+\pi^{-1}(a)\cdot x+\sum_{i=1}^{n/2}x_{2i}}\\
+		&=\sum_{x\in \Ekn{k}{n}}(-1)^{d_n(x)+(b+\pi(e_k))\cdot x}\\
+		&=\Dnka{n}{k}{b+\pi(e_k)}.
+	\end{align*}
+	We conclude by applying $\wtk{f}{k}(a)=1+\sum_{k=1}^n\wtk{f}{k}(a)$.
 \end{proof}
 
 \subsection{Balancedness of $f$}\label{sec:balancedness}
-\tsnote{@Pierrick, check entire section.}
 
-\pmnote{Under revision}
-
-In this part we determine for which values of $n$ the function $f$ is balanced, using the expression of its Walsh transform in terms of $\Dnka{n}{k}{a}$ and the recursive relation of these quantities.
-
+In this part, we determine for which values of $n$ the function $f$ is balanced, using the expression of its Walsh transform in terms of $\Dnka{n}{k}{a}$ and the recursive relation of these quantities.
 
 \begin{theorem}\label{th:bal}
-	Let $n \in \N^*$ even, and $f$ be the $n$-variable function from Definition~\ref{def:revHWBF}, the following holds on its Walsh transform in $0_n$:
-	\[\wt{f}(0_n)= \left \{
-	\begin{array}{l l}
-	0 & \text{ if } n/2 \text{ is even, } \\
-	-2 \binom{n/2-1}{(n-2)/4} & \text{ if }  n/2 \text{ is odd.}
-	\end{array}\right.\]
-	
-	Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equiv 2 \mod 4$.
-	
+	Let $n\geq 2$ be an even integer.
+	Then the Walsh transform of the revisited \hwbf{} $f\in\BN$ at $0_n$ satisfies:
+	\[
+		\wt{f}(0_n)=\left\{\begin{array}{l l}
+			0&\text{ if }n\equiv 0\bmod 4\\
+			-2\binom{(n-2)/2}{(n-2)/4}&\text{ if }n\equiv 2\bmod 4.\\
+		\end{array}\right.
+	\]
+	Accordingly, $f$ is balanced if and only if $n \equiv 0\bmod 4$.
 \end{theorem}
 
 \begin{proof}
-We use the expression of the Walsh transform of $f$ from Proposition~\ref{prop:WT}:
-\begin{align*}
-\wt{f}(0_n)&=1+\sum_{k=1}^n\Dnka{n}{k}{\pi^{-1}(0_n)+(0,1,0,1,\ldots,0,1)+\pi(e_k)}\\
-&=1+\sum_{k=1}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}
-\end{align*}
-
-%In particular, for $a=0_n$ we can study the balancedness of $f$:
-%\begin{align*}
-%\wt{f}(0_n)&=\sum_{k=0}^n\Dnka{n}{k}{(0,1,0,1,\ldots,0,1)+\pi(e_k)}\\
-%&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}
-%\end{align*}
-%\[\wt{f}(0_n)=\sum_{k=0}^n\Dnka{n}{k}{(0,1,0,1,\ldots,0,1)+\pi(e_k)}=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\]
-Using the recursive relation from Proposition~\ref{prop:recursiveDnka} we obtain:
-\begin{align*}
-\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}&= \Dnka{n-2}{k}{(1,1,0,1,\ldots,0,1)} + \Dnka{n-2}{k-2}{(1,1,0,1,\ldots,0,1)} \\
-&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{(1,1)}\\
-&=\binom{n/2-1}{k/2} \Dnka{2}{0}{(1,1)}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{(1,1)}+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{(1,1)}\\
-&=\binom{n/2-1}{k/2} -2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1}\\
-\end{align*}
-Similarly, for $\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}$ we get:
-\begin{align*}
-\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}
-%&= \Dnka{n-2}{k}{(0,0,0,1,\ldots,0,1)} + \Dnka{n-2}{k-2}{(0,0,0,1,\ldots,0,1)} \\
-&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{(0,0)}\\
-&=\binom{n/2-1}{k/2} \Dnka{2}{0}{(0,0)}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{(0,0)}+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{(0,0)}\\
-&=\binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1}.\\
-\end{align*}
-%We can study the balancedness of $f$ using the $\Dnka{n}{k}{a}$ values.
-Combining both we obtain:
-%\begin{align*}
-%\wt{f}(0_n)&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\\
-%&=\sum_{k=0}^{n/2} \left(\binom{n/2-1}{k/2} -2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
-%&\qquad+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2} - \binom{n/2-1}{k/2-1} \right)\\
-%&=\sum_{k=0}^{n}\left( \binom{n/2-1}{k/2} - \binom{n/2-1}{k/2-1}\right) 
-%+ 2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
-%&=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{n/2-1}{(k-1)/2} - \sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
-%&=2 \left( \sum_{i=\lceil n/4 \rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4 \rfloor} \binom{n/2-1}{i}\right).\\
-%\end{align*}
-\iffalse
-\begin{align*}
-\wt{f}(0_n)&=\sum_{k=0}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\\
-&=\sum_{k=0}^{\frac{n}{2}} \left(\binom{\frac{n}{2}-1}{\frac{k}{2}} -2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{\frac{n}{2}-1}{\frac{k}{2}} +2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)\\
-&=\sum_{k=0}^{n}\left( \binom{\frac{n}{2}-1}{\frac{k}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1}\right) 
-+ 2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \sum_{k=0}^{\frac{n}{2}} \binom{\frac{n}{2}-1}{\frac{k-1}{2}}\right)\\
-&=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \sum_{k=0}^{n/2} \binom{\frac{n}{2}-1}{\frac{k-1}{2}}\right)
-=2 \left( \sum_{i=\lceil \frac{n}{4} \rceil}^{\frac{n}{2}-1} \binom {\frac{n}{2}-1}{i} - \sum_{i=0}^{\lfloor\frac{n-2}{4}\rfloor} \binom{\frac{n}{2}-1}{i}\right).\\
-\end{align*}
-\fi
-\begin{align*}
-\wt{f}(0_n)&=1+\sum_{k=1}^{n/2}\Dnka{n}{k}{(1,1,0,1,\ldots,0,1)}+ \sum_{k=\frac{n}{2}+1}^{n}\Dnka{n}{k}{(0,0,0,1,\ldots,0,1)}\\
-&=\sum_{k=0}^{\frac{n}{2}} \left(\binom{\frac{n}{2}-1}{\frac{k}{2}} -2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)+ \sum_{k=\frac{n}{2}+1}^{n}   \left(  \binom{\frac{n}{2}-1}{\frac{k}{2}} +2 \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1} \right)\\
-&=\sum_{k=0}^{n}\left( \binom{\frac{n}{2}-1}{\frac{k}{2}} - \binom{\frac{n}{2}-1}{\frac{k}{2}-1}\right) 
-+ 2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \sum_{k=0}^{\frac{n}{2}} \binom{\frac{n}{2}-1}{\frac{k-1}{2}}\right)\\
-&=2 \left( \sum_{k=\frac{n}{2}+1}^{n} \binom{\frac{n}{2}-1}{\frac{k-1}{2}} - \sum_{k=0}^{n/2} \binom{\frac{n}{2}-1}{\frac{k-1}{2}}\right)
-=2 \left( \sum_{i=\lceil \frac{n}{4} \rceil}^{\frac{n}{2}-1} \binom {\frac{n}{2}-1}{i} - \sum_{i=0}^{\lfloor\frac{n-2}{4}\rfloor} \binom{\frac{n}{2}-1}{i}\right).\\
-\end{align*}
-
-Then, depending on the parity of $\frac{n}{2}$ we obtain the value of $\wt{f}(0_n)$ (using that $\binom{n}{k}=\binom{n}{n-k}$):
-	\[\wt{f}(0_n)= \left \{
-\begin{array}{l l}
-0 & \text{ if } \frac{n}{2} \text{ is even, } \\
--2 \binom{\frac{n}{2}-1}{\frac{n-2}{4}} & \text{ if }  \frac{n}{2} \text{ is odd.}
-\end{array}\right.\]
-
-Accordingly, $f$ is balanced when $n \equiv 0\mod 4$ and unbalanced when $n\equiv 2 \mod 4$.
+	Applying Remark~\ref{rmk:dependence_dnka} and that $\pi^{-1}(0_n)=0_n$,
+	Proposition~\ref{prop:WT} gives:
+	\begin{align*}
+		\wt{f}(0_n)&=1+\sum_{k=1}^n\Dnka{n}{k}{\pi^{-1}(0_n)+(0,1,0,1,\ldots,0,1)+\pi(e_k)}\\
+		&=1+\sum_{k=1}^{n/2}\Dnka{n}{k}{1,1,0,1,\ldots,0,1}+\sum_{k=n/2+1}^{n}\Dnka{n}{k}{0,0,0,1,\ldots,0,1}.
+	\end{align*}
+	Using the recursive relation from Proposition~\ref{prop:recursiveDnka}, we obtain:
+	\[
+		\Dnka{n}{k}{1,1,0,1,\ldots,0,1}=\Dnka{n-2}{k}{1,1,0,1,\ldots,0,1} +\Dnka{n-2}{k-2}{1,1,0,1,\ldots,0,1}.
+	\]
+	By reapplying this $n/2-1$ times, we obtain:
+	\begin{align*}
+		\Dnka{n}{k}{1,1,0,1,\ldots,0,1}&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{1,1}\\
+		&=\binom{n/2-1}{k/2} \Dnka{2}{0}{1,1}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{1,1}\\
+		&\qquad+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{1,1}\\
+		&=\binom{n/2-1}{k/2}-2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}.
+	\end{align*}
+	Similarly, we get:
+	\[
+		\Dnka{n}{k}{0,0,0,1,\ldots,0,1}=\binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}.\\
+	\]
+	Combining both, we obtain:
+	\begin{align*}
+		\wt{f}(0_n)&=1+\sum_{k=1}^{n/2}\Dnka{n}{k}{1,1,0,1,\ldots,0,1}+ \sum_{k=n/2+1}^{n}\Dnka{n}{k}{0,0,0,1,\ldots,0,1}\\
+		&=\sum_{k=0}^{n/2} \left(\binom{n/2-1}{k/2} -2 \binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}\right)\\
+		&\qquad+\sum_{k=n/2+1}^{n}\left(\binom{n/2-1}{k/2}+2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}\right)\\
+		&=\sum_{k=0}^{n}\left( \binom{n/2-1}{k/2}-\binom{n/2-1}{k/2-1}\right)+2\left(\sum_{k=n/2+1}^{n}\binom{n/2-1}{(k-1)/2}-\sum_{k=0}^{n/2}\binom{n/2-1}{(k-1)/2}\right)\\
+		&=0+2\left(\sum_{k=n/2+1}^{n}\binom{n/2-1}{(k-1)/2}-\sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
+		&=2\left(\sum_{i=\lceil n/4\rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4\rfloor} \binom{n/2-1}{i}\right).
+	\end{align*}
+	The announced result follows by applying that $\binom{m}{k}=\binom{m}{m-k}$ for all integers $m\geq 0$ and $k$.
 \end{proof}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1097,34 +995,6 @@ Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded 
 In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ for small values of $n$ (calculated using \textsf{SageMath}) to the upper bound $B_n$ obtained through the above method and the one from Corollary~\ref{cor:bound_walsh_cauchy}. 
 Additionally, Table~\ref{table:walsh_bounds} provides the values of the bound $B_n$ for all even values of $n$ from $1$ to $80$.
 We observe that the above method provides a much tighter bound than the one from Corollary~\ref{cor:bound_walsh_cauchy}, and its polynomial complexity enables us to extend the analysis far beyond what is feasible with a full computation of the Walsh spectrum (\( \mathcal{O}(n 2^n) \)).
-
-
-
-\iffalse
-\begin{table}
-	\centering
-	\begin{tabular}{|c|c|c|}
-		\hline
-		$n$ & $\max_{a\in\F_2^n}|W_f(a)|$ & $B_n$ \\ \hline
-		$2$  & $2$     & $4$     \\
-		$4$  & $8$     & $14$     \\
-		$6$  & $20$    & $36$    \\
-		$8$  & $52$    & $114$    \\
-		$10$ & $108$   & $288$   \\
-		$12$ & $292$   & $820$   \\
-		$14$ & $700$   & $2\,316$  \\
-		$16$ & $2\,176$  & $6\,006$  \\
-		$18$ & $4\,964$  & $18\,192$  \\
-		$20$ & $14\,968$ & $48\,480$ \\
-		$22$ & $34\,232$ & $140\,392$ \\
-		$24$ & $109\,648$ & $392\,168$ \\ \hline
-	\end{tabular}
-	\tablecaption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ compared to the bound $B_n$}
-	\label{table:max_walsh_vs_bound}
-\end{table}
-\fi
-
-
 
 \begin{table}
 	\centering
