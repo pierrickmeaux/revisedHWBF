@@ -1,108 +1,52 @@
-\def\anon{0} %% set to 1 for anonymous submissions, hides acknowledgements and author names
-\def\full{1} %% set to 0 for springer proceedings
-
+\def\anon{0} % set to 1 for anonymous submissions, hides acknowledgements and author names
+\def\full{1} % set to 0 for springer proceedings
 
 \ifnum\full=1
-\documentclass[11pt]{llncs}
-
-
-\addtolength{\parskip}{1pt}
+	\documentclass[11pt]{llncs}
+	\addtolength{\parskip}{1pt}
 \else
-\documentclass[10pt, runningheads]{llncs}
-\usepackage{times}
-
+	\documentclass[10pt, runningheads]{llncs}
+	\usepackage{times}
 \fi
-
 
 \input{header.tex}
 
-
 \begin{document}
-    \setcounter{page}{1} 
-	\title{The Revisited Hidden Weight Bit Function}
 
-	
-	\titlerunning{The Revisited Hidden Weight Bit Function}
-\author{
-	Pierrick M\'eaux\inst{1},
-	Tim Seuré\inst{1}, 
-	Deng Tang\inst{2}
-%	Pierrick M\'eaux\orcidID{0000-0001-5733-4341}\inst{1},
-%	Tim Seuré\inst{1}, 
-%	Deng Tang\orcidID{0000-0002-8373-9200}\inst{2}
-}
-\authorrunning{P.\ M\'eaux, T.\ Seur\'e, D.\ Tang}
+\setcounter{page}{1}
 
-	
-\institute{
-	University of Luxembourg, Luxembourg\\ \email{pierrick.meaux@uni.lu, tim.seure@uni.lu} 
-	%\and
-%		University of Luxembourg, Luxembourg\\ \email{pierrick.meaux@uni.lu}
-	\and
-	Shanghai Jiao Tong University, Shanghai, China\\
-	\email{dengtang@sjtu.edu.cn}
-}
+\title{The Revisited Hidden Weight Bit Function}
+\titlerunning{The Revisited Hidden Weight Bit Function}
 
-	
-	
-	
-	%----------------------------------------------------------------
-	\maketitle
+\ifnum\anon=0
+	\author{%
+		Pierrick M\'eaux\inst{1},
+		Tim Seuré\inst{1}, 
+		Deng Tang\inst{2}
+		%Pierrick M\'eaux\orcidID{0000-0001-5733-4341}\inst{1},
+		%Tim Seuré\inst{1}, 
+		%Deng Tang\orcidID{0000-0002-8373-9200}\inst{2}
+	}
+	\authorrunning{P.\ M\'eaux, T.\ Seur\'e, D.\ Tang}
+	\institute{%
+		University of Luxembourg, Luxembourg\\
+		\email{pierrick.meaux@uni.lu, tim.seure@uni.lu} 
+		\and
+		Shanghai Jiao Tong University, Shanghai, China\\
+		\email{dengtang@sjtu.edu.cn}
+	}
+\else
+	\author{}
+	\institute{}
+\fi
 
-
-\institute{
-	University of Luxembourg, Luxembourg\\
-	\email{pierrick.meaux@uni.lu}		
-}	
+\maketitle	
 	
-	\begin{abstract}
+\begin{abstract}
 	The Hidden Weight Bit Function (\hwbf{}) has drawn considerable attention for its simplicity and cryptographic potential. Despite its ease of implementation and favorable algebraic properties, its low nonlinearity limits its direct application in modern cryptographic designs. In this work, we revisit the \hwbf{} and propose a new weightwise quadratic variant obtained by combining the \hwbf{} with a bent function. This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. 
-	\end{abstract}
+\end{abstract}
 
 \section{Introduction}
-
-%\pmnote{short intro:
-
-%HWBF introduced in x, interesting for its cryptographic criteria and easy implementation. cryptographic properties studied in y such as balancedness, algebraic immunity and nonlinearity. 
-%New potential uses in a stream cipher, or modifications. Use: transciphering and works aiming at finding Boolean functions easy to evaluate homomorphically, input oblivious algorithms. 
-%Nonlinearity a bit low for direct use.
-
-
-
-%Contributions: new function as addition of HWBF and quadratic bent function. We show when the function is balanced, formalize and study its nonlinearity. Bounds on the nonlinearity of $f$, generalization to a family of function, and an algorithm for estimating the nonlinearity for $n$ up to $80$. Comparisons with other functions and practical values of the parameters for $n$ up to $20$.
-
-
-%}
-
-\iffalse
-%prompt
-
-The Hidden Weight Bit Function (\hwbf{}) has received a lot of attention since its introduction by Bryant
-in $1991$~\cite{IEEE:Bryant91}, it has been considered as the simplest example of function with binary decision
-diagram of exponential size~\cite{IEEE:Bryant91,TIA:BoLSW99}. 
-The facility of implementing this function in different models of computation since it consists in computing the Hamming weight of the input and applying a simple linear function, and it relatively good cryptographic properties exhibited in~\cite{DAM:WCST14} (balancedness, nonlinearity, degree and algebraic immunity) made it an interesting starting point candidate to design the filter of some stream cipher constructions. 
-
-Recently, new developments in stream ciphers lead to reconsider this function.
-The new potential uses of stream ciphers with filter functions on a larger number number of variables such as Hybrid Homomorphic Encryption~\cite{CCS:NaeLauVai11} (\textsf{HHE}) gave a regain of interest in these functions. \textsf{HHE} aims at finding Boolean functions efficient to evaluate as an input oblivious algorithm. 
-For example various new binary stream ciphers have been designed since $2016$ such as Kreyvium~\cite{JOC:CCFLNP18}, FLIP~\cite{EC:MJSC16}, Rasta~\cite{C:Rasta}, FiLIP~\cite{INDO:MCJS19} and Dasta~\cite{TOSC:BeiLea20}. 
-Currently, the designs with Boolean functions with more than one hundred variables as a filter are the ones leading to the \textsf{HHE} with best latency~\cite{INDO:HofMeaRic20,CCS:CDPP22,CIC:MeaParPei24}.
-%cite FHE for MPC?
-
-The nonlinearity of the \hwbf{} being low for a direct use as filter function, several generalizations have been considered recently, aiming at strengthening this parameter and keeping or improving the others cryptographic relevant parameters such as balancedness, algebraic degree and and algebraic immunity. In these generalizations we count the functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23,DAM:MeaOza24}. The later article considers some functions obtained by computing the Hamming weight of the input and then simply applying a quadratic Boolean function.
-
-In this article we consider another function that is weightwise quadratic, obtained by \textsf{XOR}-ing the \hwbf{} and a bent quadratic function. Therefore, we exhibit a family of Boolean functions both easy to compute and with good parameters, improving over the ones exhibited in~\cite{DAM:MeaOza24}. Various of the techniques we introduce to determine the nonlinearity are of independent interest, and allow to bound the maximum of the absolute Walsh spectrum for a wider family of weightwise quadratic functions. 
-Our contributions are the following:
-
-\begin{itemize}
-	\item In Section~\ref{sec:defAndBal}, we define the revisited \hwbf{} $f$, and study its balancedness. This part is done by studying the (restricted) Walsh transform of some quadratic functions over sets of fixed Hamming weight, called slices. A recursive relation between these values allows to determine for which values of $n$ the function is balanced.
-	\item In Section~\ref{sec:dnk}, we link the maximum Walsh coefficients of the revisited \hwbf{} to the coefficients of generating functions and use techniques from complex analysis to prove lower bounds on the nonlinearity of $f$. 
-	Differing from usual results in Boolean function used in cryptography, this allows us to determine a good enough bound on the nonlinearity for a larger family of functions, and for all even number of variables $n$.
-	\item In Section~\ref{sec:expAndComp}, we explain techniques to get a better bound for bounded values of $n$, giving a tighter bound for the nonlinearity of $f$ up to $n=80$. In this parts with experiments, we compare the bounds we obtain and the real value of the nonlinearity between $f$ and other weightwise quadratic functions such as the majority function, the \hwbf{}, and the two main examples from~\cite{DAM:MeaOza24}. These results show a neat advantage for the revisited \hwbf{} relatively the nonlinearity compared to function with similar computation costs.
-	\item In Section~\ref{sec:otherParameters} we analyze the other cryptographic relevant parameters of $f$, such as degree, algebraic immunity and fast algebraic immunity. Similarly to the comparison for the nonlinearity the revisited \hwbf{} performs better or similarly to the function with similar computation costs.
-		
-\end{itemize}
-
-\fi
 
 The Hidden Weight Bit Function (\hwbf{}) has attracted significant attention since its introduction by Bryant in 1991~\cite{IEEE:Bryant91}. It has been regarded as the simplest example of a function whose binary decision diagram has exponential size~\cite{IEEE:Bryant91,TIA:BoLSW99}. The ease of implementing this function across various computational models—owing to its reliance on computing the Hamming weight of the input and applying a simple linear function—combined with its relatively strong cryptographic properties as demonstrated in~\cite{DAM:WCST14} (\eg, balancedness, nonlinearity, degree, and algebraic immunity), has made it a noteworthy candidate for use as a filter function in stream cipher constructions.
 
@@ -112,24 +56,21 @@ Currently, designs employing Boolean functions with more than one hundred variab
 The \hwbf{}, while efficient to compute, suffers from low nonlinearity, which limits its direct application as a filter function. Consequently, various generalizations have been explored to enhance this parameter while preserving or improving other cryptographically relevant properties, such as balancedness, algebraic degree, and algebraic immunity. Notable examples include functions introduced in~\cite{IEEE:Carlet22,eprint:CarPar23} and~\cite{DAM:MeaOza24}. The latter work considers functions obtained by computing the Hamming weight of the input and applying a quadratic Boolean function, so-called weightwise quadratic functions.
 
 \bigskip
+
 In this article, we propose a new generalization of the \hwbf{}, a weightwise quadratic function constructed by \textsf{XOR}-ing the \hwbf{} with a bent quadratic function. This leads to a family of Boolean functions that are computationally efficient and feature superior cryptographic properties compared to previous constructions. 
 Additionally, the techniques we introduce to analyze nonlinearity have broader applicability and provide bounds on the maximum absolute Walsh spectrum for a wider class of weightwise quadratic functions. Our contributions are as follows:
+
 \begin{itemize}
 	\item\emph{Balancedness analysis} (Section~\ref{sec:defAndBal}): We define the revisited \hwbf{} in $n$ variables, hereafter denoted by $f$, and analyze its balancedness. This involves studying the (restricted) Walsh transform of specific quadratic functions over sets of fixed Hamming weights (called slices). By establishing recursive relations for these values, we determine for which values of $n$ the function is balanced.
-
     \item \emph{Nonlinearity bounds} (Section~\ref{sec:dnk}):
     We relate the maximum Walsh coefficients of the revisited \hwbf{} to the coefficients of generating functions and employ complex analysis techniques to prove lower bounds on the nonlinearity of $f$. 
     Unlike most studies on Boolean functions used in cryptography, this approach yields strong nonlinearity bounds for a broader class of functions and for all even $n$.
-    
     \item \emph{Experimental results and comparisons} (Section~\ref{sec:expAndComp}): 
     For bounded values of $n$, we employ specific techniques to refine the nonlinearity bounds of $f$, providing tighter estimates up to $n = 80$. Through experiments, we compare these bounds with actual nonlinearity values for $f$ and other weightwise quadratic functions, such as the majority function, the \hwbf{}, and the two main examples in~\cite{DAM:MeaOza24}. 
     Our results highlight the revisited \hwbf{}'s superior nonlinearity relative to functions with similar computational costs.
-    
     \item \emph{Analysis of other cryptographic parameters} (Section~\ref{sec:otherParameters}):  
     We evaluate other cryptographically relevant parameters of $f$, including degree, algebraic immunity, and fast algebraic immunity. Similar to the nonlinearity analysis, the revisited \hwbf{} outperforms or matches other functions with comparable computational costs.
 \end{itemize}
-
-
 
 \section{Preliminaries}
 
@@ -139,8 +80,6 @@ Throughout this paper, $n\geq 0$ will always denote a non-negative integer. Furt
 
 In this part we recall general concepts on Boolean functions and their cryptographic properties we use in this article. 
 For a deeper introduction on Boolean functions and their cryptographic parameters, we refer to the book~\cite{Carlet20}, and to~\cite{TOSC:CarMeaRot17} for properties on slices, so-called weightwise properties.
-
-%Accordingly, the Boolean hypercube is partitioned into $n+1$ slices where the elements have the same Hamming weight.
 
 \begin{definition}[Slice]
     For $k \in [0,n]$, we introduce the set $\Ekn{k}{n}=\{x\in \F_2^n:\w(x)=k\}$, and call it the $k$-th slice of the Boolean hypercube (of dimension $n$). 
@@ -154,30 +93,17 @@ Below, for a Boolean function $f\in\BN$, we write $f+1$ for the Boolean function
 
 \begin{definition}[Algebraic Normal Form, degree]\label{def:anf}
 	We call Algebraic Normal Form of a Boolean function $f\in\BN$ its unique representation as an element of the ring $\F_2[x_1,\dots,x_n]/(x_1^2+x_1,\dots,x_n^2+x_n)$, and we represent it as follows:
-	\[f(x_1,\dots,x_n)= \sum_{I \subseteq [1,n]} a_I \left( \prod_{i \in I} x_i \right), \]%x_1,\dots,x_n=\sum_{I \subseteq [1,n]} a_I x^I,\]
+	\[
+		f(x_1,\dots,x_n)= \sum_{I \subseteq [1,n]} a_I \left( \prod_{i \in I} x_i \right),
+	\]
 	where $a_I\in \F_2$. The (algebraic) degree of $f$ is defined by $\degg(f)=0$ in case $f$ is the null function, and $\degg(f)=\max\{ |I|:I\subseteq[1,n],a_I=1\}$ otherwise.
 \end{definition}
-
-
-
 
 \begin{definition}[Walsh transform, restricted Walsh transform]\label{def:walsh_transform}
 	The Walsh transform at $a \in \F_2^n$ of a Boolean function $f\in\BN$ restricted to a subset $S\subseteq \F_2^n$ is defined as:
     \[  \wt{f,S} (a) = \sum_{x\in S} (-1)^{f(x)+a \cdot x}.\]
     The Walsh transform of $f$ is then defined as $\wt{f}=\wt{f,\F_2^n}$. For $k\in[0,n]$, we also set $\wt{f,k}=\wt{f,\Ekn{k}{n}}$.
 \end{definition}
-
-
-	
-
-
-%\begin{definition}[Algebraic Immunity] \label{def:ai}
-%	The algebraic immunity of a Boolean function $f\in \Bfn{n}$, denoted as $\AI(f)$, is defined as:
-%	\[ \AI(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0 \; \text{or} \; (f + 1)g = 0 \}{,} \]
-%	where $\degg(g)$ is the algebraic degree of $g$.
-%	The function $g$ is called an annihilator of $f$ (or $f + 1$). 
-%	Additionally we denote $\AN(f) = \min_{g \neq 0}\{ \degg(g) \; | \; fg = 0\}$.
-%\end{definition}
 
 \begin{definition}[Balancedness]
     A Boolean function $f\in\BN$ is called balanced if $\wt f(0_n)=0$.
@@ -186,15 +112,20 @@ Below, for a Boolean function $f\in\BN$, we write $f+1$ for the Boolean function
 \begin{definition}[Nonlinearity, \eg{} page 79 in \cite{Carlet20}]%and weightwise nonlinearity
 	\label{def:nl}
 	The nonlinearity $\NL(f)$ of a Boolean function $f\in \BN$ is the minimum Hamming distance between $f$ and all the affine functions in $\BN$:
-	\[ \NL(f) = \min\{ \hd(f,g):g\in\BN,\degg(g)\leq 1\}{,} \]
+	\[
+		\NL(f) = \min\{ \hd(f,g):g\in\BN,\degg(g)\leq 1\},
+	\]
 	where the Hamming distance between $f$ and $g$ is defined as $\hd(f,g)=|\{x\in\F_2^n:f(x)\neq g(x)\}|$. Alternatively, the nonlinearity of $f\in\BN$ can also be defined in terms of its Walsh transform:
-	\[ \NL(f) = 2^{n-1}- \frac{1}{2} \max_{a\in \F_2^n}{|\wt{f}(a)|}. \]
+	\[
+		\NL(f) = 2^{n-1}- \frac{1}{2} \max_{a\in \F_2^n}{|\wt{f}(a)|}.
+	\]
 \end{definition}
 
 When $n$ is even, the nonlinearity of a Boolean function in $n$ variables can reach at most $2^{n-1}-2^{n/2 -1}$. Functions reaching this maximum are called bent functions. Due to their broad applications and importance, they have been the focus of multiple works, \eg{} \cite{Rothaus76,FSE:Dobbertin95,DBLP:conf/itw/BudaghyanCH11,Tokareva15,Mesnager16}. 
 The quadratic function $d_n\in\BN$ given by $d_n(x)=\sum_{i=1}^{n/2}x_{2i-1}x_{2i}$ is an example for such a bent function.
 
 \bigskip
+
 The algebraic degree of multiples of a Boolean function is a crucial quantity for various attacks on stream ciphers that utilize a Boolean function as a filter. 
 The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\cite{C:Courtois03} on filtered \textsf{LFSR}s have motivated the study of cryptographic properties such as algebraic immunity and fast algebraic immunity, investigated in numerous works, \eg{} \cite{FSE:Armknecht04,C:HawRos04,ISC:JiaZhaWan13})). Nowadays, these parameters are systematically determined for any function considered as a filter.
 
@@ -203,13 +134,11 @@ The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\ci
 	\[ \AI(f) = \min\{ \degg(g):\text{$g\in\BN^*$ is an annihilator of $f$ or $f+1$}\}.\]
 \end{definition}
 
-
-
-\begin{definition}[Fast algebraic immunity, \eg{} \cite{EC:ACGKMR06}]\label{def:FAI} The fast algebraic immunity of a Boolean function $f\in \Bfn{n}$ is defined as:
-\[
-    \FAI(f)=\min \{ 2 \AI(f), \min\{\degg(g)+ \degg(fg):g\in\BN,1\leq\degg(g)<\AI(f)\}\}
-\]
-
+\begin{definition}[Fast algebraic immunity, \eg{} \cite{EC:ACGKMR06}]\label{def:FAI}
+	The fast algebraic immunity of a Boolean function $f\in \Bfn{n}$ is defined as:
+	\[
+		\FAI(f)=\min \{ 2 \AI(f), \min\{\degg(g)+ \degg(fg):g\in\BN,1\leq\degg(g)<\AI(f)\}\}.
+	\]
 \end{definition}
 
 \subsection{Symmetric Functions, \hwbf{} and weightwise degree-d functions}
@@ -217,12 +146,10 @@ The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\ci
 Recall that the Boolean symmetric functions in $n$ variables are those that are constant on the slice $\Ekn{k}{n}$ for every $k\in [0,n]$. 
 This class of functions has been thoroughly studied in the context of cryptography, see \eg{} \cite{IEEE:Carlet04,IEEE:CanVid05,INDO:BraPre05,DM:SarMai07,IEEE:QFLW09,IEEE:CheLu11,Latin:Meaux19,CCDS:Meaux21,IEEE:CarMea21}.
 In this article, the symmetric functions that we consider will mainly be the slice indicator function and the majority function.
-%\begin{definition}[Elementary symmetric functions]
-%Let $i\in [0,n]$, the elementary symmetric function of degree $i$ in $n$ variables, denoted $\sigma_{i,n}$, is the function which ANF contains all monomials of degree $i$ and no monomials of other degrees. 
-%\end{definition}
-\begin{definition}[Slice indicator functions]\label{def:slice} The indicator function of the slice of weight $k\in[0,n]$ is the function $\phikn kn\in\BN$ defined by $\phikn kn(x)=1$ if and only if $\w(x)=k$.
-\end{definition}
 
+\begin{definition}[Slice indicator functions]\label{def:slice}
+	The indicator function of the slice of weight $k\in[0,n]$ is the function $\phikn kn\in\BN$ defined by $\phikn kn(x)=1$ if and only if $\w(x)=k$.
+\end{definition}
 
 \begin{definition}[Majority function]\label{def:maj}
     The majority function in $n$ variables is the Boolean function $\mathsf{Maj}_n\in\BN$ defined by $\mathsf{Maj}_n(x)=1$ if and only if $\w(x)\geq n/2$.
@@ -235,8 +162,6 @@ Bigger families of functions can be obtained by considering functions of bounded
 	Additionally, a weightwise degree-$d$ function $f=\sum_{k=0}^n f_k \phikn{k}{n}$ is called a cyclic weightwise degree-$d$ function if for all $k\in [0,n]$ and all $x\in\F_2^n$, it holds that $f_k(x)=f_0(O^k(x))$, where $O^k:\F_2^n\to\F_2^n$ is the cyclic shift by $k$ positions, defined by $O^k(x_1,\dots,x_n)=(x_{(1+k)\bmod n},\dots,x_{(n+k)\bmod n})$, the representatives modulo $n$ being taken as integers in $[1,n]$.
 \end{definition}
 
-
-
 Various weightwise affine functions (\ie{} belonging to $\WD{1}{n}$) have been exhibited, such as in~\cite{TOSC:CarMeaRot17} where the bent functions in Propositions $1$ and $2$ are weightwise affine, or in~\cite{DAM:GinMea22} to show than no weightwise perfectly balanced function is weightwise affine for $n\geq 8$. 
 The arguably best known example of weightwise affine function is the hidden weight bit function introduced in~\cite{IEEE:Bryant91}, the one obtained by fixing $f_0=0$ and $f_k=x_k$ for $k \in [1,n]$. The cryptographic properties of this function have been studied in~\cite{DAM:WCST14}, showing good algebraic properties for this function.
 
@@ -244,37 +169,31 @@ The arguably best known example of weightwise affine function is the hidden weig
     We call Hidden Weight Bit Function (\hwbf{}) the Boolean function $h\in\BN$ defined by:
 	\[h(x)= \left\{ 
 	\begin{array}{l l}
-	0 & \quad \text{ if } \w(x) =0, \\
-	x_k & \quad \text{ if } \w(x)=k.
+		0 & \quad \text{ if } \w(x) =0, \\
+		x_k & \quad \text{ if } \w(x)=k.
 	\end{array} \right. \] 
-
 \end{definition}
 
 In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$, and lower bounds are given for the nonlinearity for all $n$. 
 These bounds focus on cyclic weightwise quadratic functions and involve sums of binomial coefficients. For simplicity, in the following we provide only the nonlinearity values of the majority function and \hwbf{}, as these bounds will be used for comparison.
-
-
-%We summarize the known results on the cryptographic criteria of weightwise affine functions we will use in this article in the following property.
-
 
 \begin{Prop}\label{prop:wwd1}
 	Let $n\geq 2$ be an even integer.
 	\begin{itemize}
 		\item (\eg{} Theorem $3$ in~\cite{DCC:DalMaiSar06}) The majority function $\mathsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies:
 		\[
-		\NL(\mathsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
+			\NL(\mathsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}.
 		\]
 		\item (Theorem $3$ in~\cite{DAM:WCST14}) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies:
 		\[
-		\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
+			\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}.
 		\]	
 		\item (Theorem $1$ in \cite{DAM:WCST14}) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies $\degg(h)=n-1$ for all $n\geq 4$.
 	\end{itemize}
 \end{Prop}
 
-
-
 \subsection{Krawtchouk polynomials}
+
 We use Krawtchouk polynomials and some of their properties to prove one of our main results. We give the necessary definition here and refer to \eg{}~\cite{book:MacSlo78} for more details.
 
 \begin{definition}[Krawtchouk polynomials]\label{def:Kraw}
@@ -288,47 +207,35 @@ We use Krawtchouk polynomials and some of their properties to prove one of our m
     \]
 \end{definition} 
 
-
 \section{Revisited \hwbf{} and balancedness}\label{sec:defAndBal}
-%\subsection{Restricted Walsh transform of $f$ in a recursive fashion}
 
 In this part, we will formally define the revisited \hwbf{} function and introduce a quantity that allows us to study its balancedness and nonlinearity.
 
 \begin{definition}[Revisited \hwbf{}]\label{def:revHWBF}
-For an even integer $n\geq 0$, we call revisited \hwbf{} the Boolean function $f\in\BN$ defined as:
-\[f(x)=\sum_{i=1}^{n/2}(x_i+1) x_{i+\frac{n}{2}} + \sum_{k=1}^nx_k\phikn{k}{n}(x).\]
+	For an even integer $n\geq 0$, we call revisited \hwbf{} the Boolean function $f\in\BN$ defined as:
+	\[
+		f(x)=\sum_{i=1}^{n/2}(x_i+1) x_{i+\frac{n}{2}} + \sum_{k=1}^nx_k\phikn{k}{n}(x).
+	\]
 \end{definition}
 
-
 Since $f$ is the sum of a quadratic function and a weightwise affine function, it is a weightwise quadratic function. Using the formalism of Definition~\ref{def:wwdegd}, $f$ is the weightwise quadratic function defined by $f_0(x)=0$ and $f_k(x)=x_k+\sum_{i=1}^{n/2}(x_i+1) x_{i+n/2}$ for $k\in[1,n]$. This form allows to derive the restricted Walsh transform of $f$, which can be a useful tool to study the balancedness and bound the nonlinearity of a function.
-%Maybe add examples, such as OM24, M24
-%We study the restricted Walsh transform  of $f$ to bound its nonlinearity.
-\begin{proposition}\label{prop:restrWT}
-Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Consider any binary vector $a\in\F_2^n$, and define $c=a+e_k+\sum_{i=n/2+1}^n e_i$. Then the restricted Walsh transform of $f$ satisfies:
-\[\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+n/2}+ c \cdot x}.\]
-\end{proposition}
-\begin{proof}
-We compute:
-%\begin{align*}
-%	\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+a \cdot x}
-%	=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}+ a \cdot x}\\
-%	&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x},
-%\end{align*}
-%\begin{align*}
-\begin{align*}
-    \wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+a \cdot x}\\
-	&=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}+ a \cdot x}\\
-	&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+n/2}+\left(x_k+\sum_{i=n/2+1}^{n}x_i+a\cdot x\right)}\\
-    &=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+n/2}+ c \cdot x}.\qedhere
-\end{align*}
-\end{proof}
 
-%\begin{align*}
-%\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}\\
-%&=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}+ ax}\\
-%&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ (c)x},
-%\end{align*}
-%where $c$ is the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_i$ where the $e_i$ denotes the canonical vector with “1” in position $i$.
+\begin{proposition}\label{prop:restrWT}
+	Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Consider any binary vector $a\in\F_2^n$, and define $c=a+e_k+\sum_{i=n/2+1}^n e_i$. Then the restricted Walsh transform of $f$ satisfies:
+	\[
+		\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+n/2}+ c \cdot x}.
+	\]
+\end{proposition}
+
+\begin{proof}
+	We compute:
+	\begin{align*}
+		\wtk{f}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+a \cdot x}\\
+		&=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}+ a \cdot x}\\
+		&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+n/2}+\left(x_k+\sum_{i=n/2+1}^{n}x_i+a\cdot x\right)}\\
+		&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+n/2}+ c \cdot x}.\qedhere
+	\end{align*}
+\end{proof}
 
 Accordingly, we can study the restricted Walsh transform of the revisited \hwbf{} by analyzing the one of the following Boolean function $d_n\in\BN$:
 
@@ -343,43 +250,35 @@ The $\Dnka{n}{k}{a}$ satisfy a recursive relation:
 
 \begin{proposition}\label{prop:recursiveDnka}
 Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the following hold true:
-\begin{itemize}
-    \item We have $\Dnka 00a=1$ and $\Dnka 0ka=0$ if $k\neq 0$.
-    \item If $n\geq 2$, then for $b=(a_1,\dots,a_{n-2})\in\F_2^{n-2}$, we have:
-    \[\Dnka{n}{k}{a}=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.\]
-\end{itemize}
+	\begin{itemize}
+		\item We have $\Dnka 00a=1$ and $\Dnka 0ka=0$ if $k\neq 0$.
+		\item If $n\geq 2$, then for $b=(a_1,\dots,a_{n-2})\in\F_2^{n-2}$, we have:
+		\[
+			\Dnka{n}{k}{a}=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.
+		\]
+	\end{itemize}
 \end{proposition}
 
 \begin{proof}
     We have that $\Dnka 00a=(-1)^0=0$ since $\Ekn 00=\{\epsilon\}$ for the empty vector $\epsilon\in\F_2^0$. That $\Dnka 0ka=0$ if $k\neq 0$ follows directly from the definition. Assume now that $n\geq 2$. By considering binary vectors $x\in\F_2^n$ as $x=(y,x_{n-1},x_n)$ for $y\in\F_2^{n-2}$, we get:
     \begin{align*}
-    \Dnka{n}{k}{a}&=\sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a\cdot x}\\
-    &=\sum_{y\in \Ekn{k}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y}+
-    \sum_{y\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y + a_{n-1}}\\
-    &\qquad+\sum_{y\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y + a_{n}}
-    +\sum_{y\in \Ekn{k-2}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y +1 + a_{n-1}+ a_{n}}\\
-    &=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.\qedhere
+		\Dnka{n}{k}{a}&=\sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a\cdot x}\\
+		&=\sum_{y\in \Ekn{k}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y}+
+		\sum_{y\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y + a_{n-1}}\\
+		&\qquad+\sum_{y\in \Ekn{k-1}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y + a_{n}}
+		+\sum_{y\in \Ekn{k-2}{n-2}} (-1)^{d_{n-2}(y) +b\cdot y +1 + a_{n-1}+ a_{n}}\\
+		&=\Dnka{n-2}{k}{b}+\left((-1)^{a_{n-1}} + (-1)^{a_{n}}\right)\Dnka{n-2}{k-1}{b} + (-1)^{1+a_{n-1}+a_n} \Dnka{n-2}{k-2}{b}.\qedhere
     \end{align*}
 \end{proof}
 
-
-
-
-
-%The limit case of $n=0$ yields that $\Dnka 0ka=1$ if $k=0$ and $\Dnka 0ka=0$ otherwise.
-
-%With these notations we obtain a recursive relation for $\Dnka{n}{k}{a}$, and therefore for $\wtk{f}{k}(a)$, denoting $b=(a_1,\cdots,a_{n-2})$ and $y=(x_1,\cdots,x_{n-2})$, we get for any even $n\geq 2$:
-
 \begin{remark}
     We note that Proposition~\ref{prop:recursiveDnka} gives three different cases depending on the values of the two last elements of $a$:%Then it gives three cases:
-\begin{itemize}
-	\item if $a_{n-1}=0=a_n$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}+2\Dnka{n}{k-1}{b}-\Dnka{n}{k-2}{b}$,
-	\item if $a_{n-1} \ne a_n$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}+\Dnka{n}{k-2}{b}$,
-	\item if $a_{n-1}=1=a_n$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}-2\Dnka{n}{k-1}{b}-\Dnka{n}{k-2}{b}$.
-\end{itemize}
+	\begin{itemize}
+		\item if $a_{n-1}=0=a_n$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}+2\Dnka{n}{k-1}{b}-\Dnka{n}{k-2}{b}$,
+		\item if $a_{n-1} \ne a_n$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}+\Dnka{n}{k-2}{b}$,
+		\item if $a_{n-1}=1=a_n$, then $\Dnka{n}{k}{a}=\Dnka{n}{k}{b}-2\Dnka{n}{k-1}{b}-\Dnka{n}{k-2}{b}$.
+	\end{itemize}
 \end{remark}
-
-%In this analysis we considered the different cases depending on the values of $a_{n-1}$ and $a_n$, but the same reasoning applies with any $a_i, a_{i+1}$ where $i$ is odd. 
 
 \begin{remark}\label{rmk:dependence_dnka}
     The recursive formula of Proposition~\ref{prop:recursiveDnka} gives different cases depending on the values of the pair $(a_{n-1},a_n)$. However, the same reasoning applies with any pair of the form $(a_{2i-1}, a_{2i})$ for $i\in[0,n/2]$. Therefore, the value of $\Dnka{n}{k}{a}$ depends only on the number of pairs $(a_{2i-1}, a_{2i})$ in $a$ being $(0,0)$, $(1,1)$, $(0,1)$ or $(1,0)$. We give the values of $\Dnka{2}{k}{a}$ for $n=2$ in Table~\ref{tab:Dnka}. These values together with Proposition~\ref{prop:recursiveDnka} are sufficient to determine any $\Dnka{n}{k}{a}$. We will get back to this in Remark~\ref{rmk:Dnka_dep_pqr}.
@@ -395,7 +294,6 @@ Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the
 		$\Dnka{2}{1}{a}$ &$2$& $0$ & $-2$\\
 		$\Dnka{2}{2}{a}$ &$-1$&$1$ & $-1$\\ \hline
 	\end{tabular}
-
 	\mycaption{Values of $\Dnka{2}{k}{a}$ for $n=2$.}\label{tab:Dnka}
 \end{table}
 
@@ -408,9 +306,6 @@ In the following, we show how the Walsh transform of $f$ can be written in terms
 
 \begin{proof}
 	For every $k\in[1,n]$, we have by Proposition~\ref{prop:restrWT} that:
-	%\[
-	%\wtk{f}{k}(a)=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ c \cdot x}=\Dnka{n}{k}{d},\]
-	%where $d$ is the permutation of $c$ obtained by sending the first $n/2$ elements to the odd positions, and the $n/2$ last ones to the even positions. 
 	\begin{align*}
 		\wt{f}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{f(x)+a\cdot x}\\
 		&=\sum_{\pi(x) \in \Ekn{k}{n}} (-1)^{f(\pi(x))+a \cdot \pi(x)}\\
@@ -430,7 +325,7 @@ In this part, we determine for which values of $n$ the function $f$ is balanced,
 	Let $n\geq 2$ be an even integer.
 	Then the Walsh transform of the revisited \hwbf{} $f\in\BN$ at $0_n$ satisfies:
 	\[
-		\wt{f}(0_n)=\left\{\begin{array}{l l}
+		\wt{f}(0_n)=\left\{\begin{array}{ll}
 			0&\text{ if }n\equiv 0\bmod 4\\
 			-2\binom{(n-2)/2}{(n-2)/4}&\text{ if }n\equiv 2\bmod 4.\\
 		\end{array}\right.
@@ -472,16 +367,6 @@ In this part, we determine for which values of $n$ the function $f$ is balanced,
 	The announced result follows by applying that $\binom{m}{k}=\binom{m}{m-k}$ for all integers $m\geq 0$ and $k$.
 \end{proof}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-
-
-
 \section{Extensive study of $\Dnka nka$ and bounds on the Walsh spectrum of $f$}\label{sec:dnk}
 
 This section examines the values of $\Dnka nka$ through the use of generating functions. To begin, in Section~\ref{sec:genfunc}, we determine essential characteristics of these values. Subsequently, in Section~\ref{sec:Cauchy}, we employ Cauchy's estimate to bound the absolute values of $\Dnka nka$. This approach allows us to also bound the absolute values of the Walsh transform coefficients of the revisited \hwbf{}, thereby constraining the nonlinearity. Lastly, in Section~\ref{sec:general}, we illustrate how this result can be extended to bound the nonlinearity of a family of weightwise quadratic functions.
@@ -491,10 +376,9 @@ This section examines the values of $\Dnka nka$ through the use of generating fu
 \begin{definition}\label{defi:P_a}
     Let $n\geq 0$ be an even integer. For $a\in\F_2^n$, we denote by $p=p(a)$ the number of $i\geq 1$ for which $(a_{2i-1},a_{2i})=(0,0)$, by $q=q(a)$ the number of $i\geq 1$ for which $(a_{2i-1},a_{2i})=(1,1)$, and by $r=r(a)$ the number of $i\geq 1$ for which $(a_{2i-1},a_{2i})\in\{(0,1),(1,0)\}$. We then have $p+q+r=n/2$. We further introduce the integer polynomial $P_a(z)$ given by the following expression:
     \[
-    P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
+    	P_a(z)=(-z^2+2z+1)^{p}\cdot(-z^2-2z+1)^{q}\cdot(z^2+1)^{r}.
     \]
 \end{definition}
-
 
 \begin{proposition}\label{proposition:generating_fct}
 	For every even integer $n\geq 0$ and every binary vector $a\in\F_2^n$, the following holds:
@@ -509,11 +393,11 @@ This section examines the values of $\Dnka nka$ through the use of generating fu
 	For the inductive step, let $n\geq 2$ be even, and assume that the corresponding formula holds for $n-2$. Using the recursive formula for $\Dnka nka$ with the notation $a=(b,a_{n-1},a_n)$, we have:
 	\begin{align*}
 	\begin{split}
-	\sum_{k\in\Z}\Dnka nka z^k&=\sum_{k\in\Z}\Dnka{n-2}kbz^k+\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)\sum_{k\in\Z}\Dnka{n-2}{k-1}{b}z^k\\
-	&\qquad+(-1)^{1+a_{n-1}+a_n}\sum_{k\in\Z}\Dnka{n-2}{k-2}{b}z^k\\
-	&=P_b(z)+\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)zP_b(z)+(-1)^{1+a_{n-1}+a_n}z^2P_b(z)\\
-	&=P_b(z)\cdot\Big(z^2(-1)^{1+a_{n-1}+a_n}+z\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)+1\Big)\\
-	&=P_a(z).\qedhere
+		\sum_{k\in\Z}\Dnka nka z^k&=\sum_{k\in\Z}\Dnka{n-2}kbz^k+\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)\sum_{k\in\Z}\Dnka{n-2}{k-1}{b}z^k\\
+		&\qquad+(-1)^{1+a_{n-1}+a_n}\sum_{k\in\Z}\Dnka{n-2}{k-2}{b}z^k\\
+		&=P_b(z)+\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)zP_b(z)+(-1)^{1+a_{n-1}+a_n}z^2P_b(z)\\
+		&=P_b(z)\cdot\Big(z^2(-1)^{1+a_{n-1}+a_n}+z\big((-1)^{a_{n-1}}+(-1)^{a_{n}}\big)+1\Big)\\
+		&=P_a(z).\qedhere
 	\end{split}
 	\end{align*}
 \end{proof}
@@ -531,10 +415,10 @@ This section examines the values of $\Dnka nka$ through the use of generating fu
 	We define the reverse polynomial  $Q_a(z)$ as the degree $n$ polynomial where each coefficient of $z^k$ in $Q_a(z)$ is equal to the coefficient of $z^{n-k}$ in $P_a(z)$. 
 	Then we have:
 	\begin{align*}
-	Q_a(z)&=z^nP_a(1/z)\\
-	&=(z^2+2z-1)^p\cdot(z^2-2z-1)^q\cdot(z^2+1)^r\\
-	&=(-1)^{p+q}(-z^2-2z+1)^p\cdot(-z^2+2z+1)^q\cdot(z^2+1)^r\\
-	&=(-1)^{p+q}P_a(-z).
+		Q_a(z)&=z^nP_a(1/z)\\
+		&=(z^2+2z-1)^p\cdot(z^2-2z-1)^q\cdot(z^2+1)^r\\
+		&=(-1)^{p+q}(-z^2-2z+1)^p\cdot(-z^2+2z+1)^q\cdot(z^2+1)^r\\
+		&=(-1)^{p+q}P_a(-z).
 	\end{align*}
 	Therefore, the coefficient of $z^k$ in $Q_a(z)$, which is $\Dnka n{n-k}a$, is equal to the coefficient of $z^k$ in $(-1)^{p+q}P_a(-z)$, which is $(-1)^{p+q+k}\Dnka nka$.
 \end{proof}
@@ -548,7 +432,6 @@ This section examines the values of $\Dnka nka$ through the use of generating fu
 \end{proof}
 
 Another immediate case for zero coefficients is the following:
-
 
 \begin{proposition}
     Let $n\geq 0$ be an even integer, and let $a\in\F_2^n$ be a binary vector. If $k$ is an odd integer and  $p=q$, then it holds that $\Dnka nka=0=\Dnka n{n-k}a$.
@@ -565,20 +448,20 @@ Another immediate case for zero coefficients is the following:
     \]
     Using this formula, we can for instance use a computer algebra system to deduce $\Dnka nka$ for small values of $k$, see Table \ref{tab:Dnka_small_k}. Note that even though the expression for $\Dnka n3a$ involves a division by $3$, its evaluation at specific values for $(p,q,r)$ will always yield integers. Indeed, either $p-q\equiv 0\bmod 3$, or $(p-q)^2\equiv 1\bmod 3$, in which case $2(p-q)^2+7\equiv 0\bmod 3$.
 \end{remark}
+
 \begin{table}
 	\small
-    	\centering
-    	\begin{tabular}{|c|c|}
-    		\hline
-    		$k$ & $\Dnka nka$\\ \hline
-    		$0$&$1$\\
-            $1$&$2(p-q)$\\ 
-            $2$&$2(p-q)^2-3(p+q)+r$\\
-            $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
-    	\end{tabular}
-
-    	\mycaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$.}\label{tab:Dnka_small_k}
-    \end{table}
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		$k$ & $\Dnka nka$\\ \hline
+		$0$&$1$\\
+		$1$&$2(p-q)$\\ 
+		$2$&$2(p-q)^2-3(p+q)+r$\\
+		$3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
+	\end{tabular}
+	\mycaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$.}\label{tab:Dnka_small_k}
+\end{table}
 
 From differentiation, we can get more cases in which $\Dnka nka=0$:
 
@@ -602,29 +485,19 @@ From differentiation, we can get more cases in which $\Dnka nka=0$:
 
 Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums involving the $\Dnka nka$:
 
-
 \begin{proposition}
     Let $n\geq 0$ be an even integer, and let $a\in\F_2^n$ be a binary vector.
     \begin{enumerate}
         \item The sum and alternating sum over $k$ of the $\Dnka nka$ are, respectively:
- %       \begin{gather*}
- %           \sum_{k=0}^n\Dnka nka=(-1)^{q}2^{n/2},\\
- %           \sum_{k=0}^n(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
- %       \end{gather*}
-\[
- \sum_{k\in\Z}\Dnka nka=(-1)^{q}2^{n/2} \quad \text{and} \quad
- \sum_{k\in\Z}(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
-\]
+		\[
+			\sum_{k\in\Z}\Dnka nka=(-1)^{q}2^{n/2} \quad \text{and} \quad
+			\sum_{k\in\Z}(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
+		\]
         \item The sum over the even and the odd $k$ of the $\Dnka nka$ are, respectively:
- %       \begin{gather*}
-  %          \sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big),\\
-   %         \sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
-    %    \end{gather*}   
-\[
-\sum_{k\in\Z}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big) \quad \text{ and } \quad 
-\sum_{k\in\Z}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
-\]
-    
+		\[
+			\sum_{k\in\Z}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big) \quad \text{ and } \quad 
+			\sum_{k\in\Z}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
+		\]
     \end{enumerate}
 
 \end{proposition}
@@ -635,7 +508,6 @@ Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums
 
 \subsection{Bounding the Walsh transform of $f$ using the Cauchy estimate}\label{sec:Cauchy}
 
-
 We recall Cauchy's estimate on holomorphic functions:
 
 \begin{Prop}[Cauchy's estimate, \eg{} Theorem 10.26 in~\cite{rudin1987}]\label{property:cauchy_estimate}
@@ -644,14 +516,6 @@ We recall Cauchy's estimate on holomorphic functions:
         \left|\frac{\dd^k}{\dd^k z}f(z)\vert_{z=w}\right|\leq\frac{k!\cdot M_R}{R^k}.
     \]
 \end{Prop}
-
-%\pmnote{ The point for the remark was to recall that we use the notation "$| \cdot |$" for absolute value over the complex, since before we used it only to denote "cardinal" or absolute value over integers.}
-
-%\begin{remark}
-%    Property~\ref{property:cauchy_estimate} is typically employed to bound the absolute value of complex numbers. Naturally, the bound remains valid when the complex number is real, as will be the case in our application.
-%\end{remark}
-
-
 
 Applying the property, we get:
 
@@ -667,14 +531,12 @@ Applying the property, we get:
     \[
         |\Dnka nka|=\frac{1}{k!}\left|\frac{\dd^k}{\dd^k z}P_a(z)\vert_{z=0}\right|\leq M,
     \]
-    where $M$ is the maximum of $|P_a(z)|$ on the complex circle %$|z|=1$. 
-    $\dis=\{ z \in \C: |z|=1  \}$.
+    where $M$ is the maximum of $|P_a(z)|$ on the complex circle $\dis=\{ z \in \C: |z|=1  \}$.
     We claim, and prove below, that the maximum of $\left|-z^2+2z+1\right|$ on $\dis$ is $2\sqrt 2$. 
     This implies that the maximum of $\left|-z^2-2z+1\right|$ on $\dis$ is $2\sqrt 2$ as well because $-z^2-2z+1=-(-z)^2+2(-z)+1$. 
     Since the maximum of $\left|z^2+1\right|$ on $\dis$ is $2<2\sqrt 2$, it follows that $|\Dnka nka|\leq M\leq (2\sqrt 2)^{p+q}2^r\leq (2\sqrt 2)^{n/2}$.
 
 	We prove that the maximum of $\left|-z^2+2z+1\right|$ on $\dis$ is $2\sqrt 2$ by showing that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ equals $8$.
-    %It remains to prove that the maximum of $\left|-z^2+2z+1\right|^2$ on $\dis$ equals $8$. 
     Using that $|w|^2=w\overline w$ for every complex number $w$, we obtain for all $z\in \dis$:
     \[
         \left|-z^2+2z+1\right|^2=\left(z^2-2z-1\right)\left(\overline z^2-2\overline z-1\right)=6-\left(z^2+\overline z^2\right)=6-2\mathrm{Re}\left(z^2\right).
@@ -687,9 +549,7 @@ Applying the property, we get:
     \[
         |\wt f(a)|\leq 1+n\cdot 2^{3n/4}.
     \]
-    Equivalently, it holds that
-    %$\NL(f)\geq 2^{n-1} - \frac{1 + n 2^{\frac{3}{4}n}} {2}$.
-    $\NL(f)\geq 2^{n-1} - \frac{1}{2} -2^{3n/4 + \log_2(n) -1}$.
+    Equivalently, it holds that $\NL(f)\geq 2^{n-1} - \frac{1}{2} -2^{3n/4 + \log_2(n) -1}$.
 \end{Corollary}
 
 \begin{proof}
@@ -699,99 +559,30 @@ Applying the property, we get:
     \]
 \end{proof}
 
-\mycomment{One can also prove the following:
-
-\begin{proposition}
-    For a fixed integer $k\geq 1$ and sufficiently large $n\geq b(k)$, it holds that:
-    \[
-        \max_{a\in\F_2^n}|\Dnka nka|=|\Dnka nk{0_n}|=\left(-\frac12\right)^k\sum_{i=\lceil k/2\rceil}^{n/2}(-4)^i\binom{n/2}{i}\binom{i}{k-i}.
-    \]
-\end{proposition}
-
-Also, using the Cauchy estimate on holomorphic functions, we can prove:
-
-\begin{proposition}
-    For any real number $R>0$, we have the following bound:
-    \[
-        |\Dnka nka|\leq\frac{(M_R)^{n/2}}{R^k},
-    \]
-    where $M_R$ is the maximum of $\left|z^2-2z-1\right|$ on the complex disk $|z|=R$. Explicitly, $M_R$ can be expressed as follows:
-    \[
-        M_R=
-        \begin{cases}
-            -R^2+2R+1&\text{if $R\leq\sqrt 2-1$}\\
-            \sqrt 2\left(R^2+1\right)&\text{if $\sqrt 2-1\leq R\leq\sqrt 2+1$}\\
-            R^2+2R-1&\text{if $R\geq\sqrt 2+1$}\\
-        \end{cases}.
-    \]
-\end{proposition}
-
-\begin{remark}
-    Here are some interesting choices for $R$:
-    \begin{itemize}
-        \item Choosing $R=1/\sqrt 2$ yields that $|\Dnka nka|\leq\left(3/\sqrt 2\right)^{n/2}\cdot \sqrt 2^k$.
-        \item Choosing $R=1/2$ gives $|\Dnka nka|\leq (5\sqrt 2/4)^{n/2}\cdot 2^k$.
-        \item Choosing $R=1$ yields $|\Dnka nka|\leq (2\sqrt 2)^{n/2}$. This is particularly useful if $k$ is close to $n/2$.
-    \end{itemize}
-\end{remark}
-
-\begin{remark}
-    We can even go ahead and choose $R=R_{n,k}$ in terms of $n$ and $k$, in such a way that the upper bound of $B_{R,n,k}=(M_R)^{n/2}/R^k$ is minimized. To do this, consider any $1\leq k\leq n-1$. We can actually assume that $k\leq n/2$: if $k>n/2$, replace it by $n-k$ (recall that $|\Dnka nka|=|\Dnka n{n-k}a|$ by Proposition \ref{proposition:symmetry}). One can show that $B_{R,n,k}$ is minimal for the following choice of $R=R_{n,k}$:
-    \[
-        R_{n,k}=\begin{cases}
-            \frac{n-2k-\sqrt{2(n-2k)^2-n^2}}{2(n-k)}&\text{if $k\leq\frac{2-\sqrt 2}{4}\cdot n$}\\
-            \sqrt{\frac{k}{n-k}}&\text{if $k\geq\frac{2-\sqrt 2}{4}\cdot n$}
-        \end{cases}.
-    \]
-    Figure \ref{fig:cauchy_estimate} compares for $n=1\,000$ the two upper bounds we have for $|\Dnka nka|$ on a logarithmic scale: the binomial coefficient $\binom nk$ in red, and the bound $B_{R,n,k}$ with the optimally chosen $R=R_{n,k}$ in blue. The $x$-axis represents the values for $k$, while the $y$-axis represents the binary logarithm of the two bounds. In case $|k-n/2|\leq\sqrt{2}/4\cdot n$, it can be observed that the Cauchy estimate yields particularly good bounds compared to the binomial coefficients. In fact, in this case, we get:
-    \[
-        |\Dnka nka|\leq 2^{n/4}\sqrt{\frac{n^n}{(n-k)^{n-k}\cdot k^k}}.
-    \]
-    \begin{figure}
-        \centering
-        \includegraphics[width=7cm]{cauchy_estimate.pdf}
-
-        \mycaption{Cauchy estimate in blue vs.\ binomial coefficients in red.}
-        \label{fig:cauchy_estimate}
-    \end{figure}
-\end{remark}}
-
-
-
-
 \subsection{Generalization to a family of weightwise quadratic functions}\label{sec:general}
+
 In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic functions $f$ such that for every $k\in [1,n]$, the function $f_k$ in Definition~\ref{def:wwdegd} has exactly $t$ quadratic terms with no shared variables.
 
 \begin{definition}
 	For an even integer $n\geq 0$ and any integer $t\in[0,n/2]$, we define the Boolean function $d_{t,n}\in\BN$ by $d_{t,n}(x)=\sum_{i=1}^t x_{2i-1} x_{2i}$.
-	%	by $\Dnka{n}{k}{a}$:
-	%	\[\Dnka{n}{k}{a}= \sum_{x\in \Ekn{k}{n}} (-1)^{d_n(x) +a x}\]
 \end{definition}
 
 In particular, it holds that $d_{n/2,n}(x)=d_n(x)$. 
-%We focus on the Walsh spectrum restricted to the slices of any function $d_{t,n}$:
 We now focus on the restricted Walsh transform of $d_{t,n}$:
 
 \begin{proposition}\label{proposition:dtn}
     Let $n\geq 0$ be an even integer, and let $t\in[0,n/2]$. Let $a\in\F_2^n$ be a binary vector, and write $a=(b,c)$ with $b\in\F_2^{2t}$ and $c\in\F_2^{n-2t}$. Then the following holds for all $k\in [0,n]$:
 	\[\wtk{d_{t,n}}{k}(a)=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b}\cdot\kraw{k-\ell}{\w(c)}{n-2t}.\]
 \end{proposition}
+
 \begin{proof}
-    By considering binary vectors $x\in\F_2^n$ as $x=(y,z)$ with $y\in\F_2^{2t}$ and $z\in\F_2^{n-2t}$, we get:
-	
-%	\begin{align*}
-%	\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+ax}=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,t}(y)+by +cz}\\
-%	&=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,t}(y)+by +cz}\\
-%	&=\sum_{\ell=0}^{2t} \sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{t,t}(y)+by} \left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{cz}\right)\\
-%	&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b} \kraw{k-\ell}{\w(c)}{n-2t}.%\qedhere
-%	\end{align*}	
+    By considering binary vectors $x\in\F_2^n$ as $x=(y,z)$ with $y\in\F_2^{2t}$ and $z\in\F_2^{n-2t}$, we get:	
 	\begin{align*}
-\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+a \cdot x}\\&=\sum_{(y,z)\in\Ekn{k}{n}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\&=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\
-&=\sum_{\ell=0}^{2t}\left(\sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{2t}(y)+b \cdot y}\right)\left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{c \cdot z}\right)\\&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b}\cdot\kraw{k-\ell}{\w(c)}{n-2t}.\qedhere
-\end{align*}	
-
-
-
+		\wtk{d_{t,n}}{k}(a)&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+a \cdot x}\\
+		&=\sum_{(y,z)\in\Ekn{k}{n}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\
+		&=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\
+		&=\sum_{\ell=0}^{2t}\left(\sum_{y \in \Ekn{\ell}{2t}} (-1)^{d_{2t}(y)+b \cdot y}\right)\left( \sum_{z \in \Ekn{k-\ell}{n-2t}} (-1)^{c \cdot z}\right)\\&=\sum_{\ell=0}^{2t} \Dnka{2t}{\ell}{b}\cdot\kraw{k-\ell}{\w(c)}{n-2t}.\qedhere
+	\end{align*}
 \end{proof}
 
 \begin{definition}\label{defi:P_a_t}
@@ -848,7 +639,6 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
         \end{cases}
     \]
     Then, for all $a\in\F_2^n$ and all $k\in[0,n]$, the following hold true:
-
     \[
         |\wtk{d_{t,n}}{k}(a)|\leq 2^{\mu n}\quad \text{and} \quad  |\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}.
     \]
@@ -859,11 +649,11 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     
     As before (in the proof of Theorem~\ref{theorem:bound_D_nka}), we want to bound the maximum of $|P_{a,t}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\wtk{d_{t,n}}{k}(a)|$ for every $k\in[0,n]$. 
     We write $a=(b,c)$ with $b\in\F_2^{2t}$ and $c\in\F_2^{n-2t}$, and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}.    
-   To find a bound for $|P_{a,t}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we would like to bound the quantity $\max_{a\in\F_2^n,z\in\dis}|P_{a,t}(z)|$. Moving through all $a\in\F_2^n$ is equivalent to moving through all tuples $(p,q,r;u,v)$ of non-negative integers which satisfy $p+q+r=t$ and $u+v=n-2t$. It follows from Lemma~\ref{lemma:maximizing_args} that it is enough to consider only the cases for which only one of $p,q,r$ is non-zero, and for which only one of $u,v$ is non-zero. 
-   This leaves us with the following cases to consider for $(p,q,r;u,v)$:
+	To find a bound for $|P_{a,t}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we would like to bound the quantity $\max_{a\in\F_2^n,z\in\dis}|P_{a,t}(z)|$. Moving through all $a\in\F_2^n$ is equivalent to moving through all tuples $(p,q,r;u,v)$ of non-negative integers which satisfy $p+q+r=t$ and $u+v=n-2t$. It follows from Lemma~\ref{lemma:maximizing_args} that it is enough to consider only the cases for which only one of $p,q,r$ is non-zero, and for which only one of $u,v$ is non-zero. 
+	This leaves us with the following cases to consider for $(p,q,r;u,v)$:
     \begin{gather*}
         (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0),\\
-         (t,0,0;0,n-2t),\quad(0,t,0;0,n-2t),\quad(0,0,t;0,n-2t).
+        (t,0,0;0,n-2t),\quad(0,t,0;0,n-2t),\quad(0,0,t;0,n-2t).
     \end{gather*}
     Since replacing $(p,q)$ and $(u,v)$ by $(q,p)$ and $(v,u)$ has the same effect as replacing $z$ by $-z$ in $P_{a,t}(z)$ and therefore does not change the maximum of $|P_{a,t}(z)|$ on $\dis$, we can further restrict ourselves to the following tuples for $(p,q,r;u,v)$:
     \[
@@ -890,7 +680,6 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     	\centering
     	\includegraphics[width=11cm]{family_curves_g.pdf}
         \vspace{-4mm}
-
     	\mycaption{The curves of $\alpha\mapsto g^{(\lambda)}(\alpha)$ for the values $\lambda=\frac{i}{50}$ from $i=0$ (red) to $i=24$ (blue).}
     	\label{fig:family_curves_g}
     \end{figure}
@@ -912,7 +701,6 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     We can exclude the solution $\cos\alpha=-\lambda-\sqrt{\lambda^2-4\lambda+2}$ since $\cos\alpha\in[-1,1]$ (and $\lambda\in [0,1/2)$). 
     The other solution needs to be excluded for the same reason if $\lambda<1/6$.
 
-
     Our second claim is that $\frac{\dd^2}{\dd^2\alpha}g(\alpha)\vert_{\alpha=0}$ has the same sign as $6\lambda -1$. To see why, we apply the definition of the second derivative:
     \begin{align*}
         \frac{\dd^2}{\dd^2\alpha}g(\alpha)\vert_{\alpha=0}
@@ -926,7 +714,6 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     \[
         g(\alpha_0)=\frac{\left(-8\lambda^2+16\lambda+8\lambda\sqrt{\lambda^2-4\lambda+2}\right)^{\lambda}}{\left(2-2\lambda+2\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}=2^{2\mu}.
     \]
-    %This is exactly what we wanted to prove, 
     With this, we have covered the case $(p,q,r;u,v)=(t,0,0;n-2t,0)$ entirely. In a similar fashion, it can be proven that $|P_{a,t}(z)|$ is also bounded by $2^{\mu n}$ on $\dis$ for the remaining two cases of $(p,q,r;u,v)$. In fact, for $(p,q,r;u,v)=(0,t,0;n-2t,0)$, one can proceed in exactly the same way, and for $(p,q,r;u,v)=(0,0,t;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h(\alpha)=(2+2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$, whose maximum is bounded by the maximum of $g(\alpha)$ because $0\leq h(\alpha)\leq g(\alpha)$.
 \end{proof}
 
@@ -936,12 +723,9 @@ The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theo
 	\centering
 	\includegraphics[width=9.5cm]{curve_exponents_lambda_mu.pdf}
     \vspace{-5mm}
-
 	\mycaption{The curve of $\lambda\mapsto\mu(\lambda)$ with $0\leq\lambda\leq\frac 12$ from Theorem~\ref{theorem:bound_D_nka_generalized}.}
 	\label{fig:curve_exponents_lambda_mu}
 \end{figure}
-
-
 
 \section{Experiments and comparisons}\label{sec:expAndComp}
 
@@ -950,17 +734,14 @@ We then compare the nonlinearity of this function to that of other functions sui
 
 \subsection{Bounding the Walsh transform of $f$ experimentally}\label{sec:expwt}
 
-%We have just deduced that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every Boolean vector $a\in\F_2^n$. This is a pessimistic bound. In this section, we will discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
-
 Following Corollary~\ref{cor:bound_walsh_cauchy}, we deduce that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every even integer $n\geq 0$ and every Boolean vector $a\in\F_2^n$, where $f\in\BN$ denotes the revisited \hwbf{}. This is a pessimistic bound. In this part, we discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
 
-%This method is based on the identity (\ref{eqn:walsh_from_D}). 
 This method is based on the identity given in Proposition~\ref{prop:WT}.
 For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $k\in[1,n]$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$, where $\pi:[1,n]\to[1,n]$ is again the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Notice first that for every integer $k\in[1,n]$, it holds that $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\in[0,n/2]$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
 
 In the following discussion, we outline a method to determine an upper bound on $\max_{a\in\F_2^n}\wt f(a)$. A similar approach can be applied to find a lower bound on $\min_{a\in\F_2^n}\wt f(a)$, and by utilizing both, we can also obtain an upper bound on $\max_{a\in\F_2^n}|\wt f(a)|$ by making use of the following identity:
 \[
-\max_{a\in\F_2^n}|\wt f(a)|=\max\Big(\max_{a\in\F_2^n}\wt f(a),-\min_{a\in\F_2^n}\wt f(a)\Big).
+	\max_{a\in\F_2^n}|\wt f(a)|=\max\Big(\max_{a\in\F_2^n}\wt f(a),-\min_{a\in\F_2^n}\wt f(a)\Big).
 \]
 
 For each $k\in[1,n/2]$, we select $\{\alpha_k,\beta_k,\gamma_k\}=\{0,\pm 1\}$ with $\gamma_k\neq 0$ such that the following expression, based on the notation introduced in Remark~\ref{rmk:Dnka_dep_pqr}, is defined and maximized:
@@ -969,22 +750,16 @@ For each $k\in[1,n/2]$, we select $\{\alpha_k,\beta_k,\gamma_k\}=\{0,\pm 1\}$ wi
 \]
 This implies that $\Dnka{n}{k}{b_k}+\Dnka{n}{k+n/2}{b_{k+n/2}}\leq B_k^{p,q,r}$ for every $k\in[1,n/2]$, leading to the conclusion that $\sum_{k=1}^n\Dnka nk{b_k}\leq\sum_{k=1}^{n/2} B_k^{p,q,r}$. As a result, we derive the following upper bound:
 \begin{equation}\label{eqn:bound_walsh}
-\max_{a\in\F_2^n}\wt f(a)\leq 1+\max_{p+q+r=n/2}\sum_{k=1}^{n/2} B_k^{p,q,r}.
+	\max_{a\in\F_2^n}\wt f(a)\leq 1+\max_{p+q+r=n/2}\sum_{k=1}^{n/2} B_k^{p,q,r}.
 \end{equation}
 
 Under the assumption that the values of $\mathsf{D}_{n,k}^{p,q,r}$ have already been computed for all $k\in[1,n]$ and for all triplets $(p,q,r)$ satisfying $p+q+r=n/2$, the bound in equation (\ref{eqn:bound_walsh}) can be determined with a computational complexity of $\mathcal{O}(n^3)$. This is because there are $\mathcal{O}(n^2)$ possible triplets $(p,q,r)$ that meet the condition $p+q+r=n/2$, and the summation itself can be computed in $\mathcal{O}(n)$ steps.
 
 We consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $k\in[1,n]$ and all triplets $(p,q,r)$ satisfying $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, it is sufficient to expand $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$; this is due to Proposition \ref{proposition:generating_fct}. To achieve this, we first precompute the expanded polynomial $(-z^2 + 2z + 1)^p$ for each $p\in[1,n/2]$. This can be done recursively using the formula $(-z^2 + 2z + 1)^{p+1} = (-z^2 + 2z + 1) \cdot (-z^2 + 2z + 1)^p$. For each $p$, this requires $\mathcal O(n)$ arithmetic computations. Performing this for every $p$ results in a total complexity of $\mathcal{O}(n^2)$. The same approach can be used to expand the polynomials $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$, resulting in an overall complexity of $\mathcal{O}(n^2)$ for a fixed triplet $(p,q,r)$. Finally, for each such triplet $(p,q,r)$, we multiply the three expanded polynomials $(-z^2 + 2z + 1)^p$, $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$. These two multiplications are performed in $\mathcal{O}(n \log n)$ operations by using the fast Fourier transform. Given that there are $\mathcal{O}(n^2)$ triplets $(p,q,r)$ to consider, precomputing the values $\mathsf{D}_{n,k}^{p,q,r}$ for all $k\in[1,n]$ and all triplets $(p,q,r)$ has a complexity of $\mathcal{O}(n^3 \log n)$, making the overall complexity of the procedure also $\mathcal{O}(n^3 \log n)$.
 
-%\pmnote{add a link to the public github or name of the name of this code in supplementary materials.}
-
-%\tsnote{Is on GitHub now: \texttt{Bounding\_Walsh.ipynb}}
-
-
-%Table~\ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table~\ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
-
 \bigskip
-In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ for small values of $n$ (calculated using \textsf{SageMath}) to the bound $B_n$ obtained through the above method and the bound from Corollary~\ref{cor:bound_walsh_cauchy}. Additionally, Table~\ref{table:walsh_bounds} provides the values of the bound $B_n$ for all even values of $n\in[1,80]$. The method described above offers a significantly tighter bound compared to Corollary~\ref{cor:bound_walsh_cauchy}. Its polynomial complexity makes it possible to extend the analysis well beyond the limitations imposed by a full computation of the Walsh spectrum, which requires a complexity of $\mathcal O(n2^n)$. We provide a \textsf{SageMath} implementation to obtain the bound $B_n$: \url{https://github.com/se-tim/Revisited-HWBF.git}.
+
+In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ for small values of $n$ (calculated using \textsf{SageMath}) to the bound $B_n$ obtained through the above method and to the bound from Corollary~\ref{cor:bound_walsh_cauchy}. Additionally, Table~\ref{table:walsh_bounds} provides the values of the bound $B_n$ for all even values of $n\in[1,80]$. The method described above offers a significantly tighter bound compared to Corollary~\ref{cor:bound_walsh_cauchy}. Its polynomial complexity makes it possible to extend the analysis well beyond the limitations imposed by a full computation of the Walsh spectrum, which requires a complexity of $\mathcal O(n2^n)$. We provide a \textsf{SageMath} implementation to obtain the bound $B_n$: \url{https://github.com/se-tim/Revisited-HWBF.git}.
 
 \begin{table}
 	\small
@@ -1005,7 +780,6 @@ In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a
 		$22$ & $34\,232$ & $118\,544$ & $2\,039 \,002$ \\
 		$24$ & $109\,648$ & $325\,188$ & $6\,291 \,457$  \\ \hline
 	\end{tabular}
-
 	\mycaption{The actual $\max_{a\in\F_2^n}|\wt f(a)|$ compared to the bound $B_n$ and the bound from Corollary~\ref{cor:bound_walsh_cauchy}.}
 	\label{table:max_walsh_vs_bound}
 \end{table}
@@ -1089,7 +863,6 @@ In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a
 			\hline
 		\end{tabular}
 	\end{minipage}
-
 	\mycaption{Approximate values of $B_n$ for various values of $n$.}
 	\label{table:walsh_bounds}
 \end{table}
@@ -1097,12 +870,6 @@ In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a
 \subsection{Comparison of the nonlinearity}
 
 In this part, we compare the nonlinearity of the revisited \hwbf{} $f\in\BN$ to other weightwise quadratic functions considered for similar use-cases, such as the majority function, the \hwbf{} and the cyclic weightwise functions studied in~\cite{DAM:MeaOza24}. 
-
-
-%In Figure~\ref{fig:walsh_bound_comparison} we compare the value $\max_{a\in\mathbb F_2^n}|\wt f(a)|$, the smaller the maximum the better the nonlinearity. We display the values for $n$ up to $80$, which is sufficient to compare the asymptotic behavior of the different bounds. 
-%The violet and orange curves correspond to the upper bounds proven in~\cite{DAM:MeaOza24}. The violet one corresponds to the bound holding for all cyclic weightwise linear function such that $f_0(x)=b\cdot x$ with $\w(b)$ odd. It gives for example an upper bound for the HWBF. The orange one corresponds to the bound holding the cyclic weightwise quadratic function given by $f_0(x)=x_1+x_2x_3$. 
-%The blue curve corresponds to both the majority and HWBF function, whose exact nonlinearity are recalled in Property~\ref{prop:wwd1}. We use only one curve since on a logarithmic scale the difference of nonlinearity between these two functions is too small to differentiate the curves. 
-%Regarding the revisited HWBF introduced in Definition~\ref{def:revHWBF}, the red curve corresponds to the theoretical bound from Corollary~\ref{cor:bound_walsh_cauchy}, and the green one the experimental approach of Section~\ref{sec:expwt}.
 
 In Figure~\ref{fig:walsh_bound_comparison}, we compare the values of $\max_{a \in \mathbb{F}_2^n} |\wt f(a)|$, where a smaller maximum indicates better nonlinearity (see Definition~\ref{def:nl}). 
 We present values for $n$ up to $80$, which is sufficient for examining the asymptotic behavior of the different bounds.
@@ -1113,10 +880,7 @@ For the revisited \hwbf{} introduced in Definition~\ref{def:revHWBF}, the red cu
 \begin{figure}
 	\centering
 	\includegraphics[width=10.5cm]{comparison_walsh_bound.pdf}
-
 	\mycaption{
-		%Maximum of the absolute value of the Walsh spectrum of different functions, in logarithmic scale, for even values of $n$. In violet and orange are the bounds for the cyclic weigtwise linear functions and one cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}. In blue is the value for the majority function and HWBF. The theoretical bound (Corollary~\ref{cor:bound_walsh_cauchy}) for the function $f$ is in red and the experimental one $B_n$ (Section~\ref{sec:expwt}) is in green.}		
-		%On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue. \tsnote{Updated plot, but the description now needs to be changed.}}
 		Bounds on the maxima of absolute values of the Walsh spectrum for various functions, shown on a logarithmic scale for even values of $n$.
 		The violet and orange curves, the orange one mostly covering the violet one, represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}, respectively. The blue curve shows bounds for the majority function and the \hwbf{}. The theoretical bound for the revisited \hwbf{} (from Corollary~\ref{cor:bound_walsh_cauchy}) is in red, and the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
 	\label{fig:walsh_bound_comparison}
@@ -1132,41 +896,21 @@ We also compare in Table~\ref{table:comparisonsNL} the precise nonlinearity valu
 	\begin{tabular}{|c| c|c|c|c| c|c|c|}
 		\hline
 		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
-	\hline	
-    	\hwbf{}   & $4$  & $20$  & $88$  &  $372$ & $1\,544$ & $6\,344$ & $25\,904$  \\  	
-   %4 10 20 44 88 186 372 772 1544 3172 6344 12952 25904
-		
-Majority   & $5$  & $22$  & $93$  &  $386$ & $1\,586$ & $6\,476$ & $26\,333$  \\
-
-		%cyclic $f_0=x_1+x_2x_3$
-    	$t$~\cite{DAM:MeaOza24}   & $4$  & $22$  & $96$  &  $404$ & $1\,672$ & $6\,854$ & $27\,884$\\
-    	%4 10 22 46 96 196 404 816 1672 3358 6854 13722 27884
-
-%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
-    	$u$~\cite{DAM:MeaOza24}   & $4$  & $24$  & $104$  &  $456$ & $1\,888$ & $7\,816$ & $31\,616$ \\
-    	%4 10 24 48 104 220 456 924 1888 3862 7816 15748 31616
-	
-		
+		\hline	
+		\hwbf{}   & $4$  & $20$  & $88$  &  $372$ & $1\,544$ & $6\,344$ & $25\,904$  \\  	
+		Majority   & $5$  & $22$  & $93$  &  $386$ & $1\,586$ & $6\,476$ & $26\,333$  \\
+		$t$~\cite{DAM:MeaOza24}   & $4$  & $22$  & $96$  &  $404$ & $1\,672$ & $6\,854$ & $27\,884$\\
+		$u$~\cite{DAM:MeaOza24}   & $4$  & $24$  & $104$  &  $456$ & $1\,888$ & $7\,816$ & $31\,616$ \\
 		Revisited \hwbf{}  & $4$  & $22$  & $102$  &  $458$ & $1\,902$ & $7\,842$ & $31\,680$\\
 \hline
 	\end{tabular}
-
 	\mycaption{Comparison of the nonlinearity.}
 	\label{table:comparisonsNL}
 \end{table}
 
-
-
-
-
 \section{Other parameters}\label{sec:otherParameters}
 
 In this section, we present additional cryptographic parameters for the revisited \hwbf{} $f\in\BN$. While Theorem~\ref{th:bal} describes its balancedness and Sections~\ref{sec:Cauchy} and \ref{sec:expAndComp} thoroughly explore its nonlinearity, our focus here will be on its algebraic characteristics. Specifically, we will examine the degree, the algebraic immunity, and the fast algebraic immunity of $f$, and offer comparisons with other weightwise quadratic functions.
-
-
-%\pmnote{under construction, waiting for the parameters for the FAI}
-
-%\subsection{Degree}
 
 \begin{proposition}
 	Let $n\geq 4$ be even, and let $f\in\BN$ be the revisited \hwbf{}. Then $\degg(f)=n-1$.
@@ -1176,43 +920,34 @@ In this section, we present additional cryptographic parameters for the revisite
 	The function $h$ has degree $n-1\geq 3$ by Property~\ref{prop:wwd1}, and the function $q$ has no monomial of degree higher than $2$, so that $\degg(f)=\degg(h)=n-1$.
 \end{proof}
 
-
 In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of different weightwise quadratic function. We observe that the revisited \hwbf{} is the function with the highest degree, together with the \hwbf{}. 
 
 \begin{table}
 	\small
 	\centering
-	\begin{tabular}{|c| c|c|c|c| c|c|c|}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|}
 		\hline
 		$n$ & $4$  & $6$  & $8$  &  $10$ & $12$ & $14$ & $16$  \\
 		\hline
 		\hwbf{}   & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$  \\  	
-		
 		Majority   & $4$  & $4$  & $8$  &  $8$ & $8$ & $8$ & $16$  \\
-		
-		%cyclic $f_0=x_1+x_2x_3$
 		$t$~\cite{DAM:MeaOza24}   & $2$  & $5$  & $6$  &  $9$ & $11$ & $13$ & $14$\\
-		
-		%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
 		$u$~\cite{DAM:MeaOza24}   & $2$  & $4$  & $6$  &  $8$ & $10$ & $12$ & $14$ \\
-		
-		
 		Revisited \hwbf{}  & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$\\
 		\hline
 	\end{tabular}
-
 	\mycaption{Comparison of the degree.}
 	\label{table:comparisonsDeg}
 \end{table}
 
 \begin{proposition}
-    Let $n\geq 4$ be even, let $f\in\BN$ be the revisited \hwbf{}, and let $h\in\BN$ be the \hwbf{}. Then the following holds:
+	Let $n\geq 4$ be even, let $f\in\BN$ be the revisited \hwbf{}, and let $h\in\BN$ be the \hwbf{}. Then the following holds:
 	\[\AI(f)\geq \AI(h)-2.\]
 \end{proposition}
 
 \begin{proof}
 	Denote by $q\in\BN$ the quadratic function given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$, allowing to write $h=f+q$.
-    Let $g\in\BN^*$ with $\degg(g)=\AI(f)$ be an annihilator of $f+ \varepsilon$ for some $\varepsilon\in\{0,1\}$. Then the following holds:
+	Let $g\in\BN^*$ with $\degg(g)=\AI(f)$ be an annihilator of $f+ \varepsilon$ for some $\varepsilon\in\{0,1\}$. Then the following holds:
 	\[g\cdot(q+1) \cdot(h+\varepsilon) = g\cdot(q+1)\cdot(f+q+\varepsilon)=g\cdot(q+1)\cdot(f+\epsilon)+g\cdot(q+1)\cdot q=0+0=0.\]
 	Hence, $g\cdot(q+1)$ is an annihilator of $h+ \varepsilon$. 
 	If $g\cdot(q+1)\ne 0$, it follows that $\AI(h)\leq\degg(g\cdot(q+1))\leq\degg(g)+\degg(q+1)$, and therefore that $\AI(f)=\degg(g)\geq\AI(h)-\degg(q+1)=\AI(h)-2$. If $g\cdot(q+1)=0$, then $0=g\cdot(f+\epsilon+q+1)=g\cdot(h+\epsilon+1)$, showing that $\AI(f)=\degg(g)\geq\AI(h)$.
@@ -1220,36 +955,6 @@ In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of differen
 
 From Theorem 4 in~\cite{DAM:WCST14}, the algebraic immunity of the \hwbf{} is at least $\lfloor n/3\rfloor +1$, which leads to $\lfloor n/3\rfloor -1$ for the revisited \hwbf{}.
 In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various weightwise quadratic functions. We observe that the revisited \hwbf{} demonstrates the best performance after the majority function; the latter is known to achieve optimal algebraic immunity.
-
-
-
-
-
-
-
-\iffalse
- \begin{table}[h!]
-	 \centering
-	 \begin{tabular}{|c|c|c|c|c|}
-		 \hline
-		 $n$ & Nonlinearity & Is Balanced & Algebraic Degree & Algebraic Immunity \\
-		 \hline
-		 2   & 1             & False       & 2               & 1                   \\
-		 4   & 4             & True        & 3               & 2                   \\
-		 6   & 22            & False       & 5               & 3                   \\
-		 8   & 102           & True        & 7               & 4                   \\
-		 10  & 458           & False       & 9               & 5                   \\
-		 12  & 1902          & True        & 11              & 6                   \\
-		 14  & 7842          & False       & 13              & 6                   \\
-		 16  & 31680         & True        & 15              & 7                   \\
-		 \hline
-		 \end{tabular}
-
-	 \mycaption{Characteristics of Boolean Functions for Different $n$ Values}
-	 \end{table}
-\fi
-
-
 
 \begin{table}
 	\small
@@ -1260,14 +965,11 @@ In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various
 		\hline	
 		\hwbf{}   & $2$  & $3$  & $4$  &  $4$ & $5$ & $5$ & $6$  \\  	
 		Majority   & $2$  & $3$  & $4$  &  $5$ & $6$ & $7$ & $8$  \\
-		%cyclic $f_0=x_1+x_2x_3$
 		$t$~\cite{DAM:MeaOza24}   & $2$  & $3$  & $4$  &  $5$ & $5$ & $6$ & $7$\\
-		%$f_0= x_1 + \sum_{i=1}^{n/2-1}x_{2i}x_{2i+1}$	
 		$u$~\cite{DAM:MeaOza24}   & $2$  & $3$  & $4$  &  $5$ & $6$ & $6$ & $7$ \\					
 		Revisited \hwbf{}   & $2$  & $3$  & $4$  &  $5$ & $6$ & $6$ & $7$\\
 		\hline
 	\end{tabular}
-
 	\mycaption{Comparison of the algebraic immunity.}
 	\label{table:comparisonsAI}
 \end{table}
@@ -1275,12 +977,8 @@ In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various
 Lastly, we also considered the fast algebraic immunity of the revisited \hwbf{} $f$. In Table~\ref{table:FAI}, we give the best couples $(d,e)$ encountered for the function $f$, where $\degg(g)=d$ and $\degg(h)=e$ for functions $g$ and $h$ satisfying $fg=h$.
 
 \bigskip
+
 These various results on the algebraic properties of $f$ suggest that it possesses strong resistance against standard attacks. Furthermore, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered \textsf{LFSR}s or in homomorphically-friendly schemes like \textsf{FLIP} and \textsf{FiLIP}.
-
-
-
-
-
 
 \begin{table}
 	\small
@@ -1289,12 +987,11 @@ These various results on the algebraic properties of $f$ suggest that it possess
 		\hline
 		$ n $      & $4$     & $6$     & $8$     & $10$    & $12$    & $14$    & $16$    & $18$    \\ \hline
 		$(d, e)$ & $(1,2)$ & $(1,3)$ & $(1,5)$  & $(1,7)$ & $(1,9)$ & $(1,11)$ & $(1,13)$ & $(1,15)$ \\ 
-		 &     &    & $(2,4)$  & $(2,6)$ & $(2,8)$ & $(2,10)$ & $(2,12)$ & $(2,14)$\\ 
-		 &     &    &     & $(3,5)$ & $(3,6)$ & $(3,9)$ & $(3,11)$ & $(3,13)$\\ 
-		 &     &    &     &  &  &  & $(4,9)$ & $(4,11)$\\ 
-	 &     &    &     &  &  &  &  & $(5,10)$ \\ \hline
+		&     &    & $(2,4)$  & $(2,6)$ & $(2,8)$ & $(2,10)$ & $(2,12)$ & $(2,14)$\\ 
+		&     &    &     & $(3,5)$ & $(3,6)$ & $(3,9)$ & $(3,11)$ & $(3,13)$\\ 
+		&     &    &     &  &  &  & $(4,9)$ & $(4,11)$\\ 
+	 	&     &    &     &  &  &  &  & $(5,10)$ \\ \hline
 	\end{tabular}
-
 	\mycaption{Lowest possible values of $(d, e)$ for different values of $n$.}
 	\label{table:FAI}
 \end{table}
@@ -1306,26 +1003,18 @@ In this work, we introduced the revisited Hidden Weight Bit Function (\hwbf{}), 
 Our approach makes use of generating functions and Cauchy’s estimate to bound the maximum absolute Walsh spectrum of weightwise quadratic functions. This naturally leads to the following question: do the employed techniques, particularly the use of Cauchy’s estimate, extend to different families of Boolean functions? Exploring this could potentially lead to the discovery of new functions with even better cryptographic properties.
 
 \ifnum\anon=0
-\section{Acknowledgments}
-Pierrick Méaux was funded by the European Research Council (\textsf{ERC}) under the Advanced Grant program (reference number: 787390). Tim Seuré acknowledges the support of the Luxembourgish “Fonds National de la Recherche” (\textsf{FNR}) through an Individual Grant (reference number: 17936291).
+	\section{Acknowledgments}
+	Pierrick Méaux was funded by the European Research Council (\textsf{ERC}) under the Advanced Grant program (reference number: 787390). Tim Seuré acknowledges the support of the Luxembourgish “Fonds National de la Recherche” (\textsf{FNR}) through an Individual Grant (reference number: 17936291).
 \fi
-
 
 \newpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \ifnum\full=0
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{splncs04}
-\bibliography{add}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\bibliographystyle{splncs04}
+	\bibliography{add}
 \else
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{alpha}
-\bibliography{add}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\bibliographystyle{alpha}
+	\bibliography{add}
 \fi
 
 \end{document}
