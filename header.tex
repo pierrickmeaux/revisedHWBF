@@ -326,10 +326,11 @@
 \usepackage{mleftright}
 \mleftright %Less space when using \left and \right
 
-
-\newcommand{\tablecaption}[1]{%
-   \vspace{3pt} % Adds space above the caption
-   \caption{#1} % Displays the caption text
+\newcommand{\mycaption}[1]{%
+    \begin{minipage}{0.65\textwidth}
+      \vspace{3pt}
+      \caption{#1}
+    \end{minipage}
 }
 
 \let\leq=\leqslant %Replace symbol for \leq

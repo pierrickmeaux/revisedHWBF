@@ -58,8 +58,6 @@
 	\begin{abstract}
 	The Hidden Weight Bit Function (\hwbf{}) has drawn considerable attention for its simplicity and cryptographic potential. Despite its ease of implementation and favorable algebraic properties, its low nonlinearity limits its direct application in modern cryptographic designs. In this work, we revisit the \hwbf{} and propose a new weightwise quadratic variant obtained by combining the \hwbf{} with a bent function. This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. 
 	\end{abstract}
-    
-\tsnote{@Self, check entire document.}
 
 \section{Introduction}
 
@@ -330,7 +328,7 @@ We compute:
 %&=\sum_{x \in \Ekn{k}{n}} (-1)^{x_k + \sum_{i=1}^{n/2} (x_i+1) x_{i+\frac{n}{2}}+ ax}\\
 %&=\sum_{x \in \Ekn{k}{n}} (-1)^{\sum_{i=1}^{n/2} x_i x_{i+\frac{n}{2}}+ (c)x},
 %\end{align*}
-%where $c$ is the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_i$ where the $e_i$ denotes the canonical vector with "1" in position $i$.
+%where $c$ is the $n$-length binary vector such that $c=a+e_k+\sum_{i=n/2+1}^n e_i$ where the $e_i$ denotes the canonical vector with “1” in position $i$.
 
 Accordingly, we can study the restricted Walsh transform of the revisited \hwbf{} by analyzing the one of the following Boolean function $d_n\in\BN$:
 
@@ -388,6 +386,7 @@ Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the
 \end{remark}
 
 \begin{table}
+	\small
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -396,7 +395,8 @@ Let $n\geq 0$ be an even integer. Then for all $k\in[0,n]$ and $a\in\F_2^n$, the
 		$\Dnka{2}{1}{a}$ &$2$& $0$ & $-2$\\
 		$\Dnka{2}{2}{a}$ &$-1$&$1$ & $-1$\\ \hline
 	\end{tabular}
-	\tablecaption{Values of $\Dnka{2}{k}{a}$ for $n=2$.}\label{tab:Dnka}
+
+	\mycaption{Values of $\Dnka{2}{k}{a}$ for $n=2$.}\label{tab:Dnka}
 \end{table}
 
 In the following, we show how the Walsh transform of $f$ can be written in terms of the $\Dnka{n}{k}{a}$. Then, in Section~\ref{sec:balancedness} we use Proposition~\ref{prop:recursiveDnka} to determine the balancedness of $f$, and in Section~\ref{sec:genfunc} we study the value of $\Dnka{n}{k}{a}$ using generating functions.
@@ -566,6 +566,7 @@ Another immediate case for zero coefficients is the following:
     Using this formula, we can for instance use a computer algebra system to deduce $\Dnka nka$ for small values of $k$, see Table \ref{tab:Dnka_small_k}. Note that even though the expression for $\Dnka n3a$ involves a division by $3$, its evaluation at specific values for $(p,q,r)$ will always yield integers. Indeed, either $p-q\equiv 0\bmod 3$, or $(p-q)^2\equiv 1\bmod 3$, in which case $2(p-q)^2+7\equiv 0\bmod 3$.
 \end{remark}
 \begin{table}
+	\small
     	\centering
     	\begin{tabular}{|c|c|}
     		\hline
@@ -575,7 +576,8 @@ Another immediate case for zero coefficients is the following:
             $2$&$2(p-q)^2-3(p+q)+r$\\
             $3$&$\frac 23(p-q)\left(2(p-q)^2-9(p+q)+3r+7\right)$\\ \hline
     	\end{tabular}
-    	\tablecaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$.}\label{tab:Dnka_small_k}
+
+    	\mycaption{Values of $\Dnka{n}{k}{a}$ for small values of $k$.}\label{tab:Dnka_small_k}
     \end{table}
 
 From differentiation, we can get more cases in which $\Dnka nka=0$:
@@ -591,14 +593,7 @@ From differentiation, we can get more cases in which $\Dnka nka=0$:
 \end{proposition}
 
 \begin{proof}
-    It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$. This checking can be autotomized by a computer algebra system. For this, we refer to the corresponding \textsf{SageMath} implementation from \cite{githubseure24}.\tsnote{@Pierrick, OK like this?}
-    
-    \pmnote{I think it works for the eprint (use the "ifnum\anon=" to be sure we do not forget it in an anonymous submission.
-    
-    I do not know if this will create a reference in your google scholar later one. Personally I would prevent that by just giving the link in the text, to avoid to have a reference that will have only 1 citation. 
-    	
-    	)}
-    
+    It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$. This checking can be autotomized by a computer algebra system. For this, we refer to the corresponding \textsf{SageMath} implementation, accessible via this link: \url{https://github.com/se-tim/Revisited-HWBF.git}.
 \end{proof}
 
 \begin{remark}
@@ -620,7 +615,7 @@ Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums
  \sum_{k\in\Z}\Dnka nka=(-1)^{q}2^{n/2} \quad \text{and} \quad
  \sum_{k\in\Z}(-1)^k\Dnka nka=(-1)^{p}2^{n/2}.
 \]
-        \item The sum over the even and the odd $k$ of the the $\Dnka nka$ are, respectively:
+        \item The sum over the even and the odd $k$ of the $\Dnka nka$ are, respectively:
  %       \begin{gather*}
   %          \sum_{k=0}^{n/2}\Dnka n{2k}a=2^{n/2-1}\big((-1)^{q}+(-1)^{p}\big),\\
    %         \sum_{k=0}^{n/2-1}\Dnka n{2k+1}a=2^{n/2-1}\big((-1)^{q}-(-1)^{p}\big).
@@ -755,7 +750,8 @@ Also, using the Cauchy estimate on holomorphic functions, we can prove:
     \begin{figure}
         \centering
         \includegraphics[width=7cm]{cauchy_estimate.pdf}
-        \caption{Cauchy estimate in blue vs.\ binomial coefficients in red.}
+
+        \mycaption{Cauchy estimate in blue vs.\ binomial coefficients in red.}
         \label{fig:cauchy_estimate}
     \end{figure}
 \end{remark}}
@@ -888,13 +884,14 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
         |P_{a,t}(z)|^2=\left(\left|-z^2+2z+1\right|^{2\lambda}|1+z|^{2(1-2\lambda)}\right)^n=\left((6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}\right)^n.
     \]
     
-    The goal will be to prove that the maximum of $g^{(\lambda)}(\alpha)=g(\alpha)=(6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$ for $\alpha\in[-\pi,\pi]$ is equal to $2^{2\mu}$; the maximum of $|P_{a,t}(z)|$ on $\dis$ will then be $\left(2^{2\mu}\right)^{n/2}=2^{\mu n}$. Since $g$ is an even function, it is enough to focus on the interval $\alpha\in[0,\pi]$; the function $g$ is represented for several different values of $0\leq\lambda<1/2$ in Figure~\ref{fig:family_curves_g}.
+    The goal will be to prove that the maximum of $g^{(\lambda)}(\alpha)=g(\alpha)=(6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$ for $\alpha\in[-\pi,\pi]$ is equal to $2^{2\mu}$; the maximum of $|P_{a,t}(z)|$ on $\dis$ will then be $\left(2^{2\mu}\right)^{n/2}=2^{\mu n}$. Since $g$ is an even function, it is enough to focus on the interval $\alpha\in[0,\pi]$; the function $g$ is represented for several values of $0\leq\lambda<1/2$ in Figure~\ref{fig:family_curves_g}.
 
     \begin{figure}
     	\centering
     	\includegraphics[width=11cm]{family_curves_g.pdf}
         \vspace{-4mm}
-    	\caption{The curves of $\alpha\mapsto g^{(\lambda)}(\alpha)$ for the values $\lambda=\frac{i}{50}$ from $i=0$ (red) to $i=24$ (blue).}
+
+    	\mycaption{The curves of $\alpha\mapsto g^{(\lambda)}(\alpha)$ for the values $\lambda=\frac{i}{50}$ from $i=0$ (red) to $i=24$ (blue).}
     	\label{fig:family_curves_g}
     \end{figure}
     
@@ -937,17 +934,16 @@ The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theo
 
 \begin{figure}
 	\centering
-	\includegraphics[width=10cm]{curve_exponents_lambda_mu.pdf}
+	\includegraphics[width=9.5cm]{curve_exponents_lambda_mu.pdf}
     \vspace{-5mm}
-	\caption{The curve of $\lambda\mapsto\mu(\lambda)$ with $0\leq\lambda\leq\frac 12$ from Theorem~\ref{theorem:bound_D_nka_generalized}.}
+
+	\mycaption{The curve of $\lambda\mapsto\mu(\lambda)$ with $0\leq\lambda\leq\frac 12$ from Theorem~\ref{theorem:bound_D_nka_generalized}.}
 	\label{fig:curve_exponents_lambda_mu}
 \end{figure}
 
 
 
 \section{Experiments and comparisons}\label{sec:expAndComp}
-
-\tsnote{@Pierrick, this entire section needs updating because of Proposition 3.}
 
 In this section, we establish a tighter bound on the absolute value of the Walsh transform of the revisited \hwbf{} for even $n\in[1,80]$. 
 We then compare the nonlinearity of this function to that of other functions suited to similar use cases, such as the \hwbf{} or weightwise cyclic functions from~\cite{DAM:MeaOza24}.
@@ -960,29 +956,25 @@ Following Corollary~\ref{cor:bound_walsh_cauchy}, we deduce that $|\wt f(a)|\leq
 
 %This method is based on the identity (\ref{eqn:walsh_from_D}). 
 This method is based on the identity given in Proposition~\ref{prop:WT}.
-For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $k\in[1,n]$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$. Observe that for every $k\in[1,n]$, we have $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\in[0,n/2]$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
+For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $k\in[1,n]$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$, where $\pi:[1,n]\to[1,n]$ is again the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Notice first that for every integer $k\in[1,n]$, it holds that $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\in[0,n/2]$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
 
 In the following discussion, we outline a method to determine an upper bound on $\max_{a\in\F_2^n}\wt f(a)$. A similar approach can be applied to find a lower bound on $\min_{a\in\F_2^n}\wt f(a)$, and by utilizing both, we can also obtain an upper bound on $\max_{a\in\F_2^n}|\wt f(a)|$ by making use of the following identity:
 \[
 \max_{a\in\F_2^n}|\wt f(a)|=\max\Big(\max_{a\in\F_2^n}\wt f(a),-\min_{a\in\F_2^n}\wt f(a)\Big).
 \]
-For each $1\leq k\leq n/2$, we select $\{\alpha_k,\beta_k,\gamma_k\}=\{0,\pm 1\}$ with $\gamma_k\neq 0$ such that the following expression is defined and maximized:
+
+For each $k\in[1,n/2]$, we select $\{\alpha_k,\beta_k,\gamma_k\}=\{0,\pm 1\}$ with $\gamma_k\neq 0$ such that the following expression, based on the notation introduced in Remark~\ref{rmk:Dnka_dep_pqr}, is defined and maximized:
 \[
-B_k^{p,q,r}=\mathsf D_{n,k}^{p+\alpha_k,q+\beta_k,r+\gamma_k}+\mathsf D_{n,k+n/2}^{p+\alpha_k',q+\beta_k',r+\gamma_k'}.
+	B_k^{p,q,r}=\mathsf D_{n,k}^{p+\alpha_k,q+\beta_k,r+\gamma_k}+\mathsf D_{n,k+n/2}^{p+\alpha_k',q+\beta_k',r+\gamma_k'}.
 \]
-This implies that $\Dnka{n}{k}{b_k}+\Dnka{n}{k+n/2}{b_{k+n/2}}\leq B_k^{p,q,r}$ for every $1\leq k\leq n/2$, leading to the conclusion that $\sum_{k=1}^n\Dnka nk{b_k}\leq\sum_{k=1}^{n/2} B_k^{p,q,r}$. As a result, we derive the following upper bound:
+This implies that $\Dnka{n}{k}{b_k}+\Dnka{n}{k+n/2}{b_{k+n/2}}\leq B_k^{p,q,r}$ for every $k\in[1,n/2]$, leading to the conclusion that $\sum_{k=1}^n\Dnka nk{b_k}\leq\sum_{k=1}^{n/2} B_k^{p,q,r}$. As a result, we derive the following upper bound:
 \begin{equation}\label{eqn:bound_walsh}
-\max_{a\in\F_2^n}\wt f(a)\leq\max_{p+q+r=n/2}\sum_{k=1}^{n/2} B_k^{p,q,r}.
+\max_{a\in\F_2^n}\wt f(a)\leq 1+\max_{p+q+r=n/2}\sum_{k=1}^{n/2} B_k^{p,q,r}.
 \end{equation}
-Under the assumption that the values of $\mathsf{D}_{n,k}^{p,q,r}$ have already been computed for all triplets $(p,q,r)$ satisfying $p+q+r=n/2$, the bound in equation (\ref{eqn:bound_walsh}) can be determined with a computational complexity of $\mathcal{O}(n^3)$. This is because there are $\mathcal{O}(n^2)$ possible triplets $(p,q,r)$ that meet the condition $p+q+r=n/2$, and the summation itself can be computed in $\mathcal{O}(n)$.
 
-We consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $0 \leq k \leq n$ and for all triplets $(p,q,r)$ where $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, according to Proposition \ref{proposition:generating_fct}, it is sufficient to expand the polynomials $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$.
+Under the assumption that the values of $\mathsf{D}_{n,k}^{p,q,r}$ have already been computed for all $k\in[1,n]$ and for all triplets $(p,q,r)$ satisfying $p+q+r=n/2$, the bound in equation (\ref{eqn:bound_walsh}) can be determined with a computational complexity of $\mathcal{O}(n^3)$. This is because there are $\mathcal{O}(n^2)$ possible triplets $(p,q,r)$ that meet the condition $p+q+r=n/2$, and the summation itself can be computed in $\mathcal{O}(n)$ steps.
 
-To achieve this, we first precompute the expanded polynomials $(-z^2 + 2z + 1)^p$ for each $1 \leq p \leq n/2$. This can be done recursively using the formula $(-z^2 + 2z + 1)^{p+1} = (-z^2 + 2z + 1) \cdot (-z^2 + 2z + 1)^p$. For each $p$, we need to compute the product of two expanded polynomials of degree at most $n/2$, which requires $\mathcal{O}(n \log n)$ computations . Performing this for every $p$ results in a total complexity of $\mathcal{O}(n^2 \log n)$. The same approach is used to expand the polynomials $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$, resulting in an overall complexity of $\mathcal{O}(n^2 \log n)$ for this precomputational step.
-
-Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded polynomials $(-z^2 + 2z + 1)^p$, $(-z^2 - 2z + 1)^q$, and $(z^2 + 1)^r$. These two multiplications are once more performed in $\mathcal{O}(n \log n)$. Given that there are $\mathcal{O}(n^2)$ such triplets $(p,q,r)$, the complexity of this step totals $\mathcal{O}(n^3 \log n)$. Therefore, this final step is the primary computational bottleneck, making the overall complexity of the procedure also $\mathcal{O}(n^3 \log n)$.
-
-\pmnote{Create a public github with all the code (not the .tex) used relatively to the article. We will give this link for the public version. Fot the anonymous one we will not mention the git, and only add the files in supplementary material.}
+We consider now the complexity involved in computing the values of $\mathsf{D}_{n,k}^{p,q,r}$ for all $k\in[1,n]$ and all triplets $(p,q,r)$ satisfying $p+q+r=n/2$. We claim that this computation has a complexity of $\mathcal{O}(n^3 \log n)$. Towards this, it is sufficient to expand $(-z^2 + 2z + 1)^p \cdot (-z^2 - 2z + 1)^q \cdot (z^2 + 1)^r$ for all triplets $(p,q,r)$ such that $p+q+r=n/2$; this is due to Proposition \ref{proposition:generating_fct}. To achieve this, we first precompute the expanded polynomial $(-z^2 + 2z + 1)^p$ for each $p\in[1,n/2]$. This can be done recursively using the formula $(-z^2 + 2z + 1)^{p+1} = (-z^2 + 2z + 1) \cdot (-z^2 + 2z + 1)^p$. For each $p$, this requires $\mathcal O(n)$ arithmetic computations. Performing this for every $p$ results in a total complexity of $\mathcal{O}(n^2)$. The same approach can be used to expand the polynomials $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$, resulting in an overall complexity of $\mathcal{O}(n^2)$ for a fixed triplet $(p,q,r)$. Finally, for each such triplet $(p,q,r)$, we multiply the three expanded polynomials $(-z^2 + 2z + 1)^p$, $(-z^2 - 2z + 1)^q$ and $(z^2 + 1)^r$. These two multiplications are performed in $\mathcal{O}(n \log n)$ operations by using the fast Fourier transform. Given that there are $\mathcal{O}(n^2)$ triplets $(p,q,r)$ to consider, precomputing the values $\mathsf{D}_{n,k}^{p,q,r}$ for all $k\in[1,n]$ and all triplets $(p,q,r)$ has a complexity of $\mathcal{O}(n^3 \log n)$, making the overall complexity of the procedure also $\mathcal{O}(n^3 \log n)$.
 
 %\pmnote{add a link to the public github or name of the name of this code in supplementary materials.}
 
@@ -991,35 +983,35 @@ Finally, for each triplet $(p,q,r)$ where $p+q+r=n/2$, we multiply the expanded 
 
 %Table~\ref{table:max_walsh_vs_bound} compares $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ to the upper bound $B_n$ we find using the above method. Table~\ref{table:walsh_bounds} gives all values of this bound $B_n$ for all even $1\leq n\leq 80$.
 
-In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ for small values of $n$ (calculated using \textsf{SageMath}) to the upper bound $B_n$ obtained through the above method and the one from Corollary~\ref{cor:bound_walsh_cauchy}. 
-Additionally, Table~\ref{table:walsh_bounds} provides the values of the bound $B_n$ for all even values of $n$ from $1$ to $80$.
-We observe that the above method provides a much tighter bound than the one from Corollary~\ref{cor:bound_walsh_cauchy}, and its polynomial complexity enables us to extend the analysis far beyond what is feasible with a full computation of the Walsh spectrum (\( \mathcal{O}(n 2^n) \)).
+\bigskip
+In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ for small values of $n$ (calculated using \textsf{SageMath}) to the bound $B_n$ obtained through the above method and the bound from Corollary~\ref{cor:bound_walsh_cauchy}. Additionally, Table~\ref{table:walsh_bounds} provides the values of the bound $B_n$ for all even values of $n\in[1,80]$. The method described above offers a significantly tighter bound compared to Corollary~\ref{cor:bound_walsh_cauchy}. Its polynomial complexity makes it possible to extend the analysis well beyond the limitations imposed by a full computation of the Walsh spectrum, which requires a complexity of $\mathcal O(n2^n)$. We provide a \textsf{SageMath} implementation to obtain the bound $B_n$: \url{https://github.com/se-tim/Revisited-HWBF.git}.
 
 \begin{table}
+	\small
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
-		$n$ & $\max_{a\in\F_2^n}|W_f(a)|$ & $B_n$  & $\lfloor 1+n \cdot 2^{3n/4} \rfloor$\\ \hline
-		$2$  & $2$     & $4$  &  $6$ \\
-		$4$  & $8$     & $14$  & $33$  \\
-		$6$  & $20$    & $36$   & $136$\\
-		$8$  & $52$    & $114$  & $513$ \\
-		$10$ & $108$   & $288$  & $1\,811$\\
-		$12$ & $292$   & $820$  & $6\,145$ \\
-		$14$ & $700$   & $2\,316$ & $20\,275$ \\
-		$16$ & $2\,176$  & $6\,006$ & $65\,637$ \\
-		$18$ & $4\,964$  & $18\,192$ & $208\,535$ \\
-		$20$ & $14\,968$ & $48\,480$ & $655\,361$ \\
-		$22$ & $34\,232$ & $140\,392$ & $2\,039 \,002$ \\
-		$24$ & $109\,648$ & $392\,168$ & $6\,291 \,457$  \\ \hline
+		$n$ & $\max_{a\in\F_2^n}|\wt f(a)|$ & $B_n$  & $\lfloor 1+n \cdot 2^{3n/4} \rfloor$\\ \hline
+		$2$  & $2$     & $2$  &  $6$ \\
+		$4$  & $8$     & $8$  & $33$  \\
+		$6$  & $20$    & $28$   & $136$\\
+		$8$  & $52$    & $76$  & $513$ \\
+		$10$ & $108$   & $212$  & $1\,811$\\
+		$12$ & $292$   & $596$  & $6\,145$ \\
+		$14$ & $700$   & $1\,828$ & $20\,275$ \\
+		$16$ & $2\,176$  & $5\,196$ & $65\,537$ \\
+		$18$ & $4\,964$  & $14\,668$ & $208\,535$ \\
+		$20$ & $14\,968$ & $41\,468$ & $655\,361$ \\
+		$22$ & $34\,232$ & $118\,544$ & $2\,039 \,002$ \\
+		$24$ & $109\,648$ & $325\,188$ & $6\,291 \,457$  \\ \hline
 	\end{tabular}
-	\tablecaption{The actual $\max_{a\in\F_2^n}|W_f(a)|$ compared to the bound $B_n$ and the one from Corollary~\ref{cor:bound_walsh_cauchy}.}
+
+	\mycaption{The actual $\max_{a\in\F_2^n}|\wt f(a)|$ compared to the bound $B_n$ and the bound from Corollary~\ref{cor:bound_walsh_cauchy}.}
 	\label{table:max_walsh_vs_bound}
 \end{table}
 
-
-
 \begin{table}
+	\small
 	\centering
 	\begin{minipage}{0.24\textwidth}
 		\centering
@@ -1027,16 +1019,16 @@ We observe that the above method provides a much tighter bound than the one from
 			\hline
 			$n$ & $\approx B_n$ \\
 			\hline
-			$2$  & $4.00 \cdot 10^{0}$  \\
-			$4$  & $1.40 \cdot 10^{1}$  \\
-			$6$  & $3.60 \cdot 10^{1}$  \\
-			$8$  & $1.14 \cdot 10^{2}$  \\
-			$10$ & $2.88 \cdot 10^{2}$  \\
-			$12$ & $8.20 \cdot 10^{2}$  \\
-			$14$ & $2.32 \cdot 10^{3}$  \\
-			$16$ & $6.01 \cdot 10^{3}$  \\
-			$18$ & $1.82 \cdot 10^{4}$  \\
-			$20$ & $4.85 \cdot 10^{4}$  \\
+			$2$  & $2.00 \cdot 10^{0}$  \\
+			$4$  & $8.00 \cdot 10^{0}$  \\
+			$6$  & $2.80 \cdot 10^{1}$  \\
+			$8$  & $7.60 \cdot 10^{1}$  \\
+			$10$ & $2.12 \cdot 10^{2}$  \\
+			$12$ & $5.96 \cdot 10^{2}$  \\
+			$14$ & $1.83 \cdot 10^{3}$  \\
+			$16$ & $5.20 \cdot 10^{3}$  \\
+			$18$ & $1.47 \cdot 10^{4}$  \\
+			$20$ & $4.15 \cdot 10^{4}$  \\
 			\hline
 		\end{tabular}
 	\end{minipage}%
@@ -1046,16 +1038,16 @@ We observe that the above method provides a much tighter bound than the one from
 			\hline
 			$n$ & $\approx B_n$ \\
 			\hline
-			$22$ & $1.40 \cdot 10^{5}$  \\
-			$24$ & $3.92 \cdot 10^{5}$  \\
-			$26$ & $1.14 \cdot 10^{6}$  \\
-			$28$ & $3.12 \cdot 10^{6}$  \\
-			$30$ & $8.90 \cdot 10^{6}$  \\
-			$32$ & $2.50 \cdot 10^{7}$  \\
-			$34$ & $7.14 \cdot 10^{7}$  \\
-			$36$ & $2.04 \cdot 10^{8}$  \\
-			$38$ & $5.75 \cdot 10^{8}$  \\
-			$40$ & $1.62 \cdot 10^{9}$  \\
+			$22$ & $1.19 \cdot 10^{5}$  \\
+			$24$ & $3.25 \cdot 10^{5}$  \\
+			$26$ & $9.59 \cdot 10^{5}$  \\
+			$28$ & $2.68 \cdot 10^{6}$  \\
+			$30$ & $7.65 \cdot 10^{6}$  \\
+			$32$ & $2.14 \cdot 10^{7}$  \\
+			$34$ & $6.25 \cdot 10^{7}$  \\
+			$36$ & $1.76 \cdot 10^{8}$  \\
+			$38$ & $5.03 \cdot 10^{8}$  \\
+			$40$ & $1.40 \cdot 10^{9}$  \\
 			\hline
 		\end{tabular}
 	\end{minipage}%
@@ -1065,16 +1057,16 @@ We observe that the above method provides a much tighter bound than the one from
 			\hline
 			$n$ & $\approx B_n$ \\
 			\hline
-			$42$ & $4.59 \cdot 10^{9}$  \\
-			$44$ & $1.29 \cdot 10^{10}$ \\
-			$46$ & $3.63 \cdot 10^{10}$ \\
-			$48$ & $1.02 \cdot 10^{11}$ \\
-			$50$ & $2.88 \cdot 10^{11}$ \\
-			$52$ & $8.06 \cdot 10^{11}$ \\
-			$54$ & $2.30 \cdot 10^{12}$ \\
-			$56$ & $6.45 \cdot 10^{12}$ \\
-			$58$ & $1.83 \cdot 10^{13}$ \\
-			$60$ & $5.14 \cdot 10^{13}$ \\
+			$42$ & $4.01 \cdot 10^{9}$  \\
+			$44$ & $1.12 \cdot 10^{10}$ \\
+			$46$ & $3.21 \cdot 10^{10}$ \\
+			$48$ & $8.91 \cdot 10^{10}$ \\
+			$50$ & $2.56 \cdot 10^{11}$ \\
+			$52$ & $7.12 \cdot 10^{11}$ \\
+			$54$ & $2.05 \cdot 10^{12}$ \\
+			$56$ & $5.73 \cdot 10^{12}$ \\
+			$58$ & $1.65 \cdot 10^{13}$ \\
+			$60$ & $4.59 \cdot 10^{13}$ \\
 			\hline
 		\end{tabular}
 	\end{minipage}%
@@ -1084,29 +1076,27 @@ We observe that the above method provides a much tighter bound than the one from
 			\hline
 			$n$ & $\approx B_n$ \\
 			\hline
-			$62$ & $1.47 \cdot 10^{14}$ \\
-			$64$ & $4.09 \cdot 10^{14}$ \\
-			$66$ & $1.17 \cdot 10^{15}$ \\
-			$68$ & $3.25 \cdot 10^{15}$ \\
-			$70$ & $9.34 \cdot 10^{15}$ \\
-			$72$ & $2.60 \cdot 10^{16}$ \\
-			$74$ & $7.44 \cdot 10^{16}$ \\
-			$76$ & $2.08 \cdot 10^{17}$ \\
-			$78$ & $5.97 \cdot 10^{17}$ \\
-			$80$ & $1.65 \cdot 10^{18}$ \\
+			$62$ & $1.32 \cdot 10^{14}$ \\
+			$64$ & $3.66 \cdot 10^{14}$ \\
+			$66$ & $1.05 \cdot 10^{15}$ \\
+			$68$ & $2.93 \cdot 10^{15}$ \\
+			$70$ & $8.40 \cdot 10^{15}$ \\
+			$72$ & $2.33 \cdot 10^{16}$ \\
+			$74$ & $6.71 \cdot 10^{16}$ \\
+			$76$ & $1.87 \cdot 10^{17}$ \\
+			$78$ & $5.39 \cdot 10^{17}$ \\
+			$80$ & $1.51 \cdot 10^{18}$ \\
 			\hline
 		\end{tabular}
 	\end{minipage}
-	\tablecaption{Approximate values of $B_n$ for various values of $n$.}
+
+	\mycaption{Approximate values of $B_n$ for various values of $n$.}
 	\label{table:walsh_bounds}
 \end{table}
 
-
-
 \subsection{Comparison of the nonlinearity}
 
-
-In this part we compare the nonlinearity of the function $f$ from Definition~\ref{def:revHWBF} to other weightwise quadratic functions considered for similar use-cases, such as majority, \hwbf{} and the cyclic weighwise functions studied in~\cite{DAM:MeaOza24}. 
+In this part, we compare the nonlinearity of the revisited \hwbf{} $f\in\BN$ to other weightwise quadratic functions considered for similar use-cases, such as the majority function, the \hwbf{} and the cyclic weightwise functions studied in~\cite{DAM:MeaOza24}. 
 
 
 %In Figure~\ref{fig:walsh_bound_comparison} we compare the value $\max_{a\in\mathbb F_2^n}|\wt f(a)|$, the smaller the maximum the better the nonlinearity. We display the values for $n$ up to $80$, which is sufficient to compare the asymptotic behavior of the different bounds. 
@@ -1116,31 +1106,28 @@ In this part we compare the nonlinearity of the function $f$ from Definition~\re
 
 In Figure~\ref{fig:walsh_bound_comparison}, we compare the values of $\max_{a \in \mathbb{F}_2^n} |\wt f(a)|$, where a smaller maximum indicates better nonlinearity (see Definition~\ref{def:nl}). 
 We present values for $n$ up to $80$, which is sufficient for examining the asymptotic behavior of the different bounds.
-The violet and orange curves represent the upper bounds  in~\cite{DAM:MeaOza24}. The violet curve corresponds to the bound that holds for all cyclic weightwise linear functions where $ f_0(x) = b \cdot x $ with $\w(b)$ odd, providing, for example, an upper bound for the \hwbf{}. The orange curve corresponds to the bound for the cyclic weightwise quadratic function defined by $f_0(x) = x_1 + x_2 x_3$.
-The blue curve represents both the majority and \hwbf{} functions, whose exact nonlinearities are given in Property~\ref{prop:wwd1}. We use a single curve here because, on a logarithmic scale, the nonlinearity difference between these two functions is too small to distinguish between them.
+The violet and orange curves represent the upper bounds  in~\cite{DAM:MeaOza24}. More precisely, the violet curve corresponds to the bound that holds for all cyclic weightwise linear functions $f$ that, with the notation from Definition~\ref{def:wwdegd}, satisfy $ f_0(x) = b \cdot x $ for $\w(b)$ odd; therefore, this represents for instance an upper bound for the \hwbf{}. The orange curve corresponds to the bound for the cyclic weightwise quadratic function $f$ defined by $f_0(x) = x_1 + x_2 x_3$.
+The blue curve applies to both the majority and \hwbf{} functions, whose exact nonlinearities are given in Property~\ref{prop:wwd1}. We use a single curve here because, on a logarithmic scale, the nonlinearity difference between these two functions is too small to distinguish between them.
 For the revisited \hwbf{} introduced in Definition~\ref{def:revHWBF}, the red curve corresponds to the theoretical bound from Corollary~\ref{cor:bound_walsh_cauchy}, while the green curve represents the experimental results from Section~\ref{sec:expwt}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=9cm]{comparison_walsh_bound.pdf}
-	\caption{
+	\includegraphics[width=10.5cm]{comparison_walsh_bound.pdf}
+
+	\mycaption{
 		%Maximum of the absolute value of the Walsh spectrum of different functions, in logarithmic scale, for even values of $n$. In violet and orange are the bounds for the cyclic weigtwise linear functions and one cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}. In blue is the value for the majority function and HWBF. The theoretical bound (Corollary~\ref{cor:bound_walsh_cauchy}) for the function $f$ is in red and the experimental one $B_n$ (Section~\ref{sec:expwt}) is in green.}		
 		%On a logarithmic scale, our experimental bound $B_n$ in terms of $n$ in red, our theoretical bound $1+n\cdot 2^{3n/4}$ from Proposition \ref{cor:bound_walsh_cauchy} in green, and the bound $\binom{n}{n/2}$ in blue. \tsnote{Updated plot, but the description now needs to be changed.}}
-		Maximum absolute values of the Walsh spectrum for various functions, shown on a logarithmic scale for even values of $n$. 
-		The violet and orange curves represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}. The blue curve shows values for the majority function and \hwbf{}. The theoretical bound for the function $f$ (from Corollary~\ref{cor:bound_walsh_cauchy}) is in red, and the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
+		Bounds on the maxima of absolute values of the Walsh spectrum for various functions, shown on a logarithmic scale for even values of $n$.
+		The violet and orange curves, the orange one mostly covering the violet one, represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}, respectively. The blue curve shows bounds for the majority function and the \hwbf{}. The theoretical bound for the revisited \hwbf{} (from Corollary~\ref{cor:bound_walsh_cauchy}) is in red, and the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
 	\label{fig:walsh_bound_comparison}
 \end{figure}
 
+The revisited \hwbf{} demonstrates significantly better performance compared to the majority function and the original \hwbf{}. Its theoretical bound reveals an asymptotic slope of $3/4$ on a logarithmic scale, contrasting with the slope of $1$ for the majority function and the \hwbf{}. Notably, the green curve corresponding to the bound of Section~{sec:expwt} appears to share this asymptotic slope of $3/4$, supporting the effectiveness of Corollary~\ref{cor:bound_walsh_cauchy} and the stronger Theorem~\ref{theorem:bound_D_nka_generalized} in capturing asymptotic behavior. In contrast, the bounds proven in~\cite{DAM:MeaOza24}, represented by the violet and orange curves, exhibit the less favorable asymptotic slope of $1$.
 
-
-We observe significantly better performance for the newly introduced function $f$ compared to the majority function and \hwbf{}, with the proven bound exhibiting an asymptotic slope of $ 3/4$ as opposed to $1$. The two bounds proven in~\cite{DAM:MeaOza24} also have an asymptotic slope of $1$.
-The gap between the red and green curves, both representing upper bounds on $ \max_{a \in \mathbb{F}_2^n} |\wt f(a)| $ (with only the formula for the red curve proven for all even $n$), suggests that the true values may follow an even better slope than $ 3/4$.
-
-In Table~\ref{table:comparisonsNL}, we compare the specific nonlinearity values of the functions under consideration. Among the various weightwise quadratic functions studied so far, we observe that $f$ has the highest nonlinearity from $n=10$ onward.
-
-
+We also compare in Table~\ref{table:comparisonsNL} the precise nonlinearity values of the functions under consideration. Among the various weightwise quadratic functions studied so far, we observe that the revisited \hwbf{} has the highest nonlinearity from $n=10$ onward.
 
 \begin{table}
+	\small
 	\centering
 	\begin{tabular}{|c| c|c|c|c| c|c|c|}
 		\hline
@@ -1163,7 +1150,8 @@ Majority   & $5$  & $22$  & $93$  &  $386$ & $1\,586$ & $6\,476$ & $26\,333$  \\
 		Revisited \hwbf{}  & $4$  & $22$  & $102$  &  $458$ & $1\,902$ & $7\,842$ & $31\,680$\\
 \hline
 	\end{tabular}
-	\tablecaption{Comparison of the nonlinearity.}
+
+	\mycaption{Comparison of the nonlinearity.}
 	\label{table:comparisonsNL}
 \end{table}
 
@@ -1189,9 +1177,10 @@ In this section, we present additional cryptographic parameters for the revisite
 \end{proof}
 
 
-In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of different weightwise quadratic function. We observe that the revisited \hwbf{} is the function with highest degree, together with the \hwbf{}. 
+In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of different weightwise quadratic function. We observe that the revisited \hwbf{} is the function with the highest degree, together with the \hwbf{}. 
 
 \begin{table}
+	\small
 	\centering
 	\begin{tabular}{|c| c|c|c|c| c|c|c|}
 		\hline
@@ -1211,13 +1200,10 @@ In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of differen
 		Revisited \hwbf{}  & $3$  & $5$  & $7$  &  $9$ & $11$ & $13$ & $15$\\
 		\hline
 	\end{tabular}
-	\tablecaption{Comparison of the degree.}
+
+	\mycaption{Comparison of the degree.}
 	\label{table:comparisonsDeg}
 \end{table}
-
-
-
-%\subsection{Algebraic immunity}
 
 \begin{proposition}
     Let $n\geq 4$ be even, let $f\in\BN$ be the revisited \hwbf{}, and let $h\in\BN$ be the \hwbf{}. Then the following holds:
@@ -1228,7 +1214,7 @@ In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of differen
 	Denote by $q\in\BN$ the quadratic function given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$, allowing to write $h=f+q$.
     Let $g\in\BN^*$ with $\degg(g)=\AI(f)$ be an annihilator of $f+ \varepsilon$ for some $\varepsilon\in\{0,1\}$. Then the following holds:
 	\[g\cdot(q+1) \cdot(h+\varepsilon) = g\cdot(q+1)\cdot(f+q+\varepsilon)=g\cdot(q+1)\cdot(f+\epsilon)+g\cdot(q+1)\cdot q=0+0=0.\]
-	Hence $g\cdot(q+1)$ is an annihilator of $h+ \varepsilon$. 
+	Hence, $g\cdot(q+1)$ is an annihilator of $h+ \varepsilon$. 
 	If $g\cdot(q+1)\ne 0$, it follows that $\AI(h)\leq\degg(g\cdot(q+1))\leq\degg(g)+\degg(q+1)$, and therefore that $\AI(f)=\degg(g)\geq\AI(h)-\degg(q+1)=\AI(h)-2$. If $g\cdot(q+1)=0$, then $0=g\cdot(f+\epsilon+q+1)=g\cdot(h+\epsilon+1)$, showing that $\AI(f)=\degg(g)\geq\AI(h)$.
 \end{proof}
 
@@ -1258,13 +1244,15 @@ In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various
 		 16  & 31680         & True        & 15              & 7                   \\
 		 \hline
 		 \end{tabular}
-	 \tablecaption{Characteristics of Boolean Functions for Different $n$ Values}
+
+	 \mycaption{Characteristics of Boolean Functions for Different $n$ Values}
 	 \end{table}
 \fi
 
 
 
 \begin{table}
+	\small
 	\centering
 	\begin{tabular}{|c| c|c|c|c| c|c|c|}
 		\hline
@@ -1279,11 +1267,11 @@ In Table~\ref{table:comparisonsAI}, we present the algebraic immunity of various
 		Revisited \hwbf{}   & $2$  & $3$  & $4$  &  $5$ & $6$ & $6$ & $7$\\
 		\hline
 	\end{tabular}
-	\tablecaption{Comparison of the algebraic immunity.}
+
+	\mycaption{Comparison of the algebraic immunity.}
 	\label{table:comparisonsAI}
 \end{table}
 
-\bigskip
 Lastly, we also considered the fast algebraic immunity of the revisited \hwbf{} $f$. In Table~\ref{table:FAI}, we give the best couples $(d,e)$ encountered for the function $f$, where $\degg(g)=d$ and $\degg(h)=e$ for functions $g$ and $h$ satisfying $fg=h$.
 
 \bigskip
@@ -1295,6 +1283,7 @@ These various results on the algebraic properties of $f$ suggest that it possess
 
 
 \begin{table}
+	\small
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
@@ -1305,7 +1294,8 @@ These various results on the algebraic properties of $f$ suggest that it possess
 		 &     &    &     &  &  &  & $(4,9)$ & $(4,11)$\\ 
 	 &     &    &     &  &  &  &  & $(5,10)$ \\ \hline
 	\end{tabular}
-	\tablecaption{Lowest possible values of $(d, e)$ for different values of $n$.}
+
+	\mycaption{Lowest possible values of $(d, e)$ for different values of $n$.}
 	\label{table:FAI}
 \end{table}
 
