@@ -200,8 +200,9 @@
 \newcommand{\Ekn}[2]{\mathsf{E}_{#1,#2}}
 \newcommand{\Code}[2]{\mathsf{P}_{#1,#2}}
 \newcommand{\mdist}[2]{\mathsf{d}_{#1,#2}}
-%\newcommand{\Dka}[2]{\mathsf{D}_{#1}(#2)}
-\newcommand{\Dnka}[3]{\mathsf{D}_{#1,#2}(#3)}
+\newcommand{\Dnka}[3]{\Dkna{#2}{#1}{#3}}
+\newcommand{\Dkna}[3]{\mathsf{D}_{#1,#2}(#3)}
+\newcommand{\Dtkna}[4]{\mathsf{D}_{#1,#2,#3}(#4)}
 
 \newcommand{\dis}{\mathsf{c_1}}
 
@@ -326,12 +327,12 @@
 \usepackage{mleftright}
 \mleftright %Less space when using \left and \right
 
-\newcommand{\mycaption}[1]{
-  
-    \begin{minipage}{0.65\textwidth}
-      \vspace{3pt}
-      \caption{#1}
-    \end{minipage}
+\usepackage[font=small,labelfont=bf,width=12cm]{caption} % Add this to your preamble for better control over captions
+
+\newcommand{\mycaption}[1]{%
+    \vspace{5pt}
+    \captionsetup{justification=justified}%
+    \caption{#1}%
 }
 
 \let\leq=\leqslant %Replace symbol for \leq
@@ -343,3 +344,5 @@
 \makeatletter
 \@beginparpenalty=10000
 \makeatother
+
+\allowdisplaybreaks
