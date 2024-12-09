@@ -43,7 +43,15 @@
 \maketitle	
 	
 \begin{abstract}
-	The Hidden Weight Bit Function (\hwbf{}) has drawn considerable attention for its simplicity and cryptographic potential. Despite its ease of implementation and favorable algebraic properties, its low nonlinearity limits its direct application in modern cryptographic designs. In this work, we revisit the \hwbf{} and propose a new weightwise quadratic variant obtained by combining the \hwbf{} with a bent function. This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. 
+	The Hidden Weight Bit Function (\hwbf{}) has drawn considerable attention for its simplicity and cryptographic potential. 
+	Despite its ease of implementation and favorable algebraic properties, its low nonlinearity limits its direct application in modern cryptographic designs. In this work, we revisit the \hwbf{} and propose a new weightwise quadratic variant obtained by combining the \hwbf{} with a bent function. 
+	This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. 
+	
+The different techniques we introduce to study the nonlinearity of this function also enable us to bound the nonlinearity of a broad family of weightwise quadratic functions, both theoretically and practically. We believe these methods are of independent interest.
+
+		
+\keywords{Boolean functions, HWBF, Nonlinearity.}
+	
 \end{abstract}
 
 \section{Introduction}
@@ -106,7 +114,9 @@ Below, for a Boolean function $f\in\BN$, we write $f+1$ for the Boolean function
 \end{definition}
 
 \begin{definition}[Balancedness]
-    A Boolean function $f\in\BN$ is called balanced if $\wt f(0_n)=0$.
+%    A Boolean function $f\in\BN$ is called balanced if $\wt f(0_n)=0$.
+A Boolean function $f\in\BN$ is called balanced if $|\{x \in \F_2^n \mid f(x)=0\}|=|\{x \in \F_2^n \mid f(x)=1\}|=2^{n-1}$. 
+Equivalently, $f$ is balanced if and only if $\wt f(0_n)=0$.
 \end{definition}
 
 \begin{definition}[Nonlinearity, \eg, page 79 in \cite{Carlet20}]%and weightwise nonlinearity
@@ -134,7 +144,7 @@ The well-known algebraic attack~\cite{EC:CouMei03} and fast algebraic attack~\ci
 	\[ \AI(f) = \min\{ \degg(g):\text{$g\in\BN^*$ is an annihilator of $f$ or $f+1$}\}.\]
 \end{definition}
 
-\begin{definition}[Fast algebraic immunity, \eg, \cite{EC:ACGKMR06}]\label{def:FAI}
+\begin{definition}[Fast algebraic immunity, \eg, \cite{EC:ACGKMR06,IEEE:LiuLinPei11,DCC:CarTan15}]\label{def:FAI}
 	The fast algebraic immunity of a Boolean function $f\in \Bfn{n}$ is defined as:
 	\[
 		\FAI(f)=\min \{ 2 \AI(f), \min\{\degg(g)+ \degg(fg):g\in\BN,1\leq\degg(g)<\AI(f)\}\}.
@@ -1014,9 +1024,20 @@ These various results on the algebraic properties of the revisited \hwbf{} sugge
 
 \section{Conclusion and open questions}
 
-In this work, we introduced the revisited Hidden Weight Bit Function, a weightwise quadratic Boolean function with improved cryptographic properties over existing constructions. We analyzed its balancedness, and using generating functions in combination with complex analysis, we derived interesting lower bounds on its nonlinearity, demonstrating that the revisited \hwbf{} achieves superior nonlinearity compared to other functions with similar computational costs. We further examined other cryptographic parameters such as degree, algebraic immunity, and fast algebraic immunity, confirming that the revisited \hwbf{} matches or outperforms comparable functions in these aspects.
+In this work, we introduced the revisited hidden weight bit function, a weightwise quadratic Boolean function with improved cryptographic properties over existing constructions. 
+We analyzed its balancedness, and using generating functions in combination with complex analysis, we derived interesting lower bounds on its nonlinearity, demonstrating that the revisited \hwbf{} achieves superior nonlinearity compared to other functions with similar computational costs. 
+We further examined other cryptographic parameters such as degree, algebraic immunity, and fast algebraic immunity, confirming that the revisited \hwbf{} matches or outperforms comparable functions in these aspects.
 
-Our approach makes use of generating functions and Cauchy’s estimate to bound the nonlinearity of weightwise quadratic functions from below. This naturally leads to the following question: do the employed techniques, particularly the use of Cauchy’s estimate, extend to different families of Boolean functions? Exploring this could potentially lead to the discovery of new functions with even better cryptographic properties.
+%Our approach makes use of generating functions and Cauchy’s estimate to bound the nonlinearity of weightwise quadratic functions from below. 
+%This naturally leads to the following question: do the employed techniques, particularly the use of Cauchy’s estimate, extend to different families of Boolean functions? 
+%In particular, the same approach seems possible for other weightwise-degree-$d$ functions such that the $f_k$ are direct sums.
+%Exploring this could potentially lead to the discovery of new functions with similar computational cost and even better cryptographic properties.
+
+
+Our approach leverages generating functions and Cauchy’s estimate to establish lower bounds on the nonlinearity of weightwise quadratic functions. 
+This naturally raises the question: can the employed techniques, particularly the use of Cauchy’s estimate, be extended to other families of Boolean functions? Specifically, this approach appears feasible for other weightwise-degree-$d$ functions where the $f_k$ are direct sums. 
+Investigating this could potentially lead to the discovery of new functions with comparable computational costs and even better cryptographic properties.
+
 
 \ifnum\anon=0
 	\section{Acknowledgments}
