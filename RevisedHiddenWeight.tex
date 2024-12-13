@@ -1,5 +1,5 @@
-\def\anon{0} % set to 1 for anonymous submissions, hides acknowledgements and author names
-\def\full{1} % set to 0 for springer proceedings
+\def\anon{0} %Set to 1 for anonymous submissions, hides acknowledgements and author names
+\def\full{1} %Set to 0 for springer proceedings
 
 \ifnum\full=1
 	\documentclass[11pt]{llncs}
@@ -45,13 +45,9 @@
 \begin{abstract}
 	The Hidden Weight Bit Function (\hwbf{}) has drawn considerable attention for its simplicity and cryptographic potential. 
 	Despite its ease of implementation and favorable algebraic properties, its low nonlinearity limits its direct application in modern cryptographic designs. In this work, we revisit the \hwbf{} and propose a new weightwise quadratic variant obtained by combining the \hwbf{} with a bent function. 
-	This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. 
-	
-The different techniques we introduce to study the nonlinearity of this function also enable us to bound the nonlinearity of a broad family of weightwise quadratic functions, both theoretically and practically. We believe these methods are of independent interest.
+	This construction offers improved cryptographic properties while remaining computationally efficient. We analyze the balancedness, nonlinearity, and other criteria of this function, presenting theoretical bounds and experimental results to highlight its advantages over existing functions in similar use cases. The different techniques we introduce to study the nonlinearity of this function also enable us to bound the nonlinearity of a broad family of weightwise quadratic functions, both theoretically and practically. We believe these methods are of independent interest.
 
-		
-\keywords{Boolean functions, HWBF, Nonlinearity.}
-	
+	\keywords{Boolean functions, HWBF, Nonlinearity.}
 \end{abstract}
 
 \section{Introduction}
@@ -115,7 +111,7 @@ Below, for a Boolean function $f\in\BN$, we write $f+1$ for the Boolean function
 
 \begin{definition}[Balancedness]
 %    A Boolean function $f\in\BN$ is called balanced if $\wt f(0_n)=0$.
-A Boolean function $f\in\BN$ is called balanced if $|\{x \in \F_2^n : f(x)=0\}|=|\{x \in \F_2^n : f(x)=1\}|=2^{n-1}$. 
+A Boolean function $f\in\BN$ is called balanced if $|\{x \in \F_2^n : f(x)=0\}|=2^{n-1}=|\{x \in \F_2^n : f(x)=1\}|$. 
 Equivalently, $f$ is balanced if and only if $\wt f(0_n)=0$.
 \end{definition}
 
@@ -356,18 +352,11 @@ In this part, we determine for which values of $n$ the revisited \hwbf{} $f\in\B
 		\Dnka{n}{k}{1,1,0,1,\ldots,0,1}=\Dnka{n-2}{k}{1,1,0,1,\ldots,0,1} +\Dnka{n-2}{k-2}{1,1,0,1,\ldots,0,1}.
 	\]
 	By reapplying this $n/2-1$ times, we obtain:
-%	\begin{align*}
-%		\Dnka{n}{k}{1,1,0,1,\ldots,0,1}&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{1,1}\\
-%		&=\binom{n/2-1}{k/2} \Dnka{2}{0}{1,1}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{1,1}\\
-%		&\qquad+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{1,1}\\
-%		&=\binom{n/2-1}{k/2}-2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}.
-%	\end{align*}
 	\begin{align*}
-\Dnka{n}{k}{1,1,0,1,\ldots,0,1}&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{1,1}\\
-&=\binom{n/2-1}{k/2} \Dnka{2}{0}{1,1}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{1,1}+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{1,1}\\
-&=\binom{n/2-1}{k/2}-2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}.
-\end{align*}
-We similarly ge
+		\Dnka{n}{k}{1,1,0,1,\ldots,0,1}&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{1,1}\\
+		&=\binom{n/2-1}{k/2} \Dnka{2}{0}{1,1}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{1,1}+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{1,1}\\
+		&=\binom{n/2-1}{k/2}-2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}.
+	\end{align*}
 	We similarly get $\Dnka{n}{k}{0,0,0,1,\ldots,0,1}=\binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}$. Then, combining both, we obtain:
 	\begin{align*}
 		\wt{f}(0_n)&=1+\sum_{k=1}^{n/2}\Dnka{n}{k}{1,1,0,1,\ldots,0,1}+ \sum_{k=n/2+1}^{n}\Dnka{n}{k}{0,0,0,1,\ldots,0,1}\\
@@ -489,13 +478,11 @@ From differentiation, we can get more cases in which $\Dnka nka=0$.
 \end{proposition}
 
 \begin{proof}
- %   It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$. This checking can be autotomized by a computer algebra system.
- We use the expressions from Table~\ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. 
- For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$. ~\footnote{This checking can be automatized by a computer algebra system.
+	We use the expressions from Table~\ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. 
+	For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$.~\footnote{This checking can be automatized by a computer algebra system.
 	\ifnum\anon=0
 		For this, we refer to the corresponding \textsf{SageMath} implementation, accessible via this link: \url{https://github.com/se-tim/Revisited-HWBF.git}.
-	\fi
-}
+	\fi}
 \end{proof}
 
 \begin{remark}
@@ -577,8 +564,6 @@ We recall Cauchy's estimate on holomorphic functions.
 \end{proof}
 
 \subsection{Generalization to a family of weightwise quadratic functions}\label{sec:general}
-
-%In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic functions $f$ such that for every $k\in [1,n]$, the function $f_k$ in Definition~\ref{def:wwdegd} has exactly $t$ quadratic terms with no shared variables.
 
 In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic functions $f$ such that, for every $k \in [1, n]$, the function $f_k$ (as defined in Definition~\ref{def:wwdegd}) contains exactly $t$ quadratic terms with no shared variables.
 
@@ -1042,16 +1027,9 @@ In this work, we introduced the revisited hidden weight bit function, a weightwi
 We analyzed its balancedness, and using generating functions in combination with complex analysis, we derived interesting lower bounds on its nonlinearity, demonstrating that the revisited \hwbf{} achieves superior nonlinearity compared to other functions with similar computational costs. 
 We further examined other cryptographic parameters such as degree, algebraic immunity, and fast algebraic immunity, confirming that the revisited \hwbf{} matches or outperforms comparable functions in these aspects.
 
-%Our approach makes use of generating functions and Cauchy’s estimate to bound the nonlinearity of weightwise quadratic functions from below. 
-%This naturally leads to the following question: do the employed techniques, particularly the use of Cauchy’s estimate, extend to different families of Boolean functions? 
-%In particular, the same approach seems possible for other weightwise-degree-$d$ functions such that the $f_k$ are direct sums.
-%Exploring this could potentially lead to the discovery of new functions with similar computational cost and even better cryptographic properties.
-
-
-Our approach leverages generating functions and Cauchy’s estimate to establish lower bounds on the nonlinearity of weightwise quadratic functions. 
-This naturally raises the question: can the employed techniques, particularly the use of Cauchy’s estimate, be extended to other families of Boolean functions? Specifically, this approach appears feasible for other weightwise-degree-$d$ functions where the $f_k$ are direct sums. 
+Our approach utilizes generating functions and Cauchy’s estimate to establish lower bounds on the nonlinearity of weightwise quadratic functions. 
+This naturally raises the question: can the employed techniques, particularly the use of Cauchy’s estimate, be extended to other families of Boolean functions? Specifically, this approach appears feasible for other weightwise-degree-$d$ functions $f$ where the $f_k$ are direct sums. 
 Investigating this could potentially lead to the discovery of new functions with comparable computational costs and even better cryptographic properties.
-
 
 \ifnum\anon=0
 	\section{Acknowledgments}
