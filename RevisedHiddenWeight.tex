@@ -115,7 +115,7 @@ Below, for a Boolean function $f\in\BN$, we write $f+1$ for the Boolean function
 
 \begin{definition}[Balancedness]
 %    A Boolean function $f\in\BN$ is called balanced if $\wt f(0_n)=0$.
-A Boolean function $f\in\BN$ is called balanced if $|\{x \in \F_2^n \mid f(x)=0\}|=|\{x \in \F_2^n \mid f(x)=1\}|=2^{n-1}$. 
+A Boolean function $f\in\BN$ is called balanced if $|\{x \in \F_2^n : f(x)=0\}|=|\{x \in \F_2^n : f(x)=1\}|=2^{n-1}$. 
 Equivalently, $f$ is balanced if and only if $\wt f(0_n)=0$.
 \end{definition}
 
@@ -356,12 +356,18 @@ In this part, we determine for which values of $n$ the revisited \hwbf{} $f\in\B
 		\Dnka{n}{k}{1,1,0,1,\ldots,0,1}=\Dnka{n-2}{k}{1,1,0,1,\ldots,0,1} +\Dnka{n-2}{k-2}{1,1,0,1,\ldots,0,1}.
 	\]
 	By reapplying this $n/2-1$ times, we obtain:
+%	\begin{align*}
+%		\Dnka{n}{k}{1,1,0,1,\ldots,0,1}&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{1,1}\\
+%		&=\binom{n/2-1}{k/2} \Dnka{2}{0}{1,1}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{1,1}\\
+%		&\qquad+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{1,1}\\
+%		&=\binom{n/2-1}{k/2}-2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}.
+%	\end{align*}
 	\begin{align*}
-		\Dnka{n}{k}{1,1,0,1,\ldots,0,1}&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{1,1}\\
-		&=\binom{n/2-1}{k/2} \Dnka{2}{0}{1,1}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{1,1}\\
-		&\qquad+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{1,1}\\
-		&=\binom{n/2-1}{k/2}-2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}.
-	\end{align*}
+\Dnka{n}{k}{1,1,0,1,\ldots,0,1}&=\sum_{i=0}^{n/2-1} \binom{n/2-1}{i} \Dnka{2}{k-2i}{1,1}\\
+&=\binom{n/2-1}{k/2} \Dnka{2}{0}{1,1}+ \binom{n/2-1}{(k-1)/2} \Dnka{2}{1}{1,1}+ \binom{n/2-1}{k/2-1} \Dnka{2}{2}{1,1}\\
+&=\binom{n/2-1}{k/2}-2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}.
+\end{align*}
+We similarly ge
 	We similarly get $\Dnka{n}{k}{0,0,0,1,\ldots,0,1}=\binom{n/2-1}{k/2} +2 \binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}$. Then, combining both, we obtain:
 	\begin{align*}
 		\wt{f}(0_n)&=1+\sum_{k=1}^{n/2}\Dnka{n}{k}{1,1,0,1,\ldots,0,1}+ \sum_{k=n/2+1}^{n}\Dnka{n}{k}{0,0,0,1,\ldots,0,1}\\
@@ -371,7 +377,7 @@ In this part, we determine for which values of $n$ the revisited \hwbf{} $f\in\B
 		&=0+2\left(\sum_{k=n/2+1}^{n}\binom{n/2-1}{(k-1)/2}-\sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
 		&=2\left(\sum_{i=\lceil n/4\rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4\rfloor} \binom{n/2-1}{i}\right).
 	\end{align*}
-	The announced result follows by applying that $\binom{m}{k}=\binom{m}{m-k}$ for all integers $m\geq 0$ and $k$.
+	The final result follows by applying that $\binom{n}{k}=\binom{n}{n-k}$ for all integers $n\geq 0$ and $k$.
 \end{proof}
 
 \section{Extensive study of the $\Dnka nka$ and bounds on the Walsh spectrum of $f$}\label{sec:dnk}
@@ -483,10 +489,13 @@ From differentiation, we can get more cases in which $\Dnka nka=0$.
 \end{proposition}
 
 \begin{proof}
-    It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$. This checking can be autotomized by a computer algebra system.
+ %   It is enough to use the expressions from Table \ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$. This checking can be autotomized by a computer algebra system.
+ We use the expressions from Table~\ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. 
+ For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$. ~\footnote{This checking can be automatized by a computer algebra system.
 	\ifnum\anon=0
 		For this, we refer to the corresponding \textsf{SageMath} implementation, accessible via this link: \url{https://github.com/se-tim/Revisited-HWBF.git}.
 	\fi
+}
 \end{proof}
 
 \begin{remark}
@@ -512,7 +521,8 @@ Using Proposition \ref{proposition:generating_fct}, we can also deduce some sums
 \end{proposition}
 
 \begin{proof}
-	For the sum and the alternating sum, it is enough to compute $P_a(1)$ and $P_a(-1)$, respectively. The sum of the $\Dnka nka$ over the even (respectively, odd) $k$ is obtained by adding (respectively, subtracting) these two sums and dividing by $2$.
+	For the sum and the alternating sum, we compute $P_a(1)$ and $P_a(-1)$, respectively. 
+	The sum of the $\Dnka nka$ over the even (respectively, odd) $k$ is obtained by adding (respectively, subtracting) these two sums and dividing by $2$.
 \end{proof}
 
 \subsection{Bounding the Walsh transform of $f$ using the Cauchy estimate}\label{sec:Cauchy}
@@ -568,7 +578,9 @@ We recall Cauchy's estimate on holomorphic functions.
 
 \subsection{Generalization to a family of weightwise quadratic functions}\label{sec:general}
 
-In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic functions $f$ such that for every $k\in [1,n]$, the function $f_k$ in Definition~\ref{def:wwdegd} has exactly $t$ quadratic terms with no shared variables.
+%In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic functions $f$ such that for every $k\in [1,n]$, the function $f_k$ in Definition~\ref{def:wwdegd} has exactly $t$ quadratic terms with no shared variables.
+
+In this part, we generalize the results of Section~\ref{sec:Cauchy} to all weightwise quadratic functions $f$ such that, for every $k \in [1, n]$, the function $f_k$ (as defined in Definition~\ref{def:wwdegd}) contains exactly $t$ quadratic terms with no shared variables.
 
 \begin{definition}
 	For an even integer $n\geq 0$ and an integer $t\in[0,n/2]$, we define the Boolean function $d_{t,n}\in\BN$ by:
@@ -663,7 +675,7 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
 \begin{proof}
     To begin, we observe that the inequality $|\wt{d_{t,n}}(a)|\leq 1+n\cdot 2^{\mu n}$ will follow from the inequality $|\Dtkna tkna|\leq 2^{\mu n}$ using precisely the arguments of the proof of Corollary~\ref{cor:bound_walsh_cauchy}, so that we are only required to prove the first inequality. Also, since the case $\lambda=1/2$ corresponds to Theorem~\ref{theorem:bound_D_nka}, we will henceforth assume $\lambda<1/2$.
     
-    Similarly to the proof of Theorem~\ref{theorem:bound_D_nka}, we want to bound the maximum of $|P_{t,a}(z)|$ on $\dis$ for $a\in\F_2^n$, and this will then be an upper bound on $|\Dtkna tkna|$ for every $k\in[0,n]$. 
+    Similarly to the proof of Theorem~\ref{theorem:bound_D_nka}, we want to bound the maximum of $|P_{t,a}(z)|$ on $\dis=\{ z \in \C: |z|=1  \}$ for $a\in\F_2^n$, and this will then be an upper bound on $|\Dtkna tkna|$ for every $k\in[0,n]$. 
     We write $a=(b,c)$ with $b\in\F_2^{2t}$ and $c\in\F_2^{n-2t}$, and define $(p,q,r)=(p(b),q(b),r(b))$, and further consider $u=n-2t-\w(c)$ and $v=\w(c)$ as in Definition~\ref{defi:P_a_t}.    
 	To find a bound for $|P_{t,a}(z)|$ on $\dis$ that applies to all $a\in\F_2^n$, we would like to bound the quantity $\max_{a\in\F_2^n,z\in\dis}|P_{t,a}(z)|$. Moving through all $a\in\F_2^n$ is equivalent to moving through all tuples $(p,q,r;u,v)$ of non-negative integers which satisfy $p+q+r=t$ and $u+v=n-2t$. It follows from Lemma~\ref{lemma:maximizing_args} that it is enough to consider only the cases for which only one of $p,q,r$ is non-zero, and for which only one of $u,v$ is non-zero. 
 	This leaves us with the following cases to consider for $(p,q,r;u,v)$:
@@ -731,7 +743,8 @@ With this, we prove a generalization of Theorem~\ref{theorem:bound_D_nka} below.
     \[
         g(\alpha_0)=\frac{\left(-8\lambda^2+16\lambda+8\lambda\sqrt{\lambda^2-4\lambda+2}\right)^{\lambda}}{\left(2-2\lambda+2\sqrt{\lambda^2-4\lambda+2}\right)^{2\lambda-1}}=2^{2\mu}.
     \]
-    With this, we have covered the case $(p,q,r;u,v)=(t,0,0;n-2t,0)$ entirely. Similarly, it can be proven that $|P_{t,a}(z)|$ is also bounded by $2^{\mu n}$ on $\dis$ for the remaining two cases of $(p,q,r;u,v)$. In fact, for $(p,q,r;u,v)=(0,t,0;n-2t,0)$, one can proceed in exactly the same way, and for $(p,q,r;u,v)=(0,0,t;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h(\alpha)=(2+2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$, whose maximum is bounded by the maximum of $g(\alpha)$ because $0\leq h(\alpha)\leq g(\alpha)$.
+    With this, we have covered the case $(p,q,r;u,v)=(t,0,0;n-2t,0)$ entirely. Similarly, it can be proven that $|P_{t,a}(z)|$ is also bounded by $2^{\mu n}$ on $\dis$ for the remaining two cases of $(p,q,r;u,v)$. 
+    For $(p,q,r;u,v)=(0,t,0;n-2t,0)$, one can proceed in exactly the same way, and for $(p,q,r;u,v)=(0,0,t;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h(\alpha)=(2+2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$, whose maximum is bounded by the maximum of $g(\alpha)$ since $0\leq h(\alpha)\leq g(\alpha)$.
 \end{proof}
 
 The curve of $\lambda\mapsto\mu(\lambda)$ defined in the above Theorem~\ref{theorem:bound_D_nka_generalized} is represented in Figure~\ref{fig:curve_exponents_lambda_mu}. Observe that $\mu(1/2)=3/4$, which corresponds to Theorem~\ref{theorem:bound_D_nka}.
@@ -972,8 +985,9 @@ In Table~\ref{table:comparisonsDeg}, we display the algebraic degree of differen
 \end{proposition}
 
 \begin{proof}
-	Again, let $q\in\BN$ be given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$, so that $h=f+q$.
-	Let $g\in\BN^*$ with $\degg(g)=\AI(f)$ be an annihilator of $f+ \varepsilon$ for some $\varepsilon\in\{0,1\}$. Then the following holds:
+	Let $q\in\BN$ be given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$, so that $h=f+q$.
+	Let $g\in\BN^*$ with $\degg(g)=\AI(f)$ be an annihilator of $f+ \varepsilon$ for some $\varepsilon\in\{0,1\}$. 
+	Then the following holds:
 	\[g\cdot(q+1) \cdot(h+\varepsilon) = g\cdot(q+1)\cdot(f+q+\varepsilon)=g\cdot(q+1)\cdot(f+\epsilon)+g\cdot(q+1)\cdot q=0+0=0.\]
 	Hence, $g\cdot(q+1)$ is an annihilator of $h+ \varepsilon$. 
 	If $g\cdot(q+1)\ne 0$, it follows that $\AI(h)\leq\degg(g\cdot(q+1))\leq\degg(g)+\degg(q+1)$, and therefore that $\AI(f)=\degg(g)\geq\AI(h)-\degg(q+1)=\AI(h)-2$. If $g\cdot(q+1)=0$, then $0=g\cdot(f+\epsilon+q+1)=g\cdot(h+\epsilon+1)$, showing that $\AI(f)=\degg(g)\geq\AI(h)$.
