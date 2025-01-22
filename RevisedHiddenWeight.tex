@@ -1,9 +1,8 @@
-\def\anon{0} %Set to 1 for anonymous submissions, hides acknowledgements and author names
+\def\anon{1} %Set to 1 for anonymous submissions, hides acknowledgements and author names
 \def\full{1} %Set to 0 for springer proceedings
 
 \ifnum\full=1
-	\documentclass[11pt]{llncs}
-	\addtolength{\parskip}{1pt}
+	\documentclass{llncs}
 \else
 	\documentclass[10pt, runningheads]{llncs}
 	\usepackage{times}
