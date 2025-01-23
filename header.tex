@@ -35,8 +35,6 @@
 \usepackage{setspace}
 \usepackage{color}
 \ifnum\full=1
-\usepackage[margin=0.9in]{geometry}
-\usepackage{fullpage}
 
 \setlength{\parskip}{0cm}
 
@@ -48,7 +46,7 @@
 \renewcommand{\tabcolsep}{0pt}
 \fi
 
-\renewcommand{\arraystretch}{1.2}
+\renewcommand{\arraystretch}{1.1}
 
 \hyphenpenalty=5000
 \tolerance=1000
@@ -325,12 +323,13 @@
 \usepackage{mleftright}
 \mleftright %Less space when using \left and \right
 
-\usepackage[font=small,labelfont=bf,width=12cm]{caption} % Add this to your preamble for better control over captions
+\usepackage[font=small,labelfont=bf,width=9.5cm]{caption} % Add this to your preamble for better control over captions
 
 \newcommand{\mycaption}[1]{%
     \vspace{5pt}
     \captionsetup{justification=justified}%
     \caption{#1}%
+    \vspace{-9pt}
 }
 
 \let\leq=\leqslant %Replace symbol for \leq
@@ -342,5 +341,3 @@
 \makeatletter
 \@beginparpenalty=10000
 \makeatother
-
-\allowdisplaybreaks
