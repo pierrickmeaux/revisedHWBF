@@ -727,9 +727,9 @@ In Figure~\ref{fig:walsh_bound_comparison}, we compare bounds for the values of 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=9cm]{comparison_walsh_bound.pdf}
+	\includegraphics[width=8.5cm]{comparison_walsh_bound.pdf}
 	\mycaption{
-		Bounds on $\max_{a \in \mathbb{F}_2^n} |\wt f(a)|$ for various functions $f\in\BN$ and even values of $n$, shown on a logarithmic scale. The pink and orange curves, the orange one mostly covering the pink one, represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}, respectively. The blue curve shows bounds for the majority function and the \hwbf{}. The theoretical bound for the revisited \hwbf{} (Corollary~\ref{cor:bound_walsh_cauchy}) is in red, and the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
+		Bounds on $\max_{a \in \mathbb{F}_2^n} |\wt f(a)|$ for various functions $f\in\BN$ and even values of $n$, shown on a logarithmic scale. The pink and orange curves, the orange one mostly covering the pink one, represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}, respectively. The blue curve shows bounds for the majority function and the \hwbf{}. The theoretical bound for the revisited \hwbf{} (Corollary~\ref{cor:bound_walsh_cauchy}) is in red, the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
 	\label{fig:walsh_bound_comparison}
 \end{figure}
 
@@ -765,10 +765,10 @@ In this section, we present additional cryptographic parameters for the revisite
 	Let $n\geq 4$ be even, and let $f\in\BN$ be the revisited \hwbf{}. Then $\degg(f)=n-1$.
 \end{proposition}
 \begin{proof}
-	We write $f=q+h$, where $q\in\BN$ is given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$ and $h\in\BN$ is the \hwbf{}. The function $h$ has degree $n-1\geq 3$ by Property~\ref{prop:wwd1}, and the function $q$ has no monomial of degree higher than $2$, so that $\degg(f)=\degg(h)=n-1$.
+	We write $f=q+h$, where $q\in\BN$ is given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$ and $h\in\BN$ is the \hwbf{}. The function $h$ has degree $n-1\geq 3$ by Property~\ref{prop:wwd1}, and the function $q$ has no monomial of degree higher than $2$, so $\degg(f)=\degg(h)=n-1$.
 \end{proof}
 
-In Table~\ref{table:comparisonsDegAI}, we also display the algebraic degree of different weightwise quadratic functions. We observe that the revisited \hwbf{} is the function with the highest degree, together with the \hwbf{}. 
+In Table~\ref{table:comparisonsDegAI}, we also display the algebraic degree of different weightwise quadratic functions. We observe that the revisited \hwbf{} has the highest degree along with the original \hwbf{} when $n$ is not a power of $2$. However, when $n$ is a power of $2$, the majority function has a degree that is one higher than that of the other two functions.
 
 \begin{table}
 	\scriptsize
