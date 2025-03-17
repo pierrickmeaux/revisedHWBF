@@ -91,7 +91,7 @@ Below, for a Boolean function $f\in\BN$, we write $f+1$ for the Boolean function
 	We call Algebraic Normal Form of a Boolean function $f\in\BN$ its unique representation as an element of the ring $\F_2[x_1,\dots,x_n]/(x_1^2+x_1,\dots,x_n^2+x_n)$, and we express it as $f(x_1,\dots,x_n)= \sum_{I \subseteq [1,n]} a_I \left( \prod_{i \in I} x_i \right)$, where $a_I\in \F_2$. The (algebraic) degree of $f$ is defined by $\degg(f)=0$ in case $f$ is the null function, and $\degg(f)=\max\{ |I|:I\subseteq[1,n],a_I=1\}$ otherwise.
 \end{definition}
 
-\begin{definition}[Walsh transform, restricted Walsh transform]\label{def:walsh_transform}
+\begin{definition}[Walsh transform]\label{def:walsh_transform}
 	The Walsh transform at $a \in \F_2^n$ of a Boolean function $f\in\BN$ restricted to a subset $S\subseteq \F_2^n$ is defined as $\wt{f,S} (a) = \sum_{x\in S} (-1)^{f(x)+a \cdot x}$. The (unrestricted) Walsh transform of $f$ is then defined as $\wt{f}=\wt{f,\F_2^n}$. For any integer $k$, we also set $\wt{f,k}=\wt{f,\Ekn{k}{n}}$.
 \end{definition}
 
@@ -136,7 +136,7 @@ Bigger families of functions can be obtained by considering functions of bounded
     A Boolean function $f\in\BN^*$ is called weightwise degree-$d$ if it can be written under the form $f=\sum_{k=0}^n f_k \phikn{k}{n}$ with $f_k\in\BN$ of degree at most $d$. The set of weightwise degree-$d$ functions is denoted by $\WD{d}{n}$. Additionally, a weightwise degree-$d$ function $f=\sum_{k=0}^n f_k \phikn{k}{n}$ is called a cyclic weightwise degree-$d$ function if for all $k\in [0,n]$ and all $x\in\F_2^n$, it holds that $f_k(x)=f_0(O^k(x))$, where $O^k:\F_2^n\to\F_2^n$ is the cyclic shift by $k$ positions, defined by $O^k(x_1,\dots,x_n)=(x_{(1+k)\bmod n},\dots,x_{(n+k)\bmod n})$, the representatives modulo $n$ being taken as integers in $[1,n]$.
 \end{definition}
 
-Various weightwise affine functions (\ie, belonging to $\WD{1}{n}$) have been exhibited, such as in~\cite{TOSC:CarMeaRot17} where the bent functions in Propositions $1$ and $2$ are weightwise affine, or in~\cite{DAM:GinMea22} to show than no weightwise perfectly balanced function is weightwise affine for $n\geq 8$. The arguably best known example of weightwise affine function is the Hidden Weight Bit Function introduced in~\cite{IEEE:Bryant91}, the one obtained by fixing $f_0=0$ and $f_k=x_k$ for $k \in [1,n]$. The cryptographic properties of this function have been studied in~\cite{DAM:WCST14}, showing good algebraic properties for this function.
+Various weightwise affine functions (\ie, belonging to $\WD{1}{n}$) have been exhibited, such as in~\cite{TOSC:CarMeaRot17} where the bent functions in Propositions $1$ and $2$ are weightwise affine, or in~\cite{DAM:GinMea22} to show that no weightwise perfectly balanced function is weightwise affine for $n\geq 8$. The arguably best known example of weightwise affine function is the Hidden Weight Bit Function introduced in~\cite{IEEE:Bryant91}, the one obtained by fixing $f_0=0$ and $f_k=x_k$ for $k \in [1,n]$. The cryptographic properties of this function have been studied in~\cite{DAM:WCST14}, showing good algebraic properties for this function.
 
 \begin{definition}[Hidden Weight Bit Function]\label{def:hwbf}
     We call Hidden Weight Bit Function (\hwbf{}) the Boolean function $h\in\BN$ defined as:
@@ -145,7 +145,7 @@ Various weightwise affine functions (\ie, belonging to $\WD{1}{n}$) have been ex
 	\]
 \end{definition}
 
-In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$, and lower bounds are given for the nonlinearity for all $n$. These bounds focus on cyclic weightwise quadratic functions and involve sums of binomial coefficients. For simplicity, in the following we provide only the nonlinearity values of the majority function and \hwbf{}, as these bounds will be used for comparison.
+In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$, and lower bounds are given for the nonlinearity for all $n$. These bounds focus on cyclic weightwise quadratic functions and involve sums of binomial coefficients. For simplicity, in the following, we provide only the nonlinearity values of the majority function and \hwbf{}, as these bounds will be used for comparison.
 
 \begin{Prop}\label{prop:wwd1}
 	Let $n\geq 2$ be an even integer.
@@ -194,7 +194,7 @@ Since $f$ is the sum of a quadratic function and a weightwise affine function, i
 	\end{align*}
 \end{proof}
 
-Accordingly, we can study the restricted Walsh transform of the revisited \hwbf{} by analyzing the one of the following Boolean function $d_n\in\BN$.
+Accordingly, we can study the restricted Walsh transform of the revisited \hwbf{} by analyzing the following Boolean function $d_n\in\BN$.
 
 \begin{definition}
 	Let $n\geq 0$ be an even integer. Then we define the Boolean function $d_n\in\BN$ by:
@@ -210,7 +210,7 @@ Accordingly, we can study the restricted Walsh transform of the revisited \hwbf{
 The $\Dnka{n}{k}{a}$ satisfy a recursive relation.
 
 \begin{proposition}\label{prop:recursiveDnka}
-Let $n\geq 0$ be an even integer. Then for all integers $k$ and all binary vectors $a\in\F_2^n$, the following hold true:
+Let $n\geq 0$ be an even integer. Then for all integers $k$ and all binary vectors $a\in\F_2^n$, the following hold:
 	\begin{itemize}
 		\item We have $\Dnka 00a=1$ and $\Dnka 0ka=0$ if $k\neq 0$.
 		\item If $n\geq 2$, then for $b=(a_1,\dots,a_{n-2})\in\F_2^{n-2}$, we have:
@@ -244,7 +244,7 @@ Let $n\geq 0$ be an even integer. Then for all integers $k$ and all binary vecto
 \end{remark}
 
 \begin{remark}\label{rmk:dependence_dnka}
-    The recursive formula of Proposition~\ref{prop:recursiveDnka} gives different cases depending on the values of the pair $(a_{n-1},a_n)$. However, the same reasoning applies with any pair of the form $(a_{2i-1}, a_{2i})$ for $i\in[1,n/2]$. Therefore, the value of $\Dnka{n}{k}{a}$ depends only on the number of pairs $(a_{2i-1}, a_{2i})$ in $a$ being $(0,0)$, $(1,1)$, $(0,1)$ or $(1,0)$. We give the values of $\Dnka{2}{k}{a}$ for $n=2$ in Table~\ref{tab:Dnka}. These values together with Proposition~\ref{prop:recursiveDnka} are sufficient to determine any $\Dnka{n}{k}{a}$.
+    The recursive formula of Proposition~\ref{prop:recursiveDnka} gives different cases depending on the values of the pair $(a_{n-1},a_n)$. However, the same reasoning applies to any pair of the form $(a_{2i-1}, a_{2i})$ for $i\in[1,n/2]$. Therefore, the value of $\Dnka{n}{k}{a}$ depends only on the number of pairs $(a_{2i-1}, a_{2i})$ in $a$ being $(0,0)$, $(1,1)$, $(0,1)$ or $(1,0)$. We give the values of $\Dnka{2}{k}{a}$ for $n=2$ in Table~\ref{tab:Dnka}. These values together with Proposition~\ref{prop:recursiveDnka} are sufficient to determine any $\Dnka{n}{k}{a}$.
 \end{remark}
 
 \begin{table}
@@ -400,7 +400,7 @@ Another immediate case for zero coefficients is the following.
 \end{proposition}
 
 \begin{proof}
-    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p\cdot(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ in $P_a(z)$ of $z^k$ for odd $k$ must be zero. It follows that also $\Dnka n{n-k}a=0$ by Proposition~\ref{proposition:symmetry}.
+    If $p=q$, we have $P_a(z)=(z^4-6z^2+1)^p\cdot(z^2+1)^r$, which can be seen as a polynomial in $z^2$. Thus, the coefficient $\Dnka nka$ in $P_a(z)$ of $z^k$ for odd $k$ must be zero. It also follows that $\Dnka n{n-k}a=0$ by Proposition~\ref{proposition:symmetry}.
 \end{proof}
 
 \begin{remark}\label{remark:D_nka_differentiation}
@@ -436,7 +436,7 @@ From differentiation, we can get more cases in which $\Dnka nka=0$.
 \end{proposition}
 
 \begin{proof}
-	We use the expressions from Table~\ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$ in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$.~\footnote{This checking can be automatized by a computer algebra system.
+	We use the expressions from Table~\ref{tab:Dnka_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$, respectively, in the expression $\Dnka n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dnka n2a=0$.~\footnote{This checking can be automatized by a computer algebra system.
 	\ifnum\anon=0
 		For this, we refer to the corresponding \textsf{SageMath} implementation, accessible via this link: \url{https://github.com/se-tim/Revisited-HWBF.git}.
 	\fi}
@@ -580,7 +580,7 @@ In this section, we establish a tighter bound on the absolute value of the Walsh
 Following Corollary~\ref{cor:bound_walsh_cauchy}, we deduce that $|\wt f(a)|\leq 1+n\cdot 2^{3n/4}$ for every even integer $n\geq 0$ and every binary vector $a\in\F_2^n$, where $f\in\BN$ denotes the revisited \hwbf{}. This is a somewhat pessimistic bound. In this part, we discuss how a tighter bound on $|\wt f(a)|$ can be obtained in polynomial time in $n$.
 
 This method is based on the identity given in Proposition~\ref{prop:WT}.
-For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $k\in[1,n]$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$, where $\pi:[1,n]\to[1,n]$ is again the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Notice first that for every integer $k\in[1,n]$, it holds that $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\in[0,n/2]$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$ which only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
+For this, consider a vector $b\in\mathbb F_2^n$; we write $(p,q,r)=(p(b),q(b),r(b))$. Also, for $k\in[1,n]$, let $b_k=b+\pi(e_k)$ and $(p_k,q_k,r_k)=(p(b_k),q(b_k),r(b_k))$, where $\pi:[1,n]\to[1,n]$ is again the permutation sending the first $n/2$ elements to the odd positions and the $n/2$ last ones to the even positions. Notice first that for every integer $k\in[1,n]$, it holds that $(p_k,q_k,r_k)\in\{(p\pm1,q,r\mp 1),(p,q\pm 1,r\mp 1)\}$. Furthermore, observe that if $k\in[0,n/2]$ and $(p_k,q_k,r_k)=(p+\alpha,q+\beta,r+\gamma)$ for $\{\alpha,\beta,\gamma\}=\{0,\pm 1\}$ with $\gamma\neq 0$, then we have $(p_{k+n/2},q_{k+n/2},r_{k+n/2})=(p+\alpha',q+\beta',r+\gamma')$ for some $\{\alpha',\beta',\gamma'\}=\{0,\pm 1\}$ with $\gamma'\neq 0$, where $\alpha'$,$\beta'$ and $\gamma'$ only depend on $\alpha$, $\beta$ and $\gamma$. Explicitly, we have $(\alpha',\beta',\gamma')=(\alpha,\beta,\gamma)$ if $\gamma=1$ and $(\alpha',\beta',\gamma')=(\beta,\alpha,\gamma)$ if $\gamma=-1$.
 
 In the following discussion, we outline a method to determine an upper bound on $\max_{a\in\F_2^n}\wt f(a)$. A similar approach can be applied to find a lower bound on $\min_{a\in\F_2^n}\wt f(a)$, and by utilizing both, we can also obtain an upper bound on $\max_{a\in\F_2^n}|\wt f(a)|$ by making use of the following identity:
 \[
@@ -768,7 +768,7 @@ In this section, we present additional cryptographic parameters for the revisite
 	We write $f=q+h$, where $q\in\BN$ is given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$ and $h\in\BN$ is the \hwbf{}. The function $h$ has degree $n-1\geq 3$ by Property~\ref{prop:wwd1}, and the function $q$ has no monomial of degree higher than $2$, so that $\degg(f)=\degg(h)=n-1$.
 \end{proof}
 
-In Table~\ref{table:comparisonsDegAI}, we also display the algebraic degree of different weightwise quadratic function. We observe that the revisited \hwbf{} is the function with the highest degree, together with the \hwbf{}. 
+In Table~\ref{table:comparisonsDegAI}, we also display the algebraic degree of different weightwise quadratic functions. We observe that the revisited \hwbf{} is the function with the highest degree, together with the \hwbf{}. 
 
 \begin{table}
 	\scriptsize
@@ -843,13 +843,8 @@ Our approach utilizes generating functions and Cauchy’s estimate to establish 
 
 \newpage
 
-\ifnum\full=0
-	\bibliographystyle{splncs04}
-	\bibliography{add}
-\else
-	\bibliographystyle{alpha}
-	\bibliography{add}
-\fi
+\bibliographystyle{splncs04}
+\bibliography{add}
 
 \appendix
 
