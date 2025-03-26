@@ -145,14 +145,12 @@ Various weightwise affine functions (\ie, belonging to $\WD{1}{n}$) have been ex
 	\]
 \end{definition}
 
-In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n$ up to $20$, and lower bounds are given for the nonlinearity for all $n$. These bounds focus on cyclic weightwise quadratic functions and involve sums of binomial coefficients. For simplicity, in the following, we provide only the nonlinearity values of the majority function and \hwbf{}, as these bounds will be used for comparison.
+In~\cite{DAM:MeaOza24}, the parameters of different functions from $\WD{1}{n}$ and $\WD{2}{n}$ are studied experimentally for $n\leq 20$, and lower bounds are given for the nonlinearity for all $n$. These bounds focus on cyclic weightwise quadratic functions and involve sums of binomial coefficients. For simplicity, in the following, we provide only the nonlinearity values of the majority function and \hwbf{}, as these bounds will be used for comparison.
 
-\begin{Prop}\label{prop:wwd1}
-	Let $n\geq 2$ be an even integer.
+\begin{Prop}\label{prop:wwd1}\mbox{}
 	\begin{itemize}
-		\item (\textit{E.g.}, Theorem $3$ in~\cite{DCC:DalMaiSar06}) The majority function $\mathsf{Maj}_n$ introduced in Definition~\ref{def:maj} satisfies $\NL(\mathsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}$.
-		\item (Theorem $3$ in~\cite{DAM:WCST14}) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies $\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}$.
-		\item (Theorem $1$ in \cite{DAM:WCST14}) The \hwbf{} $h$ introduced in Definition~\ref{def:hwbf} satisfies $\degg(h)=n-1$ if $n\geq 4$.
+		\item (\textit{E.g.}, Theorem $3$ and Theorem $2$ in~\cite{DCC:DalMaiSar06}) The majority function $\mathsf{Maj}_n\in\BN$ satisfies $\NL(\mathsf{Maj}_n)=2^{n-1}-\binom{n-1}{\frac n2}$ and $\degg(\mathsf{Maj}_n)=2^{\lfloor\log_2(n)\rfloor}$ for even $n\geq 2$.
+		\item (Theorem $3$ and Theorem $1$ in~\cite{DAM:WCST14}) The \hwbf{} $h\in\BN$ satisfies $\NL(h)=2^{n-1}-2\binom{n-2}{\frac{n-2}{2}}$ for even $n\geq 2$ and $\degg(h)=n-1$ for even $n\geq 4$.
 	\end{itemize}
 \end{Prop}
 
@@ -168,14 +166,18 @@ We use Krawtchouk polynomials and some of their properties to prove one of our m
 
 In this part, we will formally define the revisited \hwbf{} function and introduce a quantity that allows us to study its balancedness and nonlinearity.
 
-\begin{definition}[Revisited \hwbf{}]\label{def:revHWBF}
+\subsection{Definition and basic properties}
+
+\begin{definition}[Revisited Hidden Weight Bit Function]\label{def:revHWBF}
 	For an even integer $n\geq 0$, we call revisited \hwbf{} the Boolean function $f\in\BN$ defined as:
 	\[
 		f(x)=\sum_{k=1}^nx_k\phikn{k}{n}(x)+\sum_{i=1}^{n/2}(x_i+1) x_{i+n/2}.
 	\]
 \end{definition}
 
-Since $f$ is the sum of a quadratic function and a weightwise affine function, it is a weightwise quadratic function. Using the formalism of Definition~\ref{def:wwdegd}, $f$ is the weightwise quadratic function defined by $f_0(x)=0$ and $f_k(x)=x_k+\sum_{i=1}^{n/2}(x_i+1) x_{i+n/2}$ for $k\in[1,n]$. This form allows to derive the restricted Walsh transform of $f$, which can be a useful tool to study the balancedness and bound the nonlinearity of a function.
+Since $f$ is the sum of a quadratic function and a weightwise affine function, it is a weightwise quadratic function. Note that, while the \hwbf{} can be computed by first computing the Hamming weight of the input and then applying a linear function, the revisited \hwbf{} can be computed by first computing the Hamming weight of the input and then applying a quadratic function, leading to a similar computational cost to for both.
+
+Using the formalism of Definition~\ref{def:wwdegd}, $f$ is the weightwise quadratic function defined by $f_0(x)=0$ and $f_k(x)=x_k+\sum_{i=1}^{n/2}(x_i+1) x_{i+n/2}$ for $k\in[1,n]$. This form allows to derive the restricted Walsh transform of $f$, which can be a useful tool to study the balancedness and bound the nonlinearity of a function.
 
 \begin{proposition}\label{prop:restrWT}
 	Let $n\geq 0$ be an even integer, and let $f\in\BN$ be the revisited \hwbf{}. Consider any binary vector $a\in\F_2^n$ and any integer $k\in[1,n]$. Define $c=a+e_k+\sum_{i=n/2+1}^n e_i$. Then the restricted Walsh transform of $f$ satisfies:
@@ -323,10 +325,9 @@ In this part, we determine for which values of $n$ the revisited \hwbf{} $f\in\B
 		&\qquad+\sum_{k=n/2+1}^{n}\left(\binom{n/2-1}{k/2}+2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}\right)\\
 		&=\sum_{k=0}^{n}\left( \binom{n/2-1}{k/2}-\binom{n/2-1}{k/2-1}\right)\\
 		&\qquad+2\left(\sum_{k=n/2+1}^{n}\binom{n/2-1}{(k-1)/2}-\sum_{k=0}^{n/2}\binom{n/2-1}{(k-1)/2}\right)\\
-		&=0+2\left(\sum_{k=n/2+1}^{n}\binom{n/2-1}{(k-1)/2}-\sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
-		&=2\left(\sum_{i=\lceil n/4\rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4\rfloor} \binom{n/2-1}{i}\right).
+		&=0+2\left(\sum_{k=n/2+1}^{n}\binom{n/2-1}{(k-1)/2}-\sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right).
 	\end{align*}
-	The final result follows by applying that $\binom{n}{k}=\binom{n}{n-k}$ for all integers $n\geq 0$ and $k$.
+	Therefore, we get $\wt{f}(0_n)=2\left(\sum_{i=\lceil n/4\rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4\rfloor} \binom{n/2-1}{i}\right)$. The final result follows by applying that $\binom{n}{k}=\binom{n}{n-k}$ for all integers $n\geq 0$ and $k$.
 \end{proof}
 
 \section{Extensive study of the $\Dnka nka$ and bounds on the Walsh spectrum of $f$}\label{sec:dnk}
@@ -727,9 +728,9 @@ In Figure~\ref{fig:walsh_bound_comparison}, we compare bounds for the values of 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=9cm]{comparison_walsh_bound.pdf}
+	\includegraphics[width=8.5cm]{comparison_walsh_bound.pdf}
 	\mycaption{
-		Bounds on $\max_{a \in \mathbb{F}_2^n} |\wt f(a)|$ for various functions $f\in\BN$ and even values of $n$, shown on a logarithmic scale. The pink and orange curves, the orange one mostly covering the pink one, represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}, respectively. The blue curve shows bounds for the majority function and the \hwbf{}. The theoretical bound for the revisited \hwbf{} (Corollary~\ref{cor:bound_walsh_cauchy}) is in red, and the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
+		Bounds on $\max_{a \in \mathbb{F}_2^n} |\wt f(a)|$ for various functions $f\in\BN$ and even values of $n$, shown on a logarithmic scale. The pink and orange curves, the orange one mostly covering the pink one, represent bounds for cyclic weightwise linear functions and a cyclic weightwise quadratic function from~\cite{DAM:MeaOza24}, respectively. The blue curve shows bounds for the majority function and the \hwbf{}. The theoretical bound for the revisited \hwbf{} (Corollary~\ref{cor:bound_walsh_cauchy}) is in red, the experimental bound $B_n$ (Section~\ref{sec:expwt}) is in green.}
 	\label{fig:walsh_bound_comparison}
 \end{figure}
 
@@ -761,14 +762,14 @@ We also compare in Table~\ref{table:comparisonsNL} the precise nonlinearity valu
 
 In this section, we present additional cryptographic parameters for the revisited \hwbf{}. While Theorem~\ref{th:bal} describes its balancedness and Sections~\ref{sec:Cauchy} and \ref{sec:expAndComp} thoroughly explore its nonlinearity, our focus here will be on its algebraic characteristics. Specifically, we will examine the degree, the algebraic immunity, and the fast algebraic immunity, and offer comparisons with other weightwise quadratic functions.
 
-\begin{proposition}
+\begin{proposition}\label{prop:deg_rhwbf}
 	Let $n\geq 4$ be even, and let $f\in\BN$ be the revisited \hwbf{}. Then $\degg(f)=n-1$.
 \end{proposition}
 \begin{proof}
-	We write $f=q+h$, where $q\in\BN$ is given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$ and $h\in\BN$ is the \hwbf{}. The function $h$ has degree $n-1\geq 3$ by Property~\ref{prop:wwd1}, and the function $q$ has no monomial of degree higher than $2$, so that $\degg(f)=\degg(h)=n-1$.
+	We write $f=q+h$, where $q\in\BN$ is given by $q(x)=\sum_{i=1}^{n/2} (x_i+1) x_{i+n/2}$ and $h\in\BN$ is the \hwbf{}. The function $h$ has degree $n-1\geq 3$ by Property~\ref{prop:wwd1}, and the function $q$ has no monomial of degree higher than $2$, so $\degg(f)=\degg(h)=n-1$.
 \end{proof}
 
-In Table~\ref{table:comparisonsDegAI}, we also display the algebraic degree of different weightwise quadratic functions. We observe that the revisited \hwbf{} is the function with the highest degree, together with the \hwbf{}. 
+In Table~\ref{table:comparisonsDegAI}, we also display the algebraic degree of different weightwise quadratic functions. We observe that the revisited \hwbf{} has the highest degree along with the original \hwbf{} when $n$ is not a power of $2$. However, when $n$ is a power of $2$, the majority function has a degree that is one higher than that of the other two functions, as explained by Property~\ref{prop:wwd1} and Proposition~\ref{prop:deg_rhwbf}.
 
 \begin{table}
 	\scriptsize
@@ -810,8 +811,7 @@ Lastly, we also considered the fast algebraic immunity of the revisited \hwbf{} 
 
 \bigskip
 
-These various results on the algebraic properties of the revisited \hwbf{} suggest that it possesses strong resistance against standard attacks. 
-Furthermore, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered \textsf{LFSR}s or in homomorphically-friendly schemes like \textsf{FLIP} and \textsf{FiLIP}. 
+These various results on the algebraic properties of the revisited \hwbf{} suggest that it possesses strong resistance against standard attacks. Furthermore, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered \textsf{LFSR}s or in homomorphically-friendly schemes like \textsf{FLIP} and \textsf{FiLIP}.
 
 \pmnote{For example, the filter functions leading to the best current performances for FiLIP in HHE~\cite{CCS:CDPP22,CIC:MeaParPei24,eprint:AGHM24} are xor-threshold functions, the direct sum of a $k$-variable linear function and an $m$-variable function giving $1$ if and only if the input has Hamming weight at least a threshold $d$ (which generalizes the majority function). Using Proposition $7$ in~\cite{IEEE:CarMea21}, the nonlinearity of a xor-threshold function is at most:
 \[2^{n-1}-2^k \cdot M \text{ where }
@@ -842,7 +842,7 @@ The nonlinearity of this whole family of functions is similar to the one of the 
 
 \section{Conclusion and open questions}
 
-In this work, we introduced the revisited hidden weight bit function, a weightwise quadratic Boolean function with improved cryptographic properties over existing constructions. We analyzed its balancedness, and using generating functions in combination with complex analysis, we derived interesting lower bounds on its nonlinearity, demonstrating that the revisited \hwbf{} achieves superior nonlinearity compared to other functions with similar computational costs. We further examined other cryptographic parameters such as degree, algebraic immunity, and fast algebraic immunity, confirming that the revisited \hwbf{} matches or outperforms comparable functions in these aspects.
+In this work, we introduced the revisited Hidden Weight Bit Function, a weightwise quadratic Boolean function with improved cryptographic properties over existing constructions. We analyzed its balancedness, and using generating functions in combination with complex analysis, we derived interesting lower bounds on its nonlinearity, demonstrating that the revisited \hwbf{} achieves superior nonlinearity compared to other functions with similar computational costs. We further examined other cryptographic parameters such as degree, algebraic immunity, and fast algebraic immunity, confirming that the revisited \hwbf{} matches or outperforms comparable functions in these aspects.
 
 Our approach utilizes generating functions and Cauchy’s estimate to establish lower bounds on the nonlinearity of weightwise quadratic functions. This naturally raises the question: can the employed techniques, particularly the use of Cauchy’s estimate, be extended to other families of Boolean functions? Specifically, this approach appears feasible for other weightwise-degree-$d$ functions $f$ where the $f_k$ are direct sums. Investigating this could potentially lead to the discovery of new functions with comparable computational costs and even better cryptographic properties.
 
@@ -864,7 +864,7 @@ In this section, we provide the missing proofs for Section~\ref{sec:general}.
 
 \begin{proof}[Proof of Proposition~\ref{proposition:dtn}]
     By considering binary vectors $x\in\F_2^n$ as $x=(y,z)$ with $y\in\F_2^{2t}$ and $z\in\F_2^{n-2t}$, we get:	
-	\begin{align*}^
+	\begin{align*}
 		\Dtkna{t}{k}{n}{a}&=\sum_{x \in \Ekn{k}{n}} (-1)^{d_{t,n}(x)+a \cdot x}\\
 		&=\sum_{(y,z)\in\Ekn{k}{n}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\
 		&=\sum_{\ell=0}^{2t} \sum_{\substack{y \in \Ekn{\ell}{2t}\\z \in \Ekn{k-\ell}{n-2t}}} (-1)^{d_{t,2t}(y)+b \cdot y +c \cdot z}\\
