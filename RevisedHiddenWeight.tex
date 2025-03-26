@@ -1,4 +1,4 @@
-\def\anon{1} %Set to 1 for anonymous submissions, hides acknowledgements and author names
+\def\anon{0} %Set to 1 for anonymous submissions, hides acknowledgements and author names
 \def\full{1} %Set to 0 for springer proceedings
 
 \ifnum\full=1
@@ -811,24 +811,15 @@ Lastly, we also considered the fast algebraic immunity of the revisited \hwbf{} 
 
 \bigskip
 
-These various results on the algebraic properties of the revisited \hwbf{} suggest that it possesses strong resistance against standard attacks. Furthermore, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered \textsf{LFSR}s or in homomorphically-friendly schemes like \textsf{FLIP} and \textsf{FiLIP}. 
-%\pmnote{For example, the filter functions leading to the best current performances for FiLIP in HHE~\cite{CCS:CDPP22,CIC:MeaParPei24,eprint:AGHM24} are xor-threshold functions, the direct sum of a $k$-variable linear function and an $m$-variable function giving $1$ if and only if the input has Hamming weight at least a threshold $d$ (which generalizes the majority function). Using Proposition $7$ in~\cite{IEEE:CarMea21}, the nonlinearity of a xor-threshold function is at most:
-%\[2^{n-1}-2^k \cdot M \text{ where }
-%M=\left\{\begin{array}{ll}
-%\binom{m-1}{\frac{m-1}{2}}&\text{ if }m\equiv 1\bmod 2,\\
-%\frac{1}{2} \binom{m}{\frac{m}{2}}&\text{ if }m\equiv 0\bmod 2.\\
-%\end{array}\right.
-%\]
-%The nonlinearity of this whole family of functions is similar to the one of the majority, hence the revisited HWBF provides a better nonlinearity that currently used filters for FiLIP for the same sizes, allowing to thwart correlation-like attacks with functions in less variables.}
-For example, the best current \textsf{FiLIP} filters in HHE~\cite{CCS:CDPP22,CIC:MeaParPei24,eprint:AGHM24} are xor-threshold functions—the sum of a $k$-variable linear function and an $m$-variable threshold function (generalizing majority).  
+These various results on the algebraic properties of the revisited \hwbf{} suggest that it possesses strong resistance against standard attacks. Furthermore, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered \textsf{LFSR}s or in homomorphically-friendly schemes like \textsf{FLIP} and \textsf{FiLIP}. For example, the best current \textsf{FiLIP} filters in \textsf{HHE}~\cite{CCS:CDPP22,CIC:MeaParPei24,eprint:AGHM24} are \textsf{XOR}-threshold functions—the sum of a $k$-variable linear function and an $m$-variable threshold function (generalizing majority).  
 By Proposition $7$ in~\cite{IEEE:CarMea21}, their nonlinearity is at most:
 \[
-2^{n-1} - 2^k \cdot M, \quad \text{where } M = \begin{cases}
-\binom{m-1}{\frac{m-1}{2}} & \text{if } m \text{ odd}, \\
-\frac{1}{2} \binom{m}{\frac{m}{2}} & \text{if } m \text{ even}.
+2^{k+m-1} - 2^k \cdot M, \quad \text{where } M = \begin{cases}
+\binom{m-1}{\frac{m-1}{2}} & \text{if } m \text{ is odd}, \\
+\frac{1}{2} \binom{m}{\frac{m}{2}} & \text{if } m \text{ is even}.
 \end{cases}
 \]
-This is similar to majority, whereas the revisited HWBF achieves higher nonlinearity for the same size, offering better resistance to correlation-like attacks with fewer variables.
+This is similar to the majority function, whereas the revisited \hwbf{} achieves higher nonlinearity for the same size, offering better resistance to correlation-like attacks with fewer variables.
 \begin{table}
 	\scriptsize
 	\centering
