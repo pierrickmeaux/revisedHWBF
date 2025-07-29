@@ -175,7 +175,7 @@ In this part, we will formally define the revisited \hwbf{} function and introdu
 	\]
 \end{definition}
 
-Since $f$ is the sum of a quadratic function and a weightwise affine function, it is a weightwise quadratic function. Note that, while the \hwbf{} can be computed by first computing the Hamming weight of the input and then applying a linear function, the revisited \hwbf{} can be computed by first computing the Hamming weight of the input and then applying a quadratic function, leading to a similar computational cost to for both.
+Since $f$ is the sum of a quadratic function and a weightwise affine function, it is a weightwise quadratic function. Note that, while the \hwbf{} can be computed by first computing the Hamming weight of the input and then applying a linear function, the revisited \hwbf{} can be computed by first computing the Hamming weight of the input and then applying a quadratic function, leading to a similar computational cost for both.
 
 Using the formalism of Definition~\ref{def:wwdegd}, $f$ is the weightwise quadratic function defined by $f_0(x)=0$ and $f_k(x)=x_k+\sum_{i=1}^{n/2}(x_i+1) x_{i+n/2}$ for $k\in[1,n]$. This form allows to derive the restricted Walsh transform of $f$, which can be a useful tool to study the balancedness and bound the nonlinearity of a function.
 
