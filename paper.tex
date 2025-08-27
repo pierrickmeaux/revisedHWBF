@@ -25,7 +25,7 @@
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\FAI}{\mathsf{FAI}}
 \newcommand{\hd}{\mathsf{d_H}}
-\newcommand{\hwbf}{\ensuremath{\mathsf{HWBF}}}
+\newcommand{\hwbf}{\textsf{HWBF}}
 \newcommand{\ie}{\textit{i.e.}}
 \newcommand{\ii}{\mathrm i\mkern1mu}
 \newcommand{\kraw}[3]{\mathsf{K}_{#1}(#2,#3)}
@@ -40,6 +40,8 @@
 
 \let\leq=\leqslant
 \let\geq=\geqslant
+
+\bibliographystyle{splncs04}
 
 \title{The Revisited Hidden Weight Bit Function}
 \titlerunning{Revisited \hwbf{}}
@@ -350,9 +352,10 @@
     		&\qquad+\sum_{k=n/2+1}^{n}\left(\binom{n/2-1}{k/2}+2\binom{n/2-1}{(k-1)/2}-\binom{n/2-1}{k/2-1}\right)\\
     		&=\sum_{k=0}^{n}\left( \binom{n/2-1}{k/2}-\binom{n/2-1}{k/2-1}\right)\\
     		&\qquad+2\left(\sum_{k=n/2+1}^{n}\binom{n/2-1}{(k-1)/2}-\sum_{k=0}^{n/2}\binom{n/2-1}{(k-1)/2}\right)\\
-    		&=0+2\left(\sum_{k=n/2+1}^{n}\binom{n/2-1}{(k-1)/2}-\sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right).
+    		&=0+2\left(\sum_{k=n/2+1}^{n}\binom{n/2-1}{(k-1)/2}-\sum_{k=0}^{n/2} \binom{n/2-1}{(k-1)/2}\right)\\
+            &=2\left(\sum_{i=\lceil n/4\rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4\rfloor} \binom{n/2-1}{i}\right).
     	\end{align*}
-    	Therefore, we get $\wt{f}(0_n)=2\left(\sum_{i=\lceil n/4\rceil}^{n/2-1} \binom {n/2-1}{i} - \sum_{i=0}^{\lfloor(n-2)/4\rfloor} \binom{n/2-1}{i}\right)$. The final result follows by applying that $\binom{n}{k}=\binom{n}{n-k}$ for all integers $n\geq 0$ and $k$.
+    	The result follows by applying that $\binom{n}{k}=\binom{n}{n-k}$ for all integers $n\geq 0$ and $k$.
     \end{proof}
     
     \section{Extensive Study of the $\Dkna nka$ and Bounds on the Walsh Spectrum of $f$}\label{sec:dnk}
@@ -868,9 +871,6 @@
         Pierrick Méaux was funded by the European Research Council (\textsf{ERC}) under the Advanced Grant program (reference number: 787390). Tim Seuré acknowledges the support of the Luxembourgish “Fonds National de la Recherche” (\textsf{FNR}) through an Individual Grant (reference number: 17936291). The work of Deng Tang was supported in part by the National Natural Science Foundation of China (\textsf{NSFC}, reference number: 62272303). We would also like to thank Claude Carlet for discussing the function introduced in this work with Deng Tang some years ago.
     \end{credits}
     
-    \bibliographystyle{splncs04}
-    {\small\bibliography{biblio}}
-    
     \appendix
     
     \section{Proofs for Section~\ref{sec:general}}\label{sec:proofs}
@@ -930,7 +930,7 @@
             (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0),\\
             (t,0,0;0,n-2t),\quad(0,t,0;0,n-2t),\quad(0,0,t;0,n-2t).
         \end{gather*}
-        Since simultaneously replacing $(p,q)$ by $(q,p)$ and $(u,v)$ by $(v,u)$ has the same effect as replacing $z$ by $-z$ in $P_{t,a}(z)$ and therefore does not change the maximum of $|P_{t,a}(z)|$ on $\dis$, we can further restrict ourselves to the following tuples for $(p,q,r;u,v)$:
+        Since simultaneously replacing $(p,q)$ by $(q,p)$ and $(u,v)$ by $(v,u)$ has the same effect as replacing $z$ by $-z$ in $P_{t,a}(z)$ and therefore does not change the maximum of $|P_{t,a}(z)|$ on $\dis$, we can restrict ourselves to the following tuples for $(p,q,r;u,v)$:
         \[
             (t,0,0;n-2t,0),\quad(0,t,0;n-2t,0),\quad(0,0,t;n-2t,0).
         \]
@@ -940,12 +940,10 @@
             P_{t,a}(z)=\left((-z^2+2z+1)^{\lambda}(1+z)^{1-2\lambda}\right)^n.
         \]
         Writing $z=\ee^{\ii\alpha}$ and $z^2=\ee^{2\ii\alpha}$ for $\alpha\in[-\pi,\pi]$, and using that $|w|^2=w\overline w$ for every complex number $w$, we get:
-        \begin{align*}
-            |-z^2+2z+1|^2&=\left(-\ee^{2\ii\alpha}+2\ee^{\ii\alpha}+1\right)\left(-\ee^{-2\ii\alpha}+2\ee^{-\ii\alpha}+1\right)\\
-            &=6-\ee^{2\ii\alpha}-\ee^{-2\ii\alpha}\\
-            &=6-2\cos (2\alpha),
-        \end{align*}
-        where the last equality uses that $\ee^{2\ii\alpha}=\cos(2\alpha)+\ii\sin(2\alpha)$. We similarly obtain that $|1+z|^2=2+2\cos\alpha$. Combining both, we get:
+        \[
+            |-z^2+2z+1|^2=\left(-\ee^{2\ii\alpha}+2\ee^{\ii\alpha}+1\right)\left(-\ee^{-2\ii\alpha}+2\ee^{-\ii\alpha}+1\right).
+        \]
+        Expanding yields $|-z^2+2z+1|^2=6-\ee^{2\ii\alpha}-\ee^{-2\ii\alpha}=6-2\cos(2\alpha)$ because $\ee^{2\ii\alpha}=\cos(2\alpha)+\ii\sin(2\alpha)$. We similarly obtain that $|1+z|^2=2+2\cos\alpha$. Combining both, we get:
     	\begin{align*}
     		P_{t,a}(z)|^2&=\left(\left|-z^2+2z+1\right|^{2\lambda}|1+z|^{2(1-2\lambda)}\right)^n\\
     		&=\left((6-2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}\right)^n.
@@ -955,7 +953,6 @@
         \begin{figure}
         	\centering
         	\includegraphics[width=10cm]{graphs/family_curves_g.pdf}
-            \vspace{-4mm}
         	\caption{The curves of $\alpha\mapsto g^{(\lambda)}(\alpha)$ for the values $\lambda=\frac{i}{50}$ from $i=0$ (the curve with the highest value at $\alpha=0$) to $i=24$ (the curve with the lowest value at $\alpha=0$).}
         	\label{fig:family_curves_g}
         \end{figure}
@@ -994,4 +991,6 @@
         \]
         With this, we have covered the case $(p,q,r;u,v)=(t,0,0;n-2t,0)$ entirely. Similarly, it can be proven that $|P_{t,a}(z)|$ is also bounded by $2^{\mu n}$ on $\dis$ for the remaining two cases of $(p,q,r;u,v)$. For $(p,q,r;u,v)=(0,t,0;n-2t,0)$, one can proceed in exactly the same way, and for $(p,q,r;u,v)=(0,0,t;n-2t,0)$, it is enough to replace $g(\alpha)$ by $h(\alpha)=(2+2\cos(2\alpha))^\lambda(2+2\cos\alpha)^{1-2\lambda}$, whose maximum is bounded by the maximum of $g(\alpha)$ since $0\leq h(\alpha)\leq g(\alpha)$.
     \end{proof}
+
+    \bibliography{biblio}
 \end{document}
