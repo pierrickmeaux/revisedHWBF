@@ -8,6 +8,7 @@
 \usepackage{amsthm}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage{microtype}
 
 \newcommand{\AI}{\mathsf{AI}}
@@ -30,7 +31,6 @@
 \newcommand{\ie}{\textit{i.e.}}
 \newcommand{\ii}{\mathrm i\mkern1mu}
 \newcommand{\kraw}[3]{\mathsf{K}_{#1}(#2,#3)}
-\newcommand{\myurl}[1]{\footnote{\texttt{\url{#1}}}}
 \newcommand{\NL}{\mathsf{NL}}
 \newcommand{\phikn}[2]{\varphi_{#1,#2}}
 \newcommand{\w}{\mathsf{w_H}}
@@ -466,7 +466,7 @@
     \end{proposition}
     
     \begin{proof}
-    	We use the expressions from Table~\ref{tab:Dkna_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$, respectively, in the expression $\Dkna n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dkna n2a=0$. This checking can be automatized by a computer algebra system, for which we provide a \textsf{SageMath} implementation.\myurl{https://github.com/se-tim/Revisited-HWBF.git}
+    	We use the expressions from Table~\ref{tab:Dkna_small_k}, and replace $p$, $q$ and $r$ by their respective values. For instance, for the case $n=16m$, we replace $p$, $q$ and $r$ by $m+s(s-1)$, $m+s(s+1)$ and $6m-2s^2$, respectively, in the expression $\Dkna n2a=2(p-q)^2-3(p+q)+r$, which yields $\Dkna n2a=0$. This checking can be automatized by a computer algebra system, for which we provide a \textsf{SageMath} implementation.\footnote{\url{https://github.com/se-tim/Revisited-HWBF.git}}
     \end{proof}
     
     \begin{remark}
@@ -632,7 +632,7 @@
     
     \bigskip
     
-    In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ for small values of $n$ (calculated using \textsf{SageMath}) to the bound $B_n$ obtained through the above method and to the bound from Corollary~\ref{cor:bound_walsh_cauchy}. Additionally, Table~\ref{table:walsh_bounds} provides the values of the bound $B_n$ for all even values of $n\in[1,80]$. The method described above offers a tighter bound compared to Corollary~\ref{cor:bound_walsh_cauchy}. Its polynomial complexity makes it possible to extend the analysis well beyond the limitations imposed by a full computation of the Walsh spectrum, which requires a complexity of $\mathcal O(n2^n)$. We provide a \textsf{SageMath} implementation to obtain the bound $B_n$.\myurl{https://github.com/se-tim/Revisited-HWBF.git}
+    In Table~\ref{table:max_walsh_vs_bound}, we compare the exact values of $\max_{a\in\mathbb F_2^n}|\wt f(a)|$ for small values of $n$ (calculated using \textsf{SageMath}) to the bound $B_n$ obtained through the above method and to the bound from Corollary~\ref{cor:bound_walsh_cauchy}. Additionally, Table~\ref{table:walsh_bounds} provides the values of the bound $B_n$ for all even values of $n\in[1,80]$. The method described above offers a tighter bound compared to Corollary~\ref{cor:bound_walsh_cauchy}. Its polynomial complexity makes it possible to extend the analysis well beyond the limitations imposed by a full computation of the Walsh spectrum, which requires a complexity of $\mathcal O(n2^n)$. We provide a \textsf{SageMath} implementation to obtain the bound $B_n$.\footnote{\url{https://github.com/se-tim/Revisited-HWBF.git}}
     
     \begin{table}
     	\scriptsize
