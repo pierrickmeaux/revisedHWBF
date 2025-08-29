@@ -833,15 +833,7 @@
     
     \bigskip
     
-    These various results on the algebraic properties of the revisited \hwbf{} suggest that it possesses strong resistance against standard attacks. Furthermore, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered \textsf{LFSR}s or in homomorphically-friendly schemes like \textsf{FLIP} and \textsf{FiLIP}. For example, the best current \textsf{FiLIP} filters in \textsf{HHE}~\cite{eprint:AGHM24,CCS:CDPP22,CIC:MeaParPei24} are \textsf{XOR}-threshold functions—the sum of a $k$-variable linear function and an $m$-variable threshold function (generalizing majority).  
-    By Proposition $7$ in~\cite{IEEE:CarMea21}, their nonlinearity is at most:
-    \[
-    2^{k+m-1} - 2^k\cdot M, \quad \text{where } M = \begin{cases}
-    \binom{m-1}{\frac{m-1}{2}} & \text{if } m \text{ is odd}, \\
-    \frac{1}{2} \binom{m}{\frac{m}{2}} & \text{if } m \text{ is even}.
-    \end{cases}
-    \]
-    This is similar to the majority function, whereas the revisited \hwbf{} achieves higher nonlinearity for the same size, offering better resistance to correlation-like attacks with fewer variables.
+    These various results on the algebraic properties of the revisited \hwbf{} suggest that it possesses strong resistance against standard attacks. Furthermore, its high nonlinearity makes it a well-suited candidate for use as a filter function in contexts such as filtered \textsf{LFSR}s or in homomorphically-friendly schemes like \textsf{FLIP} and \textsf{FiLIP}. For example, the best current \textsf{FiLIP} filters in \textsf{HHE}~\cite{eprint:AGHM24,CCS:CDPP22,CIC:MeaParPei24} are \textsf{XOR}-threshold functions—the sum of a $k$-variable linear function and an $m$-variable threshold function (generalizing majority). By Proposition $7$ in~\cite{IEEE:CarMea21}, their nonlinearity is at most $2^{k+m-1}-2^k\cdot M$, where $M=\binom{m-1}{\frac{m-1}{2}}$ if $M$ is odd, and $M=(1/2)\cdot\binom{m}{\frac{m}{2}}$ if $M$ is even. This is similar to the majority function, whereas the revisited \hwbf{} achieves higher nonlinearity for the same size, offering better resistance to correlation-like attacks with fewer variables.
     \begin{table}
     	\scriptsize
     	\centering
@@ -864,12 +856,16 @@
     
     In this work, we introduced the revisited Hidden Weight Bit Function, a weightwise quadratic Boolean function with improved cryptographic properties over existing constructions. We analyzed its balancedness, and using generating functions in combination with complex analysis, we derived interesting lower bounds on its nonlinearity, demonstrating that the revisited \hwbf{} achieves superior nonlinearity compared to other functions with similar computational costs. We further examined other cryptographic parameters such as degree, algebraic immunity, and fast algebraic immunity, confirming that the revisited \hwbf{} matches or outperforms comparable functions in these aspects.
     
-    Our approach utilizes generating functions and Cauchy’s estimate to establish lower bounds on the nonlinearity of weightwise quadratic functions. This naturally raises the question: can the employed techniques, particularly the use of Cauchy’s estimate, be extended to other families of Boolean functions? Specifically, this approach appears feasible for other weightwise-degree-$d$ functions $f$ where the $f_k$ are direct sums. Investigating this could potentially lead to the discovery of new functions with comparable computational costs and even better cryptographic properties.
+    Our approach utilizes generating functions and Cauchy's estimate to establish lower bounds on the nonlinearity of weightwise quadratic functions. This naturally raises the question: can the employed techniques, particularly the use of Cauchy's estimate, be extended to other families of Boolean functions? Specifically, this approach appears feasible for other weightwise-degree-$d$ functions $f$ where the $f_k$ are direct sums. Investigating this could potentially lead to the discovery of new functions with comparable computational costs and even better cryptographic properties.
     
     \begin{credits}
         \subsubsection{\ackname}
     
         Pierrick Méaux was funded by the European Research Council (\textsf{ERC}) under the Advanced Grant program (reference number: 787390). Tim Seuré acknowledges the support of the Luxembourgish “Fonds National de la Recherche” (\textsf{FNR}) through an Individual Grant (reference number: 17936291). The work of Deng Tang was supported in part by the National Natural Science Foundation of China (\textsf{NSFC}, reference number: 62272303). We would also like to thank Claude Carlet for discussing the function introduced in this work with Deng Tang some years ago.
+
+        \subsubsection{\discintname}
+        The authors have no competing interests to declare
+        that are relevant to the content of this article.
     \end{credits}
     
     \appendix
